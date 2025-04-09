@@ -1,0 +1,74 @@
+.navbar {
+    background-color: #0c7a87;
+    color: white;
+    padding: 0.5rem 2rem;
+    font-family: sans-serif;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* 👈 Sposta il blocco di sinistra leggermente a destra */
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: -300px;
+    transform: translateX(0px); /* regola a piacere */
+  }
+  
+  /* 👉 Sposta il blocco di destra leggermente a sinistra */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transform: translateX(-300px); /* regola a piacere */
+    margin-top: -300px;
+  }
+
+  .icon {
+    transform: translateX(300px); /* regola a piacere */
+  }
+
+  
+  .nav-center {
+    font-size: 2rem;
+  }
+  
+  /* Icone */
+  .icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .icon i {
+    margin-right: 0.3rem;
+  }
+  
+  .caret {
+    margin-left: 0.2rem;
+    font-size: 0.7rem;
+  }
+  
+  /* Bottone Pubblica */
+  .publish-btn {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: background-color 0.2s;
+  }
+  
+  .publish-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
