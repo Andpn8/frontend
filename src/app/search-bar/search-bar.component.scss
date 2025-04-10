@@ -1,0 +1,115 @@
+.search-bar-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #087E8B;
+    padding: 20px;
+  
+    .tabs {
+      display: flex;
+      margin-bottom: 10px;
+  
+      .tab {
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-weight: bold;
+        padding: 6px 14px;
+        margin-right: 10px;
+        border-radius: 20px;
+        cursor: pointer;
+        position: relative;
+        transition: background-color 0.3s ease;
+  
+        &.active {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+  
+        &.active::after {
+          content: "";
+          position: absolute;
+          bottom: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 0;
+          height: 0;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+          border-top: 8px solid white;
+        }
+      }
+    }
+  
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border-radius: 10px;
+      padding: 10px 20px;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  
+      .dropdown-section {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        margin-right: 15px;
+  
+        .arrow {
+          font-size: 12px;
+          margin-left: 6px;
+        }
+      }
+  
+      .divider {
+        width: 1px;
+        height: 30px;
+        background-color: #ccc;
+        margin-right: 15px;
+      }
+  
+      .input-section {
+        display: flex;
+        align-items: center;
+        flex: 1;
+  
+        i {
+          color: #0b7d87;
+          margin-right: 8px;
+        }
+  
+        input {
+          border: none;
+          outline: none;
+          width: 100%;
+          color: #aaa;
+          font-size: 16px;
+  
+          &::placeholder {
+            color: #aaa;
+          }
+        }
+      }
+  
+      .search-btn {
+        background-color: #d63053;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-left: 15px;
+      }
+    }
+  
+    .filters-link {
+      color: white;
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+  
