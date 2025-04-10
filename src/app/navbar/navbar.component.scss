@@ -58,7 +58,19 @@
     background-color: transparent;
     border: 1px solid white;
     color: white;
-    padding: 0.4rem 1rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    transition: background-color 0.2s;
+  }
+
+  .icon {
+    background-color: transparent;
+    padding: 0.2rem 0.6rem;
     border-radius: 20px;
     cursor: pointer;
     font-weight: bold;
@@ -69,6 +81,11 @@
   }
   
   .publish-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+
+  .icon:hover {
     background-color: rgba(255, 255, 255, 0.2);
   }
   
