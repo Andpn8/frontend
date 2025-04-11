@@ -32,7 +32,6 @@
       cursor: pointer;
       position: relative;
       transition: background-color 0.3s ease;
-      background-color:#109CAB;
     }
 
     .tab:hover {
@@ -85,24 +84,29 @@
       display: flex;
       align-items: center;
       flex: 1;
-
+    
       i {
         color: #0b7d87;
         margin-right: 8px;
       }
-
+    
       input {
         border: none;
         outline: none;
         width: 100%;
-        color: #aaa;
         font-size: 16px;
-
+        color: #000;  /* Imposta il colore del testo normale a nero */
+    
         &::placeholder {
-          color: #aaa;
+          color: #aaa;  /* Colore grigio per il placeholder */
+        }
+    
+        &:focus {
+          color: #000;  /* Quando l'input è in focus, il testo rimane nero */
         }
       }
     }
+    
 
     .search-btn {
       background-color: #d63053;
@@ -131,3 +135,23 @@
     background-color: rgba(255, 255, 255, 0.2);
   }
 }
+
+select {
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #109CAB;
+  }
+
+  &:hover {
+    border-color: #109CAB;
+  }
+}
+

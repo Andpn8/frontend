@@ -1,17 +1,21 @@
 <div class="search-bar-wrapper">
-
-  <!-- Wrapper centrato come la dropdown-section -->
   <div class="dropdown-aligned-tabs">
     <div class="tabs">
-      <button class="tab-active">COMPRA</button>
-      <button class="tab">AFFITTA</button>
+      <label for="compra" class="tab tab-active">COMPRA</label>
+      <input type="radio" id="compra" name="tab" checked />
+      <label for="affitta" class="tab">AFFITTA</label>
+      <input type="radio" id="affitta" name="tab" />
     </div>
   </div>
 
   <div class="search-bar">
     <div class="dropdown-section">
-      <span>Case/Appartamenti</span>
-      <span class="arrow">▼</span>
+      <select id="property-type" name="property-type">
+        <option value="Case/Appartamenti">Case/Appartamenti</option>
+        <option value="Ville">Ville</option>
+        <option value="Monolocali">Monolocali</option>
+        <option value="Attici">Attici</option>
+      </select>
     </div>
 
     <div class="divider"></div>
