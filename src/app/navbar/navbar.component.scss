@@ -15,7 +15,6 @@
     align-items: center;
     gap: 1.5rem;
     margin-top: -100px;
-    transform: translateX(0px); /* regola a piacere */
   }
   
   /* 👉 Sposta il blocco di destra leggermente a sinistra */
@@ -23,15 +22,9 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    transform: translateX(-200px); /* regola a piacere */
     margin-top: -100px;
   }
 
-  .icon {
-    transform: translateX(200px); /* regola a piacere */
-  }
-
-  
   .nav-center {
     font-size: 2rem;
   }
@@ -65,7 +58,7 @@
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    transition: background-color 0.2s;
+    transition: background-color 0.7s;
   }
 
   .icon {
@@ -77,7 +70,7 @@
     display: flex;
     align-items: center;
     gap: 0.3rem;
-    transition: background-color 0.2s;
+    transition: background-color 0.7s;
   }
   
   .publish-btn:hover {
