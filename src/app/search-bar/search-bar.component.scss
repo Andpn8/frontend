@@ -122,7 +122,7 @@
       letter-spacing: 2px;
     }
     .search-btn:hover{
-    color:#b0b9ba
+      background-color: #b3243f;
     }
   }
 
@@ -161,3 +161,128 @@ select {
   }
 }
 
+.filters-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semitrasparente per il background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Assicurati che il popup stia sopra al resto della pagina */
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Aggiunta di transizione per nascondere il pop-up */
+}
+
+.filters-popup.show {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s linear 0s; /* Quando è visibile, si mostra senza ritardo */
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra orizzontalmente tutto */
+  justify-content: center; /* Centra verticalmente tutto */
+  text-align: center; /* Centra il testo per tutte le etichette e il contenuto */
+
+  h3 {
+    color: #087E8B; /* Colore di testo coerente con il tema */
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .filter-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    width: 100%;
+    align-items: center; /* Centra gli elementi dentro ogni filtro */
+
+    label {
+      font-size: 14px;
+      color: #333;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      font-size: 14px;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      color: #333;
+      background-color: #f9f9f9;
+      outline: none;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #087E8B; /* Colore coerente con il tema */
+      }
+    }
+
+    input[type="number"] {
+      width: 150px; /* Limita la larghezza dell'input numerico */
+      margin-top: 8px;
+    }
+    #rooms{
+      width: 65px;
+      margin-top: 8px;
+    }
+    
+  }
+
+  /* Aggiungi i pulsanti in un contenitore separato */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px; /* Spazio tra i filtri e i pulsanti */
+
+    .apply-btn, .close-btn {
+      background-color: #d63053;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #b3243f; /* Colore di hover per il pulsante */
+      }
+    }
+
+    .close-btn {
+      background-color: #087E8B;
+      &:hover {
+        background-color: #075e63; /* Colore di hover per il pulsante di chiusura */
+      }
+    }
+  }
+
+  /* Messaggio di conferma */
+  .confirmation-message {
+    display: none;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #d63053;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .confirmation-message.show {
+    display: block;
+  }
+}
