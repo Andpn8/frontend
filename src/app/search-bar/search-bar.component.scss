@@ -117,6 +117,12 @@
       font-weight: bold;
       cursor: pointer;
       margin-left: 15px;
+      transition: background-color 0.7s ease;
+      transition: color 0.7s ease;
+      letter-spacing: 2px;
+    }
+    .search-btn:hover{
+    color:#b0b9ba
     }
   }
 
