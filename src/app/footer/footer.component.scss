@@ -1,0 +1,45 @@
+.footer {
+    background-color: #087E8B;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px;
+    font-size: 12px;
+  
+    .footer-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+  
+      a {
+        color: white;
+        text-decoration: none;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  
+    .footer-right {
+      display: flex;
+      gap: 10px;
+  
+      img {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 1px solid white;
+        padding: 2px;
+        background-color: transparent;
+        transition: border-color 0.3s;
+  
+        &:hover {
+          border-color: #ccc;
+        }
+      }
+    }
+  }
+  
+  

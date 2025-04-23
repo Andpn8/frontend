@@ -1,0 +1,197 @@
+.new-announcement {
+    font-family: 'Segoe UI', sans-serif;
+    color: #333;
+  
+    .header-bar {
+      background-color: #087E8B;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+  
+      .left-icons {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+  
+        .icon {
+          width: 28px;
+        }
+  
+        .logo {
+          height: 40px;
+        }
+      }
+  
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+      }
+  
+      .help-icon {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+  
+        span {
+          border: 1px solid white;
+          border-radius: 50%;
+          padding: 2px 8px;
+        }
+      }
+    }
+  
+    .content {
+      display: flex;
+  
+      .form-section {
+        flex: 2;
+        padding: 30px;
+  
+        h2 {
+          text-align: center;
+          color: #087E8B;
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+  
+        .contract-type {
+          display: flex;
+          gap: 10px;
+          margin-bottom: 20px;
+  
+          label {
+            font-weight: bold;
+          }
+  
+          button {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 20px;
+            background-color: #e0e0e0;
+            cursor: pointer;
+  
+            &.active {
+              background-color: #087E8B;
+              color: white;
+            }
+          }
+        }
+  
+        .form-group {
+          margin-bottom: 20px;
+  
+          label {
+            font-weight: bold;
+            display: block;
+          }
+  
+          input,
+          select {
+            width: 100%;
+            padding: 6px;
+            border: 1px solid #CE2D4F;
+            border-radius: 4px;
+            margin-top: 5px;
+          }
+  
+          small {
+            color: #CE2D4F;
+            font-size: 10px;
+          }
+  
+          &.price .price-input {
+            display: flex;
+            align-items: center;
+  
+            input {
+              flex: 1;
+            }
+  
+            span {
+              margin-left: 5px;
+            }
+          }
+  
+          &.address-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+  
+            input.small-input {
+              width: 60px;
+            }
+          }
+        }
+  
+        .form-buttons {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 30px;
+  
+          .back {
+            background-color: #087E8B;
+            color: white;
+          }
+  
+          .next {
+            background-color: #f9a9b0;
+            color: white;
+          }
+  
+          button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+          }
+        }
+      }
+  
+      .steps-section {
+        flex: 1;
+        background-color: #087E8B;
+        color: white;
+        padding: 30px;
+  
+        ul {
+          list-style: none;
+          padding: 0;
+  
+          li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+  
+            .step-circle {
+              width: 24px;
+              height: 24px;
+              border: 2px solid white;
+              border-radius: 50%;
+              text-align: center;
+              line-height: 20px;
+              font-weight: bold;
+            }
+  
+            &.active .step-circle {
+              background-color: white;
+              color: #007980;
+            }
+  
+            p {
+              margin: 0;
+              font-size: 12px;
+            }
+  
+            &.summary {
+              font-weight: bold;
+              margin-top: 30px;
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,1 +1,108 @@
-<p>QUESTO E' NEW ANNOUNCEMENT</p>
+<div class="new-announcement">
+    <div class="header-bar">
+      <div class="left-icons">
+        <img src="https://i.imgur.com/fda9m1G.png" alt="User" class="icon" />
+        <img src="https://i.imgur.com/uOvKzdr.png" alt="Logo" class="logo" />
+      </div>
+      <h1>NUOVO ANNUNCIO</h1>
+      <div class="help-icon">
+        <span>?</span>
+        <p>Help</p>
+      </div>
+    </div>
+  
+    <div class="content">
+      <div class="form-section">
+        <h2>Informazioni Annuncio</h2>
+  
+        <div class="contract-type">
+          <label>Tipo di Contratto:</label>
+          <button class="active">Vendita</button>
+          <button>Affitto</button>
+        </div>
+  
+        <form>
+          <div class="form-group">
+            <label>Immobile:</label>
+            <select required>
+              <option value="" disabled selected></option>
+            </select>
+            <small>CAMPO OBBLIGATORIO</small>
+          </div>
+  
+          <div class="form-group">
+            <label>Titolo Annuncio:</label>
+            <input type="text" placeholder="Inserisci titolo..." required />
+            <small>CAMPO OBBLIGATORIO</small>
+          </div>
+  
+          <div class="form-group price">
+            <label>Prezzo:</label>
+            <div class="price-input">
+              <input type="text" placeholder="Es. 50.000" required />
+              <span>€</span>
+            </div>
+            <small>CAMPO OBBLIGATORIO</small>
+          </div>
+  
+          <div class="form-group">
+            <label>Comune:</label>
+            <select required>
+              <option value="" disabled selected></option>
+            </select>
+          </div>
+  
+          <div class="form-group address-group">
+            <label>Indirizzo:</label>
+            <input type="text" placeholder="Indirizzo immobile" required />
+            <input type="text" placeholder="n°" class="small-input" required />
+            <label>CAP:</label>
+            <input type="text" class="small-input" required />
+            <small>CAMPI OBBLIGATORI</small>
+          </div>
+  
+          <div class="form-buttons">
+            <button class="back">INDIETRO</button>
+            <button class="next">PROSEGUI</button>
+          </div>
+        </form>
+      </div>
+  
+      <div class="steps-section">
+        <ul>
+          <li class="active">
+            <div class="step-circle">1</div>
+            <div>
+              <strong>Informazioni</strong>
+              <p>Immobile - Titolo Annuncio<br />Prezzo - Indirizzo</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-circle">2</div>
+            <div>
+              <strong>Dettagli</strong>
+              <p>Superficie - Stanze<br />Piano - Classe energetica<br />Servizi presenti</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-circle">3</div>
+            <div>
+              <strong>Foto e descrizione</strong>
+              <p>20 Foto - Planimetrie<br />Descrizione dell'immobile</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-circle">4</div>
+            <div>
+              <strong>Contatti</strong>
+              <p>Email o telefono per ricevere richieste</p>
+            </div>
+          </li>
+          <li class="summary">
+            <strong>Riepilogo e conferma</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
