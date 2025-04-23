@@ -1,48 +1,75 @@
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent {
-  filtersVisible: boolean = false;
-  confirmationVisible: boolean = false;
+  filtersVisible = false;
+  confirmationVisible = false;
 
-  // Variabili per i prezzi
-  minPrice: number = 0;
-  maxPrice: number = 0;
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
+  rooms: number | null = null;
+  bathrooms: number | null = null;
+  location: string = '';
+  minSurface: number | null = null;
+  maxSurface: number | null = null;
+  energyClass: string = 'tutte';
+  services = {
+    portineria: false,
+    garage: false,
+    climatizzazione: false,
+    sicurezza: false,
+    ascensore: false,
+    accessoDisabili: false
+  };
 
-  //Variabili per superfici
-  minSurface: number = 0;
-  maxSurface: number = 0;
+  constructor(private cdr: ChangeDetectorRef) {}
 
-  toggleFilters() {
+  toggleFilters(apply: boolean = false): void {
     this.filtersVisible = !this.filtersVisible;
+
+    if (!this.filtersVisible && apply) {
+      this.showConfirmation();
+    }
   }
 
-  // Mostra il messaggio di conferma quando si applicano i filtri
-  showConfirmation() {
+  showConfirmation(): void {
     this.confirmationVisible = true;
     setTimeout(() => {
       this.confirmationVisible = false;
-    }, 3000); // Nasconde il messaggio dopo 3 secondi
+    }, 3000); // Andrea, qui il messaggio sparisce dopo 3s
   }
 
-  // Funzione per aggiornare il prezzo massimo in base al prezzo minimo
-  updateMaxPrice() {
-    if (this.minPrice > this.maxPrice) {
-      this.maxPrice = this.minPrice;
-    }
+  closeAndReset(): void {
+    this.resetFilters();
+    this.filtersVisible = false;
+    this.cdr.detectChanges(); // Forza l'aggiornamento della vista
   }
-  updateMaxSurface() {
-    if (this.minSurface > this.maxSurface) {
-      this.maxSurface = this.minSurface;
-    }
+
+  resetFilters(): void {
+    // Cambiato da 0 a null per resettare i valori e far riapparire i placeholder
+    this.minPrice = null;
+    this.maxPrice = null;
+    this.rooms = null;
+    this.bathrooms = null;
+    this.location = '';
+    this.minSurface = null;
+    this.maxSurface = null;
+    this.energyClass = 'tutte';
+    this.services = {
+      portineria: false,
+      garage: false,
+      climatizzazione: false,
+      sicurezza: false,
+      ascensore: false,
+      accessoDisabili: false
+    };
   }
 }
-
