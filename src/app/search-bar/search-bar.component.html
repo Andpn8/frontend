@@ -40,24 +40,97 @@
     <div class="popup-content">
       <h3>Filtri Aggiuntivi</h3>
       
-      <div class="filter-item">
-        <label for="min-price">Prezzo minimo:</label>
-        <input type="number" id="min-price" name="min-price" min="0" placeholder="Inserisci prezzo min" />
+      <!-- Prezzo minimo e massimo affiancati -->
+      <div class="filter-row">
+        <div class="filter-item">
+          <label for="min-price">Prezzo minimo:</label>
+          <input 
+            type="number" 
+            id="min-price" 
+            name="min-price" 
+            min="0" 
+            [(ngModel)]="minPrice" 
+            (ngModelChange)="updateMaxPrice()" 
+            placeholder="Inserisci prezzo min" 
+          />
+        </div>
+
+        <div class="filter-item">
+          <label for="max-price">Prezzo massimo:</label>
+          <input 
+            type="number" 
+            id="max-price" 
+            name="max-price" 
+            min="0" 
+            [(ngModel)]="maxPrice" 
+            placeholder="Inserisci prezzo max" 
+          />
+        </div>
       </div>
 
-      <div class="filter-item">
-        <label for="max-price">Prezzo massimo:</label>
-        <input type="number" id="max-price" name="max-price" min="0" placeholder="Inserisci prezzo max" />
+      <!-- Camere e Classe Energetica affiancate -->
+      <div class="filter-row">
+        <!-- Numero camere -->
+        <div class="filter-item">
+          <label for="rooms">Camere:</label>
+          <input type="number" id="rooms" name="rooms" min="1" max="99" placeholder="N°" />
+        </div>
+        <!-- Numero Bagni -->
+        <div class="filter-item">
+          <label for="num-bathrooms">Numero Bagni:</label>
+          <input type="number" id="num-bathrooms" name="num-bathrooms" min="1" max="99" placeholder="N°" />
+        </div>
       </div>
 
+      <!-- Posizione -->
       <div class="filter-item">
-        <label for="rooms">Camere:</label>
-        <input type="number" id="rooms" name="rooms" min="1" max="99" placeholder="N°" />
+        <label for="location">Posizione:</label>
+        <input type="text" id="location" name="location" placeholder="Inserisci posizione" />
+      </div>
+      <!-- Superficie min/max affiancati -->
+      <div class="filter-row">
+        <div class="filter-item">
+          <label for="min-surface">Superficie minima (m²):</label>
+          <input type="number" id="min-surface" name="min-surface" min="0" max="1000"  
+          [(ngModel)]="minSurface" (ngModelChange)="updateMaxSurface()" 
+          placeholder="Min"/>
+        </div>
+
+        <div class="filter-item">
+          <label for="max-surface">Superficie massima (m²):</label>
+          <input type="number" id="max-surface" name="max-surface" min="0" max="1000" 
+          [(ngModel)]="maxSurface" 
+          placeholder="Max" />
+        </div>
+      </div>
+
+      <!-- Classe Energetica -->
+      <div class="filter-item">
+        <label for="energy-class">Classe Energetica:</label>
+        <select id="energy-class" name="energy-class">
+          <option value="tutte">Tutte</option>
+          <option value="alta">Alta (A,A+,A1-A4)</option>
+          <option value="media">Media (B,C,D e superiore)</option>
+          <option value="bassa">Bassa (E,F,G e superiore)</option>
+        </select>
+      </div>
+
+      <!-- Servizi Presenti -->
+      <div class="filter-item">
+        <label>Servizi presenti:</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" value="portineria" /> Portineria</label>
+          <label><input type="checkbox" value="garage" /> Garage</label>
+          <label><input type="checkbox" value="climatizzazione" /> Climatizzazione</label>
+          <label><input type="checkbox" value="sicurezza" /> Sicurezza</label>
+          <label><input type="checkbox" value="ascensore" /> Ascensore</label>
+          <label><input type="checkbox" value="accesso-disabili" /> Accesso Disabili</label>
+        </div>
       </div>
 
       <div class="button-container">
         <button class="close-btn" (click)="toggleFilters()">Chiudi</button>
-        <button class="apply-btn">Applica</button>
+        <button class="apply-btn" (click)="toggleFilters()">Applica</button>
       </div>
     </div>
   </div>

@@ -187,12 +187,14 @@ select {
   border-radius: 10px;
   width: 90%;
   max-width: 500px;
+  max-height: 90vh; // Andrea, questo è il punto chiave!
+  overflow-y: auto; // Rende scrollabile il contenuto se supera l'altezza disponibile
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra orizzontalmente tutto */
-  justify-content: center; /* Centra verticalmente tutto */
-  text-align: center; /* Centra il testo per tutte le etichette e il contenuto */
+  align-items: center;
+  justify-content: flex-start; // importante per evitare centering verticale quando scorre
+  text-align: center;
 
   h3 {
     color: #087E8B; /* Colore di testo coerente con il tema */
@@ -286,3 +288,50 @@ select {
     display: block;
   }
 }
+
+.checkbox-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+
+  label {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  input[type="checkbox"] {
+    accent-color: #087E8B;
+    transform: scale(1.2);
+  }
+}
+
+.filter-row {
+  display: flex;
+  gap: 20px; /* Spazio tra i due elementi */
+  justify-content: center;
+  width: 100%;
+  flex-wrap: wrap; /* Mobile-friendly */
+  
+  .filter-item {
+    flex: 1 1 45%; /* Ogni campo prende circa metà larghezza */
+    max-width: 250px; /* Per evitare che si allarghino troppo su schermi grandi */
+  }
+}
+
+#num-rooms,
+#num-bathrooms {
+  width: 50px; // oppure 65px se vuoi ancora più compatto
+  text-align: center;
+}
+
+#min-surface,
+#max-surface {
+  width: 70px;
+  text-align: center;
+}
+
