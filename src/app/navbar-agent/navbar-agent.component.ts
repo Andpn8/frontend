@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-navbar-agent',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  templateUrl: './navbar-agent.component.html',
+  styleUrls: ['./navbar-agent.component.scss']
 })
 export class NavbarComponent {
   isDropdownOpen = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {} 
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;

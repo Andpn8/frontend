@@ -1,4 +1,4 @@
-<nav class="navbar">
+  <nav class="navbar">
     <!-- Sinistra -->
     <div class="nav-left">
       <div class="icon user" (click)="toggleDropdown()" [class.open]="isDropdownOpen">
@@ -7,7 +7,7 @@
         </div>
         <i class="fas fa-user"></i>
         <span class="caret">▼</span>
-  
+
         <div class="dropdown" *ngIf="isDropdownOpen">
           <ul>
             <li><img src="https://i.imgur.com/NW7acom.png"/> Informazioni profilo</li>
@@ -25,18 +25,39 @@
           </ul>
         </div>
       </div>
-  
+
+      <div class="icon">
+        <div class="logo">
+          <img src="https://i.imgur.com/rRsXzMS.png" alt="Logo" />
+        </div>
+        <i class="fas fa-bell"></i>
+        <span>Notifiche</span>
+      </div>
+
       <div class="icon">
         <div class="logo">
           <img src="https://i.imgur.com/BBn9bOo.png" alt="Logo" />
         </div>
-        <i class="fas fa-home"></i>
+        <i class="fas fa-home" ></i>
         <span (click)="goToHome()">Home</span>
       </div>
     </div>
-  
+
+    <!-- Centro -->
+    <div class="nav-center">
+      <div class="logo">
+        <img src="https://i.imgur.com/uOvKzdr.png" alt="Logo" />
+      </div>
+    </div>
+
     <!-- Destra -->
     <div class="nav-right">
+      <button class="publish-btn" (click)="goToNewAnnouncement()">
+        <div class="logo">
+          <img src="https://i.imgur.com/MrFoMj6.png" alt="Logo" />
+        </div>
+        <i class="fas fa-plus"></i> PUBBLICA ANNUNCIO
+      </button>
       <div class="icon">
         <div class="logo">
           <img src="https://i.imgur.com/XGH6MVo.png" alt="Logo" />
@@ -46,3 +67,9 @@
       </div>
     </div>
   </nav>
+
+
+
+
+
+
