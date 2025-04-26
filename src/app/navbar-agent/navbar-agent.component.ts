@@ -42,4 +42,8 @@ export class NavbarComponent {
   goToHome() {
     this.router.navigate(['/home']);
   }
+
+  goToNotify() {
+    this.router.navigate(['/notify']);
+  }
 }

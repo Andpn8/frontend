@@ -1,1 +1,41 @@
-<p>QUESTO E' NOTIFY</p>
+<app-navbar 
+  [helpMessage]="'Qui è dove potrai <strong>visionare</strong> tutte le tue <strong>notifiche</strong>.<br><br>Per visionare una notifica basta cliccare su di essa.'" 
+  [centerMessage]="'<strong>Notifiche</strong>'">
+</app-navbar>
+
+<section class="notify-section">
+  <div class="content-wrapper">
+    <!-- Colonna notifiche -->
+    <div class="notifications">
+      <div class="notification-card" 
+           *ngFor="let notification of notifications"
+           (click)="openNotification(notification)">
+        <div class="notification-header">
+          <h3>{{ notification.title }}</h3>
+          <button class="delete-btn" (click)="deleteNotification(notification); $event.stopPropagation()">Elimina</button>
+        </div>
+        <p>{{ notification.message }}</p>
+        <span class="notification-date">{{ notification.date | date:'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+
+    <!-- Colonna statistica notifiche -->
+    <div class="info-panel">
+      <h3>Statistica Notifiche</h3>
+      <p>Totale notifiche: <strong>{{ notifications.length }}</strong></p>
+      <p>Notifiche non lette: <strong>{{ unreadNotificationsCount }}</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- QUI FUORI, Andrea! -->
+<div class="overlay" *ngIf="selectedNotification" (click)="closeNotification()">
+  <div class="overlay-content" (click)="$event.stopPropagation()">
+    <h2>{{ selectedNotification.title }}</h2>
+    <p>{{ selectedNotification.message }}</p>
+    <span class="notification-date">{{ selectedNotification.date | date:'dd/MM/yyyy' }}</span>
+    <button class="close-btn" (click)="closeNotification()">Chiudi</button>
+  </div>
+</div>
+
+<app-footer></app-footer>

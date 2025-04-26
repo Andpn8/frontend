@@ -1,0 +1,144 @@
+.notify-section {
+    display: flex;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 120px); // altezza minima per riempire bene la pagina considerando navbar+footer
+  }
+  
+  .content-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 2rem;  // Aggiungiamo uno spazio tra la colonna delle notifiche e la colonna statistica
+  }
+  
+  .notifications {
+    flex: 3;  // Occupiamo 3/4 dello spazio disponibile
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;  // Spazio tra le notifiche
+  }
+  
+  .notification-card {
+    background-color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;  // Aggiungiamo una transizione per gli effetti hover
+  }
+  
+  .notification-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  // Aggiungiamo un effetto hover per le notifiche
+  }
+  
+  .notification-card h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #087E8B;
+    flex: 1;  // Permettiamo al titolo di occupare lo spazio disponibile a sinistra
+  }
+  
+  .notification-card p {
+    margin: 0;
+    color: #333;
+  }
+  
+  .notification-date {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: gray;
+  }
+  
+  .notification-header {
+    display: flex;
+    justify-content: space-between;  // Allineiamo il titolo e il pulsante di eliminazione
+    align-items: center;  // Allineiamo verticalmente gli elementi
+  }
+  
+  .info-panel {
+    flex: 1;  // Occupiamo 1/4 dello spazio
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;  // Aggiungiamo uno spazio tra le informazioni nel pannello
+    height: auto;  // Impostiamo l'altezza in modo che si adatti automaticamente al contenuto
+    max-height: 250px;  // Limitiamo l'altezza massima per evitare che diventi troppo grande
+  }
+  
+  .info-panel h3 {
+    font-size: 1.25rem;
+    color: #087E8B;
+  }
+  
+  .info-panel p {
+    margin: 0;
+    color: #333;
+    font-size: 1rem;
+  }
+  
+  .delete-btn {
+    background-color: #f44336;  // Rosso per il pulsante di eliminazione
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.85rem;  // Riduciamo la dimensione del font per il pulsante
+  }
+  
+  .delete-btn:hover {
+    background-color: #d32f2f;  // Colore più scuro quando viene passato sopra
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .overlay-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+  }
+  
+  .overlay-content h2 {
+    margin-top: 0;
+    color: #087E8B;
+  }
+  
+  .overlay-content p {
+    margin: 1rem 0;
+    color: #333;
+  }
+  
+  .close-btn {
+    background-color: #087E8B;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+  
+  .close-btn:hover {
+    background-color: #065a63;
+  }
+  
