@@ -1,197 +1,223 @@
 .new-announcement {
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
-  
-    .header-bar {
-      background-color: #087E8B;
-      color: white;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+
+  .content {
+    display: flex;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .form-section {
+    flex: 1;
+    padding: 30px;
+
+    h2 {
+      text-align: left;
+      font-size: 24px;
+      margin-left: 305px;
+      color: #087E8B;
+      margin-bottom: 30px;
+    }
+
+    .contract-type {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-  
-      .left-icons {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-  
-        .icon {
-          width: 28px;
-        }
-  
-        .logo {
-          height: 40px;
-        }
-      }
-  
-      h1 {
-        font-size: 24px;
+      gap: 10px;
+      margin-left: 223px;
+      margin-bottom: 20px;
+
+      label {
         font-weight: bold;
       }
-  
-      .help-icon {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-  
-        span {
-          border: 1px solid white;
-          border-radius: 50%;
-          padding: 2px 8px;
+
+      button {
+        padding: 6px 16px;
+        border: none;
+        border-radius: 20px;
+        background-color: #e0e0e0;
+        cursor: pointer;
+
+        &.active {
+          background-color: #087E8B;
+          color: white;
         }
       }
     }
-  
-    .content {
-      display: flex;
-  
-      .form-section {
-        flex: 2;
-        padding: 30px;
-  
-        h2 {
-          text-align: center;
-          color: #087E8B;
-          font-size: 20px;
-          margin-bottom: 20px;
+
+    form {
+      .form-group {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        margin-left: 223px;
+
+        label {
+          font-weight: bold;
+          margin-right: 10px;
         }
-  
-        .contract-type {
+
+        input,
+        select {
+          padding: 5px;
+          border: 1px solid #CE2D4F;
+          border-radius: 4px;
+        }
+
+        /* Rettangoli con le dimensioni specificate */
+        &.immobile input,
+        &.titolo-annuncio input,
+        &.indirizzo input {
+          width: 286px;
+          height: 31px;
+        }
+
+        &.price .price-input {
           display: flex;
-          gap: 10px;
-          margin-bottom: 20px;
-  
-          label {
-            font-weight: bold;
+          align-items: center;
+
+          input {
+            width: 174px;
+            height: 31px;
           }
-  
-          button {
-            padding: 6px 16px;
-            border: none;
-            border-radius: 20px;
-            background-color: #e0e0e0;
-            cursor: pointer;
-  
-            &.active {
-              background-color: #087E8B;
-              color: white;
-            }
+
+          span {
+            margin-left: 5px;
           }
         }
-  
-        .form-group {
-          margin-bottom: 20px;
-  
-          label {
-            font-weight: bold;
-            display: block;
-          }
-  
-          input,
-          select {
-            width: 100%;
-            padding: 6px;
-            border: 1px solid #CE2D4F;
-            border-radius: 4px;
-            margin-top: 5px;
-          }
-  
-          small {
-            color: #CE2D4F;
-            font-size: 10px;
-          }
-  
-          &.price .price-input {
-            display: flex;
-            align-items: center;
-  
-            input {
-              flex: 1;
-            }
-  
-            span {
-              margin-left: 5px;
-            }
-          }
-  
-          &.address-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-  
-            input.small-input {
-              width: 60px;
-            }
-          }
+
+        &.comune input {
+          width: 96px;
+          height: 25px;
         }
-  
-        .form-buttons {
-          display: flex;
-          justify-content: space-between;
-          margin-top: 30px;
-  
-          .back {
-            background-color: #087E8B;
-            color: white;
-          }
-  
-          .next {
-            background-color: #f9a9b0;
-            color: white;
-          }
-  
-          button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-          }
+
+        &.cap input {
+          width: 80px;
+          height: 25px;
+        }
+
+        /* Posizione dei campi obbligatori sotto i rispettivi rettangoli */
+        small.required-field {
+          display: block;
+          margin-top: 5px;
+          color: #CE2D4F;
+          font-size: 12px;
         }
       }
-  
-      .steps-section {
-        flex: 1;
-        background-color: #087E8B;
-        color: white;
-        padding: 30px;
-  
-        ul {
-          list-style: none;
-          padding: 0;
-  
-          li {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            align-items: flex-start;
-  
-            .step-circle {
-              width: 24px;
-              height: 24px;
-              border: 2px solid white;
-              border-radius: 50%;
-              text-align: center;
-              line-height: 20px;
-              font-weight: bold;
-            }
-  
-            &.active .step-circle {
-              background-color: white;
-              color: #007980;
-            }
-  
-            p {
-              margin: 0;
-              font-size: 12px;
-            }
-  
-            &.summary {
-              font-weight: bold;
-              margin-top: 30px;
-            }
-          }
+
+      .form-group:nth-child(4) {
+        margin-left: 161px;  // Comune
+        margin-top: 78px;    // Distanza di Comune da Prezzo
+      }
+
+      .form-group.address-group {
+        margin-left: 161px;  // Indirizzo
+        display: flex;
+        gap: 31px;
+        margin-top: 31px;   // Distanza di Indirizzo da Comune
+      }
+
+      /* Distanza di Immobile e Prezzo dalla Titolo Annuncio */
+      .form-group:nth-child(2) {
+        margin-top: 44px;  // Distanza di Immobile da Titolo Annuncio
+      }
+
+      .form-group:nth-child(3) {
+        margin-top: 44px;  // Distanza di Prezzo da Titolo Annuncio
+      }
+
+      /* Distanza dei rettangoli di Immobile e Prezzo */
+      .form-group:nth-child(2) .form-input,
+      .form-group:nth-child(3) .form-input {
+        margin-top: 36px; // Distanza dei rettangoli di Immobile e Prezzo
+      }
+    }
+  }
+
+  .steps-section {
+    flex: 1;
+    background-color: #087E8B;
+    color: white;
+    padding: 30px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        align-items: flex-start;
+
+        .step-circle {
+          width: 24px;
+          height: 24px;
+          border: 2px solid white;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 20px;
+          font-weight: bold;
+        }
+
+        &.active .step-circle {
+          background-color: white;
+          color: #007980;
+        }
+
+        p {
+          margin: 0;
+          font-size: 12px;
+        }
+
+        &.summary {
+          font-weight: bold;
+          margin-top: 30px;
         }
       }
     }
   }
+
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-left: 223px; /* Allinea i bottoni alla stessa distanza degli altri campi */
+
+    .back {
+      background-color: #087E8B;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .next {
+      background-color: #f9a9b0;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    button {
+      font-weight: bold;
+      font-size: 14px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
   
