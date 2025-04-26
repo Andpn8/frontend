@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<app-navbar></app-navbar>
+<app-navbar 
+  [helpMessage]="'Benvenuto in <strong>About Us</strong>, la sezione dove è possibile vedere informazioni su di noi.'" 
+  [centerMessage]="'<strong>Chi siamo</strong>'">
+</app-navbar>
+
 <section class="about-us">
     <div class="about-content">
-      <h2>Chi siamo</h2>
       <p>
         <span class="highlight">DietiEstates</span> nasce con l'obiettivo di rivoluzionare il mercato immobiliare offrendo
         una piattaforma moderna,<span class="highlight"> veloce e affidabile</span>, per la ricerca e la pubblicazione di immobili.

@@ -17,7 +17,7 @@
   }
 
   .nav-left {
-    margin-left: 7rem;
+    margin-left: rem;
   }
   
   .nav-center {
@@ -126,3 +126,49 @@
     }
   }
   
+  .help-box {
+    position: absolute; // 👈 serve per posizionarlo correttamente sotto il pulsante
+    top: 70px; // 👈 distanza dal bordo superiore della navbar
+    right: 20px; // 👈 distanza dal bordo destro
+    background-color: #109CAB; // 👈 colore principale della tua app, Andrea
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); // 👈 per dare un'ombra carina
+    width: 250px;
+    font-size: 0.9rem;
+    z-index: 1000; // 👈 per essere sopra tutto il resto
+    animation: fadeIn 0.5s forwards; // 👈 animazione di comparsa
+  
+    box-shadow: 
+    0 0 10px rgba(0, 0, 0, 0.15),
+    0 0 25px rgba(0, 0, 0, 0.25);
+    p {
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+  
+  // Animazione di comparsa
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px); // 👈 parte un po' più su
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0); // 👈 arriva nella posizione corretta
+    }
+  }
+  
+  .nav-center {
+    margin-right: 105px;
+    font-size: 1.3rem; // Dimensione più piccola rispetto a prima
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    flex: 1; // Fa sì che prenda spazio in mezzo agli altri
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

@@ -11,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   isDropdownOpen = false;
+  isHelpOpen = false;
 
   constructor(private router: Router) {} 
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+  toggleHelp() {
+    this.isHelpOpen = !this.isHelpOpen;
   }
 
   @HostListener('document:click', ['$event'])
@@ -23,6 +27,11 @@ export class NavbarComponent {
     const clickedInside = (event.target as HTMLElement).closest('.user');
     if (!clickedInside) {
       this.isDropdownOpen = false;
+    }
+
+    const clickedInsideHelp = (event.target as HTMLElement).closest('.icon');
+    if (!clickedInsideHelp) {
+      this.isHelpOpen = false;
     }
   }
 

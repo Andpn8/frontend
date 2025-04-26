@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -11,11 +11,17 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   isDropdownOpen = false;
+  @Input() helpMessage: string = '';
+  @Input() centerMessage: string = '';
+  isHelpOpen = false;
 
   constructor(private router: Router) {}
 
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
+  }
+  toggleHelp() {
+    this.isHelpOpen = !this.isHelpOpen;
   }
 
   @HostListener('document:click', ['$event'])

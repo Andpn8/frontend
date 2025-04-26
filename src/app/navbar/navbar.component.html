@@ -1,48 +1,58 @@
 <nav class="navbar">
-    <!-- Sinistra -->
-    <div class="nav-left">
-      <div class="icon user" (click)="toggleDropdown()" [class.open]="isDropdownOpen">
-        <div class="logo">
-          <img src="https://i.imgur.com/fda9m1G.png" alt="Logo" />
-        </div>
-        <i class="fas fa-user"></i>
-        <span class="caret">▼</span>
-  
-        <div class="dropdown" *ngIf="isDropdownOpen">
-          <ul>
-            <li><img src="https://i.imgur.com/NW7acom.png"/> Informazioni profilo</li>
-            <hr class="dropdown-divider" />
-            <li><img src="https://i.imgur.com/T1p9xzB.png"/> Modifica profilo</li>
-            <hr class="dropdown-divider" />
-            <li><img src="https://i.imgur.com/mcfdYbE.png"/> Notifiche</li>
-            <hr class="dropdown-divider" />
-            <li (click)="goToNewAnnouncement()"><img src="https://i.imgur.com/tAIBdEg.png"/> Pubblica annuncio</li>
-            <hr class="dropdown-divider" />
-            <li class="logout">
-              <img class="logout-icon" src="https://i.imgur.com/pCXvAHh.png" alt="Logout icon" />
-              Logout
-            </li>
-          </ul>
-        </div>
+  <!-- Sinistra -->
+  <div class="nav-left">
+    <div class="icon user" (click)="toggleDropdown()" [class.open]="isDropdownOpen">
+      <div class="logo">
+        <img src="https://i.imgur.com/fda9m1G.png" alt="Logo" />
       </div>
-  
-      <div class="icon">
-        <div class="logo">
-          <img src="https://i.imgur.com/BBn9bOo.png" alt="Logo" />
-        </div>
-        <i class="fas fa-home"></i>
-        <span (click)="goToHome()">Home</span>
+      <i class="fas fa-user"></i>
+      <span class="caret">▼</span>
+
+      <div class="dropdown" *ngIf="isDropdownOpen">
+        <ul>
+          <li><img src="https://i.imgur.com/NW7acom.png"/> Informazioni profilo</li>
+          <hr class="dropdown-divider" />
+          <li><img src="https://i.imgur.com/T1p9xzB.png"/> Modifica profilo</li>
+          <hr class="dropdown-divider" />
+          <li><img src="https://i.imgur.com/mcfdYbE.png"/> Notifiche</li>
+          <hr class="dropdown-divider" />
+          <li (click)="goToNewAnnouncement()"><img src="https://i.imgur.com/tAIBdEg.png"/> Pubblica annuncio</li>
+          <hr class="dropdown-divider" />
+          <li class="logout">
+            <img class="logout-icon" src="https://i.imgur.com/pCXvAHh.png" alt="Logout icon" />
+            Logout
+          </li>
+        </ul>
       </div>
     </div>
-  
-    <!-- Destra -->
-    <div class="nav-right">
-      <div class="icon">
-        <div class="logo">
-          <img src="https://i.imgur.com/XGH6MVo.png" alt="Logo" />
-        </div>
-        <i class="fas fa-question-circle"></i>
-        <span>Help</span>
+
+    <div class="icon" (click)="goToHome()">
+      <div class="logo">
+        <img src="https://i.imgur.com/BBn9bOo.png" alt="Logo" />
       </div>
+      <i class="fas fa-home"></i>
+      <span>Home</span>
     </div>
-  </nav>
+  </div>
+
+  <!-- Centro -->
+  <div class="nav-center" *ngIf="centerMessage">
+    <p [innerHTML]="centerMessage"></p>
+  </div>
+
+  <!-- Destra -->
+  <div class="nav-right">
+    <div class="icon" (click)="toggleHelp()">
+      <div class="logo">
+        <img src="https://i.imgur.com/XGH6MVo.png" alt="Logo" />
+      </div>
+      <i class="fas fa-question-circle"></i>
+      <span>Help</span>
+    </div>
+  </div>
+
+  <!-- Messaggio di aiuto -->
+  <div class="help-box" *ngIf="isHelpOpen">
+    <p [innerHTML]="helpMessage"></p>
+  </div>
+</nav>
