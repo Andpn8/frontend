@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -11,16 +12,21 @@ import { CommonModule } from '@angular/common';
 export class NavbarComponent {
   isDropdownOpen = false;
 
+  constructor(private router: Router) {} 
+
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  // Aggiungi un listener per il click su tutto il documento
   @HostListener('document:click', ['$event'])
   closeDropdown(event: MouseEvent) {
     const clickedInside = (event.target as HTMLElement).closest('.user');
     if (!clickedInside) {
       this.isDropdownOpen = false;
     }
+  }
+
+  goToNewAnnouncement() {
+    this.router.navigate(['/new-announcement']);
   }
 }
