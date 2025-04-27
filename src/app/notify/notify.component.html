@@ -5,7 +5,6 @@
 
 <section class="notify-section">
   <div class="content-wrapper">
-    <!-- Colonna notifiche -->
     <div class="notifications">
       <div class="notification-card" 
            *ngFor="let notification of notifications"
@@ -19,16 +18,14 @@
       </div>
     </div>
 
-    <!-- Colonna statistica notifiche -->
     <div class="info-panel">
-      <h3>Statistica Notifiche</h3>
+      <h3>Riepilogo delle notifiche</h3>
       <p>Totale notifiche: <strong>{{ notifications.length }}</strong></p>
       <p>Notifiche non lette: <strong>{{ unreadNotificationsCount }}</strong></p>
     </div>
   </div>
 </section>
 
-<!-- QUI FUORI, Andrea! -->
 <div class="overlay" *ngIf="selectedNotification" (click)="closeNotification()">
   <div class="overlay-content" (click)="$event.stopPropagation()">
     <h2>{{ selectedNotification.title }}</h2>

@@ -34,14 +34,12 @@ export class NotifyComponent {
 
   deleteNotification(notification: any): void {
     this.notifications = this.notifications.filter(n => n !== notification);
-    // Chiudi l'overlay se stai eliminando la notifica aperta
     if (this.selectedNotification === notification) {
       this.closeNotification();
     }
   }
 
   openNotification(notification: any): void {
-    // Andrea, qui appena si clicca la notifica la segniamo come letta
     notification.read = true;
     this.selectedNotification = notification;
   }

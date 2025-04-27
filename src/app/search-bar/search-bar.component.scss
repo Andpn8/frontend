@@ -95,14 +95,14 @@
         outline: none;
         width: 100%;
         font-size: 16px;
-        color: #000;  /* Imposta il colore del testo normale a nero */
+        color: #000;  
     
         &::placeholder {
-          color: #aaa;  /* Colore grigio per il placeholder */
+          color: #aaa;  
         }
     
         &:focus {
-          color: #000;  /* Quando l'input è in focus, il testo rimane nero */
+          color: #000; 
         }
       }
     }
@@ -167,18 +167,18 @@ select {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semitrasparente per il background */
+  background-color: rgba(0, 0, 0, 0.5); 
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Assicurati che il popup stia sopra al resto della pagina */
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Aggiunta di transizione per nascondere il pop-up */
+  z-index: 1000;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 .filters-popup.show {
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.3s ease, visibility 0s linear 0s; /* Quando è visibile, si mostra senza ritardo */
+  transition: opacity 0.3s ease, visibility 0s linear 0s; 
 }
 
 .popup-content {
@@ -187,17 +187,17 @@ select {
   border-radius: 10px;
   width: 90%;
   max-width: 500px;
-  max-height: 90vh; // Andrea, questo è il punto chiave!
-  overflow-y: auto; // Rende scrollabile il contenuto se supera l'altezza disponibile
+  max-height: 90vh; 
+  overflow-y: auto; 
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; // importante per evitare centering verticale quando scorre
+  justify-content: flex-start; 
   text-align: center;
 
   h3 {
-    color: #087E8B; /* Colore di testo coerente con il tema */
+    color: #087E8B;
     margin-bottom: 20px;
     font-weight: bold;
     font-size: 18px;
@@ -208,7 +208,7 @@ select {
     flex-direction: column;
     margin-bottom: 20px;
     width: 100%;
-    align-items: center; /* Centra gli elementi dentro ogni filtro */
+    align-items: center;
 
     label {
       font-size: 14px;
@@ -228,12 +228,12 @@ select {
       transition: border-color 0.3s ease;
 
       &:focus {
-        border-color: #087E8B; /* Colore coerente con il tema */
+        border-color: #087E8B; 
       }
     }
 
     input[type="number"] {
-      width: 150px; /* Limita la larghezza dell'input numerico */
+      width: 150px; 
       margin-top: 8px;
     }
     #rooms{

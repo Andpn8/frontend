@@ -44,17 +44,16 @@ export class SearchBarComponent {
     this.confirmationVisible = true;
     setTimeout(() => {
       this.confirmationVisible = false;
-    }, 3000); // Andrea, qui il messaggio sparisce dopo 3s
+    }, 3000); 
   }
 
   closeAndReset(): void {
     this.resetFilters();
     this.filtersVisible = false;
-    this.cdr.detectChanges(); // Forza l'aggiornamento della vista
+    this.cdr.detectChanges(); 
   }
 
   resetFilters(): void {
-    // Cambiato da 0 a null per resettare i valori e far riapparire i placeholder
     this.minPrice = null;
     this.maxPrice = null;
     this.rooms = null;

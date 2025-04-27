@@ -1,6 +1,5 @@
 <div class="search-bar-wrapper">
 
-  <!-- ✅ TOAST DI CONFERMA -->
   <div class="confirmation-toast" *ngIf="confirmationVisible">
     ✅ Filtri applicati con successo!
   </div>
@@ -41,12 +40,10 @@
     AGGIUNGI FILTRI
   </div>
 
-  <!-- Popup -->
   <div *ngIf="filtersVisible" class="filters-popup">
     <div class="popup-content">
       <h3>Filtri Aggiuntivi</h3>
 
-      <!-- Prezzi -->
       <div class="filter-row">
         <div class="filter-item">
           <label for="min-price">Prezzo minimo:</label>
@@ -62,7 +59,6 @@
         </div>
       </div>
 
-      <!-- Camere e bagni -->
       <div class="filter-row">
         <div class="filter-item">
           <label for="rooms">Camere:</label>
@@ -78,7 +74,6 @@
         </div>
       </div>
 
-      <!-- Posizione -->
       <div class="filter-item">
         <label for="location">Posizione:</label>
         <input type="text" id="location" name="location"
@@ -86,7 +81,6 @@
                placeholder="Inserisci posizione" />
       </div>
 
-      <!-- Superficie -->
       <div class="filter-row">
         <div class="filter-item">
           <label for="min-surface">Superficie minima (m²):</label>
@@ -102,7 +96,6 @@
         </div>
       </div>
 
-      <!-- Classe energetica -->
       <div class="filter-item">
         <label for="energy-class">Classe Energetica:</label>
         <select id="energy-class" name="energy-class" [(ngModel)]="energyClass">
@@ -113,7 +106,6 @@
         </select>
       </div>
 
-      <!-- Servizi -->
       <div class="filter-item">
         <label>Servizi presenti:</label>
         <div class="checkbox-group">
@@ -126,7 +118,6 @@
         </div>
       </div>
 
-      <!-- Pulsanti -->
       <div class="button-container">
         <button class="close-btn" (click)="closeAndReset()">Chiudi</button>
         <button class="apply-btn" (click)="toggleFilters(true)">Applica</button>
