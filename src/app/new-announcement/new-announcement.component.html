@@ -1,4 +1,8 @@
-<app-navbar></app-navbar>
+<app-navbar 
+  [helpMessage]="'Invia un annuncio'" 
+  [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
+</app-navbar>
+
 <div class="new-announcement">
   <div class="content">
     <div class="form-section">
@@ -44,10 +48,12 @@
 
         <div class="form-group address-group">
           <label>Indirizzo:</label>
-          <input type="text" placeholder="Indirizzo immobile" required />
-          <input type="text" placeholder="n°" class="small-input" required />
-          <label>CAP:</label>
-          <input type="text" class="small-input" required />
+          <div class="address-fields">
+            <input type="text" placeholder="Indirizzo immobile" required />
+            <input type="text" placeholder="n°" class="number-input" required />
+            <label>CAP:</label> 
+            <input type="text" class="cap-input" required />
+          </div>
           <small class="required-field">CAMPI OBBLIGATORI</small>
         </div>
 
@@ -58,44 +64,9 @@
       </form>
     </div>
 
-    <div class="steps-section">
-      <ul>
-        <li class="active">
-          <div class="step-circle">1</div>
-          <div>
-            <strong>Informazioni</strong>
-            <p>Immobile - Titolo Annuncio<br />Prezzo - Indirizzo</p>
-          </div>
-        </li>
-        <li>
-          <div class="step-circle">2</div>
-          <div>
-            <strong>Dettagli</strong>
-            <p>Superficie - Stanze<br />Piano - Classe energetica<br />Servizi presenti</p>
-          </div>
-        </li>
-        <li>
-          <div class="step-circle">3</div>
-          <div>
-            <strong>Foto e descrizione</strong>
-            <p>20 Foto - Planimetrie<br />Descrizione dell'immobile</p>
-          </div>
-        </li>
-        <li>
-          <div class="step-circle">4</div>
-          <div>
-            <strong>Contatti</strong>
-            <p>Email o telefono per ricevere richieste</p>
-          </div>
-        </li>
-        <li class="summary">
-          <strong>Riepilogo e conferma</strong>
-        </li>
-      </ul>
-    </div>
+    <announcement-summary></announcement-summary>
   </div>
 </div>
-
 
 
 

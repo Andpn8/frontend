@@ -1,0 +1,32 @@
+.summary-container {
+    background-color: #087E8B;
+    color: white;
+    padding: 30px;
+    border-radius: 8px;
+    flex: 1;
+    margin-right: 40px;
+    margin-top: 20px;
+    width: 25%; /* Impostato a 25% della larghezza */
+    height: 100%; /* Occupa tutta l'altezza disponibile */
+  
+    h3 {
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+  
+    ul {
+      list-style: none;
+      padding: 0;
+  
+      li {
+        margin-bottom: 12px;
+        font-size: 14px;
+  
+        strong {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  

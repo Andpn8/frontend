@@ -9,7 +9,7 @@
   }
 
   .form-section {
-    flex: 1;
+    flex: 2;
     padding: 30px;
 
     h2 {
@@ -49,12 +49,13 @@
       .form-group {
         margin-bottom: 20px;
         display: flex;
-        align-items: center;
-        margin-left: 223px;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 223px; // TUTTI ALLINEATI A 223PX
 
         label {
           font-weight: bold;
-          margin-right: 10px;
+          margin-bottom: 5px;
         }
 
         input,
@@ -64,111 +65,66 @@
           border-radius: 4px;
         }
 
-        &.immobile input,
-        &.titolo-annuncio input,
-        &.indirizzo input {
+        select, input[type="text"] {
           width: 286px;
           height: 31px;
         }
 
-        &.price .price-input {
-          display: flex;
-          align-items: center;
+        &.price {
+          margin-top: 44px;
+          .price-input {
+            display: flex;
+            align-items: center;
 
-          input {
-            width: 174px;
-            height: 31px;
-          }
+            input {
+              width: 174px;
+              height: 31px;
+            }
 
-          span {
-            margin-left: 5px;
+            span {
+              margin-left: 5px;
+              font-weight: bold;
+            }
           }
         }
 
-        &.comune input {
-          width: 96px;
-          height: 25px;
+        &:nth-child(4) { // Comune
+          margin-top: 78px;
         }
 
-        &.cap input {
-          width: 80px;
-          height: 25px;
+        &.address-group {
+          margin-top: 31px;
+
+          .address-fields {
+            display: flex;
+            align-items: center;
+            gap: 23px; /* Aggiungi gap tra gli input */
+
+            input:first-child {
+              width: 286px;
+              height: 31px;
+            }
+
+            .number-input {
+              width: 41px;
+              height: 31px;
+            }
+
+            .cap-input {
+              width: 80px;
+              height: 25px;
+            }
+          }
+
+          label {
+            margin-top: 10px;
+          }
         }
 
         small.required-field {
-          display: block;
           margin-top: 5px;
           color: #CE2D4F;
           font-size: 12px;
-        }
-      }
-
-      .form-group:nth-child(4) {
-        margin-left: 161px;  
-        margin-top: 78px;    
-      }
-
-      .form-group.address-group {
-        margin-left: 161px;  
-        display: flex;
-        gap: 31px;
-        margin-top: 31px;   
-      }
-
-      .form-group:nth-child(2) {
-        margin-top: 44px;  
-      }
-
-      .form-group:nth-child(3) {
-        margin-top: 44px;  
-      }
-
-      .form-group:nth-child(2) .form-input,
-      .form-group:nth-child(3) .form-input {
-        margin-top: 36px; 
-      }
-    }
-  }
-
-  .steps-section {
-    flex: 1;
-    background-color: #087E8B;
-    color: white;
-    padding: 30px;
-
-    ul {
-      list-style: none;
-      padding: 0;
-
-      li {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-        align-items: flex-start;
-
-        .step-circle {
-          width: 24px;
-          height: 24px;
-          border: 2px solid white;
-          border-radius: 50%;
-          text-align: center;
-          line-height: 20px;
-          font-weight: bold;
-        }
-
-        &.active .step-circle {
-          background-color: white;
-          color: #007980;
-        }
-
-        p {
-          margin: 0;
-          font-size: 12px;
-        }
-
-        &.summary {
-          font-weight: bold;
-          margin-top: 30px;
         }
       }
     }
@@ -178,32 +134,30 @@
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
-    margin-left: 223px; 
+    margin-left: 223px;
+
+    .back, .next {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
 
     .back {
       background-color: #087E8B;
       color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
     }
 
     .next {
       background-color: #f9a9b0;
       color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    button {
-      font-weight: bold;
-      font-size: 14px;
     }
   }
 }
+
+
 
 
 
