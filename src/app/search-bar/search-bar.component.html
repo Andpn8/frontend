@@ -15,7 +15,7 @@
   <div class="search-bar">
     <div class="dropdown-section">
       <select id="property-type" name="property-type">
-        <option value="Case/Appartamenti">Case/Appartamenti</option>
+        <option value="Case/Appartamenti" selected>Case/Appartamenti</option>
         <option value="Ville">Ville</option>
         <option value="Monolocali">Monolocali</option>
         <option value="Attici">Attici</option>
@@ -29,7 +29,9 @@
         <img src="https://i.imgur.com/q3KeOAl.png" alt="Logo">
       </div>
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Effettua una nuova ricerca per città" [(ngModel)]="location" (input)="onSearchChange()">
+      <input type="text" placeholder="Effettua una nuova ricerca per città" 
+             [(ngModel)]="location" 
+             (input)="onSearchChange()">
       <div *ngIf="filteredCities.length > 0" class="suggestions">
         <ul>
           <li *ngFor="let city of filteredCities.slice(0, 3)" (click)="onCitySelect(city)">

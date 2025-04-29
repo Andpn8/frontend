@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 export class SearchBarComponent {
   filtersVisible = false;
   confirmationVisible = false;
+  citySelected: boolean = false;
 
   minPrice: number | null = null;
   maxPrice: number | null = null;
@@ -39,7 +40,6 @@ export class SearchBarComponent {
 
   filteredCities: string[] = [];
   isSearchEnabled: boolean = false;
-  selectedPropertyType: string = '';  // Aggiunta la variabile per il tipo di immobile
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -81,6 +81,7 @@ export class SearchBarComponent {
       ascensore: false,
       accessoDisabili: false
     };
+    this.updateSearchButtonState();
   }
 
   onSearchChange(): void {
@@ -88,26 +89,25 @@ export class SearchBarComponent {
       this.filteredCities = this.allCities.filter(city =>
         city.toLowerCase().includes(this.location.toLowerCase())
       );
-      this.isSearchEnabled = this.filteredCities.length > 0 && this.selectedPropertyType !== '';  // Aggiunto controllo sul tipo di immobile
     } else {
       this.filteredCities = [];
-      this.isSearchEnabled = false;
     }
+    this.citySelected = false; // Resetta quando l'utente modifica il testo
+    this.updateSearchButtonState();
   }
 
   onCitySelect(city: string): void {
     this.location = city;
     this.filteredCities = [];
-    this.isSearchEnabled = this.location.trim().length > 0 && this.selectedPropertyType !== '';  // Aggiunto controllo sul tipo di immobile
+    this.citySelected = true; // Imposta a true quando si seleziona una città
+    this.updateSearchButtonState();
+  }
+
+  updateSearchButtonState(): void {
+    this.isSearchEnabled = this.citySelected && this.location.trim().length > 0;
   }
 
   onSearchClick(): void {
-    console.log('Searching for', this.location, 'Type:', this.selectedPropertyType);
-    // Handle the search functionality here
-  }
-
-  onPropertyTypeChange(event: any): void {
-    this.selectedPropertyType = event.target.value;
-    this.isSearchEnabled = this.location.trim().length > 0 && this.selectedPropertyType !== '';  // Verifica se entrambi i campi sono validi
+    console.log('Searching for', this.location);
   }
 }
