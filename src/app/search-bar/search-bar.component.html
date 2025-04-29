@@ -1,5 +1,4 @@
 <div class="search-bar-wrapper">
-
   <div class="confirmation-toast" *ngIf="confirmationVisible">
     ✅ Filtri applicati con successo!
   </div>
@@ -30,10 +29,17 @@
         <img src="https://i.imgur.com/q3KeOAl.png" alt="Logo">
       </div>
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Effettua una nuova ricerca" />
+      <input type="text" placeholder="Effettua una nuova ricerca per città" [(ngModel)]="location" (input)="onSearchChange()">
+      <div *ngIf="filteredCities.length > 0" class="suggestions">
+        <ul>
+          <li *ngFor="let city of filteredCities.slice(0, 3)" (click)="onCitySelect(city)">
+            {{ city }}
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <button class="search-btn">CERCA</button>
+    <button class="search-btn" [disabled]="!isSearchEnabled" (click)="onSearchClick()">CERCA</button>
   </div>
 
   <div class="filters-link" (click)="toggleFilters()">
