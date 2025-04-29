@@ -92,14 +92,14 @@ export class SearchBarComponent {
     } else {
       this.filteredCities = [];
     }
-    this.citySelected = false; // Resetta quando l'utente modifica il testo
+    this.citySelected = false;
     this.updateSearchButtonState();
   }
 
   onCitySelect(city: string): void {
     this.location = city;
     this.filteredCities = [];
-    this.citySelected = true; // Imposta a true quando si seleziona una città
+    this.citySelected = true;
     this.updateSearchButtonState();
   }
 

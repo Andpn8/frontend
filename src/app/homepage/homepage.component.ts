@@ -17,8 +17,8 @@ export class HomepageComponent {
   userRole: 'guest' | 'agent' | 'user' = 'guest';
 
   constructor() {
-    const isLogged = true; 
-    const isAgent = true;
+    const isLogged = false; 
+    const isAgent = false;
 
     if (!isLogged) {
       this.userRole = 'guest';
