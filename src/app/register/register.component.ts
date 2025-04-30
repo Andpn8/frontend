@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FooterComponent } from "../footer/footer.component";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, FooterComponent],
+  imports: [FormsModule, FooterComponent,HttpClientModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
