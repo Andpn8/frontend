@@ -1,1 +1,33 @@
-<p>QUESTO E' LOGIN</p>
+<div class="login-container">
+      <div class="login-card">
+        <div class="back-arrow" (click)="goBack()">&#8592;</div>
+        <h2>Felici di rivederti su <span>DietiEstates</span>!</h2>
+      
+        <form>
+          <input type="text" placeholder="Username" [(ngModel)]="username" name="username" />
+          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" />
+          <button class="login-btn" type="submit" [disabled]="!username || !password">Accedi</button>
+        </form>
+      
+        <div class="social-login">
+            <p>Oppure accedi con</p>
+          
+            <button class="social-btn google">
+                <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google icon" class="icon" />
+                Google
+              </button>
+          
+              <button class="social-btn facebook">
+                <img class="icon" src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook icon">
+                Facebook
+              </button>
+          
+              <button class="social-btn github">
+                <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" class="icon" />
+                GitHub
+              </button>
+          </div>
+          <br><br>
+          <p class="register-link">Non hai un account? <a (click)="goToRegister()">Registrati</a></p>
+      </div>
+      <app-footer></app-footer>

@@ -10,7 +10,10 @@
            *ngFor="let notification of notifications"
            (click)="openNotification(notification)">
         <div class="notification-header">
-          <h3>{{ notification.title }}</h3>
+          <h3>
+            {{ notification.title }}
+            <span *ngIf="!notification.read" class="new-label">NEW</span>
+          </h3>
           <button class="delete-btn" (click)="deleteNotification(notification); $event.stopPropagation()">Elimina</button>
         </div>
         <p>{{ notification.message }}</p>
@@ -21,7 +24,7 @@
     <div class="info-panel">
       <h3>Riepilogo delle notifiche</h3>
       <p>Totale notifiche: <strong>{{ notifications.length }}</strong></p>
-      <p>Notifiche non lette: <strong>{{ unreadNotificationsCount }}</strong></p>
+      <p>Notifiche non lette: <strong>{{ unreadNotificationsCount }}</strong></p> 
     </div>
   </div>
 </section>
