@@ -6,7 +6,7 @@
         <form>
           <input type="text" placeholder="Username" [(ngModel)]="username" name="username" />
           <input type="password" placeholder="Password" [(ngModel)]="password" name="password" />
-          <button class="login-btn" type="submit">Accedi</button>
+          <button class="login-btn" type="submit" [disabled]="!username || !password">Accedi</button>
         </form>
       
         <div class="social-login">
