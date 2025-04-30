@@ -19,13 +19,12 @@ export class LoginComponent {
 
   login(): void {
     console.log('Username:', this.username, 'Password:', this.password);
-    // Qui metti la logica reale per autenticazione
   }
 
   goBack(): void {
-    this.router.navigate(['/']); // Oppure il percorso desiderato
+    this.router.navigate(['/']); 
   }
   goToRegister(): void {
-    this.router.navigate(['/register']); // Modifica il percorso in base alla tua configurazione
+    this.router.navigate(['/register']); 
   }
 }

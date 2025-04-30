@@ -55,7 +55,7 @@
   }
   
   .register-btn {
-    background-color: #d63053; // Rosso già usato per delete-btn
+    background-color: #d63053;
     color: white;
     border: none;
     padding: 0.75rem;
@@ -124,17 +124,17 @@
   
   .login-link {
     margin-top: 1rem;
-    color: #333; /* Colore del testo principale */
+    color: #333; 
   
     a {
-      font-weight: bold; /* Rende il testo più bold */
-      color: #087E8B; /* Colore azzurrino per il link */
-      text-decoration: underline; /* Aggiunge la sottolineatura */
+      font-weight: bold;
+      color: #087E8B;
+      text-decoration: underline;
       cursor: pointer;
       transition: color 0.3s ease;
   
       &:hover {
-        color: #005f5f; /* Cambia colore quando ci passi sopra con il mouse */
+        color: #005f5f; 
       }
     }
   }
