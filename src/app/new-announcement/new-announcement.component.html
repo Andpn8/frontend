@@ -1,4 +1,4 @@
-<app-navbar 
+<app-navbar  
   [helpMessage]="'Invia un annuncio'" 
   [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
 </app-navbar>
@@ -10,8 +10,16 @@
 
       <div class="contract-type">
         <label>Tipo di Contratto:</label>
-        <button class="active">Vendita</button>
-        <button>Affitto</button>
+        <button 
+          [class.active]="announcementType === 'vendita'" 
+          (click)="setAnnouncementType('vendita')">
+          Vendita
+        </button>
+        <button 
+          [class.active]="announcementType === 'affitto'" 
+          (click)="setAnnouncementType('affitto')">
+          Affitto
+        </button>
       </div>
 
       <form>
@@ -67,6 +75,19 @@
     <announcement-summary></announcement-summary>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
