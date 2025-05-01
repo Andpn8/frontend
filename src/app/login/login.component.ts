@@ -1,8 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FooterComponent } from "../footer/footer.component";
+import { AuthService } from '../../services/auth.service'; // <-- Importa il servizio
 
 @Component({
   selector: 'app-login',
@@ -12,18 +12,33 @@ import { FooterComponent } from "../footer/footer.component";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  username: string = '';
+  email: string = '';
   password: string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService // <-- Inietta il servizio
+  ) {}
 
   login(): void {
-    console.log('Username:', this.username, 'Password:', this.password);
+    this.authService.login(this.email, this.password).subscribe({
+      next: (res) => {
+        console.log('Login riuscito', res);
+        localStorage.setItem('token', res.token);
+        alert('Login effettuato con successo!');
+        this.router.navigate(['/home']); 
+      },
+      error: (err) => {
+        console.error('Errore nel login:', err);
+        alert('Credenziali errate o errore nel server.');
+      }
+    });
   }
 
   goBack(): void {
     this.router.navigate(['/']); 
   }
+
   goToRegister(): void {
     this.router.navigate(['/register']); 
   }
