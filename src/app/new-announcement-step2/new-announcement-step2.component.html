@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+
+<main class="step2-container">
+  <div class="layout-wrapper">
+    <form [formGroup]="step2Form" (ngSubmit)="onSubmit()" class="form-wrapper">
+      <div class="top-section">
+        <div class="left-column">
+          <h2>Dettagli Immobile</h2>
+          <div class="form-group">
+            <label for="superficie">Superficie:</label>
+            <input id="superficie" formControlName="superficie" placeholder="Es. 65 m²" />
+            <span *ngIf="isInvalid('superficie')">CAMPO OBBLIGATORIO</span>
+          </div>
+
+          <div class="form-group">
+            <label for="piano">Piano:</label>
+            <input id="piano" formControlName="piano" placeholder="Es. 4°" />
+            <span *ngIf="isInvalid('piano')">CAMPO OBBLIGATORIO</span>
+          </div>
+
+          <div class="form-group">
+            <label for="classeEnergetica">Classe Energetica:</label>
+            <select id="classeEnergetica" formControlName="classeEnergetica">
+              <option value="">Seleziona</option>
+              <option *ngFor="let classe of classiEnergetiche" [value]="classe">{{ classe }}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <h2>Dettagli Stanze</h2>
+          <div class="room" *ngFor="let stanza of stanze">
+            <img [src]="stanza.icon" [alt]="stanza.label" />
+            <input [placeholder]="stanza.placeholder" />
+            <button type="button">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-section">
+        <h2>Ulteriori Servizi</h2>
+        <div class="services-grid">
+          <div class="service" *ngFor="let servizio of servizi">
+            <img [src]="servizio.icon" [alt]="servizio.label" />
+            <label>
+              {{ servizio.label }}
+              <input type="checkbox" [formControlName]="servizio.control" />
+            </label>
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <button type="button" class="indietro" (click)="goBack()">INDIETRO</button>
+          <button type="submit" class="prosegui">PROSEGUI</button>
+        </div>
+      </div>
+    </form>
+
+    <div class="summary-wrapper">
+      <announcement-summary></announcement-summary>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>
+
+
+
+
+
+  
