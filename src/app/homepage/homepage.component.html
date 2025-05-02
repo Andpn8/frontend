@@ -1,14 +1,15 @@
 <ng-container *ngIf="userRole === 'guest'">
-    <app-navbar-guest></app-navbar-guest>
-  </ng-container>
-  
-  <ng-container *ngIf="userRole === 'agent'">
-    <app-navbar-agent></app-navbar-agent>
-  </ng-container>
-  
-  <ng-container *ngIf="userRole === 'user'">
-    <app-navbar-user></app-navbar-user>
-  </ng-container>
+  <app-navbar-guest></app-navbar-guest>
+</ng-container>
+
+<ng-container *ngIf="userRole === 'agent'">
+  <app-navbar-agent></app-navbar-agent>
+</ng-container>
+
+<ng-container *ngIf="userRole === 'user'">
+  <app-navbar-user></app-navbar-user>
+</ng-container>
+
 <app-search-bar></app-search-bar>
 <app-search-history></app-search-history>
 <app-footer></app-footer>
