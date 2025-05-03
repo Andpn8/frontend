@@ -42,4 +42,9 @@ export class LoginComponent {
   goToRegister(): void {
     this.router.navigate(['/register']); 
   }
+  
+  goToAgentLogin(): void {
+    this.router.navigate(['/loginAgent']);
+  }
 }
+
