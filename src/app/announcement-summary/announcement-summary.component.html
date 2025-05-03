@@ -5,7 +5,9 @@
     <br><br>
 
     <div class="step">
-      <div class="circle">1</div>
+      <div class="circle" 
+           [ngStyle]="{'background-color': currentStep === 1 ? '#109CAB' : (isStepCompleted(1) ? '#109CAB' : 'white')}"
+           (click)="goToStep(1)">1</div>
       <div class="content">
         <h4>Informazioni</h4>
         <br>
@@ -15,7 +17,9 @@
     </div>
 
     <div class="step">
-      <div class="circle">2</div>
+      <div class="circle" 
+           [ngStyle]="{'background-color': currentStep === 2 ? '#109CAB' : (isStepCompleted(2) ? '#109CAB' : 'white')}"
+           (click)="goToStep(2)">2</div>
       <div class="content">
         <h4>Dettagli</h4>
         <br>
@@ -25,7 +29,9 @@
     </div>
 
     <div class="step">
-      <div class="circle">3</div>
+      <div class="circle" 
+           [ngStyle]="{'background-color': currentStep === 3 ? '#109CAB' : (isStepCompleted(3) ? '#109CAB' : 'white')}"
+           (click)="goToStep(3)">3</div>
       <div class="content">
         <h4>Foto e descrizione</h4>
         <br>
@@ -35,7 +41,9 @@
     </div>
 
     <div class="step">
-      <div class="circle">4</div>
+      <div class="circle" 
+           [ngStyle]="{'background-color': currentStep === 4 ? '#109CAB' : (isStepCompleted(4) ? '#109CAB' : 'white')}"
+           (click)="goToStep(4)">4</div>
       <div class="content">
         <h4>Contatti</h4>
         <br>
@@ -45,7 +53,7 @@
     </div>
 
     <div class="footer">
-      <div class="circle small"></div>
+      <div class="circle small" [ngStyle]="{'background-color': formValid ? '#109CAB' : 'white'}"></div>
       <strong>Riepilogo e conferma</strong>
     </div>
   </div>

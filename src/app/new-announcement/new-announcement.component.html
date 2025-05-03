@@ -1,8 +1,9 @@
 <div class="new-announcement">
   <app-navbar  
-  [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'" 
-  [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
-</app-navbar>
+    [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'" 
+    [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
+  </app-navbar>
+
   <div class="content">
     <div class="form-section">
       <h2>Informazioni Annuncio</h2>
@@ -21,25 +22,29 @@
         </button>
       </div>
 
-      <form>
+      <form [formGroup]="form" (ngSubmit)="proceed()">
         <div class="form-group">
           <label>Immobile:</label>
-          <select required>
+          <select formControlName="immobile">
             <option value="" disabled selected></option>
+            <option>Casa/Appartamento</option>
+            <option>Villa</option>
+            <option>Monolocale</option>
+            <option>Attico</option>
           </select>
           <small class="required-field">CAMPO OBBLIGATORIO</small>
         </div>
 
         <div class="form-group">
           <label>Titolo Annuncio:</label>
-          <input type="text" placeholder="Inserisci titolo..." required />
+          <input type="text" placeholder="Inserisci titolo..." formControlName="titolo" />
           <small class="required-field">CAMPO OBBLIGATORIO</small>
         </div>
 
         <div class="form-group price">
           <label>Prezzo:</label>
           <div class="price-input">
-            <input type="text" placeholder="Es. 50.000" required />
+            <input type="text" placeholder="Es. 50.000" formControlName="prezzo" />
             <span>€</span>
           </div>
           <small class="required-field">CAMPO OBBLIGATORIO</small>
@@ -47,8 +52,14 @@
 
         <div class="form-group">
           <label>Comune:</label>
-          <select required>
+          <select formControlName="comune">
             <option value="" disabled selected></option>
+            <option>Napoli</option>
+            <option>Salerno</option>
+            <option>Caserta</option>
+            <option>Avellino</option>
+            <option>Benevento</option>
+            <option>Giugliano in Campania</option>
           </select>
           <small class="required-field">CAMPO OBBLIGATORIO</small>
         </div>
@@ -56,24 +67,33 @@
         <div class="form-group address-group">
           <label>Indirizzo:</label>
           <div class="address-fields">
-            <input type="text" placeholder="Indirizzo immobile" required />
-            <input type="text" placeholder="n°" class="number-input" required />
+            <input type="text" placeholder="Indirizzo immobile" formControlName="indirizzo" />
+            <input type="text" placeholder="n°" class="number-input" formControlName="numero" />
             <label>CAP:</label> 
-            <input type="text" class="cap-input" required />
+            <input type="text" class="cap-input" formControlName="cap" />
           </div>
           <small class="required-field">CAMPI OBBLIGATORI</small>
         </div>
 
         <div class="form-buttons">
-          <button class="back">INDIETRO</button>
-          <button class="next">PROSEGUI</button>
+          <button type="button" class="back">INDIETRO</button>
+          <button 
+            type="submit" 
+            class="next" 
+            [ngClass]="{ 'active': form.valid, 'valid-button': form.valid }">
+            PROSEGUI
+          </button>
         </div>
       </form>
     </div>
     <announcement-summary></announcement-summary>
   </div>
+
   <app-footer></app-footer>
 </div>
+
+
+
 
 
 
