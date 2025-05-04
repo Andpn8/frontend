@@ -44,7 +44,7 @@
         <div class="form-group price">
           <label>Prezzo:</label>
           <div class="price-input">
-            <input type="text" placeholder="Es. 50.000" formControlName="prezzo" />
+            <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="Es. 50.000" formControlName="prezzo" />
             <span>€</span>
           </div>
           <small class="required-field">CAMPO OBBLIGATORIO</small>
@@ -68,9 +68,9 @@
           <label>Indirizzo:</label>
           <div class="address-fields">
             <input type="text" placeholder="Indirizzo immobile" formControlName="indirizzo" />
-            <input type="text" placeholder="n°" class="number-input" formControlName="numero" />
+            <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="n°" class="number-input" formControlName="numero" />
             <label>CAP:</label> 
-            <input type="text" class="cap-input" formControlName="cap" />
+            <input type="number" min="0" oninput="validity.valid||(value='');" class="cap-input" formControlName="cap" />
           </div>
           <small class="required-field">CAMPI OBBLIGATORI</small>
         </div>

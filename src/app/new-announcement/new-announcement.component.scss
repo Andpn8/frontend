@@ -2,6 +2,17 @@
   font-family: 'Segoe UI', sans-serif;
   color: #333;
 
+  /* Rimuove frecce dai campi numerici */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+
   .content {
     display: flex;
     margin-top: 20px;
@@ -138,7 +149,7 @@
     .next {
       background-color: #f9a9b0;
       transition: background-color 0.3s;
-  
+
       &.active {
         background-color: #CE2D4F;
       }
@@ -173,6 +184,7 @@
     }
   }
 }
+
 
 
 
