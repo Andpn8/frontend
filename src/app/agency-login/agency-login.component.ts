@@ -18,20 +18,19 @@ export class AgencyLoginComponent {
   constructor(private router: Router, private authService: AuthService) {}
 
   login(): void {
-    /*
+    
     this.authService.loginAgency(this.piva, this.password).subscribe({
       next: (res) => {
         console.log('Login agenzia riuscito', res);
         localStorage.setItem('token', res.token);
         alert('Login agenzia effettuato con successo!');
-        this.router.navigate(['/home']);  // Naviga alla home dell'agenzia
+        this.router.navigate(['/home']);
       },
       error: (err) => {
         console.error('Errore login agenzia:', err);
         alert('Credenziali errate o errore nel server.');
       }
     });
-    */
   }
 
   goBack(): void {

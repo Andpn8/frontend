@@ -19,6 +19,10 @@ export class AuthService {
   register(name: string, email: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrlUser}/`, { name, email, password });
   }
+
+  loginAgency(piva: string, password: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrlAgency}/login`, { piva, password });
+  }
   
   registerAgency(data: any) {
     return this.http.post(`${this.apiUrlAgency}/register`, data);
