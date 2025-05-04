@@ -1,0 +1,18 @@
+<div class="login-container">
+    <div class="login-card">
+      <div class="back-arrow" (click)="goBack()">&#8592;</div>
+      <h2>Accesso Agenzia <span>DietiEstates</span></h2>
+  
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <input type="text" placeholder="P.IVA Agenzia" [(ngModel)]="piva" name="piva" required />
+        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+        <button class="login-btn" type="submit" [disabled]="!piva || !password">Accedi</button>
+      </form>
+  
+      <p class="register-link">Non hai un registrato la tua agenzia? 
+        <a (click)="goToRegisterAgency()">Clicca qui</a>
+      </p>
+    </div>
+    <app-footer></app-footer>
+  </div>
+  

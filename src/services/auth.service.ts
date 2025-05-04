@@ -6,21 +6,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3002/users';
+  private apiUrlUser = 'http://localhost:3002/users';
+  private apiUrlAgency = 'http://localhost:3002/agency';
+
 
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/login`, { email, password });
+    return this.http.post<any>(`${this.apiUrlUser}/login`, { email, password });
   }
 
   register(name: string, email: string, password: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/`, { name, email, password });
+    return this.http.post<any>(`${this.apiUrlUser}/`, { name, email, password });
+  }
+  
+  registerAgency(data: any) {
+    return this.http.post(`${this.apiUrlAgency}/register`, data);
   }
 
   getProfile(token: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<any>(`${this.apiUrl}/me`, { headers });
+    return this.http.get<any>(`${this.apiUrlUser}/me`, { headers });
   }
 
   saveToken(token: string): void {

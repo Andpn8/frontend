@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { NewAnnouncementStep2Component } from './new-announcement-step2/new-announcement-step2.component';
 import { LoginAgentComponent } from './login-agent/login-agent.component';
 import { RegisterAgencyComponent } from './register-agency/register-agency.component';
+import { AgencyLoginComponent } from './agency-login/agency-login.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -19,5 +20,6 @@ export const routes: Routes = [
   { path: 'new-announcementStep2', component: NewAnnouncementStep2Component },
   { path: 'loginAgent', component: LoginAgentComponent},
   { path: 'registerAgency', component: RegisterAgencyComponent},
+  { path: 'loginAgency', component: AgencyLoginComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];

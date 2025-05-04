@@ -23,12 +23,12 @@
     top: 1rem;
     left: 1rem;
     cursor: pointer;
-    color: #087E8B;
+    color: #087e8b;
     font-size: 1.5rem;
   }
   
   h2 span {
-    color: #087E8B;
+    color: #087e8b;
   }
   
   form {
@@ -43,7 +43,7 @@
     border-radius: 8px;
     font-size: 1rem;
     &:focus {
-      border-color: #087E8B;
+      border-color: #087e8b;
       outline: none;
     }
   }
@@ -74,7 +74,7 @@
   
     a {
       font-weight: bold;
-      color: #087E8B;
+      color: #087e8b;
       text-decoration: underline;
       cursor: pointer;
       transition: color 0.3s ease;
@@ -84,22 +84,4 @@
       }
     }
   }
-
-  .ceo-link {
-    margin-top: 1.5rem;
-    color: #333;
-  
-    a {
-      font-weight: bold;
-      color: #087E8B;
-      text-decoration: underline;
-      cursor: pointer;
-      transition: color 0.3s ease;
-  
-      &:hover {
-        color: #005f5f;
-      }
-    }
-  }
-  
   

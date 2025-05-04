@@ -14,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
 export class RegisterAgencyComponent {
   agencyName: string = '';
   ceoName: string = '';
-  vatNumber: string = '';
+  pIva: string = '';
   password: string = '';
   confirmPassword: string = '';
 
@@ -27,12 +27,12 @@ export class RegisterAgencyComponent {
     }
 
     const agencyData = {
-      agencyName: this.agencyName,
-      ceoName: this.ceoName,
-      vatNumber: this.vatNumber,
+      nomeAgenzia: this.agencyName,
+      nomeCeo: this.ceoName,
+      piva: this.pIva,
       password: this.password
     };
-/*
+
     this.authService.registerAgency(agencyData).subscribe({
       next: (res) => {
         console.log('Registrazione agenzia avvenuta', res);
@@ -40,18 +40,21 @@ export class RegisterAgencyComponent {
         this.router.navigate(['/loginAgent']);
       },
       error: (err) => {
-        console.error('Errore nella registrazione:', err);
-        alert('Errore nella registrazione. Riprova.');
+        if (err.status === 409) {
+          alert('Questa agenzia è già registrata, Andrea!');
+        } else {
+          console.error('Errore nella registrazione:', err);
+          alert('Errore nella registrazione. Riprova.');
+        }
       }
     });
-    */
   }
 
   goBack(): void {
     this.router.navigate(['/']);
   }
 
-  goToLogin(): void {
-    this.router.navigate(['/loginAgent']);
+  goToLoginAgency(): void {
+    this.router.navigate(['/loginAgency']);
   }
 }
