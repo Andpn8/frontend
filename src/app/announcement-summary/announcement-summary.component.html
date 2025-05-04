@@ -1,4 +1,3 @@
-<!-- Wrapper generale sotto la navbar -->
 <div class="page-wrapper">
   <div class="summary-container">
     <h3>STEP DI PUBBLICAZIONE</h3>
@@ -6,7 +5,10 @@
 
     <div class="step">
       <div class="circle" 
-           [ngStyle]="{'background-color': currentStep === 1 ? '#109CAB' : (isStepCompleted(1) ? '#109CAB' : 'white')}"
+           [ngClass]="{
+             'active': currentStep === 1, 
+             'completed': isStepCompleted(1)
+           }"
            (click)="goToStep(1)">1</div>
       <div class="content">
         <h4>Informazioni</h4>
@@ -18,7 +20,10 @@
 
     <div class="step">
       <div class="circle" 
-           [ngStyle]="{'background-color': currentStep === 2 ? '#109CAB' : (isStepCompleted(2) ? '#109CAB' : 'white')}"
+           [ngClass]="{
+             'active': currentStep === 2, 
+             'completed': isStepCompleted(2)
+           }"
            (click)="goToStep(2)">2</div>
       <div class="content">
         <h4>Dettagli</h4>
@@ -30,7 +35,10 @@
 
     <div class="step">
       <div class="circle" 
-           [ngStyle]="{'background-color': currentStep === 3 ? '#109CAB' : (isStepCompleted(3) ? '#109CAB' : 'white')}"
+           [ngClass]="{
+             'active': currentStep === 3, 
+             'completed': isStepCompleted(3)
+           }"
            (click)="goToStep(3)">3</div>
       <div class="content">
         <h4>Foto e descrizione</h4>
@@ -42,19 +50,41 @@
 
     <div class="step">
       <div class="circle" 
-           [ngStyle]="{'background-color': currentStep === 4 ? '#109CAB' : (isStepCompleted(4) ? '#109CAB' : 'white')}"
+           [ngClass]="{
+             'active': currentStep === 4, 
+             'completed': isStepCompleted(4)
+           }"
            (click)="goToStep(4)">4</div>
       <div class="content">
         <h4>Contatti</h4>
         <br>
         <p>Indirizzo di posta elettronica<br />e/o telefono per ricevere richieste</p>
-            <br><br>
+        <br><br>
       </div>
     </div>
 
     <div class="footer">
-      <div class="circle small" [ngStyle]="{'background-color': formValid ? '#109CAB' : 'white'}"></div>
+      <div class="circle small" [ngClass]="{'active': formValid}" [ngStyle]="{'background-color': formValid ? '#109CAB' : 'white'}"></div>
       <strong>Riepilogo e conferma</strong>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

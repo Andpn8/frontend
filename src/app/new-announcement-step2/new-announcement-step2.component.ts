@@ -53,8 +53,10 @@ export class NewAnnouncementStep2Component {
     return control ? control.invalid && control.touched : false;
   }
 
+  // Funzione che gestisce il click sul bottone "INDIETRO"
   goBack(): void {
-    this.router.navigate(['/new-announcement-step1']);
+    // Naviga verso la pagina del primo step, cioè 'new-announcement'
+    this.router.navigate(['/new-announcement']);
   }
 
   onSubmit(): void {
@@ -65,5 +67,6 @@ export class NewAnnouncementStep2Component {
     }
   }
 }
+
 
 

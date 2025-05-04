@@ -41,8 +41,10 @@ export class NewAnnouncementComponent {
 
   proceed() {
     if (this.form.valid) {
-      this.router.navigate(['/new-announcementStep2']);
+      // Quando il form è valido, naviga a new-announcement-step2
+      this.router.navigate(['/new-announcement-step2']);
     } else {
+      // Se il form non è valido, fai vedere i campi richiesti
       this.form.markAllAsTouched();
     }
   }
