@@ -22,7 +22,6 @@ export const routes: Routes = [
   { path: 'notify', component: NotifyComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'new-announcementStep2', component: NewAnnouncementStep2Component },
   { path: 'loginAgent', component: LoginAgentComponent},
   { path: 'registerAgency', component: RegisterAgencyComponent},
   { path: 'loginAgency', component: AgencyLoginComponent},
