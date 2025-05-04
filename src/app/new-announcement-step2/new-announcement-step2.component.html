@@ -8,14 +8,24 @@
           <h2>Dettagli Immobile</h2>
           <div class="form-group">
             <label for="superficie">Superficie:</label>
-            <input id="superficie" formControlName="superficie" placeholder="Es. 65 m²" />
-            <span *ngIf="isInvalid('superficie')">CAMPO OBBLIGATORIO</span>
+            <input
+              id="superficie"
+              formControlName="superficie"
+              placeholder="Es. 65 m²"
+              [class.always-invalid]="true"
+            />
+            <span class="always-error">CAMPO OBBLIGATORIO</span>
           </div>
 
           <div class="form-group">
             <label for="piano">Piano:</label>
-            <input id="piano" formControlName="piano" placeholder="Es. 4°" />
-            <span *ngIf="isInvalid('piano')">CAMPO OBBLIGATORIO</span>
+            <input
+              id="piano"
+              formControlName="piano"
+              placeholder="Es. 4°"
+              [class.always-invalid]="true"
+            />
+            <span class="always-error">CAMPO OBBLIGATORIO</span>
           </div>
 
           <div class="form-group">
@@ -51,7 +61,13 @@
 
         <div class="form-buttons">
           <button type="button" class="indietro" (click)="goBack()">INDIETRO</button>
-          <button type="submit" class="prosegui">PROSEGUI</button>
+          <button
+            type="submit"
+            class="prosegui"
+            [ngClass]="{ 'active': step2Form.valid }"
+          >
+            PROSEGUI
+          </button>
         </div>
       </div>
     </form>
@@ -63,6 +79,11 @@
 </main>
 
 <app-footer></app-footer>
+
+
+
+
+
 
 
 
