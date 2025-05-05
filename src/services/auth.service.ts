@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,6 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrlUser = 'http://localhost:3002/users';
   private apiUrlAgency = 'http://localhost:3002/agency';
-
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +23,7 @@ export class AuthService {
   loginAgency(piva: string, password: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrlAgency}/login`, { piva, password });
   }
-  
+
   registerAgency(data: any) {
     return this.http.post(`${this.apiUrlAgency}/register`, data);
   }
@@ -47,5 +47,19 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+  }
+
+  getUserRoleFromToken(): 'user' | 'agent' | 'ceo' | 'guest' {
+    const token = this.getToken();
+    if (!token) return 'guest';
+
+    try {
+      const decoded: any = jwtDecode(token);
+      if (decoded.agency_id) return 'ceo';
+      if (decoded.agent_id) return 'agent';
+      return 'user';
+    } catch (e) {
+      return 'guest';
+    }
   }
 }

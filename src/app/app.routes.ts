@@ -13,6 +13,7 @@ import { RegisterAgencyComponent } from './register-agency/register-agency.compo
 import { AgencyLoginComponent } from './agency-login/agency-login.component';
 import { ManageAgentComponent } from './manage-agent/manage-agent.component';
 import { LoginAmministratorComponent } from './login-amministrator/login-amministrator.component';
+import { CreateAgentComponent } from './create-agent/create-agent.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'loginAgency', component: AgencyLoginComponent},
   { path: 'loginAmministrator', component: LoginAmministratorComponent},
   { path: 'manageAgent', component: ManageAgentComponent},
+  { path: 'createAgent', component: CreateAgentComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 

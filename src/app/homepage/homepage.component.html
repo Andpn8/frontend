@@ -10,6 +10,10 @@
   <app-navbar-user></app-navbar-user>
 </ng-container>
 
+<ng-container *ngIf="userRole === 'ceo'">
+  <app-navbar-ceo></app-navbar-ceo>
+</ng-container>
+
 <app-search-bar></app-search-bar>
 <app-search-history></app-search-history>
 <app-footer></app-footer>

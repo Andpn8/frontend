@@ -1,0 +1,33 @@
+<div class="create-agent-container">
+    <div class="create-agent-card">
+      <div class="back-arrow" (click)="goBack()">&#8592;</div>
+      <h2>Crea un nuovo <span>agente</span></h2>
+  
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <select [(ngModel)]="agentData.role" name="role" required>
+          <option value="" disabled selected>Seleziona ruolo</option>
+          <option value="agent">Agente</option>
+          <option value="admin">Amministratore</option>
+        </select>
+  
+        <input
+          type="text"
+          placeholder="Nome"
+          [(ngModel)]="agentData.name"
+          name="name"
+          required
+        />
+  
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="agentData.password"
+          name="password"
+          required
+        />
+  
+        <button class="create-btn" type="submit" [disabled]="form.invalid">Crea Utente</button>
+      </form>
+    </div>
+  </div>
+  

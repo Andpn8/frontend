@@ -8,6 +8,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { NavbarGuestComponent } from '../navbar-guest/navbar-guest.component';
 import { NavbarComponent } from '../navbar-agent/navbar-agent.component';
 import { NavbarUserComponent } from '../navbar-user/navbar-user.component';
+import { NavbarCeoComponent } from '../navbar-ceo/navbar-ceo.component';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,13 +16,14 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [
     SearchBarComponent, SearchHistoryComponent, FooterComponent,
-    NavbarGuestComponent, NavbarComponent, NavbarUserComponent, CommonModule
+    NavbarGuestComponent, NavbarComponent, NavbarUserComponent,
+    NavbarCeoComponent, CommonModule
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent implements OnInit {
-  userRole: 'guest' | 'agent' | 'user' = 'guest';
+  userRole: 'guest' | 'agent' | 'user' | 'ceo' = 'guest';
 
   constructor(
     private authService: AuthService,
@@ -30,12 +32,7 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      if (this.authService.isLoggedIn()) {
-        // Qui puoi anche usare getProfile per distinguere tra user/agent se in futuro serve
-        this.userRole = 'user';
-      } else {
-        this.userRole = 'guest';
-      }
+      this.userRole = this.authService.getUserRoleFromToken();
     }
   }
 }
