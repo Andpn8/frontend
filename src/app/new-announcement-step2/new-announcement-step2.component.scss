@@ -4,6 +4,17 @@
   justify-content: center;
 }
 
+  /* Rimuove frecce dai campi numerici */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield; /* Firefox */
+  }
+
 .layout-wrapper {
   display: flex;
   max-width: 1200px;
@@ -13,13 +24,10 @@
 
 .form-wrapper {
   flex: 2;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-left: -100px; /* Sposta Dettagli Immobile a sinistra */
 
   h2 {
-    color: #00717f;
+    color: #087E8B;
     margin-bottom: 15px;
   }
 
@@ -27,70 +35,112 @@
     display: flex;
     gap: 40px;
 
-    .left-column,
+    .left-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .form-group-horizontal {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+
+        label {
+          width: 140px;
+          font-weight: 600;
+          margin-top: 4px;
+        }
+
+        .input-column {
+          display: flex;
+          flex-direction: column;
+
+          input,
+          select {
+            height: 26px;
+            padding: 2px 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+          }
+
+          input#superficie {
+            width: 94px;
+          }
+
+          input#piano {
+            width: 79px;
+          }
+
+          select#classeEnergetica {
+            width: 94px;
+          }
+
+          .always-error {
+            color: #ce2d4f;
+            font-size: 0.75rem;
+            margin-top: 4px;
+          }
+        }
+
+        input.always-invalid {
+          border-color: #ce2d4f !important;
+        }
+      }
+    }
+
     .right-column {
       flex: 1;
-    }
 
-    .form-group {
-      margin-bottom: 20px;
+      .room {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
 
-      label {
-        display: block;
-        font-weight: 600;
-        margin-bottom: 5px;
-      }
+        .room-label {
+          width: 80px;
+          font-weight: 600;
+        }
 
-      input,
-      select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-      }
+        .empty-label {
+          visibility: hidden;
+        }
 
-      input.always-invalid {
-        border-color: #CE2D4F !important;
-      }
+        .icon-input-wrapper {
+          position: relative;
 
-      .always-error {
-        color: #CE2D4F;
-        font-size: 0.75rem;
-        margin-top: 4px;
-        display: block;
-      }
-    }
+          img {
+            position: absolute;
+            top: 50%;
+            left: 8px;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            pointer-events: none;
+          }
 
-    .room {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
+          input {
+            width: 266px;
+            height: 31px;
+            padding: 4px 8px 4px 32px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
+        }
 
-      img {
-        width: 24px;
-        height: 24px;
-      }
-
-      input {
-        flex: 1;
-        padding: 6px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      button {
-        background-color: transparent;
-        border: none;
-        font-size: 1.2rem;
-        color: #e91e63;
-        cursor: pointer;
+        button {
+          background-color: transparent;
+          border: none;
+          font-size: 1.2rem;
+          color: #e91e63;
+          cursor: pointer;
+        }
       }
     }
   }
 
   .bottom-section {
-    margin-top: 30px;
+    margin-top: 100px;
 
     .services-grid {
       display: grid;
@@ -130,7 +180,7 @@
       }
 
       .indietro {
-        background-color: #00717f;
+        background-color: #087E8B;
         color: #fff;
       }
 
@@ -141,7 +191,7 @@
       }
 
       .prosegui.active {
-        background-color: #CE2D4F !important;
+        background-color: #ce2d4f !important;
       }
     }
   }
@@ -149,10 +199,49 @@
 
 .summary-wrapper {
   flex: 1;
+  margin-left: auto;
+  margin-right: 0;
+  padding-left: 40px;
+  position: absolute;
+  right: 0;
+  top: 50px;
 }
 
+.line {
+  position: absolute;
+  top: 50%;  /* Posiziona la linea al centro verticale */
+  left: 50%;  /* Centra la linea orizzontalmente */
+  transform: translateX(-50%); /* Compensa la metà della larghezza della linea */
+  width: 100%;  /* Fa in modo che la linea prenda tutta la larghezza disponibile */
+  height: 4px;
+  background-color: #087E8B;
+  margin: 0;
+}
 
-  
-  
-  
-  
+/* Linea verticale */
+.line-vertical {
+  position: absolute;
+  top: 60px; /* La linea parte da sotto la navbar, supponendo che la navbar sia alta 60px */
+  left: 650px; /* Posiziona la linea orizzontalmente dove desideri */
+  width: 4px; /* Spessore della linea verticale */
+  height: calc(50% - 60px); /* Altezza della linea verticale, fermandosi all'intersezione con la linea orizzontale */
+  background-color: #087E8B;
+}
+
+/* Modifica: Sposta Dettagli Stanza molto più a destra */
+.right-column {
+  margin-left: 325px; /* Aggiustato a 325 come hai detto */
+}
+
+.services-wrapper {
+  margin-top: 100px; /* Aumenta o riduci questo valore se necessario */
+  display: flex;
+  justify-content: center; /* Centra il contenuto orizzontalmente */
+  align-items: center; /* Centra il contenuto verticalmente */
+  flex-direction: column; /* Organizza i contenuti in colonna, se necessario */
+}
+
+.services-wrapper h2 {
+  text-align: center; /* Allinea il testo al centro */
+  margin-bottom: 20px; /* Puoi regolare questo margine a piacere */
+}
