@@ -33,6 +33,12 @@ export class AuthService {
     return this.http.get<any>(`${this.apiUrlUser}/me`, { headers });
   }
 
+  createAgent(data: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post('http://localhost:3002/agent', data, { headers });
+  }
+
   saveToken(token: string): void {
     localStorage.setItem('token', token);
   }
@@ -52,12 +58,13 @@ export class AuthService {
   getUserRoleFromToken(): 'user' | 'agent' | 'ceo' | 'guest' {
     const token = this.getToken();
     if (!token) return 'guest';
-
+  
     try {
       const decoded: any = jwtDecode(token);
-      if (decoded.agency_id) return 'ceo';
-      if (decoded.agent_id) return 'agent';
-      return 'user';
+      
+      if (decoded.agencyId) return 'ceo';
+      if (decoded.agentId) return 'agent';
+      return 'user'; // fallback se è un utente normale
     } catch (e) {
       return 'guest';
     }
