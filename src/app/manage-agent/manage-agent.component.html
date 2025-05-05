@@ -1,0 +1,53 @@
+<app-navbar 
+  [helpMessage]="'Qui è dove potrai <strong>amministrare</strong> tutti gli agenti immobiliari.'" 
+  [centerMessage]="'<strong>Terminale amministrativo</strong>'">
+</app-navbar>
+<div class="manage-container">
+    <div class="sidebar">
+      <p><strong>AMMINISTRATORE:</strong> <span>Luca Esposito</span></p>
+      <p><strong>PERMESSI:</strong> <span class="limited">Limitati</span></p>
+      <p><strong>AGENTI TOTALI:</strong> <span>42</span></p>
+      <p><strong>ADMIN TOTALI:</strong> <span>8</span></p>
+      <button class="back-btn" (click)="goBack()">← Torna indietro</button>
+    </div>
+  
+    <div class="agent-list">
+      <h2>LISTA AGENTI IMMOBILIARI E AMMINISTRATORI</h2>
+  
+      <table>
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>ASSUNTO IL</th>
+            <th>NOME</th>
+            <th>RUOLO</th>
+            <th>OPERAZIONI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let agent of agents; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ agent.hiredDate }}</td>
+            <td>{{ agent.name }}</td>
+            <td>{{ agent.role }}</td>
+            <td>
+              <button class="promote" [disabled]="agent.role !== 'Agente'">
+                Promuovi
+                <span *ngIf="agent.role !== 'Agente'" class="lock">🔒</span>
+              </button>
+              <button class="fire">Licenzia</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <div class="pagination">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-></button>
+      </div>
+    </div>
+    <app-footer></app-footer>
+  </div>
+  

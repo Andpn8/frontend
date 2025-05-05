@@ -1,0 +1,115 @@
+.manage-container {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+  }
+  
+  .sidebar {
+    border: 3px solid #00838f;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    min-width: 250px;
+    height: fit-content;
+    margin-top: 110px;
+  
+    span {
+      color: #00838f;
+      font-weight: bold;
+    }
+  
+    .limited {
+      color: #00838f;
+    }
+  
+    .back-btn {
+      margin-top: 2rem;
+      background-color: #d63053;
+      color: white;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #b3243f;
+      }
+    }
+  }
+  
+  .agent-list {
+    flex: 1;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid #00838f;
+  
+      th, td {
+        border: 1px solid #00838f;
+        padding: 0.75rem;
+        text-align: center;
+      }
+  
+      thead {
+        background-color: #00838f;
+        color: white;
+      }
+  
+      .promote {
+        background-color: #00838f;
+        color: white;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 4px;
+        margin-right: 0.5rem;
+        cursor: pointer;
+  
+        &:disabled {
+          background-color: #b2dfdb;
+          cursor: not-allowed;
+        }
+  
+        .lock {
+          margin-left: 0.25rem;
+        }
+      }
+  
+      .fire {
+        background-color: #d63053;
+        color: white;
+        padding: 0.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+  
+    .pagination {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+  
+      button {
+        padding: 0.5rem 0.75rem;
+        border: none;
+        background-color: #00838f;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+  
+        &:hover {
+          background-color: #005f5f;
+        }
+      }
+    }
+  }
+  

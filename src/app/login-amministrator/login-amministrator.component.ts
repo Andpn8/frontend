@@ -5,29 +5,29 @@ import { FooterComponent } from '../footer/footer.component';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-login-agent',
+  selector: 'app-login-amministrator',
   standalone: true,
   imports: [FormsModule, FooterComponent],
-  templateUrl: './login-agent.component.html',
-  styleUrls: ['./login-agent.component.scss']
+  templateUrl: './login-amministrator.component.html',
+  styleUrls: ['./login-amministrator.component.scss']
 })
-export class LoginAgentComponent {
-  agentId: string = '';
+export class LoginAmministratorComponent {
+  adminId: string = '';
   password: string = '';
 
   constructor(private router: Router, private authService: AuthService) {}
 
   login(): void {
     /*
-    this.authService.loginAgent(this.agentId, this.password).subscribe({
+    this.authService.loginAmministrator(this.adminId, this.password).subscribe({
       next: (res) => {
-        console.log('Login agente riuscito', res);
+        console.log('Login amministratore riuscito', res);
         localStorage.setItem('token', res.token);
-        alert('Login agente effettuato con successo!');
-        this.router.navigate(['/home']); 
+        alert('Login amministratore effettuato con successo!');
+        this.router.navigate(['/home']);
       },
       error: (err) => {
-        console.error('Errore login agente:', err);
+        console.error('Errore login amministratore:', err);
         alert('Credenziali errate o errore nel server.');
       }
     });
@@ -38,6 +38,10 @@ export class LoginAgentComponent {
     this.router.navigate(['/']);
   }
 
+  goToAgentLogin(): void{
+    this.router.navigate(['/loginAgent']);
+  }
+  
   goToRegisterAgency(): void {
     this.router.navigate(['/registerAgency']);
   }
@@ -45,9 +49,4 @@ export class LoginAgentComponent {
   goToCeoLogin(): void {
     this.router.navigate(['/loginAgency']);
   }
-
-  goToAdminLogin(): void {
-    this.router.navigate(['/loginAmministrator']);
-  }
 }
-

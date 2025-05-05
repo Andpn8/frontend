@@ -1,16 +1,16 @@
 <div class="login-container">
     <div class="login-card">
       <div class="back-arrow" (click)="goBack()">&#8592;</div>
-      <h2>Accesso agenti <span>DietiEstates</span></h2>
+      <h2>Accesso <span>Amministratori</span></h2>
   
       <form (ngSubmit)="login()" #loginForm="ngForm">
-        <input type="text" placeholder="ID Agente" [(ngModel)]="agentId" name="agentId" required />
+        <input type="text" placeholder="ID Amministratore" [(ngModel)]="adminId" name="adminId" required />
         <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
-        <button class="login-btn" type="submit" [disabled]="!agentId || !password">Accedi</button>
+        <button class="login-btn" type="submit" [disabled]="!adminId || !password">Accedi</button>
       </form>
-  
-      <p class="admin-link">Sei un amministratore? 
-        <a (click)="goToAdminLogin()">Clicca qui</a>
+
+      <p class="agent-link">Sei un agente immobiliare? 
+        <a (click)="goToAgentLogin()">Clicca qui</a>
       </p>
       <p class="register-link">Vuoi registrare la tua agenzia? 
         <a (click)="goToRegisterAgency()">Clicca qui</a>

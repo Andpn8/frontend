@@ -11,6 +11,8 @@ import { NewAnnouncementStep4Component } from './new-announcement-step4/new-anno
 import { LoginAgentComponent } from './login-agent/login-agent.component';
 import { RegisterAgencyComponent } from './register-agency/register-agency.component';
 import { AgencyLoginComponent } from './agency-login/agency-login.component';
+import { ManageAgentComponent } from './manage-agent/manage-agent.component';
+import { LoginAmministratorComponent } from './login-amministrator/login-amministrator.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -25,6 +27,8 @@ export const routes: Routes = [
   { path: 'loginAgent', component: LoginAgentComponent},
   { path: 'registerAgency', component: RegisterAgencyComponent},
   { path: 'loginAgency', component: AgencyLoginComponent},
+  { path: 'loginAmministrator', component: LoginAmministratorComponent},
+  { path: 'manageAgent', component: ManageAgentComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
