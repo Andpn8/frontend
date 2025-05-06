@@ -69,4 +69,10 @@ export class AuthService {
       return 'guest';
     }
   }
+
+  createAdmin(data: any): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post('http://localhost:3002/amministratori', data, { headers });
+  }
 }
