@@ -73,12 +73,12 @@ export class AuthService {
     }
   }
 
-  loginAgent(nome: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrlAgent}/login`, { nome, password });
+  loginAgent(agentId: number, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrlAgent}/login`, { agentId, password });
   }
 
-  loginAmministrator(nome: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrlAmministrator}/login`, { nome, password });
+  loginAmministrator(amministratore_id: number, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrlAmministrator}/login`, { amministratore_id, password });
   }
 
   createAdmin(data: any): Observable<any> {

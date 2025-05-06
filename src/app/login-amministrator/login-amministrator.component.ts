@@ -18,7 +18,7 @@ export class LoginAmministratorComponent {
   constructor(private router: Router, private authService: AuthService) {}
 
   login(): void {
-    this.authService.loginAmministrator(this.adminId, this.password).subscribe({
+    this.authService.loginAmministrator(Number(this.adminId), this.password).subscribe({
       next: (res) => {
         console.log('Login amministratore riuscito', res);
         localStorage.setItem('token', res.token);

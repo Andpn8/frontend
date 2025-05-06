@@ -19,7 +19,7 @@ export class LoginAgentComponent {
 
   login(): void {
 
-    this.authService.loginAgent(this.agentId, this.password).subscribe({
+    this.authService.loginAgent(Number(this.agentId), this.password).subscribe({
       next: (res) => {
         console.log('Login agente riuscito', res);
         localStorage.setItem('token', res.token);

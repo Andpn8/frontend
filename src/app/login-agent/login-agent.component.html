@@ -4,7 +4,7 @@
       <h2>Accesso agenti <span>DietiEstates</span></h2>
   
       <form (ngSubmit)="login()" #loginForm="ngForm">
-        <input type="text" placeholder="ID Agente" [(ngModel)]="agentId" name="agentId" required />
+        <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="ID Agente" [(ngModel)]="agentId" name="agentId" required />
         <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
         <button class="login-btn" type="submit" [disabled]="!agentId || !password">Accedi</button>
       </form>

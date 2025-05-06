@@ -4,7 +4,7 @@
       <h2>Accesso <span>Amministratori</span></h2>
   
       <form (ngSubmit)="login()" #loginForm="ngForm">
-        <input type="text" placeholder="ID Amministratore" [(ngModel)]="adminId" name="adminId" required />
+        <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="ID Amministratore" [(ngModel)]="adminId" name="adminId" required />
         <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
         <button class="login-btn" type="submit" [disabled]="!adminId || !password">Accedi</button>
       </form>
