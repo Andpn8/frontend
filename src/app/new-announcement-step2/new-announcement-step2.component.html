@@ -6,46 +6,65 @@
       <div class="top-section">
         <div class="left-column">
           <h2>Dettagli Immobile</h2>
-          <div class="form-group">
+
+          <div class="form-group-horizontal">
             <label for="superficie">Superficie:</label>
-            <input
-              id="superficie"
-              formControlName="superficie"
-              placeholder="Es. 65 m²"
-              [class.always-invalid]="true"
-            />
-            <span class="always-error">CAMPO OBBLIGATORIO</span>
+            <div class="input-column">
+              <input
+                type="number" min="0" oninput="validity.valid||(value='');"
+                id="superficie"
+                formControlName="superficie"
+                placeholder="Es. 65 m²"
+                [class.always-invalid]="true"
+              />
+              <span class="always-error">CAMPO OBBLIGATORIO</span>
+            </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group-horizontal">
             <label for="piano">Piano:</label>
-            <input
-              id="piano"
-              formControlName="piano"
-              placeholder="Es. 4°"
-              [class.always-invalid]="true"
-            />
-            <span class="always-error">CAMPO OBBLIGATORIO</span>
+            <div class="input-column">
+              <input
+                type="number" min="0" oninput="validity.valid||(value='');"
+                id="piano"
+                formControlName="piano"
+                placeholder="Es. 4°"
+                [class.always-invalid]="true"
+              />
+              <span class="always-error">CAMPO OBBLIGATORIO</span>
+            </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group-horizontal">
             <label for="classeEnergetica">Classe Energetica:</label>
-            <select id="classeEnergetica" formControlName="classeEnergetica">
-              <option value="">Seleziona</option>
-              <option *ngFor="let classe of classiEnergetiche" [value]="classe">{{ classe }}</option>
-            </select>
+            <div class="input-column">
+              <select id="classeEnergetica" formControlName="classeEnergetica">
+                <option value="">Seleziona</option>
+                <option *ngFor="let classe of classiEnergetiche" [value]="classe">{{ classe }}</option>
+              </select>
+            </div>
           </div>
         </div>
 
         <div class="right-column">
           <h2>Dettagli Stanze</h2>
-          <div class="room" *ngFor="let stanza of stanze">
-            <img [src]="stanza.icon" [alt]="stanza.label" />
-            <input [placeholder]="stanza.placeholder" />
+          <div class="room" *ngFor="let stanza of stanze; let i = index">
+            <label *ngIf="i === 0" class="room-label">Stanze:</label>
+            <label *ngIf="i !== 0" class="room-label empty-label"></label>
+            <div class="icon-input-wrapper">
+              <img [src]="stanza.icon" [alt]="stanza.label" />
+              <input [placeholder]="stanza.placeholder" />
+            </div>
             <button type="button">+</button>
           </div>
         </div>
       </div>
+
+      <!-- Linea verticale -->
+      <div class="line-vertical"></div>
+
+      <!-- Linea orizzontale -->
+      <div class="line"></div>
 
       <div class="bottom-section">
         <h2>Ulteriori Servizi</h2>
@@ -79,14 +98,3 @@
 </main>
 
 <app-footer></app-footer>
-
-
-
-
-
-
-
-
-
-
-  
