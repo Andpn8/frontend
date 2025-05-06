@@ -4,16 +4,16 @@
   justify-content: center;
 }
 
-  /* Rimuove frecce dai campi numerici */
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
+/* Rimuove frecce dai campi numerici */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
-  input[type=number] {
-    -moz-appearance: textfield; /* Firefox */
-  }
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}
 
 .layout-wrapper {
   display: flex;
@@ -142,6 +142,14 @@
   .bottom-section {
     margin-top: 100px;
 
+    
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      margin-left: 410px; 
+      width: fit-content;
+    }
+
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -233,15 +241,20 @@
   margin-left: 325px; /* Aggiustato a 325 come hai detto */
 }
 
+.right-column h2 {
+  margin-left: 160px; /* o qualsiasi valore che ti soddisfa */
+}
+
+
 .services-wrapper {
-  margin-top: 100px; /* Aumenta o riduci questo valore se necessario */
+  margin-top: 100px;
   display: flex;
-  justify-content: center; /* Centra il contenuto orizzontalmente */
-  align-items: center; /* Centra il contenuto verticalmente */
-  flex-direction: column; /* Organizza i contenuti in colonna, se necessario */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .services-wrapper h2 {
-  text-align: center; /* Allinea il testo al centro */
-  margin-bottom: 20px; /* Puoi regolare questo margine a piacere */
+  text-align: center;
+  margin-bottom: 20px;
 }
