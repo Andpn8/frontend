@@ -1,0 +1,82 @@
+<nav class="navbar">
+    <!-- Sinistra -->
+    <div class="nav-left">
+      <div class="icon user" (click)="toggleDropdown()" [class.open]="isDropdownOpen">
+        <div class="logo">
+          <img src="https://i.imgur.com/fda9m1G.png" alt="Logo" />
+        </div>
+        <i class="fas fa-user"></i>
+        <span class="caret">▼</span>
+
+        <div class="dropdown" *ngIf="isDropdownOpen">
+          <ul>
+            <li (click)="goToNotify()"><img src="https://i.imgur.com/mcfdYbE.png"/> Notifiche</li>
+            <hr class="dropdown-divider" />
+            <li (click)="goToManageAgent()"><img src="https://i.imgur.coffm/tAIBdEg.png"/> Gestisci agenti</li>
+            <hr class="dropdown-divider" />
+            <li (click)="goToNewAnnouncement()"><img src="https://i.imgur.com/tAIBdEg.png"/> Pubblica annuncio</li>
+            <hr class="dropdown-divider" />
+            <li (click)="logout()" class="logout">
+              <img class="logout-icon" src="https://i.imgur.com/pCXvAHh.png" alt="Logout icon" />
+              Logout
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="icon" (click)="goToNotify()">
+        <div class="logo">
+          <img src="https://i.imgur.com/rRsXzMS.png" alt="Logo" />
+        </div>
+        <i class="fas fa-bell"></i>
+        <span>Notifiche</span>
+      </div>
+
+      <div class="icon" (click)="goToHome()">
+        <div class="logo">
+          <img src="https://i.imgur.com/BBn9bOo.png" alt="Logo" />
+        </div>
+        <i class="fas fa-home" ></i>
+        <span>Home</span>
+      </div>
+    </div>
+
+    <!-- Centro -->
+    <div class="nav-center">
+      <div class="logo">
+        <img src="https://i.imgur.com/uOvKzdr.png" alt="Logo" />
+      </div>
+    </div>
+
+    <!-- Destra -->
+    <div class="nav-right">
+      <button class="manage-btn" (click)="goToManageAgent()">
+        <div class="logo">
+          <img src="https://i.imgur.com/MrFoMj6.png" alt="Logo" />
+        </div>
+        <i class="fas fa-plus"></i> Gestisci agenti
+      </button>
+      <div class="icon" (click)="toggleHelp()">
+        <div class="logo">
+          <img src="https://i.imgur.com/XGH6MVo.png" alt="Logo " />
+        </div>
+        <i class="fas fa-question-circle"></i>
+        <span>Help</span>
+      
+        <!-- Riquadro di aiuto che si mostra al click -->
+        <div class="help-box" *ngIf="isHelpOpen">
+          <p>
+            Nella barra di ricerca è possibile filtrare gli annunci per <strong>città</strong>.<br><br>
+            E' possibile aggiungere filtri tramite il pulsante <strong>aggiungi filtri</strong>.<br><br>
+            Inoltre è possibile anche filtrare tra annunci di <strong>affitto</strong> o <strong>acquisto</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+

@@ -18,7 +18,6 @@ export class LoginAmministratorComponent {
   constructor(private router: Router, private authService: AuthService) {}
 
   login(): void {
-    /*
     this.authService.loginAmministrator(this.adminId, this.password).subscribe({
       next: (res) => {
         console.log('Login amministratore riuscito', res);
@@ -31,7 +30,6 @@ export class LoginAmministratorComponent {
         alert('Credenziali errate o errore nel server.');
       }
     });
-    */
   }
 
   goBack(): void {

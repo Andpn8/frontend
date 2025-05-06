@@ -6,6 +6,10 @@
   <app-navbar-agent></app-navbar-agent>
 </ng-container>
 
+<ng-container *ngIf="userRole === 'admin'">
+  <app-navbar-amministrator></app-navbar-amministrator>
+</ng-container>
+
 <ng-container *ngIf="userRole === 'user'">
   <app-navbar-user></app-navbar-user>
 </ng-container>

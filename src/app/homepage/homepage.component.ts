@@ -10,6 +10,7 @@ import { NavbarComponent } from '../navbar-agent/navbar-agent.component';
 import { NavbarUserComponent } from '../navbar-user/navbar-user.component';
 import { NavbarCeoComponent } from '../navbar-ceo/navbar-ceo.component';
 import { AuthService } from '../../services/auth.service';
+import { NavbarAmministratorComponent } from '../navbar-amministrator/navbar-amministrator.component';
 
 @Component({
   selector: 'app-homepage',
@@ -17,13 +18,13 @@ import { AuthService } from '../../services/auth.service';
   imports: [
     SearchBarComponent, SearchHistoryComponent, FooterComponent,
     NavbarGuestComponent, NavbarComponent, NavbarUserComponent,
-    NavbarCeoComponent, CommonModule
+    NavbarCeoComponent, NavbarAmministratorComponent, CommonModule
   ],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent implements OnInit {
-  userRole: 'guest' | 'agent' | 'user' | 'ceo' = 'guest';
+  userRole: 'guest' | 'agent' | 'user' | 'ceo' | 'admin' = 'guest';
 
   constructor(
     private authService: AuthService,

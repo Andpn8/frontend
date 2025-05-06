@@ -10,6 +10,7 @@ export class AuthService {
   private apiUrlUser = 'http://localhost:3002/users';
   private apiUrlAgency = 'http://localhost:3002/agency';
   private apiUrlAgent = 'http://localhost:3002/agent';
+  private apiUrlAmministrator = 'http://localhost:3002/amministrator';
 
   constructor(private http: HttpClient) {}
 
@@ -56,13 +57,14 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
-  getUserRoleFromToken(): 'user' | 'agent' | 'ceo' | 'guest' {
+  getUserRoleFromToken(): 'user' | 'agent' | 'ceo' | 'admin' | 'guest' {
     const token = this.getToken();
     if (!token) return 'guest';
   
     try {
       const decoded: any = jwtDecode(token);
-      
+  
+      if (decoded.amministratore_id) return 'admin';
       if (decoded.agencyId) return 'ceo';
       if (decoded.agentId) return 'agent';
       return 'user';
@@ -75,9 +77,13 @@ export class AuthService {
     return this.http.post(`${this.apiUrlAgent}/login`, { nome, password });
   }
 
+  loginAmministrator(nome: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrlAmministrator}/login`, { nome, password });
+  }
+
   createAdmin(data: any): Observable<any> {
     const token = this.getToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post('http://localhost:3002/amministratori', data, { headers });
+    return this.http.post('http://localhost:3002/amministrator', data, { headers });
   }
 }
