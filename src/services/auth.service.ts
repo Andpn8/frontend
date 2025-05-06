@@ -9,6 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
   private apiUrlUser = 'http://localhost:3002/users';
   private apiUrlAgency = 'http://localhost:3002/agency';
+  private apiUrlAgent = 'http://localhost:3002/agent';
 
   constructor(private http: HttpClient) {}
 
@@ -64,10 +65,14 @@ export class AuthService {
       
       if (decoded.agencyId) return 'ceo';
       if (decoded.agentId) return 'agent';
-      return 'user'; // fallback se è un utente normale
+      return 'user';
     } catch (e) {
       return 'guest';
     }
+  }
+
+  loginAgent(nome: string, password: string): Observable<any> {
+    return this.http.post(`${this.apiUrlAgent}/login`, { nome, password });
   }
 
   createAdmin(data: any): Observable<any> {

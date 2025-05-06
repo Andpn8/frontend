@@ -18,7 +18,7 @@ export class LoginAgentComponent {
   constructor(private router: Router, private authService: AuthService) {}
 
   login(): void {
-    /*
+
     this.authService.loginAgent(this.agentId, this.password).subscribe({
       next: (res) => {
         console.log('Login agente riuscito', res);
@@ -31,7 +31,6 @@ export class LoginAgentComponent {
         alert('Credenziali errate o errore nel server.');
       }
     });
-    */
   }
 
   goBack(): void {
