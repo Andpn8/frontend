@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,6 +21,10 @@ export class NavbarGuestComponent {
   toggleHelp() {
     this.isHelpOpen = !this.isHelpOpen;
   }
+
+  @Input() isGeneric: boolean = false;
+  @Input() helpMessage: string = '';
+  @Input() centerMessage: string = '';
 
   @HostListener('document:click', ['$event'])
   closeDropdown(event: MouseEvent) {

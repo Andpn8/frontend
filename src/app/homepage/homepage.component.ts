@@ -6,7 +6,7 @@ import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { SearchHistoryComponent } from '../search-history/search-history.component';
 import { FooterComponent } from '../footer/footer.component';
 import { NavbarGuestComponent } from '../navbar-guest/navbar-guest.component';
-import { NavbarComponent } from '../navbar-agent/navbar-agent.component';
+import { NavbarAgentComponent } from '../navbar-agent/navbar-agent.component';
 import { NavbarUserComponent } from '../navbar-user/navbar-user.component';
 import { NavbarCeoComponent } from '../navbar-ceo/navbar-ceo.component';
 import { AuthService } from '../../services/auth.service';
@@ -17,7 +17,7 @@ import { NavbarAmministratorComponent } from '../navbar-amministrator/navbar-amm
   standalone: true,
   imports: [
     SearchBarComponent, SearchHistoryComponent, FooterComponent,
-    NavbarGuestComponent, NavbarComponent, NavbarUserComponent,
+    NavbarGuestComponent, NavbarAgentComponent, NavbarUserComponent,
     NavbarCeoComponent, NavbarAmministratorComponent, CommonModule
   ],
   templateUrl: './homepage.component.html',
