@@ -4,27 +4,24 @@
   justify-content: center;
 }
 
-/* Rimuove frecce dai campi numerici */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield; /* Firefox */
-}
-
 .layout-wrapper {
   display: flex;
-  max-width: 1200px;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
   width: 100%;
+  max-width: 1400px;
   gap: 40px;
+  
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 .form-wrapper {
-  flex: 2;
-  margin-left: -100px; /* Sposta Dettagli Immobile a sinistra */
+  flex: 1;
+  min-width: 0;
 
   h2 {
     color: #087E8B;
@@ -33,12 +30,13 @@ input[type=number] {
 
   .top-section {
     display: flex;
-    gap: 40px;
+    gap: 8%;
 
     .left-column {
       display: flex;
       flex-direction: column;
       gap: 20px;
+      margin-left: 2%;
 
       .form-group-horizontal {
         display: flex;
@@ -88,8 +86,14 @@ input[type=number] {
       }
     }
 
+    /* Dettagli stanze spostati a destra accanto al summary */
     .right-column {
-      flex: 1;
+      flex: 0 0 350px; /* Larghezza fissa per la colonna di dettagli */
+      margin-left: 15rem;
+
+      h2 {
+        margin-left: 0;
+      }
 
       .room {
         display: flex;
@@ -120,7 +124,8 @@ input[type=number] {
           }
 
           input {
-            width: 266px;
+            width: 100%;
+            max-width: 266px;
             height: 31px;
             padding: 4px 8px 4px 32px;
             border: 1px solid #ccc;
@@ -140,20 +145,23 @@ input[type=number] {
   }
 
   .bottom-section {
-    margin-top: 100px;
+    margin-top: 9rem;
 
-    
     h2 {
       text-align: center;
       margin-bottom: 20px;
-      margin-left: 410px; 
-      width: fit-content;
     }
 
     .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 10%;
+
+      .service-column {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
 
       .service {
         display: flex;
@@ -176,7 +184,8 @@ input[type=number] {
     .form-buttons {
       display: flex;
       justify-content: space-between;
-      margin-top: 30px;
+      margin-top: 7rem;
+      padding: 0 10%;
 
       button {
         padding: 10px 20px;
@@ -205,56 +214,19 @@ input[type=number] {
   }
 }
 
-.summary-wrapper {
-  flex: 1;
-  margin-left: auto;
-  margin-right: 0;
-  padding-left: 40px;
-  position: absolute;
-  right: 0;
-  top: 50px;
-}
+/* L'Announcement Summary va completamente a destra */
+.summary-sidebar {
+  flex: 0 0 350px; /* Larghezza fissa per il summary */
+  position: sticky;
+  top: 100px;  /* Ancorato dalla parte superiore */
 
-.line {
-  position: absolute;
-  top: 50%;  /* Posiziona la linea al centro verticale */
-  left: 50%;  /* Centra la linea orizzontalmente */
-  transform: translateX(-50%); /* Compensa la metà della larghezza della linea */
-  width: 100%;  /* Fa in modo che la linea prenda tutta la larghezza disponibile */
-  height: 4px;
-  background-color: #087E8B;
-  margin: 0;
-}
+  @media (max-width: 1200px) {
+    flex: 0 0 300px; /* Riduce la larghezza su schermi più piccoli */
+  }
 
-/* Linea verticale */
-.line-vertical {
-  position: absolute;
-  top: 60px; /* La linea parte da sotto la navbar, supponendo che la navbar sia alta 60px */
-  left: 650px; /* Posiziona la linea orizzontalmente dove desideri */
-  width: 4px; /* Spessore della linea verticale */
-  height: calc(50% - 60px); /* Altezza della linea verticale, fermandosi all'intersezione con la linea orizzontale */
-  background-color: #087E8B;
-}
-
-/* Modifica: Sposta Dettagli Stanza molto più a destra */
-.right-column {
-  margin-left: 325px; /* Aggiustato a 325 come hai detto */
-}
-
-.right-column h2 {
-  margin-left: 160px; /* o qualsiasi valore che ti soddisfa */
-}
-
-
-.services-wrapper {
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.services-wrapper h2 {
-  text-align: center;
-  margin-bottom: 20px;
+  @media (max-width: 1024px) {
+    position: static;
+    width: 100%;
+    margin-top: 2rem;
+  }
 }

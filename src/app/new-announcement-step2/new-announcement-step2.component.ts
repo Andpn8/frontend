@@ -14,6 +14,9 @@ import { CommonModule } from '@angular/common';
   imports: [FooterComponent, NavbarComponent, AnnouncementSummaryComponent, ReactiveFormsModule, CommonModule]
 })
 export class NewAnnouncementStep2Component {
+proceed() {
+throw new Error('Method not implemented.');
+}
   step2Form: FormGroup;
 
   classiEnergetiche = ['A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];

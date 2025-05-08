@@ -1,4 +1,7 @@
-<app-navbar></app-navbar>
+<app-navbar>
+  [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'" 
+  [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
+</app-navbar>
 
 <main class="step2-container">
   <div class="layout-wrapper">
@@ -11,7 +14,9 @@
             <label for="superficie">Superficie:</label>
             <div class="input-column">
               <input
-                type="number" min="0" oninput="validity.valid||(value='');"
+                type="number"
+                min="0"
+                oninput="validity.valid||(value='');"
                 id="superficie"
                 formControlName="superficie"
                 placeholder="Es. 65 m²"
@@ -25,7 +30,9 @@
             <label for="piano">Piano:</label>
             <div class="input-column">
               <input
-                type="number" min="0" oninput="validity.valid||(value='');"
+                type="number"
+                min="0"
+                oninput="validity.valid||(value='');"
                 id="piano"
                 formControlName="piano"
                 placeholder="Es. 4°"
@@ -60,21 +67,26 @@
         </div>
       </div>
 
-      <!-- Linea verticale -->
-      <div class="line-vertical"></div>
-
-      <!-- Linea orizzontale -->
-      <div class="line"></div>
-
       <div class="bottom-section">
         <h2>Ulteriori Servizi</h2>
         <div class="services-grid">
-          <div class="service" *ngFor="let servizio of servizi">
-            <img [src]="servizio.icon" [alt]="servizio.label" />
-            <label>
-              {{ servizio.label }}
-              <input type="checkbox" [formControlName]="servizio.control" />
-            </label>
+          <div class="service-column">
+            <div class="service" *ngFor="let servizio of servizi.slice(0, 3)">
+              <img [src]="servizio.icon" [alt]="servizio.label" />
+              <label>
+                {{ servizio.label }}
+                <input type="checkbox" [formControlName]="servizio.control" />
+              </label>
+            </div>
+          </div>
+          <div class="service-column">
+            <div class="service" *ngFor="let servizio of servizi.slice(3, 6)">
+              <img [src]="servizio.icon" [alt]="servizio.label" />
+              <label>
+                {{ servizio.label }}
+                <input type="checkbox" [formControlName]="servizio.control" />
+              </label>
+            </div>
           </div>
         </div>
 
@@ -91,9 +103,9 @@
       </div>
     </form>
 
-    <div class="summary-wrapper">
+    <aside class="summary-sidebar">
       <announcement-summary></announcement-summary>
-    </div>
+    </aside>
   </div>
 </main>
 
