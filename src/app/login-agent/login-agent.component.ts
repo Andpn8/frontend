@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthService } from '../../services/auth.service';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-login-agent',
   standalone: true,
-  imports: [FormsModule, FooterComponent],
+  imports: [FormsModule, FooterComponent, NavbarComponent],
   templateUrl: './login-agent.component.html',
   styleUrls: ['./login-agent.component.scss']
 })

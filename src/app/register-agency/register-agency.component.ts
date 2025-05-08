@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthService } from '../../services/auth.service';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-register-agency',
   standalone: true,
-  imports: [FormsModule, FooterComponent],
+  imports: [FormsModule, FooterComponent, NavbarComponent],
   templateUrl: './register-agency.component.html',
   styleUrls: ['./register-agency.component.scss']
 })

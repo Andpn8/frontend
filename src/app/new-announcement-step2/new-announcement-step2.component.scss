@@ -217,7 +217,7 @@
 /* L'Announcement Summary va completamente a destra */
 .summary-sidebar {
   flex: 0 0 350px; /* Larghezza fissa per il summary */
-  position: sticky;
+  position: relative;
   top: 100px;  /* Ancorato dalla parte superiore */
 
   @media (max-width: 1200px) {

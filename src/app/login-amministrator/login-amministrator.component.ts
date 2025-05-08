@@ -3,11 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FooterComponent } from '../footer/footer.component';
 import { AuthService } from '../../services/auth.service';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-login-amministrator',
   standalone: true,
-  imports: [FormsModule, FooterComponent],
+  imports: [FormsModule, FooterComponent, NavbarComponent],
   templateUrl: './login-amministrator.component.html',
   styleUrls: ['./login-amministrator.component.scss']
 })

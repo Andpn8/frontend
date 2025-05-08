@@ -2,12 +2,13 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FooterComponent } from "../footer/footer.component";
-import { AuthService } from '../../services/auth.service'; // <-- Importa il servizio
+import { AuthService } from '../../services/auth.service';
+import { NavbarComponent } from "../navbar/navbar.component"; // <-- Importa il servizio
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, FooterComponent],
+  imports: [FormsModule, FooterComponent, NavbarComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
