@@ -50,4 +50,8 @@ export class RegisterComponent {
   goToLogin(): void {
     this.router.navigate(['/login']);
   }
+
+  loginWithGoogle(): void {
+    window.location.href = 'http://localhost:3002/auth/google';
+  }
 }

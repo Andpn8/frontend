@@ -18,7 +18,7 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthService // <-- Inietta il servizio
+    private authService: AuthService
   ) {}
 
   login(): void {
@@ -46,6 +46,10 @@ export class LoginComponent {
   
   goToAgentLogin(): void {
     this.router.navigate(['/loginAgent']);
+  }
+
+  loginWithGoogle(): void {
+    window.location.href = 'http://localhost:3002/auth/google';
   }
 }
 
