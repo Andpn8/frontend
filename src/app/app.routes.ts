@@ -14,6 +14,7 @@ import { AgencyLoginComponent } from './agency-login/agency-login.component';
 import { ManageAgentComponent } from './manage-agent/manage-agent.component';
 import { LoginAmministratorComponent } from './login-amministrator/login-amministrator.component';
 import { CreateAgentComponent } from './create-agent/create-agent.component';
+import { LoginSuccessComponent } from './login-success/login-success.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -31,6 +32,7 @@ export const routes: Routes = [
   { path: 'loginAmministrator', component: LoginAmministratorComponent},
   { path: 'manageAgent', component: ManageAgentComponent},
   { path: 'createAgent', component: CreateAgentComponent},
+  { path: 'login-success', component: LoginSuccessComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
