@@ -1,90 +1,34 @@
-<div class="page-wrapper">
-  <div class="summary-container">
-    <h3>STEP DI PUBBLICAZIONE</h3>
-    <br><br>
-
-    <div class="step">
-      <div class="circle" 
-           [ngClass]="{
-             'active': currentStep === 1, 
-             'completed': isStepCompleted(1)
-           }"
-           (click)="goToStep(1)">1</div>
-      <div class="content">
-        <h4>Informazioni</h4>
-        <br>
-        <p>Immobile – Titolo Annuncio<br />Prezzo – Indirizzo</p>
-        <br><br>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="circle" 
-           [ngClass]="{
-             'active': currentStep === 2, 
-             'completed': isStepCompleted(2)
-           }"
-           (click)="goToStep(2)">2</div>
-      <div class="content">
-        <h4>Dettagli</h4>
-        <br>
-        <p>Superficie – Stanze<br />Piano – Classe energetica<br />Servizi presenti</p>
-        <br><br>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="circle" 
-           [ngClass]="{
-             'active': currentStep === 3, 
-             'completed': isStepCompleted(3)
-           }"
-           (click)="goToStep(3)">3</div>
-      <div class="content">
-        <h4>Foto e descrizione</h4>
-        <br>
-        <p>20 Foto – Planimetrie<br />Descrizione dell'immobile</p>
-        <br><br>
-      </div>
-    </div>
-
-    <div class="step">
-      <div class="circle" 
-           [ngClass]="{
-             'active': currentStep === 4, 
-             'completed': isStepCompleted(4)
-           }"
-           (click)="goToStep(4)">4</div>
-      <div class="content">
-        <h4>Contatti</h4>
-        <br>
-        <p>Indirizzo di posta elettronica<br />e/o telefono per ricevere richieste</p>
-        <br><br>
-      </div>
-    </div>
-
-    <div class="footer">
-      <div class="circle small" [ngClass]="{'active': formValid}" [ngStyle]="{'background-color': formValid ? '#109CAB' : 'white'}"></div>
-      <strong>Riepilogo e conferma</strong>
+<div class="summary-container">
+  <h2>STEP DI PUBBLICAZIONE</h2>
+  <div class="step">
+    <div class="circle">1</div>
+    <div class="step-content">
+      <h3>Informazioni</h3>
+      <p>Immobile - Titolo Annuncio<br>Prezzo - Indirizzo</p>
     </div>
   </div>
+  <div class="step">
+    <div class="circle">2</div>
+    <div class="step-content">
+      <h3>Dettagli</h3>
+      <p>Superficie - Stanze<br>Piano - Classe energetica<br>Servizi presenti</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="circle">3</div>
+    <div class="step-content">
+      <h3>Foto e descrizione</h3>
+      <p>20 Foto - Planimetrie<br>Descrizione dell'immobile</p>
+    </div>
+  </div>
+  <div class="step">
+    <div class="circle">4</div>
+    <div class="step-content">
+      <h3>Contatti</h3>
+      <p>Indirizzo di posta elettronica<br>e/o telefono per ricevere richieste</p>
+    </div>
+  </div>
+  <div class="final-step">
+    <strong>Riepilogo e conferma</strong>
+  </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
