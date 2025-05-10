@@ -1,5 +1,5 @@
 <app-navbar
-  [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'" 
+  [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'"
   [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
 </app-navbar>
 
@@ -102,11 +102,8 @@
         </div>
       </div>
     </form>
-
-    <aside class="summary-sidebar">
-      <app-announcement-summary></app-announcement-summary>
-    </aside>
   </div>
+  <app-announcement-summary></app-announcement-summary>
 </main>
 
 <app-footer></app-footer>
