@@ -42,8 +42,12 @@ export class AuthService {
   }
 
   saveToken(token: string): void {
+  if (typeof window !== 'undefined' && window.localStorage) {
     localStorage.setItem('token', token);
+  } else {
+    console.warn('localStorage non disponibile');
   }
+}
 
   getToken(): string | null {
     return localStorage.getItem('token');

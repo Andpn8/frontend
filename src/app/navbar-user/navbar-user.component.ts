@@ -52,6 +52,10 @@ export class NavbarUserComponent {
     this.router.navigate(['/notify']);
   }
 
+  goToProfileInfo() {
+    this.router.navigate(['/profile-info']);
+  }
+
 
   logout() {
     this.authService.logout();  

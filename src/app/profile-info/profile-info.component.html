@@ -1,0 +1,23 @@
+<app-navbar
+  [helpMessage]="'<strong>Profilo</strong>: visualizza le informazioni associate al tuo account, come <strong>nome</strong>, <strong>email</strong> e la <strong>data di creazione</strong>.'"
+  [centerMessage]="'<strong>INFORMAZIONI PROFILO</strong>'">
+</app-navbar>
+
+<div class="profile-container" *ngIf="user">
+  <div class="profile-card">
+    <div class="back-arrow" (click)="goBack()">&#8592;</div>
+
+    <h2>Benvenuto, <span>{{ user.name }}</span>!</h2>
+
+    <div class="info-group">
+      <label>Email:</label>
+      <p>{{ user.email }}</p>
+    </div>
+
+    <div class="info-group">
+      <label>Data creazione:</label>
+      <p>{{ user.created_at | date: 'yyyy-MM-dd' }}</p>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

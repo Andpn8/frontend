@@ -15,6 +15,7 @@ import { ManageAgentComponent } from './manage-agent/manage-agent.component';
 import { LoginAmministratorComponent } from './login-amministrator/login-amministrator.component';
 import { CreateAgentComponent } from './create-agent/create-agent.component';
 import { LoginSuccessComponent } from './login-success/login-success.component';
+import { ProfileInfoComponent } from './profile-info/profile-info.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomepageComponent },
@@ -33,6 +34,7 @@ export const routes: Routes = [
   { path: 'manageAgent', component: ManageAgentComponent},
   { path: 'createAgent', component: CreateAgentComponent},
   { path: 'login-success', component: LoginSuccessComponent},
+  { path: 'profile-info', component: ProfileInfoComponent},
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
