@@ -11,13 +11,13 @@
            (click)="openNotification(notification)">
         <div class="notification-header">
           <h3>
-            {{ notification.title }}
-            <span *ngIf="!notification.read" class="new-label">NEW</span>
+            {{ notification.titoloNotifica }}
+            <span *ngIf="!notification.letta" class="new-label">NEW</span>
           </h3>
           <button class="delete-btn" (click)="deleteNotification(notification); $event.stopPropagation()">Elimina</button>
         </div>
-        <p>{{ notification.message }}</p>
-        <span class="notification-date">{{ notification.date | date:'dd/MM/yyyy' }}</span>
+        <p>{{ notification.contenuto }}</p>
+        <span class="notification-date">{{ notification.dataNotifica | date:'dd/MM/yyyy' }}</span>
       </div>
     </div>
 
@@ -31,9 +31,9 @@
 
 <div class="overlay" *ngIf="selectedNotification" (click)="closeNotification()">
   <div class="overlay-content" (click)="$event.stopPropagation()">
-    <h2>{{ selectedNotification.title }}</h2>
-    <p>{{ selectedNotification.message }}</p>
-    <span class="notification-date">{{ selectedNotification.date | date:'dd/MM/yyyy' }}</span>
+    <h2>{{ selectedNotification.titoloNotifica }}</h2>
+    <p>{{ selectedNotification.contenuto }}</p>
+    <span class="notification-date">{{ selectedNotification.dataNotifica | date:'dd/MM/yyyy' }}</span>
     <button class="close-btn" (click)="closeNotification()">Chiudi</button>
   </div>
 </div>
