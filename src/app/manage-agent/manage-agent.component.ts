@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
 import { AgentService } from '../../services/agent.service';
+import { AuthService } from '../../services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 interface User {
   id: string;
@@ -25,40 +27,63 @@ export class ManageAgentComponent implements OnInit {
   currentPage: number = 1;
   itemsPerPage: number = 5;
 
-  currentUserName: string = 'Andrea Pinto'; 
+  currentUserName: string = 'Utente'; 
   currentUserRole: 'Amministratore' | 'CEO' = 'Amministratore';
 
-  constructor(private router: Router, private agentService: AgentService) {}
+  constructor(
+    private router: Router,
+    private agentService: AgentService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    this.setUserInfo();
     this.loadAgents();
   }
 
- loadAgents(): void {
-  this.agentService.getAllUsers().subscribe(([agents, admins]) => {
-    const normalizedAgents = agents.map((agent: any) => ({
-      id: agent.id,
-      name: agent.nome || agent.name || 'Sconosciuto',
-      hiredDate: agent.createdAt ? new Date(agent.createdAt).toLocaleDateString() : '',
-      role: 'Agente'
-    }));
+  setUserInfo(): void {
+    const token = this.authService.getToken();
+    if (!token) return;
 
-    const normalizedAdmins = admins.map((admin: any) => ({
-      id: admin.id,
-      name: admin.nome || admin.name || 'Sconosciuto',
-      hiredDate: admin.createdAt ? new Date(admin.createdAt).toLocaleDateString() : '',
-      role: 'Amministratore'
-    }));
+    try {
+      const decoded: any = jwtDecode(token);
 
-    this.agents = [...normalizedAgents, ...normalizedAdmins];
-  });
-}
+      if (decoded.agencyId) {
+        this.currentUserRole = 'CEO';
+        this.currentUserName = decoded.name || 'CEO Sconosciuto';
+      } else if (decoded.amministratore_id) {
+        this.currentUserRole = 'Amministratore';
+        this.currentUserName = decoded.name || 'Admin Sconosciuto';
+      }
+    } catch (e) {
+      console.error('Errore nel decoding del token:', e);
+    }
+  }
+
+  loadAgents(): void {
+    this.agentService.getAllUsers().subscribe(([agents, admins]) => {
+      const normalizedAgents = agents.map((agent: any) => ({
+        id: agent.id,
+        name: agent.nome || agent.name || 'Sconosciuto',
+        hiredDate: agent.createdAt ? new Date(agent.createdAt).toLocaleDateString() : '',
+        role: 'Agente'
+      }));
+
+      const normalizedAdmins = admins.map((admin: any) => ({
+        id: admin.id,
+        name: admin.nome || admin.name || 'Sconosciuto',
+        hiredDate: admin.createdAt ? new Date(admin.createdAt).toLocaleDateString() : '',
+        role: 'Amministratore'
+      }));
+
+      this.agents = [...normalizedAgents, ...normalizedAdmins];
+    });
+  }
 
   goBack(): void {
     this.router.navigate(['/home']);
   }
 
-  // 🟡 Paginazione
   get paginatedAgents(): User[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return this.agents.slice(startIndex, startIndex + this.itemsPerPage);

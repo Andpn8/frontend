@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,11 @@ export class AgentService {
 
 
   getAllUsers(): Observable<any[]> {
-    return forkJoin([this.getAgents(), this.getAdmins()]);
-  }
+  return forkJoin([this.getAgents(), this.getAdmins()]).pipe(
+    tap(([agents, admins]) => {
+      console.log('Agenti:', agents);
+      console.log('Amministratori:', admins);
+    })
+  );
+}
 }

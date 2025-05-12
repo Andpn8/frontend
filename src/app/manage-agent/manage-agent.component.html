@@ -5,12 +5,12 @@
 
 <div class="manage-container">
   <div class="sidebar">
-    <p><strong>AMMINISTRATORE:</strong> <span>{{ currentUserName }}</span></p>
+    <p><strong>RUOLO:</strong> <span>{{ currentUserRole === 'Amministratore' ? 'Amministratore' : 'CEO' }}</span></p>
     <p><strong>PERMESSI:</strong> 
       <span [ngClass]="{
         'limited': currentUserRole === 'Amministratore',
         'ceo': currentUserRole === 'CEO'
-      }">{{ currentUserRole === 'CEO' ? 'CEO' : 'Limitati' }}</span>
+      }">{{ currentUserRole === 'CEO' ? 'TOTALI' : 'Limitati' }}</span>
     </p>
     <p><strong>AGENTI TOTALI:</strong> <span>{{ totalAgents }}</span></p>
     <p><strong>ADMIN TOTALI:</strong> <span>{{ totalAdmins }}</span></p>
