@@ -2,52 +2,61 @@
   [helpMessage]="'Qui è dove potrai <strong>amministrare</strong> tutti gli agenti immobiliari.'" 
   [centerMessage]="'<strong>Terminale amministrativo</strong>'">
 </app-navbar>
+
 <div class="manage-container">
-    <div class="sidebar">
-      <p><strong>AMMINISTRATORE:</strong> <span>Luca Esposito</span></p>
-      <p><strong>PERMESSI:</strong> <span class="limited">Limitati</span></p>
-      <p><strong>AGENTI TOTALI:</strong> <span>42</span></p>
-      <p><strong>ADMIN TOTALI:</strong> <span>8</span></p>
-      <button class="back-btn" (click)="goBack()">← Torna indietro</button>
-    </div>
-  
-    <div class="agent-list">
-      <h2>LISTA AGENTI IMMOBILIARI E AMMINISTRATORI</h2>
-  
-      <table>
-        <thead>
-          <tr>
-            <th>N°</th>
-            <th>ASSUNTO IL</th>
-            <th>NOME</th>
-            <th>RUOLO</th>
-            <th>OPERAZIONI</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let agent of agents; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ agent.hiredDate }}</td>
-            <td>{{ agent.name }}</td>
-            <td>{{ agent.role }}</td>
-            <td>
-              <button class="promote" [disabled]="agent.role !== 'Agente'">
-                Promuovi
-                <span *ngIf="agent.role !== 'Agente'" class="lock">🔒</span>
-              </button>
-              <button class="fire">Licenzia</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-  
-      <div class="pagination">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>-></button>
-      </div>
-    </div>
-    <app-footer></app-footer>
+  <div class="sidebar">
+    <p><strong>AMMINISTRATORE:</strong> <span>{{ currentUserName }}</span></p>
+    <p><strong>PERMESSI:</strong> 
+      <span [ngClass]="{
+        'limited': currentUserRole === 'Amministratore',
+        'ceo': currentUserRole === 'CEO'
+      }">{{ currentUserRole === 'CEO' ? 'CEO' : 'Limitati' }}</span>
+    </p>
+    <p><strong>AGENTI TOTALI:</strong> <span>{{ totalAgents }}</span></p>
+    <p><strong>ADMIN TOTALI:</strong> <span>{{ totalAdmins }}</span></p>
+    <button class="back-btn" (click)="goBack()">← Torna indietro</button>
   </div>
-  
+
+  <div class="agent-list">
+    <h2>LISTA AGENTI IMMOBILIARI E AMMINISTRATORI</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>N°</th>
+          <th>ASSUNTO IL</th>
+          <th>NOME</th>
+          <th>RUOLO</th>
+          <th>OPERAZIONI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let agent of paginatedAgents; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ agent.hiredDate || 'ND' }}</td>
+          <td>{{ agent.name }}</td>
+          <td>{{ agent.role }}</td>
+          <td>
+            <button class="promote" [disabled]="agent.role !== 'Agente'">
+              Promuovi
+              <span *ngIf="agent.role !== 'Agente'" class="lock">🔒</span>
+            </button>
+            <button class="fire" [disabled]="agent.role === 'Amministratore'">
+              Licenzia
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage === 1">←</button>
+      <button *ngFor="let page of [].constructor(totalPages); let i = index"
+              (click)="setPage(i + 1)"
+              [class.active]="currentPage === i + 1">{{ i + 1 }}</button>
+      <button (click)="nextPage()" [disabled]="currentPage === totalPages">→</button>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>
