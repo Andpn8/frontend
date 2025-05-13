@@ -29,6 +29,7 @@ export class ManageAgentComponent implements OnInit {
 
   currentUserName: string = 'Utente'; 
   currentUserRole: 'Amministratore' | 'CEO' = 'Amministratore';
+  agencyId: string | null = null;
 
   constructor(
     private router: Router,
@@ -41,44 +42,50 @@ export class ManageAgentComponent implements OnInit {
     this.loadAgents();
   }
 
-  setUserInfo(): void {
-    const token = this.authService.getToken();
-    if (!token) return;
+ setUserInfo(): void {
+  const token = this.authService.getToken();
+  if (!token) return;
 
-    try {
-      const decoded: any = jwtDecode(token);
+  try {
+    const decoded: any = jwtDecode(token);
 
-      if (decoded.agencyId) {
-        this.currentUserRole = 'CEO';
-        this.currentUserName = decoded.name || 'CEO Sconosciuto';
-      } else if (decoded.amministratore_id) {
-        this.currentUserRole = 'Amministratore';
-        this.currentUserName = decoded.name || 'Admin Sconosciuto';
-      }
-    } catch (e) {
-      console.error('Errore nel decoding del token:', e);
+    if (decoded.agencyId) {
+      this.currentUserRole = 'CEO';
+      this.currentUserName = decoded.name || 'CEO Sconosciuto';
+      this.agencyId = decoded.agencyId;
+    } else if (decoded.amministratore_id) {
+      this.currentUserRole = 'Amministratore';
+      this.currentUserName = decoded.name || 'Admin Sconosciuto';
+      this.agencyId = decoded.agencyId;
     }
+  } catch (e) {
+    console.error('Errore nel decoding del token:', e);
   }
+}
 
   loadAgents(): void {
-    this.agentService.getAllUsers().subscribe(([agents, admins]) => {
-      const normalizedAgents = agents.map((agent: any) => ({
+  this.agentService.getAllUsers().subscribe(([agents, admins]) => {
+    const normalizedAgents = agents
+      .filter((agent: any) => agent.agencyId === this.agencyId) // 👈 filtro
+      .map((agent: any) => ({
         id: agent.id,
         name: agent.nome || agent.name || 'Sconosciuto',
         hiredDate: agent.createdAt ? new Date(agent.createdAt).toLocaleDateString() : '',
         role: 'Agente'
       }));
 
-      const normalizedAdmins = admins.map((admin: any) => ({
+    const normalizedAdmins = admins
+      .filter((admin: any) => admin.agenzia_id === this.agencyId) // 👈 filtro
+      .map((admin: any) => ({
         id: admin.id,
         name: admin.nome || admin.name || 'Sconosciuto',
         hiredDate: admin.createdAt ? new Date(admin.createdAt).toLocaleDateString() : '',
         role: 'Amministratore'
       }));
 
-      this.agents = [...normalizedAgents, ...normalizedAdmins];
-    });
-  }
+    this.agents = [...normalizedAgents, ...normalizedAdmins];
+  });
+}
 
   goBack(): void {
     this.router.navigate(['/home']);
