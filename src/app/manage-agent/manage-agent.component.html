@@ -5,15 +5,15 @@
 
 <div class="manage-container">
   <div class="sidebar">
-    <p><strong>RUOLO:</strong> <span>{{ currentUserRole === 'Amministratore' ? 'Amministratore' : 'CEO' }}</span></p>
-    <p><strong>PERMESSI:</strong> 
+    <p><strong>RUOLO:  </strong> <span>{{ currentUserRole === 'Amministratore' ? 'Amministratore' : 'CEO' }}</span></p>
+    <p><strong>PERMESSI:  </strong> 
       <span [ngClass]="{
         'limited': currentUserRole === 'Amministratore',
         'ceo': currentUserRole === 'CEO'
       }">{{ currentUserRole === 'CEO' ? 'TOTALI' : 'Limitati' }}</span>
     </p>
-    <p><strong>AGENTI TOTALI:</strong> <span>{{ totalAgents }}</span></p>
-    <p><strong>ADMIN TOTALI:</strong> <span>{{ totalAdmins }}</span></p>
+    <p><strong>AGENTI TOTALI:  </strong> <span>{{ totalAgents }}</span></p>
+    <p><strong>ADMIN TOTALI:  </strong> <span>{{ totalAdmins }}</span></p>
     <button class="back-btn" (click)="goBack()">← Torna indietro</button>
   </div>
 
@@ -37,12 +37,26 @@
           <td>{{ agent.name }}</td>
           <td>{{ agent.role }}</td>
           <td>
-            <button class="promote" [disabled]="agent.role !== 'Agente'">
-              Promuovi
-              <span *ngIf="agent.role !== 'Agente'" class="lock">🔒</span>
+            <!-- Promuovi (solo se è un Agente) -->
+           <button class="promote" 
+               *ngIf="agent.role === 'Agente'" 
+                [disabled]="currentUserRole !== 'CEO' && currentUserRole !== 'Amministratore'">
+             Promuovi
             </button>
-            <button class="fire" [disabled]="agent.role === 'Amministratore'">
+
+            <!-- Declassa (solo se è un Amministratore) -->
+            <button class="demote"
+                    *ngIf="agent.role === 'Amministratore'" 
+                    [disabled]="currentUserRole !== 'CEO'">
+              Declassa
+              <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
+            </button>
+
+            <!-- Licenzia -->
+            <button class="fire" 
+                    [disabled]="currentUserRole !== 'CEO' && agent.role === 'Amministratore'">
               Licenzia
+              <span *ngIf="currentUserRole !== 'CEO' && agent.role === 'Amministratore'" class="lock">🔒</span>
             </button>
           </td>
         </tr>

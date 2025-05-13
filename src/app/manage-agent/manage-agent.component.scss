@@ -71,15 +71,6 @@
         border-radius: 4px;
         margin-right: 0.5rem;
         cursor: pointer;
-  
-        &:disabled {
-          background-color: #b2dfdb;
-          cursor: not-allowed;
-        }
-  
-        .lock {
-          margin-left: 0.25rem;
-        }
       }
   
       .fire {
@@ -89,8 +80,35 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        
+         &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .lock {
+    margin-left: 0.25rem;
+  }
       }
     }
+    .demote {
+  background-color: #d63053; 
+  color: white;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  .lock {
+    margin-left: 0.25rem;
+  }
+}
   
     .pagination {
       margin-top: 1rem;

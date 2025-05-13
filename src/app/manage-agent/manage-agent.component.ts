@@ -56,7 +56,7 @@ export class ManageAgentComponent implements OnInit {
     } else if (decoded.amministratore_id) {
       this.currentUserRole = 'Amministratore';
       this.currentUserName = decoded.name || 'Admin Sconosciuto';
-      this.agencyId = decoded.agencyId;
+       this.agencyId = decoded.agenzia_id || decoded.agencyId || null;
     }
   } catch (e) {
     console.error('Errore nel decoding del token:', e);
@@ -66,7 +66,7 @@ export class ManageAgentComponent implements OnInit {
   loadAgents(): void {
   this.agentService.getAllUsers().subscribe(([agents, admins]) => {
     const normalizedAgents = agents
-      .filter((agent: any) => agent.agencyId === this.agencyId) // 👈 filtro
+      .filter((agent: any) => agent.agencyId === this.agencyId) 
       .map((agent: any) => ({
         id: agent.id,
         name: agent.nome || agent.name || 'Sconosciuto',
@@ -75,7 +75,7 @@ export class ManageAgentComponent implements OnInit {
       }));
 
     const normalizedAdmins = admins
-      .filter((admin: any) => admin.agenzia_id === this.agencyId) // 👈 filtro
+      .filter((admin: any) => admin.agenzia_id === this.agencyId) 
       .map((admin: any) => ({
         id: admin.id,
         name: admin.nome || admin.name || 'Sconosciuto',
