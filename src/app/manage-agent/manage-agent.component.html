@@ -39,18 +39,20 @@
           <td>
             <!-- Promuovi (solo se è un Agente) -->
            <button class="promote" 
+           (click)="promoteAgent(agent.id)"
                *ngIf="agent.role === 'Agente'" 
                 [disabled]="currentUserRole !== 'CEO' && currentUserRole !== 'Amministratore'">
              Promuovi
             </button>
 
             <!-- Declassa (solo se è un Amministratore) -->
-            <button class="demote"
-                    *ngIf="agent.role === 'Amministratore'" 
-                    [disabled]="currentUserRole !== 'CEO'">
-              Declassa
-              <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
-            </button>
+           <button class="demote"
+        *ngIf="agent.role === 'Amministratore'" 
+        (click)="demoteAdmin(agent.id)" 
+        [disabled]="currentUserRole !== 'CEO'">
+  Declassa
+  <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
+</button>
 
             <!-- Licenzia AGENTE -->
 <button class="fire" 
