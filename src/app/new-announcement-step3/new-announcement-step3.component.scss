@@ -1,0 +1,176 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+  font-family: Arial, sans-serif;
+}
+
+.new-announcement-step3 {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.step3-container {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.layout-wrapper {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 70%;
+  margin-left: 12rem;
+}
+
+.top-section {
+  display: flex;
+  gap: 6.4rem; /* ~103px */
+  align-items: flex-start;
+  margin-top: 2rem;
+}
+
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-title {
+  color: #087E8B;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.foto-box {
+  width: 17.3rem; /* Imposta la larghezza */
+  height: 13.8rem; /* Imposta l'altezza */
+  border: 2px solid #087E8B; /* Imposta un bordo per renderlo visibile */
+  background-color: #f4f4f4; /* Colore di sfondo */
+  border-radius: 8px; /* Bordo arrotondato */
+  display: flex; /* Assicura che il contenuto (l'immagine) sia centrato */
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+  margin-bottom: 1rem; /* Aggiungi margine in basso se necessario */
+}
+
+.descrizione-box {
+  width: 30.2rem; /* 302px */
+  height: 13.8rem;
+  border: 2px solid #CE2D4F;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.descrizione-box textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  resize: none;
+  padding: 0.5rem;
+}
+
+.campo-obbligatorio {
+  font-size: 12px;
+  color: #CE2D4F;
+  font-weight: bold;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 7rem;
+  padding: 0 10%;
+
+  button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 120px;
+    font-size: 14px;
+  }
+
+  .indietro {
+    background-color: #087E8B;
+    color: #fff;
+  }
+
+  .prosegui {
+    background-color: #f8a5b0;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .prosegui.active {
+    background-color: #ce2d4f !important;
+  }
+}
+
+.planimetrie-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.planimetrie-box {
+  width: 17.3rem; /* Imposta la larghezza */
+  height: 13.8rem; /* Imposta l'altezza */
+  border: 2px solid #087E8B; /* Imposta un bordo per renderlo visibile */
+  background-color: #f4f4f4; /* Colore di sfondo */
+  border-radius: 8px; /* Bordo arrotondato */
+  display: flex; /* Assicura che l'immagine sia centrata */
+  justify-content: center; /* Centra orizzontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
+.planimetrie-container h2 {
+  color: #087E8B;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.center-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Assicura che l'immagine non distorca */
+}
+
+
+.nota {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 12px; /* Ridotto il font size */
+  width: calc(100% - 20rem); /* Dà spazio sufficiente per il quadrato e il testo affianco */
+}
+
+.nota strong {
+  color: #109CAB;
+  font-weight: bold;
+}
+
+.nota p {
+  margin: 0;
+  text-align: left;
+  font-size: 14px;
+  color: #000;
+}
+

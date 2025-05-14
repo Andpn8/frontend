@@ -1,1 +1,63 @@
-<p>new-announcement-step3 works!</p>
+<div class="new-announcement-step3">
+  <app-navbar  
+    [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'" 
+    [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
+  </app-navbar>
+
+  <main class="step3-container">
+    <div class="layout-wrapper">
+      <form [formGroup]="step3Form" (ngSubmit)="onSubmit()" class="form-wrapper">
+        <div class="top-section">
+          <!-- Foto -->
+            <div class="left-column">
+             <h2 class="form-title">Foto</h2>
+            <div class="foto-box">
+              <img src="https://i.imgur.com/REuCBoY.png" alt="Foto" class="center-image">
+             </div>
+        </div>
+
+            <!-- Descrizione -->
+        <div class="right-column">
+          <h2 class="form-title">Descrizione</h2>
+             <div class="descrizione-box">
+              <textarea formControlName="descrizione" placeholder="Descrizione immobile"></textarea>
+              <small class="campo-obbligatorio">CAMPO OBBLIGATORIO</small>
+              </div>
+             </div>
+        </div>
+
+            <!-- Planimetrie -->
+        <div class="planimetrie-container">
+           <h2 class="form-title">Planimetrie</h2>
+            <div class="planimetrie-box">
+             <img src="https://i.imgur.com/REuCBoY.png" alt="Planimetrie" class="center-image">
+             </div>
+
+             <!-- NOTA -->
+             <div class="nota">
+               <p><strong style="color: #109CAB;">NOTA:</strong> Foto e Planimetrie non sono obbligatorie! 
+                 Tuttavia aggiungerle renderà il tuo annuncio 
+                 più accattivante e professionale, aumentando
+                 la possibilità di catturare l'attenzione dei potenziali
+                 interessati e fornendo maggiori dettagli utili per
+                 una decisione informata.
+               </p>
+             </div>
+        </div>
+
+        <!-- Pulsanti -->
+        <div class="form-buttons">
+          <button type="button" class="indietro" (click)="goBack()">INDIETRO</button>
+          <button type="submit" class="prosegui" [ngClass]="{ 'active': step3Form.valid }">
+            PROSEGUI
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Announcement Summary -->
+    <app-announcement-summary [activeStep]="3"></app-announcement-summary>
+  </main>
+
+  <app-footer></app-footer>
+</div>

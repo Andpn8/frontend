@@ -57,6 +57,12 @@
       font-weight: bold;
       flex-shrink: 0;
       margin: 1rem;
+       transition: background-color 0.3s, color 0.3s;
+
+  &.active {
+    background-color: #109CAB;
+    color: #fff;
+  }
     }
 
     .step-content {
@@ -81,5 +87,11 @@
     font-weight: bold;
     font-size: 1.1rem;
     margin-top: auto;
+  }
+
+  .circle.active {
+  background-color: #109CAB !important;
+  color: white;
+  border: 2px solid white;
   }
 }
