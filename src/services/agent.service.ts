@@ -29,4 +29,20 @@ export class AgentService {
     })
   );
 }
+
+deleteAgent(agentId: string): Observable<any> {
+  return this.http.delete<any>(`${this.apiUrl}/agent/${agentId}`);
+}
+
+deleteAdmin(adminId: string): Observable<any> {
+  return this.http.delete<any>(`${this.apiUrl}/amministrator/${adminId}`);
+}
+
+promoteAgent(agentId: string): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/agent/promote/${agentId}`, {});
+}
+
+demoteAdmin(adminId: string): Observable<any> {
+  return this.http.post<any>(`${this.apiUrl}/amministrator/demote/${adminId}`, {});
+}
 }
