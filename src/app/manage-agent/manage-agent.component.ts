@@ -68,7 +68,7 @@ export class ManageAgentComponent implements OnInit {
     const normalizedAgents = agents
       .filter((agent: any) => agent.agencyId === this.agencyId) 
       .map((agent: any) => ({
-        id: agent.id,
+        id: agent.agentId,
         name: agent.nome || agent.name || 'Sconosciuto',
         hiredDate: agent.createdAt ? new Date(agent.createdAt).toLocaleDateString() : '',
         role: 'Agente'
@@ -77,7 +77,7 @@ export class ManageAgentComponent implements OnInit {
     const normalizedAdmins = admins
       .filter((admin: any) => admin.agenzia_id === this.agencyId) 
       .map((admin: any) => ({
-        id: admin.id,
+        id: admin.amministratore_id,
         name: admin.nome || admin.name || 'Sconosciuto',
         hiredDate: admin.createdAt ? new Date(admin.createdAt).toLocaleDateString() : '',
         role: 'Amministratore'
@@ -125,4 +125,39 @@ export class ManageAgentComponent implements OnInit {
   get totalAdmins(): number {
     return this.agents.filter(agent => agent.role === 'Amministratore').length;
   }
+
+ fireAgent(agentId: string): void {
+  if (this.currentUserRole === 'CEO' || this.currentUserRole === 'Amministratore') {
+    this.agentService.deleteAgent(agentId).subscribe(
+      response => {
+        console.log('Agente licenziato con successo', response);
+        this.loadAgents(); // Ricarica gli agenti dopo l'eliminazione
+      },
+      error => {
+        console.error('Errore durante la licenza dell\'agente', error);
+      }
+    );
+  } else {
+    console.warn('Permesso negato per licenziare agenti');
+  }
+}
+
+fireAdmin(adminId: string): void {
+  if (!adminId) {
+    console.error('ID amministratore mancante.');
+    return;
+  }
+
+  if (this.currentUserRole === 'CEO') {
+    this.agentService.deleteAdmin(adminId).subscribe(
+      response => {
+        console.log('Amministratore licenziato con successo', response);
+        this.loadAgents(); // Ricarica gli amministratori dopo l'eliminazione
+      },
+      error => {
+        console.error('Errore durante la licenza dell\'amministratore', error);
+      }
+    );
+  }
+}
 }

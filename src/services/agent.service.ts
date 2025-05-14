@@ -29,4 +29,12 @@ export class AgentService {
     })
   );
 }
+
+deleteAgent(agentId: string): Observable<any> {
+  return this.http.delete<any>(`${this.apiUrl}/agent/${agentId}`);
+}
+
+deleteAdmin(adminId: string): Observable<any> {
+  return this.http.delete<any>(`${this.apiUrl}/amministrator/${adminId}`);
+}
 }

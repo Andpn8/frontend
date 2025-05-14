@@ -52,12 +52,22 @@
               <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
             </button>
 
-            <!-- Licenzia -->
-            <button class="fire" 
-                    [disabled]="currentUserRole !== 'CEO' && agent.role === 'Amministratore'">
-              Licenzia
-              <span *ngIf="currentUserRole !== 'CEO' && agent.role === 'Amministratore'" class="lock">🔒</span>
-            </button>
+            <!-- Licenzia AGENTE -->
+<button class="fire" 
+        *ngIf="agent.role === 'Agente'" 
+        (click)="fireAgent(agent.id)" 
+        [disabled]="currentUserRole !== 'CEO' && currentUserRole !== 'Amministratore'">
+  Licenzia
+</button>
+
+<!-- Licenzia AMMINISTRATORE -->
+<button class="fire" 
+        *ngIf="agent.role === 'Amministratore'" 
+        (click)="fireAdmin(agent.id)" 
+        [disabled]="currentUserRole !== 'CEO'">
+  Licenzia
+  <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
+</button>
           </td>
         </tr>
       </tbody>
