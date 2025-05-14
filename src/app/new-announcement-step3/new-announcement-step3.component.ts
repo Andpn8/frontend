@@ -5,14 +5,13 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { AnnouncementSummaryComponent } from '../announcement-summary/announcement-summary.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from "../footer/footer.component";
-import { AboutUsComponent } from "../about-us/about-us.component";
 
 @Component({
   selector: 'app-new-announcement-step3',
   standalone: true,
   templateUrl: './new-announcement-step3.component.html',
   styleUrls: ['./new-announcement-step3.component.scss'],
-  imports: [FooterComponent, CommonModule, ReactiveFormsModule, NavbarComponent, AnnouncementSummaryComponent, AboutUsComponent]
+  imports: [FooterComponent, CommonModule, ReactiveFormsModule, NavbarComponent, AnnouncementSummaryComponent]
 })
 export class NewAnnouncementStep3Component {
   activeStep = 3;

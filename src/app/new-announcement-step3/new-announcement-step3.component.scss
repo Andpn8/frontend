@@ -123,10 +123,17 @@
   }
 }
 
+.planimetrie-container-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;  /* Spazio tra planimetria e nota */
+}
+
 .planimetrie-container {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  flex: 1;  /* Occupa lo spazio rimanente */
 }
 
 .planimetrie-box {
@@ -152,14 +159,14 @@
   object-fit: contain; /* Assicura che l'immagine non distorca */
 }
 
-
 .nota {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  font-size: 12px; /* Ridotto il font size */
-  width: calc(100% - 20rem); /* Dà spazio sufficiente per il quadrato e il testo affianco */
+  font-size: 12px;
+  width: 40%;  /* Imposta la larghezza della nota, puoi modificarla come preferisci */
+  max-width: 20rem;  /* Limita la larghezza massima */
 }
 
 .nota strong {

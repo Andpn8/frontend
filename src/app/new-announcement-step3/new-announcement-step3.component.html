@@ -9,40 +9,41 @@
       <form [formGroup]="step3Form" (ngSubmit)="onSubmit()" class="form-wrapper">
         <div class="top-section">
           <!-- Foto -->
-            <div class="left-column">
-             <h2 class="form-title">Foto</h2>
+          <div class="left-column">
+            <h2 class="form-title">Foto</h2>
             <div class="foto-box">
               <img src="https://i.imgur.com/REuCBoY.png" alt="Foto" class="center-image">
-             </div>
-        </div>
+            </div>
+          </div>
 
-            <!-- Descrizione -->
-        <div class="right-column">
-          <h2 class="form-title">Descrizione</h2>
-             <div class="descrizione-box">
+          <!-- Descrizione -->
+          <div class="right-column">
+            <h2 class="form-title">Descrizione</h2>
+            <div class="descrizione-box">
               <textarea formControlName="descrizione" placeholder="Descrizione immobile"></textarea>
               <small class="campo-obbligatorio">CAMPO OBBLIGATORIO</small>
-              </div>
-             </div>
+            </div>
+          </div>
         </div>
 
-            <!-- Planimetrie -->
-        <div class="planimetrie-container">
-           <h2 class="form-title">Planimetrie</h2>
+        <!-- Planimetrie e Nota -->
+        <div class="planimetrie-container-wrapper">
+          <div class="planimetrie-container">
+            <h2 class="form-title">Planimetrie</h2>
             <div class="planimetrie-box">
-             <img src="https://i.imgur.com/REuCBoY.png" alt="Planimetrie" class="center-image">
-             </div>
+              <img src="https://i.imgur.com/REuCBoY.png" alt="Planimetrie" class="center-image">
+            </div>
+          </div>
 
-             <!-- NOTA -->
-             <div class="nota">
-               <p><strong style="color: #109CAB;">NOTA:</strong> Foto e Planimetrie non sono obbligatorie! 
-                 Tuttavia aggiungerle renderà il tuo annuncio 
-                 più accattivante e professionale, aumentando
-                 la possibilità di catturare l'attenzione dei potenziali
-                 interessati e fornendo maggiori dettagli utili per
-                 una decisione informata.
-               </p>
-             </div>
+          <div class="nota">
+            <p><strong style="color: #109CAB;">NOTA:</strong> Foto e Planimetrie non sono obbligatorie! 
+               Tuttavia aggiungerle renderà il tuo annuncio 
+               più accattivante e professionale, aumentando
+               la possibilità di catturare l'attenzione dei potenziali
+               interessati e fornendo maggiori dettagli utili per
+               una decisione informata.
+            </p>
+          </div>
         </div>
 
         <!-- Pulsanti -->
