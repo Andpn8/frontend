@@ -1,2 +1,17 @@
-<p>QUESTO E' SEARCH HISTORY
-</p>
+<div class="history-container" *ngIf="searchHistory.length > 0">
+  <h4>Ricerche Recenti</h4>
+  <div class="history-cards">
+    <div 
+      class="history-card" 
+      *ngFor="let entry of searchHistory; let i = index" 
+      (click)="applyFilters(entry)">
+      <p><strong>{{ entry.location }}</strong></p>
+      <p *ngIf="entry.minPrice || entry.maxPrice">💰 {{ entry.minPrice || 'Min' }} - {{ entry.maxPrice || 'Max' }} €</p>
+      <p *ngIf="entry.rooms">🛏️ {{ entry.rooms }} camere</p>
+      <p *ngIf="entry.bathrooms">🛁 {{ entry.bathrooms }} bagni</p>
+      <p *ngIf="entry.minSurface || entry.maxSurface">📐 {{ entry.minSurface || 'Min' }} - {{ entry.maxSurface || 'Max' }} m²</p>
+      <p *ngIf="entry.energyClass !== 'tutte'">⚡ Classe {{ entry.energyClass }}</p>
+      <p *ngIf="hasServices(entry.services)">🔧 Servizi: {{ listServices(entry.services) }}</p>
+    </div>
+  </div>
+</div>

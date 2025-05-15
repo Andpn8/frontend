@@ -1,0 +1,32 @@
+.history-container {
+  margin-top: 1rem;
+
+  h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .history-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .history-card {
+    background-color: #f2f2f2;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    width: 200px;
+
+    p {
+      margin: 0.2rem 0;
+      font-size: 0.9rem;
+    }
+
+    &:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+}

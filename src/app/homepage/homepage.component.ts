@@ -11,6 +11,7 @@ import { NavbarUserComponent } from '../navbar-user/navbar-user.component';
 import { NavbarCeoComponent } from '../navbar-ceo/navbar-ceo.component';
 import { AuthService } from '../../services/auth.service';
 import { NavbarAmministratorComponent } from '../navbar-amministrator/navbar-amministrator.component';
+import { FilterSet } from '../../models/filter-set.model';
 
 @Component({
   selector: 'app-homepage',
@@ -25,15 +26,40 @@ import { NavbarAmministratorComponent } from '../navbar-amministrator/navbar-amm
 })
 export class HomepageComponent implements OnInit {
   userRole: 'guest' | 'agent' | 'user' | 'ceo' | 'admin' = 'guest';
+  searchHistory: FilterSet[] = [];
+  restoredFilters: FilterSet | null = null;
 
   constructor(
     private authService: AuthService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.userRole = this.authService.getUserRoleFromToken();
+ ngOnInit(): void {
+  if (isPlatformBrowser(this.platformId)) {
+    this.userRole = this.authService.getUserRoleFromToken();
+
+    const savedHistory = sessionStorage.getItem('searchHistory');
+    if (savedHistory) {
+      this.searchHistory = JSON.parse(savedHistory);
+    }
+
+    const restored = sessionStorage.getItem('restoredFilters');
+    if (restored) {
+      this.restoredFilters = JSON.parse(restored);
     }
   }
+}
+
+   onFiltersApplied(newFilters: FilterSet): void {
+  if (this.searchHistory.length >= 3) {
+    this.searchHistory.shift();
+  }
+  this.searchHistory.push(newFilters);
+  sessionStorage.setItem('searchHistory', JSON.stringify(this.searchHistory));
+}
+
+ onRestoreFilters(filters: FilterSet): void {
+  this.restoredFilters = filters;
+  sessionStorage.setItem('restoredFilters', JSON.stringify(filters));
+}
 }

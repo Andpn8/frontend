@@ -1,6 +1,7 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { FilterSet } from '../../models/filter-set.model';
 
 @Component({
   selector: 'app-search-bar',
@@ -10,6 +11,14 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./search-bar.component.scss']
 })
 export class SearchBarComponent {
+  @Output() filtersApplied = new EventEmitter<FilterSet>();
+  @Input() restoredFilters: FilterSet | null = null;
+
+  ngOnChanges(): void {
+  if (this.restoredFilters) {
+    this.applyFilterSet(this.restoredFilters);
+  }
+}
   filtersVisible = false;
   confirmationVisible = false;
   citySelected: boolean = false;
@@ -43,13 +52,25 @@ export class SearchBarComponent {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  toggleFilters(apply: boolean = false): void {
-    this.filtersVisible = !this.filtersVisible;
+ toggleFilters(apply: boolean = false): void {
+  this.filtersVisible = !this.filtersVisible;
 
-    if (!this.filtersVisible && apply) {
-      this.showConfirmation();
-    }
+  if (!this.filtersVisible && apply) {
+    const currentFilters: FilterSet = {
+      location: this.location,
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+      rooms: this.rooms,
+      bathrooms: this.bathrooms,
+      minSurface: this.minSurface,
+      maxSurface: this.maxSurface,
+      energyClass: this.energyClass,
+      services: { ...this.services }
+    };
+    this.filtersApplied.emit(currentFilters);
+    this.showConfirmation();
   }
+}
 
   showConfirmation(): void {
     this.confirmationVisible = true;
@@ -124,6 +145,20 @@ onMinSurfaceChange(): void {
       this.maxSurface = this.minSurface + 1;
     }
   }
+}
+
+applyFilterSet(filters: FilterSet): void {
+  this.location = filters.location;
+  this.minPrice = filters.minPrice;
+  this.maxPrice = filters.maxPrice;
+  this.rooms = filters.rooms;
+  this.bathrooms = filters.bathrooms;
+  this.minSurface = filters.minSurface;
+  this.maxSurface = filters.maxSurface;
+  this.energyClass = filters.energyClass;
+  this.services = { ...filters.services };
+  this.citySelected = true;
+  this.updateSearchButtonState();
 }
 
 

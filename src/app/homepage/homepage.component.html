@@ -19,6 +19,12 @@
 </ng-container>
 
 
-<app-search-bar></app-search-bar>
-<app-search-history></app-search-history>
+<app-search-bar 
+  [restoredFilters]="restoredFilters" 
+  (filtersApplied)="onFiltersApplied($event)">
+</app-search-bar>
+<app-search-history 
+  [searchHistory]="searchHistory" 
+  (restoreFilters)="onRestoreFilters($event)">
+</app-search-history>
 <app-footer></app-footer>
