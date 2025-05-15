@@ -110,4 +110,22 @@ export class SearchBarComponent {
   onSearchClick(): void {
     console.log('Searching for', this.location);
   }
+
+  onMinPriceChange(): void {
+  if (this.minPrice != null && this.minPrice >= 0 && this.minPrice <= 9999999) {
+    if (this.maxPrice == null || this.maxPrice <= this.minPrice) {
+      this.maxPrice = this.minPrice + 1;
+    }
+  }
+}
+
+onMinSurfaceChange(): void {
+  if (this.minSurface != null && this.minSurface >= 0 && this.minSurface <= 999) {
+    if (this.maxSurface == null || this.maxSurface <= this.minSurface) {
+      this.maxSurface = this.minSurface + 1;
+    }
+  }
+}
+
+
 }

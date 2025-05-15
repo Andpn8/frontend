@@ -55,52 +55,58 @@
       <div class="filter-row">
         <div class="filter-item">
           <label for="min-price">Prezzo minimo:</label>
-          <input type="number" min="0" oninput="validity.valid||(value='');" id="min-price" name="min-price" min="0"
-                 [(ngModel)]="minPrice"
-                 placeholder="Inserisci prezzo min" />
+          <input type="number" min="0" max="9999999"
+       oninput="validity.valid||(value='');"
+       id="min-price" name="min-price"
+       [(ngModel)]="minPrice"
+       (ngModelChange)="onMinPriceChange()"
+       placeholder="Inserisci prezzo min" />
         </div>
         <div class="filter-item">
           <label for="max-price">Prezzo massimo:</label>
-          <input type="number" min="0" oninput="validity.valid||(value='');" id="max-price" name="max-price" min="0"
-                 [(ngModel)]="maxPrice"
-                 placeholder="Inserisci prezzo max" />
+         <input type="number" min="0" max="10000000"
+       oninput="validity.valid||(value='');"
+       id="max-price" name="max-price"
+       [(ngModel)]="maxPrice"
+       placeholder="Inserisci prezzo max" />
         </div>
       </div>
 
       <div class="filter-row">
         <div class="filter-item">
           <label for="rooms">Camere:</label>
-          <input type="number" min="0" oninput="validity.valid||(value='');" id="rooms" name="rooms" min="1" max="99"
-                 [(ngModel)]="rooms"
-                 placeholder="N°" />
+         <input type="number" min="1" max="99"
+       oninput="validity.valid||(value='');"
+       id="rooms" name="rooms"
+       [(ngModel)]="rooms"
+       placeholder="N°" />
         </div>
         <div class="filter-item">
           <label for="num-bathrooms">Numero Bagni:</label>
-          <input type="number" min="0" oninput="validity.valid||(value='');" id="num-bathrooms" name="num-bathrooms" min="1" max="99"
-                 [(ngModel)]="bathrooms"
-                 placeholder="N°" />
+          <input type="number" min="1" max="10"
+       oninput="validity.valid||(value='');"
+       id="num-bathrooms" name="num-bathrooms"
+       [(ngModel)]="bathrooms"
+       placeholder="N°" />
         </div>
       </div>
-
-      <div class="filter-item">
-        <label for="location">Posizione:</label>
-        <input type="text" id="location" name="location"
-               [(ngModel)]="location"
-               placeholder="Inserisci posizione" />
-      </div>
-
       <div class="filter-row">
         <div class="filter-item">
           <label for="min-surface">Superficie minima (m²):</label>
-          <input type="number" min="0" oninput="validity.valid||(value='');" id="min-surface" name="min-surface" min="0" max="1000"
-                 [(ngModel)]="minSurface"
-                 placeholder="Min" />
+          <input type="number" min="0" max="999"
+       oninput="validity.valid||(value='');"
+       id="min-surface" name="min-surface"
+       [(ngModel)]="minSurface"
+       (ngModelChange)="onMinSurfaceChange()"
+       placeholder="Min" />
         </div>
         <div class="filter-item">
           <label for="max-surface">Superficie massima (m²):</label>
-          <input type="number" min="0" oninput="validity.valid||(value='');" id="max-surface" name="max-surface" min="0" max="1000"
-                 [(ngModel)]="maxSurface"
-                 placeholder="Max" />
+          <input type="number" min="0" max="1000"
+       oninput="validity.valid||(value='');"
+       id="max-surface" name="max-surface"
+       [(ngModel)]="maxSurface"
+       placeholder="Max" />
         </div>
       </div>
 
