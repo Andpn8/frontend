@@ -52,15 +52,17 @@
 }
 
 .foto-box {
-  width: 17.3rem; /* Imposta la larghezza */
-  height: 13.8rem; /* Imposta l'altezza */
-  border: 2px solid #087E8B; /* Imposta un bordo per renderlo visibile */
-  background-color: #f4f4f4; /* Colore di sfondo */
-  border-radius: 8px; /* Bordo arrotondato */
-  display: flex; /* Assicura che il contenuto (l'immagine) sia centrato */
-  justify-content: center; /* Centra orizzontalmente */
-  align-items: center; /* Centra verticalmente */
-  margin-bottom: 1rem; /* Aggiungi margine in basso se necessario */
+  position: relative;
+  width: 17.3rem; 
+  height: 13.8rem; 
+  border: 2px solid #087E8B; 
+  background-color: #f4f4f4; 
+  border-radius: 8px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  margin-bottom: 1rem; 
+  cursor: pointer;
 }
 
 .descrizione-box {
@@ -94,7 +96,7 @@
 .form-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 7rem;
+  margin-top: 3rem;
   padding: 0 10%;
 
   button {
@@ -137,14 +139,16 @@
 }
 
 .planimetrie-box {
-  width: 17.3rem; /* Imposta la larghezza */
-  height: 13.8rem; /* Imposta l'altezza */
-  border: 2px solid #087E8B; /* Imposta un bordo per renderlo visibile */
-  background-color: #f4f4f4; /* Colore di sfondo */
-  border-radius: 8px; /* Bordo arrotondato */
-  display: flex; /* Assicura che l'immagine sia centrata */
-  justify-content: center; /* Centra orizzontalmente */
-  align-items: center; /* Centra verticalmente */
+  position: relative;
+  width: 17.3rem; 
+  height: 13.8rem; 
+  border: 2px solid #087E8B; 
+  background-color: #f4f4f4; 
+  border-radius: 8px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  cursor: pointer;
 }
 
 .planimetrie-container h2 {
@@ -156,7 +160,15 @@
 .center-image {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* Assicura che l'immagine non distorca */
+  object-fit: cover; /* Questo farà in modo che l'immagine riempia l'area senza distorcersi */
+}
+
+.corner-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
 }
 
 .nota {
@@ -164,7 +176,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  font-size: 12px;
+  font-size: 16px;
   width: 40%;  /* Imposta la larghezza della nota, puoi modificarla come preferisci */
   max-width: 20rem;  /* Limita la larghezza massima */
 }
@@ -177,7 +189,63 @@
 .nota p {
   margin: 0;
   text-align: left;
-  font-size: 14px;
+  font-size: 16px;
   color: #000;
 }
 
+.remove-button {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ce2d4f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.preview-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.preview-image.overlay {
+  position: relative;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(17, 17, 17, 0.7);
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0 0 0 6px;
+}

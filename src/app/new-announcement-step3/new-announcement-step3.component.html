@@ -11,8 +11,32 @@
           <!-- Foto -->
           <div class="left-column">
             <h2 class="form-title">Foto</h2>
-            <div class="foto-box">
-              <img src="https://i.imgur.com/REuCBoY.png" alt="Foto" class="center-image">
+            <div class="foto-box" (click)="fotoInput.click()">
+              <input type="file" #fotoInput multiple accept="image/*" (change)="onFotoSelected($event)" hidden />
+              <ng-container *ngIf="fotoPreviews.length === 0">
+                <img src="https://imgur.com/P4XVZEh.png" alt="Foto" class="center-image">
+                <img src="https://imgur.com/1am7rdh.png" alt="Decorazione" class="corner-icon">
+              </ng-container>
+              <div class="preview-wrapper" *ngIf="fotoPreviews.length > 0">
+                <ng-container *ngFor="let img of fotoPreviews.slice(0, 3); let i = index">
+                  <div class="preview-image">
+                    <img [src]="img" alt="Foto caricata" />
+                    <button class="remove-button" (click)="removeFoto(i, $event)">✖</button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="fotoPreviews.length > 4">
+                  <div class="preview-image overlay">
+                    <img [src]="fotoPreviews[3]" alt="Foto caricata" />
+                    <div class="overlay-text">+{{ fotoPreviews.length - 3 }}</div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="fotoPreviews.length === 4">
+                  <div class="preview-image">
+                    <img [src]="fotoPreviews[3]" alt="Foto caricata" />
+                    <button class="remove-button" (click)="removeFoto(3, $event)">✖</button>
+                  </div>
+                </ng-container>
+              </div>
             </div>
           </div>
 
@@ -30,8 +54,32 @@
         <div class="planimetrie-container-wrapper">
           <div class="planimetrie-container">
             <h2 class="form-title">Planimetrie</h2>
-            <div class="planimetrie-box">
-              <img src="https://i.imgur.com/REuCBoY.png" alt="Planimetrie" class="center-image">
+            <div class="planimetrie-box" (click)="planimetriaInput.click()">
+              <input type="file" #planimetriaInput multiple accept="image/*" (change)="onPlanimetriaSelected($event)" hidden />
+              <ng-container *ngIf="planimetriaPreviews.length === 0">
+                <img src="https://imgur.com/P4XVZEh.png" alt="Planimetrie" class="center-image">
+                <img src="https://imgur.com/1am7rdh.png" alt="Decorazione" class="corner-icon">
+              </ng-container>
+              <div class="preview-wrapper" *ngIf="planimetriaPreviews.length > 0">
+                <ng-container *ngFor="let img of planimetriaPreviews.slice(0, 3); let i = index">
+                  <div class="preview-image">
+                    <img [src]="img" alt="Planimetria caricata" />
+                    <button class="remove-button" (click)="removePlanimetria(i, $event)">✖</button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="planimetriaPreviews.length > 4">
+                  <div class="preview-image overlay">
+                    <img [src]="planimetriaPreviews[3]" alt="Planimetria caricata" />
+                    <div class="overlay-text">+{{ planimetriaPreviews.length - 3 }}</div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="planimetriaPreviews.length === 4">
+                  <div class="preview-image">
+                    <img [src]="planimetriaPreviews[3]" alt="Planimetria caricata" />
+                    <button class="remove-button" (click)="removePlanimetria(3, $event)">✖</button>
+                  </div>
+                </ng-container>
+              </div>
             </div>
           </div>
 
@@ -56,7 +104,6 @@
       </form>
     </div>
 
-    <!-- Announcement Summary -->
     <app-announcement-summary [activeStep]="3"></app-announcement-summary>
   </main>
 
