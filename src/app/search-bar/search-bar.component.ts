@@ -69,7 +69,6 @@ export class SearchBarComponent {
     this.maxPrice = null;
     this.rooms = null;
     this.bathrooms = null;
-    this.location = '';
     this.minSurface = null;
     this.maxSurface = null;
     this.energyClass = 'tutte';
