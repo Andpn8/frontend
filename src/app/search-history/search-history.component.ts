@@ -36,23 +36,25 @@ export class SearchHistoryComponent {
     this.restoreFilters.emit(filters);
   }
 
-  hasServices(services: FilterSet["services"]): boolean {
-    return Object.values(services).some(v => v);
-  }
+  hasServices(services: FilterSet["services"] | undefined): boolean {
+  return services ? Object.values(services).some(v => v) : false;
+}
 
-  listServices(services: FilterSet["services"]): string {
-    const names = {
-      portineria: 'Portineria',
-      garage: 'Garage',
-      climatizzazione: 'Climatizzazione',
-      sicurezza: 'Sicurezza',
-      ascensore: 'Ascensore',
-      accessoDisabili: 'Accesso Disabili'
-    };
+  listServices(services: FilterSet["services"] | undefined): string {
+  if (!services) return '';
 
-    return Object.entries(services)
-      .filter(([key, val]) => val)
-      .map(([key]) => names[key as keyof typeof names])
-      .join(', ');
-  }
+  const names = {
+    portineria: 'Portineria',
+    garage: 'Garage',
+    climatizzazione: 'Climatizzazione',
+    sicurezza: 'Sicurezza',
+    ascensore: 'Ascensore',
+    accessoDisabili: 'Accesso Disabili'
+  };
+
+      return Object.entries(services)
+    .filter(([key, val]) => val)
+    .map(([key]) => names[key as keyof typeof names])
+    .join(', ');
+}
 }

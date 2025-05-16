@@ -12,6 +12,7 @@ import { NavbarCeoComponent } from '../navbar-ceo/navbar-ceo.component';
 import { AuthService } from '../../services/auth.service';
 import { NavbarAmministratorComponent } from '../navbar-amministrator/navbar-amministrator.component';
 import { FilterSet } from '../../models/filter-set.model';
+import { FiltriService } from '../../services/filtri.service';
 
 @Component({
   selector: 'app-homepage',
@@ -26,40 +27,42 @@ import { FilterSet } from '../../models/filter-set.model';
 })
 export class HomepageComponent implements OnInit {
   userRole: 'guest' | 'agent' | 'user' | 'ceo' | 'admin' = 'guest';
-  searchHistory: FilterSet[] = [];
   restoredFilters: FilterSet | null = null;
+  searchHistory: FilterSet[] = [];
 
   constructor(
     private authService: AuthService,
+     private filtriService: FiltriService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
  ngOnInit(): void {
   if (isPlatformBrowser(this.platformId)) {
     this.userRole = this.authService.getUserRoleFromToken();
+   const userId = this.authService.getUserId();
 
-    const savedHistory = sessionStorage.getItem('searchHistory');
-    if (savedHistory) {
-      this.searchHistory = JSON.parse(savedHistory);
-    }
-
-    const restored = sessionStorage.getItem('restoredFilters');
-    if (restored) {
-      this.restoredFilters = JSON.parse(restored);
-    }
+  if (userId !== null) {
+  this.filtriService.getFiltri(userId.toString()).subscribe(history => {
+    this.searchHistory = history;
+  });
+}
   }
 }
 
-   onFiltersApplied(newFilters: FilterSet): void {
-  if (this.searchHistory.length >= 3) {
-    this.searchHistory.shift();
+ onFiltersApplied(newFilters: FilterSet): void {
+  const userId = this.authService.getUserId();
+  if (userId === null) {
+    console.warn('Nessun userId disponibile, impossibile salvare il filtro.');
+    return;
   }
+
+  if (this.searchHistory.length >= 3) this.searchHistory.shift();
   this.searchHistory.push(newFilters);
-  sessionStorage.setItem('searchHistory', JSON.stringify(this.searchHistory));
+
+  this.filtriService.salvaFiltri(userId.toString(), newFilters).subscribe();
 }
 
- onRestoreFilters(filters: FilterSet): void {
+onRestoreFilters(filters: FilterSet): void {
   this.restoredFilters = filters;
-  sessionStorage.setItem('restoredFilters', JSON.stringify(filters));
 }
 }

@@ -90,4 +90,16 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post('http://localhost:3002/amministrator', data, { headers });
   }
+
+  getUserId(): number | null {
+  const token = this.getToken();
+  if (!token) return null;
+
+  try {
+    const decoded: any = jwtDecode(token);
+    return decoded.user_id || null;
+  } catch (e) {
+    return null;
+  }
+}
 }
