@@ -56,10 +56,25 @@ export class HomepageComponent implements OnInit {
     return;
   }
 
+  const filtroBackend = {
+    user_id: userId,
+    localita: newFilters.location,
+    prezzo_minimo: newFilters.minPrice,
+    prezzo_massimo: newFilters.maxPrice,
+    numero_camere: newFilters.rooms,
+    numero_bagni: newFilters.bathrooms,
+    superfice_minima: newFilters.minSurface,
+    superfice_massima: newFilters.maxSurface,
+    classe_energetica: newFilters.energyClass,
+    servizi: Object.entries(newFilters.services)
+      .filter(([_, v]) => v)
+      .map(([k]) => k)
+  };
+
   if (this.searchHistory.length >= 3) this.searchHistory.shift();
   this.searchHistory.push(newFilters);
 
-  this.filtriService.salvaFiltri(userId.toString(), newFilters).subscribe();
+  this.filtriService.salvaFiltri(userId.toString(), filtroBackend).subscribe();
 }
 
 onRestoreFilters(filters: FilterSet): void {
