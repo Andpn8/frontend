@@ -139,6 +139,14 @@ export class SearchBarComponent {
   }
 }
 
+onMaxPriceChange(): void {
+  if (this.maxPrice != null && this.maxPrice >= 0 && this.maxPrice <= 10000000) {
+    if (this.minPrice != null && this.maxPrice < this.minPrice) {
+      this.minPrice = this.maxPrice - 1;
+    }
+  }
+}
+
 onMinSurfaceChange(): void {
   if (this.minSurface != null && this.minSurface >= 0 && this.minSurface <= 999) {
     if (this.maxSurface == null || this.maxSurface <= this.minSurface) {
@@ -147,6 +155,13 @@ onMinSurfaceChange(): void {
   }
 }
 
+ onMaxSurfaceChange(): void {
+  if (this.maxSurface != null && this.maxSurface >= 0 && this.maxSurface <= 1000) {
+    if (this.minSurface != null && this.maxSurface < this.minSurface) {
+      this.minSurface = this.maxSurface - 1;
+    }
+  }
+}
 applyFilterSet(filters: FilterSet): void {
   this.location = filters.location;
   this.minPrice = filters.minPrice;
