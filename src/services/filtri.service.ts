@@ -16,6 +16,7 @@ export class FiltriService {
  getFiltri(userId: string): Observable<FilterSet[]> {
   return this.http.get<any[]>(`${this.apiUrl}/${userId}`).pipe(
     map(raw => raw.map(entry => ({
+      id: entry.id_filtro,
       location: entry.localita,
       minPrice: entry.prezzo_minimo,
       maxPrice: entry.prezzo_massimo,
@@ -34,5 +35,9 @@ export class FiltriService {
       }
     })))
   );
+}
+
+deleteFiltro(filtroId: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/${filtroId}`);
 }
 }

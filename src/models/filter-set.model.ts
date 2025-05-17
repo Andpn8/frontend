@@ -1,4 +1,5 @@
 export interface FilterSet {
+  id?: number;
   location: string;
   minPrice: number | null;
   maxPrice: number | null;

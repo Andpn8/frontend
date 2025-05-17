@@ -136,7 +136,11 @@
 
       <div class="button-container">
         <button class="close-btn" (click)="closeAndReset()">Chiudi</button>
-        <button class="apply-btn" (click)="toggleFilters(true)">Applica</button>
+       <button class="apply-btn"
+        [disabled]="isApplyDisabled"
+        (click)="toggleFilters(true)">
+  Applica
+</button>
       </div>
     </div>
   </div>

@@ -176,5 +176,14 @@ applyFilterSet(filters: FilterSet): void {
   this.updateSearchButtonState();
 }
 
+get isApplyDisabled(): boolean {
+  return !(
+    this.minPrice || this.maxPrice || this.rooms || this.bathrooms ||
+    this.minSurface || this.maxSurface ||
+    this.energyClass !== 'tutte' ||
+    Object.values(this.services).some(v => v)
+  );
+}
+
 
 }
