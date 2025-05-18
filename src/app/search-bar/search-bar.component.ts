@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef, Output, EventEmitter, Input } from '@angu
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterSet } from '../../models/filter-set.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -50,7 +51,7 @@ export class SearchBarComponent {
   filteredCities: string[] = [];
   isSearchEnabled: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef,  private router: Router,) {}
 
  toggleFilters(apply: boolean = false): void {
   this.filtersVisible = !this.filtersVisible;
@@ -184,6 +185,10 @@ get isApplyDisabled(): boolean {
     Object.values(this.services).some(v => v)
   );
 }
+
+ goToCatalog() {
+    this.router.navigate(['/catalog']);
+  }
 
 
 }

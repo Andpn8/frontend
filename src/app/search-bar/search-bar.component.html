@@ -41,7 +41,7 @@
       </div>
     </div>
 
-    <button class="search-btn" [disabled]="!isSearchEnabled" (click)="onSearchClick()">CERCA</button>
+    <button class="search-btn" (click)="goToCatalog()" [disabled]="!isSearchEnabled" (click)="onSearchClick()">CERCA</button>
   </div>
 
   <div class="filters-link" (click)="toggleFilters()">
@@ -136,7 +136,7 @@
 
       <div class="button-container">
         <button class="close-btn" (click)="closeAndReset()">Chiudi</button>
-       <button class="apply-btn"
+       <button class="apply-btn "
         [disabled]="isApplyDisabled"
         (click)="toggleFilters(true)">
   Applica

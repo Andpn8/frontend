@@ -16,25 +16,47 @@ import { LoginAmministratorComponent } from './login-amministrator/login-amminis
 import { CreateAgentComponent } from './create-agent/create-agent.component';
 import { LoginSuccessComponent } from './login-success/login-success.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 export const routes: Routes = [
+
+  //HOMEPAGE
   { path: 'home', component: HomepageComponent },
+
+  //CREA ANNUNCIO
   { path: 'new-announcement', component: NewAnnouncementComponent },
   { path: 'new-announcement-step2', component: NewAnnouncementStep2Component },
   { path: 'new-announcement-step3', component: NewAnnouncementStep3Component },
   { path: 'new-announcement-step4', component: NewAnnouncementStep4Component },
+
+  //INFO
   { path: 'about-us', component: AboutUsComponent },
+
+  //NOTIFICHE
   { path: 'notify', component: NotifyComponent },
+
+  //LOGIN E REGISTRAZIONE
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'loginAgent', component: LoginAgentComponent},
   { path: 'registerAgency', component: RegisterAgencyComponent},
   { path: 'loginAgency', component: AgencyLoginComponent},
   { path: 'loginAmministrator', component: LoginAmministratorComponent},
+
+  //API PER LOGIN
+  { path: 'login-success', component: LoginSuccessComponent},
+
+  //GESTIONE AGENTI
   { path: 'manageAgent', component: ManageAgentComponent},
   { path: 'createAgent', component: CreateAgentComponent},
-  { path: 'login-success', component: LoginSuccessComponent},
+
+  //INFO PROFILO
   { path: 'profile-info', component: ProfileInfoComponent},
+
+  //CATALOGO
+  { path: 'catalog', component: CatalogComponent},
+
+  //REDIRECT
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
