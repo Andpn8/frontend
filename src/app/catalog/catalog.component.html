@@ -4,4 +4,20 @@
 </app-navbar>
 
 
+<div class="catalog-container">
+  <div class="annuncio-card" *ngFor="let annuncio of annunciPaginati">
+    <img [src]="annuncio.foto?.[0] || 'assets/default.jpg'" alt="foto" class="preview-img" />
+    <h3>{{ annuncio.titolo }}</h3>
+    <p><strong>{{ annuncio.indirizzo }}</strong>, {{ annuncio.civico }} - {{ annuncio.cap }}</p>
+    <p><strong>{{ annuncio.comune }}</strong></p>
+    <strong>{{ annuncio.prezzo || annuncio.prezzo_mensile | currency:'EUR':'symbol' }}</strong>
+  </div>
+</div>
+
+<div class="pagination">
+  <button *ngFor="let pagina of numeroPagine" (click)="cambiaPagina(pagina)">
+    {{ pagina }}
+  </button>
+</div>
+
 <app-footer></app-footer>
