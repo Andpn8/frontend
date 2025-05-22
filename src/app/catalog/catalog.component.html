@@ -3,10 +3,12 @@
   [centerMessage]="'<strong>Catalogo</strong>'">
 </app-navbar>
 
+<app-search-bar [showFilters]="false"></app-search-bar>
+
 
 <div class="catalog-container">
   <div class="annuncio-card" *ngFor="let annuncio of annunciPaginati">
-    <img [src]="annuncio.foto?.[0] || 'assets/default.jpg'" alt="foto" class="preview-img" />
+    <img [src]="annuncio.foto?.[0]" alt="foto" class="preview-img" />
     <h3>{{ annuncio.titolo }}</h3>
     <p><strong>{{ annuncio.indirizzo }}</strong>, {{ annuncio.civico }} - {{ annuncio.cap }}</p>
     <p><strong>{{ annuncio.comune }}</strong></p>

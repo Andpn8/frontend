@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class SearchBarComponent {
   @Output() filtersApplied = new EventEmitter<FilterSet>();
   @Input() restoredFilters: FilterSet | null = null;
+    @Input() showFilters: boolean = true;
 
   ngOnChanges(): void {
   if (this.restoredFilters) {

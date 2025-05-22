@@ -5,6 +5,7 @@ import { InsertionService } from '../../services/insertion.service';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
 import { AuthService } from '../../services/auth.service';
+import { SearchBarComponent } from "../search-bar/search-bar.component";
 
 @Component({
   selector: 'app-catalog',
@@ -13,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
     CommonModule,
     NavbarComponent,
     FooterComponent,
+    SearchBarComponent
 ],
   templateUrl: './catalog.component.html',
   styleUrl: './catalog.component.scss'

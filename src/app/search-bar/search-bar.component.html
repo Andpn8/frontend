@@ -44,11 +44,11 @@
     <button class="search-btn" (click)="goToCatalog()" [disabled]="!isSearchEnabled" (click)="onSearchClick()">CERCA</button>
   </div>
 
-  <div class="filters-link" (click)="toggleFilters()">
+  <div *ngIf="showFilters" class="filters-link" (click)="toggleFilters()">
     AGGIUNGI FILTRI
   </div>
 
-  <div *ngIf="filtersVisible" class="filters-popup">
+  <div *ngIf="showFilters && filtersVisible" class="filters-popup">
     <div class="popup-content">
       <h3>Filtri Aggiuntivi</h3>
 
