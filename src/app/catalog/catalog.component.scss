@@ -8,17 +8,18 @@
 
 .annuncio-card {
   width: 300px;
-  border: 2px solid #087E8B; // ✅ Andrea, colore del bordo aggiornato
+  border: 2px solid #087E8B; // ✅ Andrea, bordo blu riconoscibile
   padding: 12px;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
-  transition: 0.2s ease-in-out;
   background-color: #fff;
+  box-shadow: 0 4px 6px rgba(8, 126, 139, 0.2);  // Ombra leggera iniziale
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    transform: scale(1.02);
+    box-shadow: 0 12px 20px rgba(8, 126, 139, 0.4); // Ombra più intensa su hover
+    transform: translateY(-6px) scale(1.05); // Movimento più fluido e sollevamento
   }
 
   .preview-img {
@@ -26,8 +27,12 @@
     height: 180px;
     object-fit: cover;
     border-radius: 5px;
+    transition: filter 0.3s ease;
   }
 
+  &:hover .preview-img {
+    filter: brightness(1.1); // Leggero aumento di luminosità dell'immagine al passaggio del mouse
+  }
 }
 
 .pagination {
