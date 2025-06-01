@@ -24,6 +24,8 @@ export class SearchBarComponent {
   filtersVisible = false;
   confirmationVisible = false;
   citySelected: boolean = false;
+  buyOrRent: 'sale' | 'rent' = 'sale';
+  propertyType : string = 'Appartamento'
 
   minPrice: number | null = null;
   maxPrice: number | null = null;
@@ -188,8 +190,24 @@ get isApplyDisabled(): boolean {
 }
 
  goToCatalog() {
-    this.router.navigate(['/catalog']);
-  }
+  const filters: FilterSet = {
+    location: this.location,
+    minPrice: this.minPrice,
+    maxPrice: this.maxPrice,
+    rooms: this.rooms,
+    bathrooms: this.bathrooms,
+    minSurface: this.minSurface,
+    maxSurface: this.maxSurface,
+    energyClass: this.energyClass,
+    services: this.services,
+    buyOrRent: this.buyOrRent,
+    propertyType: this.propertyType,
+  };
+
+  this.router.navigate(['/catalog'], {
+    queryParams: { filters: JSON.stringify(filters) }
+  });
+}
 
 
 }

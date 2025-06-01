@@ -6,20 +6,22 @@
   <div class="dropdown-aligned-tabs">
     <div class="tabs">
       <label for="compra" class="tab tab-active">COMPRA</label>
-      <input type="radio" id="compra" name="tab" checked />
+      <input type="radio" id="compra" name="tab"
+         [(ngModel)]="buyOrRent" value="sale" />
       <label for="affitta" class="tab">AFFITTA</label>
-      <input type="radio" id="affitta" name="tab" />
+     <input type="radio" id="affitta" name="tab"
+         [(ngModel)]="buyOrRent" value="rent" />
     </div>
   </div>
 
   <div class="search-bar">
     <div class="dropdown-section">
-      <select id="property-type" name="property-type">
-        <option value="Case/Appartamenti" selected>Case/Appartamenti</option>
-        <option value="Ville">Ville</option>
-        <option value="Monolocali">Monolocali</option>
-        <option value="Attici">Attici</option>
-      </select>
+      <select id="property-type" name="property-type" [(ngModel)]="propertyType">
+  <option value="Appartamento" selected >Appartamento</option>
+  <option value="Villa">Villa</option>
+  <option value="Monolocale">Monolocale</option>
+  <option value="Attico">Attico</option>
+</select>
     </div>
 
     <div class="divider"></div>
@@ -116,9 +118,9 @@
         <label for="energy-class">Classe Energetica:</label>
         <select id="energy-class" name="energy-class" [(ngModel)]="energyClass">
           <option value="tutte">Tutte</option>
-          <option value="alta">Alta (A,A+,A1-A4)</option>
-          <option value="media">Media (B,C,D e superiore)</option>
-          <option value="bassa">Bassa (E,F,G e superiore)</option>
+          <option value="alta">Alta (A,A+)</option>
+          <option value="media">Media (B,C,D)</option>
+          <option value="bassa">Bassa (E,F,G)</option>
         </select>
       </div>
 

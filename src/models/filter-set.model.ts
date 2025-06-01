@@ -1,5 +1,6 @@
 export interface FilterSet {
   id?: number;
+   propertyType?: string;
   location: string;
   minPrice: number | null;
   maxPrice: number | null;
@@ -16,4 +17,6 @@ export interface FilterSet {
     ascensore: boolean;
     accessoDisabili: boolean;
   };
+  buyOrRent?: 'sale' | 'rent';
+  
 }
