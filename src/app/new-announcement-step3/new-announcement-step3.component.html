@@ -11,17 +11,31 @@
           <!-- Foto -->
           <div class="left-column">
             <h2 class="form-title">Foto</h2>
-            <div class="foto-box" (click)="fotoInput.click()">
+            <div 
+              class="foto-box"
+              [class.hovered]="showFotoOverlay && !showDeleteIcons"
+              (mouseenter)="onMouseEnter()"
+              (mouseleave)="onMouseLeave()"
+              (click)="toggleFotoMenu($event)">
+
               <input type="file" #fotoInput multiple accept="image/*" (change)="onFotoSelected($event)" hidden />
+
               <ng-container *ngIf="fotoPreviews.length === 0">
                 <img src="https://imgur.com/P4XVZEh.png" alt="Foto" class="center-image">
                 <img src="https://imgur.com/1am7rdh.png" alt="Decorazione" class="corner-icon">
               </ng-container>
+
               <div class="preview-wrapper" *ngIf="fotoPreviews.length > 0">
                 <ng-container *ngFor="let img of fotoPreviews.slice(0, 3); let i = index">
-                  <div class="preview-image">
+                  <div class="preview-image" [class.show-delete]="showDeleteIcons">
                     <img [src]="img" alt="Foto caricata" />
-                    <button class="remove-button" (click)="removeFoto(i, $event)">✖</button>
+                    <button class="remove-button" *ngIf="showDeleteIcons" (click)="removeFoto(i, $event)">✖</button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="fotoPreviews.length === 4">
+                  <div class="preview-image" [class.show-delete]="showDeleteIcons">
+                    <img [src]="fotoPreviews[3]" alt="Foto caricata" />
+                    <button class="remove-button" *ngIf="showDeleteIcons" (click)="removeFoto(3, $event)">✖</button>
                   </div>
                 </ng-container>
                 <ng-container *ngIf="fotoPreviews.length > 4">
@@ -30,12 +44,17 @@
                     <div class="overlay-text">+{{ fotoPreviews.length - 3 }}</div>
                   </div>
                 </ng-container>
-                <ng-container *ngIf="fotoPreviews.length === 4">
-                  <div class="preview-image">
-                    <img [src]="fotoPreviews[3]" alt="Foto caricata" />
-                    <button class="remove-button" (click)="removeFoto(3, $event)">✖</button>
-                  </div>
-                </ng-container>
+              </div>
+
+              <!-- Overlay immagine "+" -->
+              <div class="foto-overlay" *ngIf="showFotoOverlay && !showDeleteIcons">
+                <img src="https://imgur.com/P4XVZEh.png" alt="Foto" />
+              </div>
+
+              <!-- Menu contestuale -->
+              <div class="menu-popup" *ngIf="showFotoMenu" (click)="stopPropagation($event)">
+                <div (click)="triggerFileInput(fotoInput)">📤 Aggiungi nuova foto</div>
+                <div (click)="enableDeleteMode()">🗑 Elimina foto</div>
               </div>
             </div>
           </div>
@@ -54,17 +73,31 @@
         <div class="planimetrie-container-wrapper">
           <div class="planimetrie-container">
             <h2 class="form-title">Planimetrie</h2>
-            <div class="planimetrie-box" (click)="planimetriaInput.click()">
+            <div 
+              class="planimetrie-box"
+              [class.hovered]="showPlanimetriaOverlay && !showPlanimetriaDeleteIcons"
+              (mouseenter)="onPlanimetriaMouseEnter()"
+              (mouseleave)="onPlanimetriaMouseLeave()"
+              (click)="togglePlanimetriaMenu($event)">
+
               <input type="file" #planimetriaInput multiple accept="image/*" (change)="onPlanimetriaSelected($event)" hidden />
+
               <ng-container *ngIf="planimetriaPreviews.length === 0">
                 <img src="https://imgur.com/P4XVZEh.png" alt="Planimetrie" class="center-image">
                 <img src="https://imgur.com/1am7rdh.png" alt="Decorazione" class="corner-icon">
               </ng-container>
+
               <div class="preview-wrapper" *ngIf="planimetriaPreviews.length > 0">
                 <ng-container *ngFor="let img of planimetriaPreviews.slice(0, 3); let i = index">
-                  <div class="preview-image">
+                  <div class="preview-image" [class.show-delete]="showPlanimetriaDeleteIcons">
                     <img [src]="img" alt="Planimetria caricata" />
-                    <button class="remove-button" (click)="removePlanimetria(i, $event)">✖</button>
+                    <button class="remove-button" *ngIf="showPlanimetriaDeleteIcons" (click)="removePlanimetria(i, $event)">✖</button>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="planimetriaPreviews.length === 4">
+                  <div class="preview-image" [class.show-delete]="showPlanimetriaDeleteIcons">
+                    <img [src]="planimetriaPreviews[3]" alt="Planimetria caricata" />
+                    <button class="remove-button" *ngIf="showPlanimetriaDeleteIcons" (click)="removePlanimetria(3, $event)">✖</button>
                   </div>
                 </ng-container>
                 <ng-container *ngIf="planimetriaPreviews.length > 4">
@@ -73,12 +106,17 @@
                     <div class="overlay-text">+{{ planimetriaPreviews.length - 3 }}</div>
                   </div>
                 </ng-container>
-                <ng-container *ngIf="planimetriaPreviews.length === 4">
-                  <div class="preview-image">
-                    <img [src]="planimetriaPreviews[3]" alt="Planimetria caricata" />
-                    <button class="remove-button" (click)="removePlanimetria(3, $event)">✖</button>
-                  </div>
-                </ng-container>
+              </div>
+
+              <!-- Overlay immagine "+" -->
+              <div class="foto-overlay" *ngIf="showPlanimetriaOverlay && !showPlanimetriaDeleteIcons">
+                <img src="https://imgur.com/P4XVZEh.png" alt="Planimetria" />
+              </div>
+
+              <!-- Menu contestuale -->
+              <div class="menu-popup" *ngIf="showPlanimetriaMenu" (click)="stopPropagation($event)">
+                <div (click)="triggerPlanimetriaInput(planimetriaInput)">📤 Aggiungi nuova planimetria</div>
+                <div (click)="enablePlanimetriaDeleteMode()">🗑 Elimina planimetria</div>
               </div>
             </div>
           </div>

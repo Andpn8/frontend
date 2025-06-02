@@ -249,3 +249,58 @@
   padding: 0.25rem 0.5rem;
   border-radius: 0 0 0 6px;
 }
+.foto-box.hovered {
+  background-color: #e0e0e0;
+  position: relative;
+}
+
+.foto-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.foto-overlay img {
+  width: 50px;
+  height: 50px;
+}
+
+.menu-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+  z-index: 10;
+  width: 180px;
+  padding: 0.5rem;
+}
+
+.menu-popup div {
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.menu-popup div:hover {
+  background-color: #f0f0f0;
+}
+
+
+.menu-popup div:hover {
+  background-color: #f0f0f0;
+}
+
+.preview-image .remove-button {
+  display: none;
+}
+
+.preview-image.show-delete .remove-button {
+  display: block;
+}
