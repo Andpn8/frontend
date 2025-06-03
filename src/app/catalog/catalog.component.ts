@@ -25,7 +25,8 @@ export class CatalogComponent implements OnInit {
   userRole: 'guest' | 'agent' | 'user' | 'ceo' | 'admin' = 'guest';
   annunci: any[] = [];
   currentPage: number = 1;
-  annunciPerPagina: number = 7;
+  annunciPerPagina: number = 4;
+  modalitaCatalogo: 'vendita' | 'affitto' = 'vendita';
 
  constructor(
   private authService: AuthService,
@@ -46,8 +47,9 @@ export class CatalogComponent implements OnInit {
         : this.insertionService.getAllSales();
 
       fetchData$.subscribe(data => {
-        this.annunci = filters ? this.filtraAnnunci(data, filters) : data;
-      });
+  this.modalitaCatalogo = filters.buyOrRent === 'rent' ? 'affitto' : 'vendita';
+  this.annunci = filters ? this.filtraAnnunci(data, filters) : data;
+});
     });
   }
 }
