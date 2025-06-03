@@ -11,7 +11,12 @@
     <h3>{{ annuncio.titolo }}</h3>
     <p><strong>{{ annuncio.indirizzo }}</strong>, {{ annuncio.civico }} - {{ annuncio.cap }}</p>
     <p><strong>{{ annuncio.comune }}</strong></p>
-    <strong>{{ annuncio.prezzo || annuncio.prezzo_mensile | currency:'EUR':'symbol' }}</strong>
+    <strong *ngIf="modalitaCatalogo === 'vendita'">
+  {{ annuncio.prezzo | currency:'EUR':'symbol' }}
+</strong>
+<strong *ngIf="modalitaCatalogo === 'affitto'">
+  {{ annuncio.prezzo_mensile | currency:'EUR':'symbol' }}/mese
+</strong>
   </div>
 </div>
 
