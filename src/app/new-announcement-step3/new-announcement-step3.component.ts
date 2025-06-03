@@ -18,7 +18,14 @@ export class NewAnnouncementStep3Component {
   step3Form: FormGroup;
 
   fotoPreviews: string[] = [];
+  tempFotoPreviews: string[] = [];
+  selectedFotoToDelete: boolean[] = [];
+  isFotoDeletionModalVisible = false;
+
   planimetriaPreviews: string[] = [];
+  tempPlanimetriaPreviews: string[] = [];
+  selectedPlanimetriaToDelete: boolean[] = []; 
+  isPlanimetriaDeletionModalVisible = false;
 
   showFotoOverlay = false;
   showFotoMenu = false;
@@ -35,46 +42,18 @@ export class NewAnnouncementStep3Component {
     });
   }
 
-  goBack(): void {
-    this.router.navigate(['/new-announcement-step2']);
-  }
-
-  onSubmit(): void {
-    if (this.step3Form.valid) {
-      this.router.navigate(['/new-announcement-step4']);
-    } else {
-      this.step3Form.markAllAsTouched();
-    }
-  }
-
+  // FOTO - Caricamento
   onFotoSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
-    if (input.files) {
-      for (const file of Array.from(input.files)) {
+    if (input?.files) {
+      Array.from(input.files).forEach((file: File) => {
         const reader = new FileReader();
-        reader.onload = () => {
-          this.fotoPreviews.push(reader.result as string);
+        reader.onload = (e) => {
+          this.fotoPreviews.push(e.target?.result as string);
         };
         reader.readAsDataURL(file);
-      }
+      });
     }
-    this.showFotoMenu = false;
-    this.showDeleteIcons = false;
-  }
-
-  onPlanimetriaSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      for (const file of Array.from(input.files)) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          this.planimetriaPreviews.push(reader.result as string);
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-    this.showPlanimetriaMenu = false;
-    this.showPlanimetriaDeleteIcons = false;
   }
 
   removeFoto(index: number, event: MouseEvent): void {
@@ -82,6 +61,69 @@ export class NewAnnouncementStep3Component {
     this.fotoPreviews.splice(index, 1);
     if (this.fotoPreviews.length === 0) {
       this.disableDeleteMode();
+    }
+  }
+
+  toggleFotoMenu(event: MouseEvent): void {
+    event.stopPropagation();
+    this.showFotoMenu = !this.showFotoMenu;
+  }
+
+  triggerFileInput(input: HTMLInputElement): void {
+    input.click();
+  }
+
+  // FOTO - Modale eliminazione
+  openPhotoDeletionPanel(): void {
+    this.tempFotoPreviews = [...this.fotoPreviews];
+    this.selectedFotoToDelete = this.tempFotoPreviews.map(() => false);
+    this.isFotoDeletionModalVisible = true;
+    this.showFotoMenu = false;
+  }
+
+  closeFotoDeletionPanel(): void {
+    this.isFotoDeletionModalVisible = false;
+  }
+
+  toggleFotoSelection(index: number): void {
+    this.selectedFotoToDelete[index] = !this.selectedFotoToDelete[index];
+  }
+
+  confirmFotoDeletion(): void {
+    this.fotoPreviews = this.tempFotoPreviews.filter((_, i) => !this.selectedFotoToDelete[i]);
+    this.isFotoDeletionModalVisible = false;
+    if (this.fotoPreviews.length === 0) {
+      this.disableDeleteMode();
+    }
+  }
+
+  disableDeleteMode(): void {
+    this.showDeleteIcons = false;
+  }
+
+  onMouseEnter(): void {
+    this.showFotoOverlay = true;
+  }
+
+  onMouseLeave(): void {
+    this.showFotoOverlay = false;
+  }
+
+  stopPropagation(event: MouseEvent): void {
+    event.stopPropagation();
+  }
+
+  // PLANIMETRIE - Caricamento
+  onPlanimetriaSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input?.files) {
+      Array.from(input.files).forEach((file: File) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.planimetriaPreviews.push(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      });
     }
   }
 
@@ -93,89 +135,61 @@ export class NewAnnouncementStep3Component {
     }
   }
 
-  toggleFotoMenu(event: MouseEvent): void {
-    event.stopPropagation();
-    if (!this.showDeleteIcons) {
-      this.showFotoMenu = !this.showFotoMenu;
-    }
-  }
-
   togglePlanimetriaMenu(event: MouseEvent): void {
     event.stopPropagation();
-    if (!this.showPlanimetriaDeleteIcons) {
-      this.showPlanimetriaMenu = !this.showPlanimetriaMenu;
-    }
-  }
-
-  enableDeleteMode(): void {
-    this.showDeleteIcons = true;
-    this.showFotoMenu = false;
-    this.showFotoOverlay = false;
-    this.hovered = false;
-  }
-
-  enablePlanimetriaDeleteMode(): void {
-    this.showPlanimetriaDeleteIcons = true;
-    this.showPlanimetriaMenu = false;
-    this.showPlanimetriaOverlay = false;
-  }
-
-  disableDeleteMode(): void {
-    this.showDeleteIcons = false;
-    this.showFotoOverlay = false;
-    this.hovered = false;
-  }
-
-  disablePlanimetriaDeleteMode(): void {
-    this.showPlanimetriaDeleteIcons = false;
-    this.showPlanimetriaOverlay = false;
-  }
-
-  triggerFileInput(fotoInput: HTMLInputElement): void {
-    fotoInput.click();
-    this.showFotoMenu = false;
+    this.showPlanimetriaMenu = !this.showPlanimetriaMenu;
   }
 
   triggerPlanimetriaInput(input: HTMLInputElement): void {
     input.click();
+  }
+
+  // PLANIMETRIE - Modale eliminazione
+  openPlanimetriaDeletionPanel(): void {
+    this.tempPlanimetriaPreviews = [...this.planimetriaPreviews];
+    this.selectedPlanimetriaToDelete = this.tempPlanimetriaPreviews.map(() => false); 
+    this.isPlanimetriaDeletionModalVisible = true;
     this.showPlanimetriaMenu = false;
   }
 
-  @HostListener('document:click')
-  onDocumentClick(): void {
-    this.showFotoMenu = false;
-    this.showDeleteIcons = false;
-    this.showFotoOverlay = false;
-    this.hovered = false;
-
-    this.showPlanimetriaMenu = false;
-    this.showPlanimetriaDeleteIcons = false;
-    this.showPlanimetriaOverlay = false;
+  closePlanimetriaDeletionPanel(): void {
+    this.isPlanimetriaDeletionModalVisible = false;
   }
 
-  stopPropagation(event: MouseEvent): void {
-    event.stopPropagation();
+  togglePlanimetriaSelection(index: number): void {
+    this.selectedPlanimetriaToDelete[index] = !this.selectedPlanimetriaToDelete[index]; 
   }
 
-  onMouseEnter(): void {
-    if (this.fotoPreviews.length > 0 && !this.showDeleteIcons) {
-      this.hovered = true;
-      this.showFotoOverlay = true;
+  confirmPlanimetriaDeletion(): void {
+    this.planimetriaPreviews = this.tempPlanimetriaPreviews.filter((_, i) => !this.selectedPlanimetriaToDelete[i]); 
+    this.isPlanimetriaDeletionModalVisible = false;
+    if (this.planimetriaPreviews.length === 0) {
+      this.disablePlanimetriaDeleteMode();
     }
   }
 
-  onMouseLeave(): void {
-    this.hovered = false;
-    this.showFotoOverlay = false;
+  disablePlanimetriaDeleteMode(): void {
+    this.showPlanimetriaDeleteIcons = false;
   }
 
   onPlanimetriaMouseEnter(): void {
-    if (this.planimetriaPreviews.length > 0 && !this.showPlanimetriaDeleteIcons) {
-      this.showPlanimetriaOverlay = true;
-    }
+    this.showPlanimetriaOverlay = true;
   }
 
   onPlanimetriaMouseLeave(): void {
     this.showPlanimetriaOverlay = false;
+  }
+
+  // Navigazione
+  onSubmit(): void {
+    if (this.step3Form.valid) {
+      this.router.navigate(['/new-announcement-step4']);
+    } else {
+      this.step3Form.markAllAsTouched();
+    }
+  }
+
+  goBack(): void {
+    this.router.navigate(['/new-announcement-step2']);
   }
 }

@@ -52,12 +52,14 @@
               </div>
 
               <!-- Menu contestuale -->
-              <div class="menu-popup" *ngIf="showFotoMenu" (click)="stopPropagation($event)">
-                <div (click)="triggerFileInput(fotoInput)">📤 Aggiungi nuova foto</div>
-                <div (click)="enableDeleteMode()">🗑 Elimina foto</div>
-              </div>
+             <div class="menu-popup" *ngIf="showFotoMenu" (click)="stopPropagation($event)">
+              <div (click)="triggerFileInput(fotoInput)">📤 Aggiungi nuova foto</div>
+              <!-- Aggiungi questa condizione per mostrare il campo solo se ci sono foto -->
+              <div *ngIf="fotoPreviews.length > 0" (click)="openPhotoDeletionPanel()">🗑 Elimina foto</div>
             </div>
+
           </div>
+        </div>
 
           <!-- Descrizione -->
           <div class="right-column">
@@ -116,7 +118,8 @@
               <!-- Menu contestuale -->
               <div class="menu-popup" *ngIf="showPlanimetriaMenu" (click)="stopPropagation($event)">
                 <div (click)="triggerPlanimetriaInput(planimetriaInput)">📤 Aggiungi nuova planimetria</div>
-                <div (click)="enablePlanimetriaDeleteMode()">🗑 Elimina planimetria</div>
+                <!-- Aggiungi questa condizione per mostrare il campo solo se ci sono planimetrie -->
+                <div *ngIf="planimetriaPreviews.length > 0" (click)="openPlanimetriaDeletionPanel()">🗑 Elimina planimetria</div>
               </div>
             </div>
           </div>
@@ -140,6 +143,50 @@
           </button>
         </div>
       </form>
+    </div>
+
+    <!-- MODAL: Seleziona planimetrie da eliminare -->
+    <div class="deletion-modal custom-modal" *ngIf="isPlanimetriaDeletionModalVisible">
+      <div class="modal-content">
+        <h3>Seleziona le planimetrie da eliminare</h3>
+        <div class="modal-gallery">
+          <div
+            class="modal-thumb"
+            *ngFor="let planimetria of tempPlanimetriaPreviews; let i = index"
+            [class.selected]="selectedPlanimetriaToDelete[i]"
+            (click)="togglePlanimetriaSelection(i)"
+          >
+            <img [src]="planimetria" />
+            <div class="check-overlay" *ngIf="selectedPlanimetriaToDelete[i]">✔</div>
+          </div>
+        </div>
+        <div class="custom-modal-buttons">
+          <button class="indietro" (click)="closePlanimetriaDeletionPanel()">Indietro</button>
+          <button class="conferma" (click)="confirmPlanimetriaDeletion()">Prosegui</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: Seleziona foto da eliminare -->
+    <div class="deletion-modal custom-modal" *ngIf="isFotoDeletionModalVisible">
+      <div class="modal-content">
+        <h3>Seleziona le foto da eliminare</h3>
+        <div class="modal-gallery">
+          <div
+            class="modal-thumb"
+            *ngFor="let foto of tempFotoPreviews; let i = index"
+            [class.selected]="selectedFotoToDelete[i]"
+            (click)="toggleFotoSelection(i)"
+          >
+            <img [src]="foto" />
+            <div class="check-overlay" *ngIf="selectedFotoToDelete[i]">✔</div>
+          </div>
+        </div>
+        <div class="custom-modal-buttons">
+          <button class="indietro" (click)="closeFotoDeletionPanel()">Indietro</button>
+          <button class="conferma" (click)="confirmFotoDeletion()">Prosegui</button>
+        </div>
+      </div>
     </div>
 
     <app-announcement-summary [activeStep]="3"></app-announcement-summary>
