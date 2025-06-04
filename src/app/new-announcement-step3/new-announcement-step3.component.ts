@@ -6,6 +6,7 @@ import { AnnouncementSummaryComponent } from '../announcement-summary/announceme
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from "../footer/footer.component";
 
+
 @Component({
   selector: 'app-new-announcement-step3',
   templateUrl: './new-announcement-step3.component.html',
@@ -38,23 +39,54 @@ export class NewAnnouncementStep3Component {
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.step3Form = this.fb.group({
-      descrizione: ['', Validators.required]
+      descrizione: ['', [Validators.required, Validators.maxLength(200)]]
     });
   }
+
+  @HostListener('document:click', ['$event'])
+    onDocumentClick(event: MouseEvent): void {
+     const target = event.target as HTMLElement;
+
+      // Chiudi menu foto se aperto e clic fuori
+     if (this.showFotoMenu && !target.closest('.foto-box') && !target.closest('.menu-popup')) {
+       this.showFotoMenu = false;
+      }
+
+    // Chiudi menu planimetria se aperto e clic fuori
+    if (this.showPlanimetriaMenu && !target.closest('.planimetrie-box') && !target.closest('.menu-popup')) {
+      this.showPlanimetriaMenu = false;
+    }
+  }
+
 
   // FOTO - Caricamento
   onFotoSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input?.files) {
-      Array.from(input.files).forEach((file: File) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.fotoPreviews.push(e.target?.result as string);
-        };
-        reader.readAsDataURL(file);
-      });
+      const newFiles = Array.from(input.files);
+      const totalFiles = this.fotoPreviews.length + newFiles.length;
+
+    if (totalFiles > 20) {
+      alert("Puoi caricare un massimo di 20 foto.");
+      return;
     }
+
+    newFiles.forEach((file: File) => {
+      const fileType = file.type;
+      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.fotoPreviews.push(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    });
   }
+}
+
 
   removeFoto(index: number, event: MouseEvent): void {
     event.stopPropagation();
@@ -114,18 +146,33 @@ export class NewAnnouncementStep3Component {
   }
 
   // PLANIMETRIE - Caricamento
-  onPlanimetriaSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input?.files) {
-      Array.from(input.files).forEach((file: File) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          this.planimetriaPreviews.push(e.target?.result as string);
-        };
-        reader.readAsDataURL(file);
-      });
+ onPlanimetriaSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input?.files) {
+    const newFiles = Array.from(input.files);
+    const totalFiles = this.planimetriaPreviews.length + newFiles.length;
+
+    if (totalFiles > 4) {
+      alert("Puoi caricare un massimo di 4 planimetrie.");
+      return;
     }
+
+    newFiles.forEach((file: File) => {
+      const fileType = file.type;
+      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.planimetriaPreviews.push(e.target?.result as string);
+      };
+      reader.readAsDataURL(file);
+    });
   }
+  }
+
 
   removePlanimetria(index: number, event: MouseEvent): void {
     event.stopPropagation();
