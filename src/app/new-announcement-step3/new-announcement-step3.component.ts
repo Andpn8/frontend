@@ -39,7 +39,7 @@ export class NewAnnouncementStep3Component {
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.step3Form = this.fb.group({
-      descrizione: ['', [Validators.required, Validators.maxLength(200)]]
+      descrizione: ['', [Validators.required, Validators.maxLength(3000)]]
     });
   }
 

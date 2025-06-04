@@ -68,13 +68,13 @@
           <div class="right-column">
             <h2 class="form-title">Descrizione</h2>
             <div class="descrizione-box">
-              <textarea formControlName="descrizione" placeholder="Descrizione immobile" maxlength="200"></textarea>
+              <textarea formControlName="descrizione" placeholder="Descrizione immobile" maxlength="3000"></textarea>
               <small class="text-muted">
-                {{ 200 - (step3Form.get('descrizione')?.value?.length || 0) }} di 200 caratteri rimasti
+                {{ 3000 - (step3Form.get('descrizione')?.value?.length || 0) }} di 3000 caratteri rimasti
               </small>
 
               <small class="campo-obbligatorio" *ngIf="step3Form.get('descrizione')?.errors?.['maxlength']">
-                Massimo 200 caratteri.
+                Massimo 3000 caratteri.
               </small>
             </div>
               <small class="campo-obbligatorio" *ngIf="step3Form.get('descrizione')?.errors?.['required']">

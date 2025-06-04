@@ -1,1 +1,53 @@
-<p>new-announcement-step4 works!</p>
+<div class="new-announcement-step4">
+  <app-navbar  
+    [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'" 
+    [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
+  </app-navbar>
+
+  <main class="step4-container">
+    <div class="form-wrapper">
+      <h2>Contatti</h2>
+
+      <form [formGroup]="step4Form" (ngSubmit)="proceed()">
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input id="email" type="email" formControlName="email" placeholder="La tua e-mail"
+                 [class.invalid]="isInvalid('email')" />
+          <div class="error" *ngIf="isInvalid('email')">CAMPO OBBLIGATORIO</div>
+        </div>
+
+        <!-- Cellulare -->
+        <div class="form-group">
+          <label for="phone">Cellulare:</label>
+          <div class="phone-input">
+            <select formControlName="prefix">
+              <option *ngFor="let option of prefixOptions" [value]="option.code">
+                {{ option.label }}
+              </option>
+            </select>
+            <input id="phone" type="tel" formControlName="phone" placeholder="Il tuo telefono"
+                   [class.invalid]="isInvalid('phone')" />
+          </div>
+          <div class="error" *ngIf="isInvalid('phone')">CAMPO OBBLIGATORIO</div>
+        </div>
+
+        <!-- Checkbox -->
+        <div class="form-group checkbox-group">
+          <label>Mostra cellulare nell’annuncio:</label>
+          <input type="checkbox" formControlName="showPhone" />
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-row">
+          <button type="button" class="indietro" (click)="goBack()">INDIETRO</button>
+          <button type="submit" class="prosegui">PROSEGUI</button>
+        </div>
+      </form>
+    </div>
+
+    <app-announcement-summary [activeStep]="4"></app-announcement-summary>
+  </main>
+
+  <app-footer></app-footer>
+</div>

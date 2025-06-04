@@ -1,0 +1,131 @@
+.step4-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.form-wrapper {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 5rem;
+
+  h2 {
+    font-size: 1.8rem;
+    color: #087E8B;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      border: 1.5px solid #ccc;
+      border-radius: 4px;
+
+      &.invalid {
+        border-color: #e15d7a;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #e15d7a;
+      }
+    }
+
+    .phone-input {
+      display: flex;
+      gap: 0.5rem;
+
+      select {
+        width: 30%;
+        padding: 0.6rem;
+      }
+
+      input {
+        width: 70%;
+      }
+    }
+
+    .error {
+      color: #e15d7a;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+      font-weight: 500;
+    }
+
+    &.checkbox-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        accent-color: #087E8B;
+      }
+
+      label {
+        margin: 0;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2.5rem;
+
+    .indietro,
+    .prosegui {
+      padding: 0.8rem 1.8rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+  .indietro {
+    background-color: #087E8B;
+    color: #fff;
+  }
+
+  .prosegui {
+    background-color: #f8a5b0;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .prosegui.active {
+    background-color: #ce2d4f !important;
+  }
+}
+}
+
+app-announcement-summary {
+  width: 400px;
+  min-width: 300px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
