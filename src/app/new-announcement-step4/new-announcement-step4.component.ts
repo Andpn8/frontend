@@ -25,11 +25,30 @@ export class NewAnnouncementStep4Component {
 
   constructor(private fb: FormBuilder, private router: Router) {
     this.step4Form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      prefix: ['+39', Validators.required],
-      phone: ['', Validators.required],
-      showPhone: [true]
+    email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|it|net|org|edu|gov|info|biz|io|co)$')]],
+    prefix: ['+39', Validators.required],
+    phone: [
+     '', 
+    [
+      Validators.required, 
+      Validators.pattern('^[0-9]+$'), // Solo numeri
+      Validators.minLength(10),        // Lunghezza minima 10
+      Validators.maxLength(15)         // Lunghezza massima 15
+    ]
+  ],
+  showPhone: [true]
     });
+  }
+
+  get isFormValid(): boolean {
+   return this.step4Form.valid;
+  }
+
+  filterNumericInput(event: Event): void {
+   const input = event.target as HTMLInputElement;
+   input.value = input.value.replace(/\D/g, '');
+    this.step4Form.get('phone')?.setValue(input.value);
+    this.step4Form.get('phone')?.updateValueAndValidity();
   }
 
   goBack(): void {

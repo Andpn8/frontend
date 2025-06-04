@@ -71,6 +71,20 @@
       font-weight: 500;
     }
 
+    
+    .error-row {
+      display: flex;
+      align-items: center;
+      gap: 3rem; 
+      flex-wrap: wrap; 
+
+      .error {
+        font-size: 0.8rem;
+        color: #e15d7a;
+        font-weight: 500;
+      }
+    }
+
     &.checkbox-group {
       display: flex;
       align-items: center;
@@ -104,21 +118,21 @@
       font-weight: 600;
     }
 
-  .indietro {
-    background-color: #087E8B;
-    color: #fff;
-  }
+    .indietro {
+      background-color: #087E8B;
+      color: #fff;
+    }
 
-  .prosegui {
-    background-color: #f8a5b0;
-    color: white;
-    transition: background-color 0.3s ease;
-  }
+    .prosegui {
+      background-color: #f8a5b0;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
 
-  .prosegui.active {
-    background-color: #ce2d4f !important;
+    .prosegui.active {
+      background-color: #ce2d4f !important;
+    }
   }
-}
 }
 
 app-announcement-summary {
