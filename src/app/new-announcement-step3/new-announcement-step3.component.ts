@@ -1,11 +1,11 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { AnnouncementSummaryComponent } from '../announcement-summary/announcement-summary.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from "../footer/footer.component";
-
+import { AnnouncementDataService } from '../services/announcement-data.service';
 
 @Component({
   selector: 'app-new-announcement-step3',
@@ -14,7 +14,7 @@ import { FooterComponent } from "../footer/footer.component";
   standalone: true,
   imports: [FooterComponent, CommonModule, ReactiveFormsModule, NavbarComponent, AnnouncementSummaryComponent]
 })
-export class NewAnnouncementStep3Component {
+export class NewAnnouncementStep3Component implements OnInit {
   activeStep = 3;
   step3Form: FormGroup;
 
@@ -37,27 +37,43 @@ export class NewAnnouncementStep3Component {
   showPlanimetriaMenu = false;
   showPlanimetriaDeleteIcons = false;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private announcementDataService: AnnouncementDataService) {
     this.step3Form = this.fb.group({
       descrizione: ['', [Validators.required, Validators.maxLength(3000)]]
     });
   }
 
-  @HostListener('document:click', ['$event'])
-    onDocumentClick(event: MouseEvent): void {
-     const target = event.target as HTMLElement;
-
-      // Chiudi menu foto se aperto e clic fuori
-     if (this.showFotoMenu && !target.closest('.foto-box') && !target.closest('.menu-popup')) {
-       this.showFotoMenu = false;
+  ngOnInit(): void {
+    const data = this.announcementDataService.getData();
+    
+    // Carica i dati esistenti (se presenti)
+    if (data.fotoCount !== undefined) {
+      
+      // Ripristina il valore della descrizione
+     if (data.descrizione) {
+        this.step3Form.get('descrizione')?.setValue(data.descrizione);
       }
+
+      // Ripristina i conteggi delle foto e delle planimetrie
+      this.fotoPreviews = new Array(data.fotoCount).fill('');
+      this.planimetriaPreviews = new Array(data.planimetriaCount).fill('');
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+
+    // Chiudi menu foto se aperto e clic fuori
+    if (this.showFotoMenu && !target.closest('.foto-box') && !target.closest('.menu-popup')) {
+      this.showFotoMenu = false;
+    }
 
     // Chiudi menu planimetria se aperto e clic fuori
     if (this.showPlanimetriaMenu && !target.closest('.planimetrie-box') && !target.closest('.menu-popup')) {
       this.showPlanimetriaMenu = false;
     }
   }
-
 
   // FOTO - Caricamento
   onFotoSelected(event: Event): void {
@@ -66,27 +82,26 @@ export class NewAnnouncementStep3Component {
       const newFiles = Array.from(input.files);
       const totalFiles = this.fotoPreviews.length + newFiles.length;
 
-    if (totalFiles > 20) {
-      alert("Puoi caricare un massimo di 20 foto.");
-      return;
-    }
-
-    newFiles.forEach((file: File) => {
-      const fileType = file.type;
-      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
-        alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
+      if (totalFiles > 20) {
+        alert("Puoi caricare un massimo di 20 foto.");
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.fotoPreviews.push(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-}
+      newFiles.forEach((file: File) => {
+        const fileType = file.type;
+        if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+          alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
+          return;
+        }
 
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.fotoPreviews.push(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }
 
   removeFoto(index: number, event: MouseEvent): void {
     event.stopPropagation();
@@ -146,33 +161,32 @@ export class NewAnnouncementStep3Component {
   }
 
   // PLANIMETRIE - Caricamento
- onPlanimetriaSelected(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  if (input?.files) {
-    const newFiles = Array.from(input.files);
-    const totalFiles = this.planimetriaPreviews.length + newFiles.length;
+  onPlanimetriaSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input?.files) {
+      const newFiles = Array.from(input.files);
+      const totalFiles = this.planimetriaPreviews.length + newFiles.length;
 
-    if (totalFiles > 4) {
-      alert("Puoi caricare un massimo di 4 planimetrie.");
-      return;
-    }
-
-    newFiles.forEach((file: File) => {
-      const fileType = file.type;
-      if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
-        alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
+      if (totalFiles > 4) {
+        alert("Puoi caricare un massimo di 4 planimetrie.");
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.planimetriaPreviews.push(e.target?.result as string);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-  }
+      newFiles.forEach((file: File) => {
+        const fileType = file.type;
+        if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+          alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
+          return;
+        }
 
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.planimetriaPreviews.push(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+  }
 
   removePlanimetria(index: number, event: MouseEvent): void {
     event.stopPropagation();
@@ -230,6 +244,15 @@ export class NewAnnouncementStep3Component {
   // Navigazione
   onSubmit(): void {
     if (this.step3Form.valid) {
+      const step3Data = {
+        descrizione: this.step3Form.get('descrizione')?.value,
+        fotoCount: this.fotoPreviews.length,  // Salva solo il numero delle foto
+        planimetriaCount: this.planimetriaPreviews.length  // Salva solo il numero delle planimetrie
+      };
+
+      // Salva i dati di Step 3
+      this.announcementDataService.setData(step3Data);
+
       this.router.navigate(['/new-announcement-step4']);
     } else {
       this.step3Form.markAllAsTouched();

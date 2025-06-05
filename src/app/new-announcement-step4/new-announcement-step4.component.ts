@@ -5,6 +5,7 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
 import { AnnouncementSummaryComponent } from "../announcement-summary/announcement-summary.component";
 import { CommonModule } from '@angular/common';
+import { AnnouncementDataService } from '../services/announcement-data.service';
 
 @Component({
   selector: 'app-new-announcement-step4',
@@ -23,7 +24,7 @@ export class NewAnnouncementStep4Component {
     // Aggiungi altri se necessario
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router, private announcementDataService: AnnouncementDataService) {
     this.step4Form = this.fb.group({
     email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|it|net|org|edu|gov|info|biz|io|co)$')]],
     prefix: ['+39', Validators.required],
@@ -57,6 +58,7 @@ export class NewAnnouncementStep4Component {
 
  proceed(): void {
     if (this.step4Form.valid) {
+      this.announcementDataService.setData(this.step4Form.value)
       this.router.navigate(['/new-announcement-recap']);
     } else {
       this.step4Form.markAllAsTouched();
