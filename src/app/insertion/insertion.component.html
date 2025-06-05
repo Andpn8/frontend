@@ -1,0 +1,64 @@
+<app-navbar 
+  [helpMessage]="'Qui è dove potrai <strong>visionare</strong> in maniera dettagliata gli annunci.'" 
+  [centerMessage]="'<strong>Annuncio</strong>'">
+</app-navbar>
+<div class="insertion-static">
+ <div class="header">
+  <div class="header-content" #headerContent>
+    <span class="back-arrow" (click)="goBack()">←</span>
+    <span class="title">Appartamento in centro</span>
+    <img src="https://i.imgur.com/TiOYumk.png" class="header-image" alt="Icona orologio" />
+    <div class="date-block">
+      <div class="label">aggiornato al</div>
+      <div class="date">2024-05-20</div>
+    </div>
+  </div>
+</div>
+
+ <div class="gallery" [style.maxWidth.px]="headerWidth">
+  <button class="nav-button prev" (click)="prevImage()">‹</button>
+  <img [src]="selectedImage" class="main-image" alt="Foto appartamento" />
+  <button class="nav-button next" (click)="nextImage()">›</button>
+
+  <div class="thumbnails">
+    <img 
+      *ngFor="let img of images; let i = index" 
+      [src]="img" 
+      [class.selected]="img === selectedImage" 
+      (click)="selectImage(i)" 
+      alt="Thumbnail {{i + 1}}" 
+    />
+  </div>
+</div>
+
+  <div class="info-row">
+    <i class="fa fa-map-marker"></i> Via Roma, 10<br />
+    80100, Napoli
+  </div>
+
+  <div class="info-row">
+    <i class="fa fa-home"></i> 4 locali
+    <i class="fa fa-bath"></i> 2 bagni
+    <span class="prezzo">€250.000</span>
+  </div>
+
+  <div class="descrizione">
+    <strong>DESCRIZIONE</strong>
+    <p>Bellissimo appartamento in centro, luminoso e spazioso, ideale per famiglie.</p>
+  </div>
+
+  <div class="dati-aggiuntivi">
+    <div><i class="fa fa-arrows-alt"></i> Superficie: 120 m²</div>
+    <div><i class="fa fa-building"></i> Piano: 3</div>
+    <div><strong>CLASSE ENERGETICA:</strong> B</div>
+  </div>
+
+  <div class="servizi">
+    <strong>SERVIZI:</strong> Ascensore, Balcone, Aria condizionata
+  </div>
+
+  <div class="contatto">
+    <strong>CELLULARE AGENTE:</strong> 3331234567
+  </div>
+</div>
+<app-footer></app-footer>

@@ -6,18 +6,24 @@
 <app-search-bar [showFilters]="false"></app-search-bar>
 
 <div class="catalog-container">
-  <div class="annuncio-card" *ngFor="let annuncio of annunciPaginati">
-    <img [src]="annuncio.foto?.[0]" alt="foto" class="preview-img" />
-    <h3>{{ annuncio.titolo }}</h3>
-    <p><strong>{{ annuncio.indirizzo }}</strong>, {{ annuncio.civico }} - {{ annuncio.cap }}</p>
-    <p><strong>{{ annuncio.comune }}</strong></p>
-    <strong *ngIf="modalitaCatalogo === 'vendita'">
-  {{ annuncio.prezzo | currency:'EUR':'symbol' }}
-</strong>
-<strong *ngIf="modalitaCatalogo === 'affitto'">
-  {{ annuncio.prezzo_mensile | currency:'EUR':'symbol' }}/mese
-</strong>
-  </div>
+  <div 
+  class="annuncio-card" 
+  *ngFor="let annuncio of annunciPaginati"
+  (click)="vaiADettaglio(annuncio)"
+  style="cursor: pointer;"
+>
+  <img [src]="annuncio.foto?.[0]" alt="foto" class="preview-img" />
+  <h3>{{ annuncio.titolo }}</h3>
+  <p><strong>{{ annuncio.indirizzo }}</strong>, {{ annuncio.civico }} - {{ annuncio.cap }}</p>
+  <p><strong>{{ annuncio.comune }}</strong></p>
+
+  <strong *ngIf="modalitaCatalogo === 'vendita'">
+    {{ annuncio.prezzo | currency:'EUR':'symbol' }}
+  </strong>
+  <strong *ngIf="modalitaCatalogo === 'affitto'">
+    {{ annuncio.prezzo_mensile | currency:'EUR':'symbol' }}/mese
+  </strong>
+</div>
 </div>
 
 <div class="pagination">

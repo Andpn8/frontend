@@ -17,6 +17,7 @@ import { CreateAgentComponent } from './create-agent/create-agent.component';
 import { LoginSuccessComponent } from './login-success/login-success.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { InsertionComponent } from './insertion/insertion.component';
 
 export const routes: Routes = [
 
@@ -55,6 +56,9 @@ export const routes: Routes = [
 
   //CATALOGO
   { path: 'catalog', component: CatalogComponent},
+
+  //INSERTION
+  { path: 'insertion', component: InsertionComponent},
 
   //REDIRECT
   { path: '**', redirectTo: 'home', pathMatch: 'full' }

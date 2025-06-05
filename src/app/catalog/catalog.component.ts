@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { SearchBarComponent } from "../search-bar/search-bar.component";
 import { ActivatedRoute } from '@angular/router';
 import { FilterSet } from '../../models/filter-set.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -32,6 +33,7 @@ export class CatalogComponent implements OnInit {
   private authService: AuthService,
   private insertionService: InsertionService,
   private route: ActivatedRoute,
+  private router: Router,
   @Inject(PLATFORM_ID) private platformId: Object
 ) {}
 
@@ -94,5 +96,8 @@ export class CatalogComponent implements OnInit {
     return matchesPropertyType && matchesLocation && matchesPrezzo && matchesRooms && matchesBathrooms &&
            matchesSurface && matchesEnergy && matchesServices;
   });
+}
+vaiADettaglio(annuncio: any) {
+   this.router.navigate(['/insertion']);
 }
 }
