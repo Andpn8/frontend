@@ -7,11 +7,11 @@
   <div class="header">
     <div class="header-content" #headerContent>
       <span class="back-arrow" (click)="goBack()">←</span>
-      <span class="title">Appartamento in centro</span>
+      <span class="title">{{ annuncio.titolo }}</span>
       <img src="https://i.imgur.com/pJI4Efn.png" class="header-image" alt="Icona orologio" />
       <div class="date-block">
         <div class="label">aggiornato al</div>
-        <div class="date">2024-05-20</div>
+        <div class="date">{{ annuncio.created_at }}</div>
       </div>
     </div>
   </div>
@@ -36,8 +36,8 @@
     <img src="https://i.imgur.com/5T5vo0U.png" class="map-icon" alt="Mappa">
 
     <div class="address-bubble">
-      <div class="address-line bold">Via Roma , 14A</div>
-      <div class="address-line">80100 - Napoli</div>
+      <div class="address-line bold">{{ annuncio.indirizzo }} , {{ annuncio.civico }}</div>
+      <div class="address-line">{{ annuncio.cap }} - {{ annuncio.comune }}</div>
     </div>
 
     <div class="vertical-separator"></div>
@@ -46,37 +46,25 @@
       <div class="info-block">
         <img src="https://i.imgur.com/hlHRiv4.png" class="info-img" alt="Icona casa" />
         <i class="fa fa-home"></i>
-        <span class="info-number">4</span>
+        <span class="info-number">{{ annuncio.locali }}</span>
       </div>
       <div class="info-block">
         <img src="https://i.imgur.com/eiE4nsX.png" class="info-img" alt="Icona bagno" />
         <i class="fa fa-bath"></i>
-        <span class="info-number">2</span>
+        <span class="info-number">{{ annuncio.bagni }}</span>
       </div>
     </div>
 
     <div class="vertical-separator"></div>
 
     <div class="info-row">
-      <span class="prezzo">€250.000</span>
+      <span class="prezzo">€ {{ annuncio.prezzo }}</span>
     </div>
   </div>
 
   <div class="descrizione">
     <strong>DESCRIZIONE</strong>
-    <p>Questo splendido appartamento situato nel cuore pulsante della città rappresenta la soluzione ideale per chi cerca comfort, praticità e un ambiente accogliente in cui vivere o creare la propria casa. Andrea, il valore di questo immobile risiede non solo nella sua posizione strategica, ma anche nella qualità degli spazi interni, nella luce naturale abbondante e nella cura dei dettagli.
-
-Entrando nell’appartamento, si viene subito accolti da un ampio soggiorno, caratterizzato da grandi finestre che lasciano filtrare una luminosità naturale che avvolge l’intero ambiente, rendendolo caldo e invitante. Lo spazio è stato progettato per offrire versatilità: perfetto per ospitare amici e familiari o per rilassarsi dopo una lunga giornata. Le pareti dai colori neutri si prestano a qualsiasi tipo di arredamento, dal moderno al classico, consentendo di personalizzare ogni angolo secondo il proprio gusto.
-
-La cucina, separata ma comunicante con il soggiorno, è dotata di elettrodomestici di ultima generazione, pensati per rendere la preparazione dei pasti un momento semplice e piacevole. Gli spazi di lavoro e di stoccaggio sono ampi, consentendo di organizzare tutto in modo efficiente. Un piccolo angolo colazione con finestra rende il risveglio ancora più piacevole, con la vista sulla città che fa da sfondo.
-
-Le camere da letto sono spaziose e confortevoli. La camera matrimoniale dispone di un grande armadio a muro e di una finestra che garantisce una buona aerazione e luminosità. La seconda camera, ideale per bambini o per essere adibita a studio, è altrettanto luminosa e silenziosa, garantendo un ambiente tranquillo per il riposo o il lavoro. I pavimenti in parquet aggiungono un tocco di eleganza e calore, mentre la disposizione intelligente degli spazi permette di vivere con comodità anche in famiglia numerosa.
-
-Il bagno è moderno, dotato di sanitari di qualità e di una doccia ampia con pareti in vetro, che garantisce un ambiente funzionale e piacevole. I materiali scelti per rifinire il bagno sono resistenti e di facile manutenzione, ideali per chi cerca praticità senza rinunciare all’estetica.
-
-Un altro punto di forza di questo appartamento è il balcone, perfetto per godersi momenti di relax all’aria aperta senza uscire di casa. Qui è possibile posizionare un tavolino con sedie, qualche pianta verde e godersi le serate estive o un caffè al mattino con vista sulla città.
-
-
+    <p>{{ annuncio.descrizione }}</p>
   </div>
 
  <div class="dati-aggiuntivi">
@@ -84,12 +72,12 @@ Un altro punto di forza di questo appartamento è il balcone, perfetto per goder
     <div class="info-block">
       <img src="https://i.imgur.com/j06eHj1.png" alt="Icona superficie" class="custom-icon" />
       <i class="fa fa-arrows-alt"></i>
-      <span><strong>Superficie:</strong> 120 m²</span>
+      <span><strong>Superficie:</strong> {{ annuncio.superficie }} m²</span>
     </div>
     <div class="info-block">
       <img src="https://i.imgur.com/2rOY3sw.png" alt="Icona piano" class="custom-icon" />
       <i class="fa fa-building"></i>
-      <span><strong>Piano:</strong> 3</span>
+      <span><strong>Piano:</strong> {{ annuncio.piano }}</span>
     </div>
   </div>
 
@@ -97,20 +85,44 @@ Un altro punto di forza di questo appartamento è il balcone, perfetto per goder
 
   <div class="info-row classe-energetica">
   <img src="https://i.imgur.com/Ij52b7K.png" alt="Icona classe energetica" class="custom-icon" />
-  <strong>Classe Energetica:</strong> B
+  <strong>Classe Energetica:</strong> {{ annuncio.classe_energetica }}
 </div>
 </div>
 
  <div class="servizi">
   <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
-  <strong>Servizi:</strong> Ascensore, Balcone, Aria condizionata
+  <strong>Servizi:</strong>  {{ getServiziAttivi(annuncio.servizi).join(', ') }}
+</div>
+<div class="gallery" *ngIf="planimetrie.length" [style.maxWidth.px]="headerWidth">
+  <div class="section-label">Planimetrie</div>
+  
+  <button class="nav-button prev" (click)="prevPlanimetria()">‹</button>
+  <img [src]="selectedPlanimetria" class="main-image" alt="Planimetria" />
+  <button class="nav-button next" (click)="nextPlanimetria()">›</button>
+
+  <div class="thumbnails">
+    <img 
+      *ngFor="let pl of planimetrie; let i = index" 
+      [src]="pl" 
+      [class.selected]="pl === selectedPlanimetria" 
+      (click)="selectPlanimetria(i)" 
+      alt="Miniatura planimetria {{i + 1}}" 
+    />
+  </div>
 </div>
 <div class="contatto-box">
   <div class="contatto-content">
     <div class="contatto-header">
-      <div class="contatto-titolo">Contatta l'inserzionista:</div>
-      <div class="contatto-numero">+39 345 678 9012</div>
-    </div>
+  <div class="contatto-titolo">Contatta l'inserzionista:</div>
+
+  <div class="contatto-numero" *ngIf="annuncio?.cellulare_mostrato">
+    {{ annuncio.cellulare_agente }}
+  </div>
+
+  <div class="contatto-numero" *ngIf="!annuncio?.cellulare_mostrato">
+    Proponi un'offerta oppure richiedi una visita!
+  </div>
+</div>
 
     <button class="btn proponi">PROPONI PREZZO</button>
     <div class="oppure">oppure</div>

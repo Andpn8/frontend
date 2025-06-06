@@ -98,6 +98,6 @@ export class CatalogComponent implements OnInit {
   });
 }
 vaiADettaglio(annuncio: any) {
-   this.router.navigate(['/insertion']);
+  this.router.navigate(['/insertion'], { state: { annuncio } });
 }
 }
