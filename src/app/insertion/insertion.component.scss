@@ -312,7 +312,7 @@
 .servizi {
   display: flex;
   align-items: center;
-  gap: 8px; /* spazio tra icona e testo */
+  gap: 8px;
   max-width: 600px;
   margin-top: 25px;
   font-size: 16px;
@@ -339,6 +339,119 @@
   strong {
     font-weight: bold;
     color: #000;
+  }
+}
+
+.contatto-box {
+  position: fixed;
+  top: 70px; 
+  right: 8px;
+  width: 35%;
+  height: calc(100vh - 70px);
+  max-width: calc(100vw - 750px);
+  background-color: #087E8B;
+  padding: 30px 20px;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.1);
+  color: white;
+   box-shadow: none;
+
+  .contatto-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;  
+    height: 100%;
+    gap: 24px;
+    text-align: center;
+    flex-wrap: wrap;
+    word-wrap: break-word;
+    padding-top: 40px; 
+  }
+
+
+  .contatto-header {
+    background-color: white;
+    color: black;
+    padding: 20px 30px;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 30px auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .contatto-titolo {
+      font-size: 20px;
+      font-weight: bold;
+      color: black;
+    }
+
+    .contatto-numero {
+      font-size: 24px;
+      font-weight: bold;
+      color: black;
+    }
+  }
+
+  .btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    min-width: 200px;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .proponi {
+    background-color: #d63053;
+    color: white;
+  }
+
+  .richiedi {
+    background-color: white;
+    color: #087E8B;
+    border: 2px solid white;
+  }
+
+  .oppure {
+    font-style: italic;
+    font-size: 14px;
+    color: #fff;
+  }
+}
+
+@media (max-width: 1300px) {
+  .contatto-box {
+    width: 30%;
+    max-width: calc(100vw - 750px);
+  }
+}
+
+@media (max-width: 1100px) {
+  .contatto-box {
+    width: 25%;
+    max-width: calc(100vw - 750px);
+  }
+}
+
+@media (max-width: 900px) {
+  .contatto-box {
+    position: static;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    padding: 20px;
+    border-radius: 0;
+    box-shadow: none;
+    margin-top: 20px;
   }
 }
 
