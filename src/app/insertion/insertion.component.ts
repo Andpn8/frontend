@@ -13,6 +13,7 @@ import { FooterComponent } from "../footer/footer.component";
 })
 export class InsertionComponent implements OnInit, AfterViewInit {
   annuncio: any;
+   modalitaCatalogo: 'vendita' | 'affitto' = 'vendita';
   images: string[] = [];
   selectedImage: string = '';
   planimetrie: string[] = [];
@@ -24,6 +25,7 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.annuncio = navigation?.extras?.state?.['annuncio'];
+     this.modalitaCatalogo = navigation?.extras?.state?.['modalitaCatalogo'] || 'vendita';
 
     if (!this.annuncio) {
       this.router.navigate(['/catalog']);

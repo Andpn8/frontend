@@ -58,7 +58,10 @@
     <div class="vertical-separator"></div>
 
     <div class="info-row">
-      <span class="prezzo">€ {{ annuncio.prezzo }}</span>
+      <span class="prezzo">
+  € {{ modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo }}
+  <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
+</span>
     </div>
   </div>
 
@@ -91,7 +94,11 @@
 
  <div class="servizi">
   <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
-  <strong>Servizi:</strong>  {{ getServiziAttivi(annuncio.servizi).join(', ') }}
+  <strong>Servizi:</strong>
+<span *ngIf="getServiziAttivi(annuncio.servizi).length; else noServizi">
+  {{ getServiziAttivi(annuncio.servizi).join(', ') }}
+</span>
+<ng-template #noServizi>NESSUNO</ng-template>
 </div>
 <div class="gallery" *ngIf="planimetrie.length" [style.maxWidth.px]="headerWidth">
   <div class="section-label">Planimetrie</div>
