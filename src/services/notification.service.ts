@@ -14,12 +14,12 @@ export interface Notifica {
   providedIn: 'root'
 })
 export class NotificationService {
-  private apiUrl = 'http://localhost:3002/notifications'; // aggiorna se serve
+  private apiUrl = 'http://localhost:3002/notifications'; 
 
   constructor(private http: HttpClient) {}
 
   private getAuthHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // o dove salvi il JWT
+    const token = localStorage.getItem('token');
     return new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
