@@ -1,4 +1,4 @@
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { AnnouncementDataService } from '../services/announcement-data.service';
 
@@ -12,9 +12,13 @@ import { AnnouncementDataService } from '../services/announcement-data.service';
 export class AnnouncementSummaryComponent implements OnInit {
   @Input() activeStep: number = 1;
   announcementData: any = {};
+
   constructor(private announcementDataService: AnnouncementDataService) {}
 
   ngOnInit() {
-  this.announcementData = this.announcementDataService.getData();
+    this.announcementData = this.announcementDataService.getData();
+
+    this.announcementData.indirizzoCompleto =
+      `${this.announcementData.indirizzo || ''}${this.announcementData.numero ? ', ' + this.announcementData.numero : ''}${this.announcementData.cap ? ' - ' + this.announcementData.cap : ''}`.trim() || '—';
   }
 }
