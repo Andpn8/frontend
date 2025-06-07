@@ -128,12 +128,14 @@
         </div>
       </div>
 
-      <button class="btn proponi">PROPONI PREZZO</button>
+      <button class="btn proponi" (click)="mostraPopupPrezzo = true">PROPONI PREZZO</button>
       <div class="oppure">oppure</div>
       <button class="btn richiedi" (click)="mostraPopupVisita = true">RICHIEDI VISITA</button>
     </div>
   </div>
+</div>
 
+<!-- MODAL RICHIEDI VISITA -->
 <div class="modal-overlay" *ngIf="mostraPopupVisita">
   <div class="modal-content">
     <h2 class="modal-title">RICHIEDI VISITA</h2>
@@ -165,3 +167,31 @@
   </div>
 </div>
 
+<div class="modal-overlay" *ngIf="mostraPopupPrezzo">
+  <div class="modal-content">
+    <h2 class="modal-title">PROPONI PREZZO</h2>
+    <p class="modal-description">
+      Inserisci l'offerta che desideri proporre all'inserzionista
+      per l'immobile. Questa cifra sarà inviata direttamente
+      per una possibile negoziazione.
+    </p>
+
+    <div class="input-group">
+      <label class="input-label">Prezzo di partenza:</label>
+      <div class="starting-price">
+        € {{ modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo }} 
+        <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="propostaPrezzo" class="input-label">La tua proposta:</label>
+      <input type="number" id="propostaPrezzo" [(ngModel)]="propostaPrezzo" min="0" placeholder="Proposta..." />
+    </div>
+
+    <div class="modal-buttons">
+      <button class="btn chiudi" (click)="mostraPopupPrezzo = false">CHIUDI</button>
+      <button class="btn prosegui" (click)="inviaPropostaPrezzo()">INVIA</button>
+    </div>
+  </div>
+</div>

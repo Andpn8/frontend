@@ -27,6 +27,8 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   selectedDate: string = '';
   selectedHour: string = '';
   selectedMinute: string = '';
+  mostraPopupPrezzo: boolean = false;
+  propostaPrezzo: string = '';
 
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
@@ -120,4 +122,15 @@ export class InsertionComponent implements OnInit, AfterViewInit {
       alert("Per favore compila sia la data che l'orario prima di inviare.");
     }
   }
+
+  inviaPropostaPrezzo(): void {
+  if (this.propostaPrezzo && +this.propostaPrezzo > 0) {
+    console.log(`📩 , proposta di prezzo inviata: €${this.propostaPrezzo}`);
+    alert(`Grazie , la tua proposta di €${this.propostaPrezzo} è stata inviata!`);
+    this.mostraPopupPrezzo = false;
+    this.propostaPrezzo = '';
+  } else {
+    alert("Per favore inserisci una proposta valida prima di inviare.");
+  }
+}
 }
