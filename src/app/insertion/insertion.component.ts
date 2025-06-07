@@ -4,11 +4,16 @@ import { Router } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
 import { FormsModule } from '@angular/forms';
+import { OffertaVendita, OffertaVenditaService } from '../../services/offerta_vendita.service';
+import { OffertaAffitto, OffertaAffittoService } from '../../services/offerta_affitto.service';
+import { AuthService } from '../../services/auth.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-insertion',
   standalone: true,
   imports: [CommonModule, NavbarComponent, FooterComponent, FormsModule],
+   providers: [OffertaVenditaService, OffertaAffittoService,AuthService],
   templateUrl: './insertion.component.html',
   styleUrls: ['./insertion.component.scss']
 })
@@ -31,10 +36,11 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   propostaPrezzo: string = '';
   minDate: string = '';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService) {
     const navigation = this.router.getCurrentNavigation();
     this.annuncio = navigation?.extras?.state?.['annuncio'];
     this.modalitaCatalogo = navigation?.extras?.state?.['modalitaCatalogo'] || 'vendita';
+    
 
     if (!this.annuncio) {
       this.router.navigate(['/catalog']);
@@ -128,15 +134,76 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   }
 
   inviaPropostaPrezzo(): void {
-  if (this.propostaPrezzo && +this.propostaPrezzo > 0) {
-    console.log(`📩 , proposta di prezzo inviata: €${this.propostaPrezzo}`);
-    alert(`Grazie , la tua proposta di €${this.propostaPrezzo} è stata inviata!`);
-    this.mostraPopupPrezzo = false;
-    this.propostaPrezzo = '';
-  } else {
+  const proposta = parseFloat(this.propostaPrezzo);
+  if (!proposta || proposta <= 0 || !this.propostaValida()) {
     alert("Per favore inserisci una proposta valida prima di inviare.");
+    return;
+  }
+
+  const userId = this.authService.getUserId();
+  const token = this.authService.getToken();
+
+  if (!userId || !token) {
+    alert("Devi essere loggato per inviare una proposta.");
+    return;
+  }
+
+  // Ottieni i dati decodificati dal token JWT
+  let decoded: any;
+  try {
+    decoded = jwtDecode(token);
+  } catch {
+    alert("Errore nell'autenticazione, effettua di nuovo il login.");
+    return;
+  }
+
+  const emailOfferente = decoded.email;
+
+  if (this.modalitaCatalogo === 'vendita') {
+    const offerta: OffertaVendita = {
+      email_offerente: emailOfferente,
+      offer_amount: proposta,
+      inserzione_id: this.annuncio.vendita_id,
+      user_id: userId,
+    };
+
+    this.offertaVenditaService.creaOffertaVendita(offerta).subscribe({
+      next: () => {
+        alert('✅ Proposta vendita inviata con successo!');
+        this.mostraPopupPrezzo = false;
+        this.propostaPrezzo = '';
+      },
+      error: (err) => {
+        console.error('Errore invio proposta vendita:', err);
+        alert('❌ Errore nell\'invio della proposta vendita, riprova più tardi.');
+      }
+    });
+
+  } else if (this.modalitaCatalogo === 'affitto') {
+    const offerta: OffertaAffitto = {
+      email_offerente: emailOfferente,
+      offer_amount: proposta,
+      inserzione_id: this.annuncio.affitto_id,
+      user_id: userId,
+    };
+
+    this.offertaAffittoService.creaOffertaAffitto(offerta).subscribe({
+      next: () => {
+        alert('✅ Proposta affitto inviata con successo!');
+        this.mostraPopupPrezzo = false;
+        this.propostaPrezzo = '';
+      },
+      error: (err) => {
+        console.error('Errore invio proposta affitto:', err);
+        alert('❌ Errore nell\'invio della proposta affitto, riprova più tardi.');
+      }
+    });
+
+  } else {
+    alert('Modalità catalogo non riconosciuta.');
   }
 }
+
 
 calcolaDifferenzaPercentuale(): number {
   const prezzoBase = this.modalitaCatalogo === 'affitto'

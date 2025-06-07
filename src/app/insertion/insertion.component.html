@@ -143,17 +143,17 @@
       l’immobile. Tale richiesta sarà direttamente inviata
       all’agente immobiliare il quale si occuperà di fornire
       risposta.
-    </p>
-
-    <div class="input-group">
-      <label for="data" class="input-label">Data:</label>
-      <input
+<input
   type="date"
   id="data"
   [(ngModel)]="selectedDate"
   [min]="minDate"
   (keydown)="preventManualInput($event)"
-/>
+/>    </p>
+
+    <div class="input-group">
+      <label for="data" class="input-label">Data:</label>
+      
     </div>
 
     <div class="input-group">
