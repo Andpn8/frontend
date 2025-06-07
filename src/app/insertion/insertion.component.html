@@ -142,17 +142,17 @@
       Inserisci la data e l’orario in cui si desidera visitare
       l’immobile. Tale richiesta sarà direttamente inviata
       all’agente immobiliare il quale si occuperà di fornire
-      risposta.
-<input
+      risposta.</p>
+
+    <div class="input-group">
+      <label for="data" class="input-label">Data:</label>
+      <input
   type="date"
   id="data"
   [(ngModel)]="selectedDate"
   [min]="minDate"
   (keydown)="preventManualInput($event)"
-/>    </p>
-
-    <div class="input-group">
-      <label for="data" class="input-label">Data:</label>
+/> 
       
     </div>
 
