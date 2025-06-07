@@ -668,6 +668,58 @@ input[type="number"] {
   }
 }
 
+.separator {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.prezzo-diff-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.diff-label {
+  font-weight: bold;
+}
+
+.diff-box {
+  background-color: #f2f2f2;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  color: #ce2d4f;
+  min-width: 60px;
+  text-align: center;
+}
+
+.variazione-info {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.variazione-massima {
+  display: block;
+  color: gray;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+}
+
+.btn:disabled {
+  opacity: 50% !important;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+
 
 
 

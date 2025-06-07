@@ -189,9 +189,34 @@
       <input type="number" id="propostaPrezzo" [(ngModel)]="propostaPrezzo" min="0" placeholder="Proposta..." />
     </div>
 
+    <hr class="separator" />
+
+    <div class="prezzo-diff-block" *ngIf="propostaPrezzo">
+      <div class="diff-label">Differenza prezzo:</div>
+      <div
+  class="diff-box"
+  [ngStyle]="{
+    'color': getColoreDifferenza()
+  }"
+>
+  {{ formatDifferenzaPercentuale() }}
+</div>
+    </div>
+
+    <div class="variazione-info">
+      Il prezzo è stato elaborato da un professionista immobiliare.  
+      <span class="variazione-massima">Massima variazione possibile: 15%</span>
+    </div>
+
     <div class="modal-buttons">
       <button class="btn chiudi" (click)="mostraPopupPrezzo = false">CHIUDI</button>
-      <button class="btn prosegui" (click)="inviaPropostaPrezzo()">INVIA</button>
+      <button
+  class="btn prosegui"
+  [disabled]="!propostaValida()"
+  (click)="inviaPropostaPrezzo()"
+>
+  INVIA
+</button>
     </div>
   </div>
 </div>

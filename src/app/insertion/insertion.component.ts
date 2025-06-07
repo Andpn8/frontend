@@ -133,4 +133,32 @@ export class InsertionComponent implements OnInit, AfterViewInit {
     alert("Per favore inserisci una proposta valida prima di inviare.");
   }
 }
+
+calcolaDifferenzaPercentuale(): number {
+  const prezzoBase = this.modalitaCatalogo === 'affitto'
+    ? this.annuncio.prezzo_mensile
+    : this.annuncio.prezzo;
+
+  const proposta = parseFloat(this.propostaPrezzo);
+  if (!prezzoBase || !proposta || proposta <= 0) return 0;
+
+  const diff = ((proposta - prezzoBase) / prezzoBase) * 100;
+  return Math.round(diff);
+}
+
+formatDifferenzaPercentuale(): string {
+  const diff = this.calcolaDifferenzaPercentuale();
+  return diff > 0 ? `+${diff}%` : `${diff}%`;
+}
+
+getColoreDifferenza(): string {
+  const diff = this.calcolaDifferenzaPercentuale();
+  return diff >= -15 && diff <= 15 ? '#087e8b' : '#ce2d4f';
+}
+
+propostaValida(): boolean {
+  const proposta = parseFloat(this.propostaPrezzo);
+  const diff = this.calcolaDifferenzaPercentuale();
+  return !!proposta && diff >= -15 && diff <= 15;
+}
 }
