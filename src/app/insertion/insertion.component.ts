@@ -29,6 +29,7 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   selectedMinute: string = '';
   mostraPopupPrezzo: boolean = false;
   propostaPrezzo: string = '';
+  minDate: string = '';
 
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
@@ -41,6 +42,9 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  this.minDate = tomorrow.toISOString().split('T')[0];
     setTimeout(() => {
       if (this.annuncio) {
         if (this.annuncio.foto) {
@@ -204,5 +208,9 @@ onMinuteInput(event: any): void {
   } else {
     this.selectedMinute = '';
   }
+}
+
+preventManualInput(event: KeyboardEvent): void {
+  event.preventDefault();
 }
 }

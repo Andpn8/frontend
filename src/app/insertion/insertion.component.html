@@ -135,7 +135,6 @@
   </div>
 </div>
 
-<!-- MODAL RICHIEDI VISITA -->
 <div class="modal-overlay" *ngIf="mostraPopupVisita">
   <div class="modal-content">
     <h2 class="modal-title">RICHIEDI VISITA</h2>
@@ -148,7 +147,13 @@
 
     <div class="input-group">
       <label for="data" class="input-label">Data:</label>
-      <input type="date" id="data" [(ngModel)]="selectedDate" />
+      <input
+  type="date"
+  id="data"
+  [(ngModel)]="selectedDate"
+  [min]="minDate"
+  (keydown)="preventManualInput($event)"
+/>
     </div>
 
     <div class="input-group">
