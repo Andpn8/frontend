@@ -3,17 +3,18 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-insertion',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent],
+  imports: [CommonModule, NavbarComponent, FooterComponent, FormsModule],
   templateUrl: './insertion.component.html',
   styleUrls: ['./insertion.component.scss']
 })
 export class InsertionComponent implements OnInit, AfterViewInit {
   annuncio: any;
-   modalitaCatalogo: 'vendita' | 'affitto' = 'vendita';
+  modalitaCatalogo: 'vendita' | 'affitto' = 'vendita';
   images: string[] = [];
   selectedImage: string = '';
   planimetrie: string[] = [];
@@ -22,10 +23,15 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   @ViewChild('headerContent') headerContent!: ElementRef<HTMLDivElement>;
   headerWidth: number = 0;
 
+  mostraPopupVisita: boolean = false;
+  selectedDate: string = '';
+  selectedHour: string = '';
+  selectedMinute: string = '';
+
   constructor(private router: Router) {
     const navigation = this.router.getCurrentNavigation();
     this.annuncio = navigation?.extras?.state?.['annuncio'];
-     this.modalitaCatalogo = navigation?.extras?.state?.['modalitaCatalogo'] || 'vendita';
+    this.modalitaCatalogo = navigation?.extras?.state?.['modalitaCatalogo'] || 'vendita';
 
     if (!this.annuncio) {
       this.router.navigate(['/catalog']);
@@ -33,7 +39,6 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    // ✅ Andrea: ritardo di un tick per garantire che annuncio sia ben caricato
     setTimeout(() => {
       if (this.annuncio) {
         if (this.annuncio.foto) {
@@ -55,7 +60,6 @@ export class InsertionComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.headerWidth = this.headerContent.nativeElement.offsetWidth;
-
     window.addEventListener('resize', () => {
       this.headerWidth = this.headerContent.nativeElement.offsetWidth;
     });
@@ -105,5 +109,15 @@ export class InsertionComponent implements OnInit, AfterViewInit {
 
   formattaServizio(servizio: string): string {
     return servizio.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  }
+
+  inviaRichiestaVisita(): void {
+    if (this.selectedDate && this.selectedHour && this.selectedMinute) {
+      const orario = `${this.selectedHour.padStart(2, '0')}:${this.selectedMinute.padStart(2, '0')}`;
+      console.log('📩 Richiesta inviata per il giorno:', this.selectedDate, 'alle:', orario);
+      this.mostraPopupVisita = false;
+    } else {
+      alert("Per favore compila sia la data che l'orario prima di inviare.");
+    }
   }
 }

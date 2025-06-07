@@ -34,7 +34,6 @@
 
   <div class="image-address-box">
     <img src="https://i.imgur.com/5T5vo0U.png" class="map-icon" alt="Mappa">
-
     <div class="address-bubble">
       <div class="address-line bold">{{ annuncio.indirizzo }} , {{ annuncio.civico }}</div>
       <div class="address-line">{{ annuncio.cap }} - {{ annuncio.comune }}</div>
@@ -59,9 +58,9 @@
 
     <div class="info-row">
       <span class="prezzo">
-  € {{ modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo }}
-  <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
-</span>
+        € {{ modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo }}
+        <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
+      </span>
     </div>
   </div>
 
@@ -70,71 +69,99 @@
     <p>{{ annuncio.descrizione }}</p>
   </div>
 
- <div class="dati-aggiuntivi">
-  <div class="info-icons">
-    <div class="info-block">
-      <img src="https://i.imgur.com/j06eHj1.png" alt="Icona superficie" class="custom-icon" />
-      <i class="fa fa-arrows-alt"></i>
-      <span><strong>Superficie:</strong> {{ annuncio.superficie }} m²</span>
+  <div class="dati-aggiuntivi">
+    <div class="info-icons">
+      <div class="info-block">
+        <img src="https://i.imgur.com/j06eHj1.png" alt="Icona superficie" class="custom-icon" />
+        <i class="fa fa-arrows-alt"></i>
+        <span><strong>Superficie:</strong> {{ annuncio.superficie }} m²</span>
+      </div>
+      <div class="info-block">
+        <img src="https://i.imgur.com/2rOY3sw.png" alt="Icona piano" class="custom-icon" />
+        <i class="fa fa-building"></i>
+        <span><strong>Piano:</strong> {{ annuncio.piano }}</span>
+      </div>
     </div>
-    <div class="info-block">
-      <img src="https://i.imgur.com/2rOY3sw.png" alt="Icona piano" class="custom-icon" />
-      <i class="fa fa-building"></i>
-      <span><strong>Piano:</strong> {{ annuncio.piano }}</span>
+
+    <div class="vertical-separator"></div>
+
+    <div class="info-row classe-energetica">
+      <img src="https://i.imgur.com/Ij52b7K.png" alt="Icona classe energetica" class="custom-icon" />
+      <strong>Classe Energetica:</strong> {{ annuncio.classe_energetica }}
     </div>
   </div>
 
-  <div class="vertical-separator"></div>
-
-  <div class="info-row classe-energetica">
-  <img src="https://i.imgur.com/Ij52b7K.png" alt="Icona classe energetica" class="custom-icon" />
-  <strong>Classe Energetica:</strong> {{ annuncio.classe_energetica }}
-</div>
-</div>
-
- <div class="servizi">
-  <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
-  <strong>Servizi:</strong>
-<span *ngIf="getServiziAttivi(annuncio.servizi).length; else noServizi">
-  {{ getServiziAttivi(annuncio.servizi).join(', ') }}
-</span>
-<ng-template #noServizi>NESSUNO</ng-template>
-</div>
-<div class="gallery" *ngIf="planimetrie.length" [style.maxWidth.px]="headerWidth">
-  <div class="section-label">Planimetrie</div>
-  
-  <button class="nav-button prev" (click)="prevPlanimetria()">‹</button>
-  <img [src]="selectedPlanimetria" class="main-image" alt="Planimetria" />
-  <button class="nav-button next" (click)="nextPlanimetria()">›</button>
-
-  <div class="thumbnails">
-    <img 
-      *ngFor="let pl of planimetrie; let i = index" 
-      [src]="pl" 
-      [class.selected]="pl === selectedPlanimetria" 
-      (click)="selectPlanimetria(i)" 
-      alt="Miniatura planimetria {{i + 1}}" 
-    />
-  </div>
-</div>
-<div class="contatto-box">
-  <div class="contatto-content">
-    <div class="contatto-header">
-  <div class="contatto-titolo">Contatta l'inserzionista:</div>
-
-  <div class="contatto-numero" *ngIf="annuncio?.cellulare_mostrato">
-    {{ annuncio.cellulare_agente }}
+  <div class="servizi">
+    <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
+    <strong>Servizi:</strong>
+    <span *ngIf="getServiziAttivi(annuncio.servizi).length; else noServizi">
+      {{ getServiziAttivi(annuncio.servizi).join(', ') }}
+    </span>
+    <ng-template #noServizi>NESSUNO</ng-template>
   </div>
 
-  <div class="contatto-numero" *ngIf="!annuncio?.cellulare_mostrato">
-    Proponi un'offerta oppure richiedi una visita!
+  <div class="gallery" *ngIf="planimetrie.length" [style.maxWidth.px]="headerWidth">
+    <div class="section-label">Planimetrie</div>
+    <button class="nav-button prev" (click)="prevPlanimetria()">‹</button>
+    <img [src]="selectedPlanimetria" class="main-image" alt="Planimetria" />
+    <button class="nav-button next" (click)="nextPlanimetria()">›</button>
+    <div class="thumbnails">
+      <img 
+        *ngFor="let pl of planimetrie; let i = index" 
+        [src]="pl" 
+        [class.selected]="pl === selectedPlanimetria" 
+        (click)="selectPlanimetria(i)" 
+        alt="Miniatura planimetria {{i + 1}}" 
+      />
+    </div>
   </div>
-</div>
 
-    <button class="btn proponi">PROPONI PREZZO</button>
-    <div class="oppure">oppure</div>
-    <button class="btn richiedi">RICHIEDI VISITA</button>
+  <div class="contatto-box">
+    <div class="contatto-content">
+      <div class="contatto-header">
+        <div class="contatto-titolo">Contatta l'inserzionista:</div>
+        <div class="contatto-numero" *ngIf="annuncio?.cellulare_mostrato">
+          {{ annuncio.cellulare_agente }}
+        </div>
+        <div class="contatto-numero" *ngIf="!annuncio?.cellulare_mostrato">
+          Proponi un'offerta oppure richiedi una visita!
+        </div>
+      </div>
+
+      <button class="btn proponi">PROPONI PREZZO</button>
+      <div class="oppure">oppure</div>
+      <button class="btn richiedi" (click)="mostraPopupVisita = true">RICHIEDI VISITA</button>
+    </div>
   </div>
-</div>
+
+<div class="modal-overlay" *ngIf="mostraPopupVisita">
+  <div class="modal-content">
+    <h2 class="modal-title">RICHIEDI VISITA</h2>
+    <p class="modal-description">
+      Inserisci la data e l’orario in cui si desidera visitare
+      l’immobile. Tale richiesta sarà direttamente inviata
+      all’agente immobiliare il quale si occuperà di fornire
+      risposta.
+    </p>
+
+    <div class="input-group">
+      <label for="data" class="input-label">Data:</label>
+      <input type="date" id="data" [(ngModel)]="selectedDate" />
+    </div>
+
+    <div class="input-group">
+      <label for="orario" class="input-label">Orario:</label>
+      <div class="orario-input">
+        <input type="number" placeholder="Hr"  [(ngModel)]="selectedHour" min="0" max="23" maxlength="2" />
+        :
+        <input type="number" placeholder="Min" [(ngModel)]="selectedMinute" min="0" max="59" maxlength="2" />
+      </div>
+    </div>
+
+    <div class="modal-buttons">
+      <button class="btn chiudi" (click)="mostraPopupVisita = false">CHIUDI</button>
+      <button class="btn prosegui" (click)="inviaRichiestaVisita()">INVIA</button>
+    </div>
+  </div>
 </div>
 
