@@ -154,9 +154,21 @@
     <div class="input-group">
       <label for="orario" class="input-label">Orario:</label>
       <div class="orario-input">
-        <input type="number" placeholder="Hr"  [(ngModel)]="selectedHour" min="0" max="23" maxlength="2" />
+        <input
+  type="text"
+  placeholder="Hr"
+  [(ngModel)]="selectedHour"
+  (input)="onHourInput($event)"
+  maxlength="2"
+/>
         :
-        <input type="number" placeholder="Min" [(ngModel)]="selectedMinute" min="0" max="59" maxlength="2" />
+        <input
+  type="text"
+  placeholder="Min"
+  [(ngModel)]="selectedMinute"
+  (input)="onMinuteInput($event)"
+  maxlength="2"
+/>
       </div>
     </div>
 

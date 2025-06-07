@@ -161,4 +161,48 @@ propostaValida(): boolean {
   const diff = this.calcolaDifferenzaPercentuale();
   return !!proposta && diff >= -15 && diff <= 15;
 }
+
+validateHour(): void {
+  const hour = parseInt(this.selectedHour || '0', 10);
+  if (hour > 23) this.selectedHour = '23';
+  if (hour < 0) this.selectedHour = '0';
+}
+
+validateMinute(): void {
+  const minute = parseInt(this.selectedMinute || '0', 10);
+  if (minute > 59) this.selectedMinute = '59';
+  if (minute < 0) this.selectedMinute = '0';
+}
+
+onHourInput(event: any): void {
+  let value = event.target.value.replace(/\D/g, '');
+  if (value.length > 2) value = value.slice(0, 2); 
+
+  const num = parseInt(value, 10);
+  if (!isNaN(num)) {
+    if (num > 23) {
+      value = '23';
+    }
+    this.selectedHour = value;
+    event.target.value = value;
+  } else {
+    this.selectedHour = '';
+  }
+}
+
+onMinuteInput(event: any): void {
+  let value = event.target.value.replace(/\D/g, ''); 
+  if (value.length > 2) value = value.slice(0, 2); 
+
+  const num = parseInt(value, 10);
+  if (!isNaN(num)) {
+    if (num > 59) {
+      value = '59';
+    }
+    this.selectedMinute = value;
+    event.target.value = value;
+  } else {
+    this.selectedMinute = '';
+  }
+}
 }
