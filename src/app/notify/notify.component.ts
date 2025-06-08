@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { PLATFORM_ID } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
-import { CommonModule } from '@angular/common';
-import { NotificationService, Notifica } from '../../services/notification.service';
+import { NotificationService, Notifica as NotificaUser } from '../../services/notification.service';
+import { NotificationAgenteService, NotificaAgente } from '../../services/notification-agente.service';
+import { AuthService } from '../../services/auth.service';
+
+type Notifica = NotificaUser | NotificaAgente;
 
 @Component({
   selector: 'app-notify',
@@ -14,22 +19,36 @@ import { NotificationService, Notifica } from '../../services/notification.servi
 export class NotifyComponent implements OnInit {
   notifications: Notifica[] = [];
   selectedNotification: Notifica | null = null;
+  userRole: 'user' | 'agent' | 'guest' = 'guest';
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private notificationAgenteService: NotificationAgenteService,
+    private authService: AuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit(): void {
-    this.loadNotifications();
+    if (isPlatformBrowser(this.platformId)) {
+      this.userRole = this.authService.getUserRoleFromToken() as 'user' | 'agent' | 'guest';
+      this.loadNotifications();
+    }
   }
 
   loadNotifications(): void {
-    this.notificationService.getNotifiche().subscribe({
-      next: (data) => {
-        this.notifications = data;
-      },
-      error: (err) => {
-        console.error('Errore nel caricamento notifiche:', err);
-      }
-    });
+    if (this.userRole === 'agent') {
+      this.notificationAgenteService.getNotifiche().subscribe({
+        next: (data) => this.notifications = data,
+        error: (err) => console.error('Errore nel caricamento notifiche agente:', err)
+      });
+    } else if (this.userRole === 'user') {
+      this.notificationService.getNotifiche().subscribe({
+        next: (data) => this.notifications = data,
+        error: (err) => console.error('Errore nel caricamento notifiche utente:', err)
+      });
+    } else {
+      console.warn('Ruolo non riconosciuto, nessuna notifica caricata.');
+    }
   }
 
   get unreadNotificationsCount(): number {
@@ -37,7 +56,8 @@ export class NotifyComponent implements OnInit {
   }
 
   deleteNotification(notification: Notifica): void {
-    this.notificationService.deleteNotifica(notification.notificaId).subscribe({
+    const service = this.userRole === 'agent' ? this.notificationAgenteService : this.notificationService;
+    service.deleteNotifica(notification.notificaId).subscribe({
       next: () => {
         this.notifications = this.notifications.filter(n => n.notificaId !== notification.notificaId);
         if (this.selectedNotification?.notificaId === notification.notificaId) {
@@ -50,7 +70,8 @@ export class NotifyComponent implements OnInit {
 
   openNotification(notification: Notifica): void {
     if (!notification.letta) {
-      this.notificationService.markAsRead(notification.notificaId).subscribe({
+      const service = this.userRole === 'agent' ? this.notificationAgenteService : this.notificationService;
+      service.markAsRead(notification.notificaId).subscribe({
         next: () => {
           notification.letta = true;
         },
