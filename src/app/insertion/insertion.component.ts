@@ -8,12 +8,14 @@ import { OffertaVendita, OffertaVenditaService } from '../../services/offerta_ve
 import { OffertaAffitto, OffertaAffittoService } from '../../services/offerta_affitto.service';
 import { AuthService } from '../../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
+import { OffertaVisitaAffitto, OffertaVisitaAffittoService } from '../../services/offerta_visita_affitto.service';
+import { OffertaVisitaVendita, OffertaVisitaVenditaService } from '../../services/offerta_visita_vendita.service';
 
 @Component({
   selector: 'app-insertion',
   standalone: true,
   imports: [CommonModule, NavbarComponent, FooterComponent, FormsModule],
-   providers: [OffertaVenditaService, OffertaAffittoService,AuthService],
+   providers: [OffertaVenditaService, OffertaAffittoService,AuthService,OffertaVisitaVenditaService,OffertaVisitaAffittoService],
   templateUrl: './insertion.component.html',
   styleUrls: ['./insertion.component.scss']
 })
@@ -36,7 +38,7 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   propostaPrezzo: string = '';
   minDate: string = '';
 
-  constructor(private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService) {
+  constructor(private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService,private offertaVisitaVenditaService: OffertaVisitaVenditaService,private offertaVisitaAffittoService: OffertaVisitaAffittoService) {
     const navigation = this.router.getCurrentNavigation();
     this.annuncio = navigation?.extras?.state?.['annuncio'];
     this.modalitaCatalogo = navigation?.extras?.state?.['modalitaCatalogo'] || 'vendita';
@@ -124,14 +126,80 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   }
 
   inviaRichiestaVisita(): void {
-    if (this.selectedDate && this.selectedHour && this.selectedMinute) {
-      const orario = `${this.selectedHour.padStart(2, '0')}:${this.selectedMinute.padStart(2, '0')}`;
-      console.log('📩 Richiesta inviata per il giorno:', this.selectedDate, 'alle:', orario);
-      this.mostraPopupVisita = false;
-    } else {
-      alert("Per favore compila sia la data che l'orario prima di inviare.");
+  if (this.selectedDate && this.selectedHour && this.selectedMinute) {
+    const orario = `${this.selectedHour.padStart(2, '0')}:${this.selectedMinute.padStart(2, '0')}`;
+
+    const userId = this.authService.getUserId();
+    const token = this.authService.getToken();
+
+    if (!userId || !token) {
+      alert("Devi essere loggato per inviare la richiesta di visita.");
+      return;
     }
+
+    let decoded: any;
+    try {
+      decoded = jwtDecode(token);
+    } catch {
+      alert("Errore nell'autenticazione, effettua di nuovo il login.");
+      return;
+    }
+
+    const emailOfferente = decoded.email;
+
+    if (this.modalitaCatalogo === 'vendita') {
+      const offertaVisita: OffertaVisitaVendita = {
+        email_offerente: emailOfferente,
+        data_visita: this.selectedDate,
+        orario: orario,
+        inserzione_id: this.annuncio.vendita_id,
+        user_id: userId
+      };
+
+      this.offertaVisitaVenditaService.creaOffertaVisitaVendita(offertaVisita).subscribe({
+        next: () => {
+          alert('✅ Richiesta visita vendita inviata con successo!');
+          this.mostraPopupVisita = false;
+          this.selectedDate = '';
+          this.selectedHour = '';
+          this.selectedMinute = '';
+        },
+        error: (err) => {
+          console.error('Errore invio richiesta visita vendita:', err);
+          alert('❌ Errore nell\'invio della richiesta visita, riprova più tardi.');
+        }
+      });
+
+    } else if (this.modalitaCatalogo === 'affitto') {
+      const offertaVisita: OffertaVisitaAffitto = {
+        email_offerente: emailOfferente,
+        data_visita: this.selectedDate,
+        orario: orario,
+        inserzione_id: this.annuncio.affitto_id,
+        user_id: userId
+      };
+
+      this.offertaVisitaAffittoService.creaOffertaVisitaAffitto(offertaVisita).subscribe({
+        next: () => {
+          alert('✅ Richiesta visita affitto inviata con successo!');
+          this.mostraPopupVisita = false;
+          this.selectedDate = '';
+          this.selectedHour = '';
+          this.selectedMinute = '';
+        },
+        error: (err) => {
+          console.error('Errore invio richiesta visita affitto:', err);
+          alert('❌ Errore nell\'invio della richiesta visita, riprova più tardi.');
+        }
+      });
+
+    } else {
+      alert('Modalità catalogo non riconosciuta.');
+    }
+  } else {
+    alert("Per favore compila sia la data che l'orario prima di inviare.");
   }
+}
 
   inviaPropostaPrezzo(): void {
   const proposta = parseFloat(this.propostaPrezzo);
