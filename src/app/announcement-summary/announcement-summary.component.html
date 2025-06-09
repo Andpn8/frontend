@@ -6,20 +6,10 @@
     <div class="step-content">
       <h3>Informazioni</h3>
       <p>
-        <strong>Immobile:</strong>
-        {{ announcementData.immobile?.trim() || 'Immobile' }}<br />
-
-        <strong>Titolo:</strong>
-        {{ announcementData.titolo?.trim() || 'Titolo Annuncio' }}<br />
-
-        <strong>Prezzo:</strong>
-        {{ announcementData.prezzo?.toString().trim() || 'Prezzo' }}<br />
-
-        <strong>Indirizzo:</strong>
-        {{
-          (announcementData.indirizzo?.trim() || '') +
-            (announcementData.numero ? ', ' + announcementData.numero : '') || 'Indirizzo'
-        }}
+        {{ announcementData.immobile || 'Immobile' }} -
+        {{ announcementData.titolo || 'Titolo Annuncio' }}<br />
+        {{ announcementData.prezzo || 'Prezzo' }} -
+        {{ (announcementData.indirizzo || '') + (announcementData.numero ? ', ' + announcementData.numero : '') || 'Indirizzo' }}
       </p>
     </div>
   </div>
@@ -29,20 +19,11 @@
     <div class="step-content">
       <h3>Dettagli</h3>
       <p>
-        <strong>Superficie:</strong>
-        {{ announcementData.superficie?.toString().trim() || 'Superficie' }}<br />
-
-        <strong>Stanze:</strong>
-        {{ announcementData.stanze?.toString().trim() || 'Stanze' }}<br />
-
-        <strong>Piano:</strong>
-        {{ announcementData.piano?.toString().trim() || 'Piano' }}<br />
-
-        <strong>Classe energetica:</strong>
-        {{ announcementData.classeEnergetica?.trim() || 'Classe energetica' }}<br />
-
-        <strong>Servizi:</strong>
-        {{ announcementData.servizi?.trim() || 'Servizi presenti' }}
+        {{ announcementData.superficie || 'Superficie' }} -
+        {{ announcementData.stanze || 'Stanze' }}<br />
+        {{ announcementData.piano || 'Piano' }} -
+        {{ announcementData.classeEnergetica || 'Classe energetica' }}<br />
+        {{ announcementData.servizi || 'Servizi presenti' }}
       </p>
     </div>
   </div>
@@ -52,13 +33,8 @@
     <div class="step-content">
       <h3>Foto e descrizione</h3>
       <p>
-        <strong>Foto:</strong>
-        {{ announcementData.foto?.length || 0 }} Foto<br />
-
-        <strong>Planimetrie:</strong>
+        {{ announcementData.foto?.length || 0 }} Foto -
         {{ announcementData.planimetrie || 'Planimetrie' }}<br />
-
-        <strong>Descrizione:</strong>
         {{ announcementData.descrizione || 'Descrizione dell\'immobile' }}
       </p>
     </div>
@@ -69,10 +45,7 @@
     <div class="step-content">
       <h3>Contatti</h3>
       <p>
-        <strong>Email:</strong>
         {{ announcementData.contatti?.email || 'Email' }}<br />
-
-        <strong>Telefono:</strong>
         {{ announcementData.contatti?.telefono || 'Telefono' }}
       </p>
     </div>

@@ -76,16 +76,10 @@
       }
 
       p {
-       margin-top: 0.5rem;
-       margin-bottom: 0;
-       line-height: 1.6;
-       word-wrap: break-word;
-       word-break: break-word;
-       overflow-wrap: break-word;
-       white-space: normal;
-       max-width: 100%;
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+        line-height: 1.6;
       }
-
     }
   }
 
@@ -149,12 +143,6 @@
     &::after {
      display: none;
     }
-  }
-
-  .step-content p {
-    word-wrap: break-word; /* Permette alle parole lunghe di andare a capo */
-    white-space: normal; /* Permette di andare a capo anche nelle parole lunghe */
-    overflow-wrap: break-word; /* Compatibilità per i browser più vecchi */
   }
 
 }

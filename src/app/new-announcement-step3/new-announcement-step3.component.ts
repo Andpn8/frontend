@@ -240,33 +240,23 @@ export class NewAnnouncementStep3Component implements OnInit {
     this.showPlanimetriaOverlay = false;
   }
 
-// Navigazione
-onSubmit(): void {
-  const fotoValide = this.fotoPreviews.length > 0;
-  const planimetrieValide = this.planimetriaPreviews.length > 0;
+  // Navigazione
+  onSubmit(): void {
+    if (this.step3Form.valid) {
+      const step3Data = {
+        descrizione: this.step3Form.get('descrizione')?.value,
+        fotoCount: this.fotoPreviews.length,  // Salva solo il numero delle foto
+        planimetriaCount: this.planimetriaPreviews.length  // Salva solo il numero delle planimetrie
+      };
 
-  if (!fotoValide) {
-    alert('Devi caricare almeno una foto.');
+      // Salva i dati di Step 3
+      this.announcementDataService.setData(step3Data);
+
+      this.router.navigate(['/new-announcement-step4']);
+    } else {
+      this.step3Form.markAllAsTouched();
+    }
   }
-
-  if (!planimetrieValide) {
-    alert('Devi caricare almeno una planimetria.');
-  }
-
-  if (this.step3Form.valid && fotoValide && planimetrieValide) {
-    const step3Data = {
-      descrizione: this.step3Form.get('descrizione')?.value,
-      fotoCount: this.fotoPreviews.length,
-      planimetriaCount: this.planimetriaPreviews.length
-    };
-
-    this.announcementDataService.setData(step3Data);
-    this.router.navigate(['/new-announcement-step4']);
-  } else {
-    this.step3Form.markAllAsTouched();
-  }
-}
-
 
   goBack(): void {
     this.router.navigate(['/new-announcement-step2']);

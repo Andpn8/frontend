@@ -153,12 +153,9 @@
         <!-- Pulsanti -->
         <div class="form-buttons">
           <button type="button" class="indietro" (click)="goBack()">INDIETRO</button>
-          <button type="submit" class="prosegui" 
-            [disabled]="!step3Form.get('descrizione')?.valid || fotoPreviews.length === 0 || planimetriaPreviews.length === 0"
-            [ngClass]="{ 'active': step3Form.get('descrizione')?.valid && fotoPreviews.length > 0 && planimetriaPreviews.length > 0 }">
+          <button type="submit" class="prosegui" [ngClass]="{ 'active': step3Form.valid }">
             PROSEGUI
           </button>
-
         </div>
       </form>
     </div>
