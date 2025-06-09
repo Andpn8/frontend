@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .insertion-static {
   padding-left: 60px;
   padding-top: 20px;
@@ -558,7 +560,7 @@ input[type="date"] {
   color: white;
 
   &:hover {
-    background-color: darken(#ce2d4f, 10%);
+    background-color: color.adjust(#ce2d4f, $lightness: -10%);
     transform: scale(1.05);
   }
 }
@@ -568,7 +570,7 @@ input[type="date"] {
   color: white;
 
   &:hover {
-    background-color: darken(#087e8b, 10%);
+    background-color: color.adjust(#087e8b, $lightness: -10%);
     transform: scale(1.05);
   }
 }
@@ -653,7 +655,7 @@ input[type="number"] {
   color: white;
 
   &:hover {
-    background-color: darken(#ce2d4f, 10%);
+    background-color: color.adjust(#ce2d4f, $lightness: -10%);
     transform: scale(1.05);
   }
 }
@@ -663,7 +665,7 @@ input[type="number"] {
   color: white;
 
   &:hover {
-    background-color: darken(#087e8b, 10%);
+    background-color: color.adjust(#087e8b, $lightness: -10%);
     transform: scale(1.05);
   }
 }

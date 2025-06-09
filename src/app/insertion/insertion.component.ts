@@ -2,7 +2,6 @@ import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angula
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
-import { FooterComponent } from "../footer/footer.component";
 import { FormsModule } from '@angular/forms';
 import { OffertaVendita, OffertaVenditaService } from '../../services/offerta_vendita.service';
 import { OffertaAffitto, OffertaAffittoService } from '../../services/offerta_affitto.service';
@@ -14,7 +13,7 @@ import { OffertaVisitaVendita, OffertaVisitaVenditaService } from '../../service
 @Component({
   selector: 'app-insertion',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, FormsModule],
+  imports: [CommonModule, NavbarComponent, FormsModule],
    providers: [OffertaVenditaService, OffertaAffittoService,AuthService,OffertaVisitaVenditaService,OffertaVisitaAffittoService],
   templateUrl: './insertion.component.html',
   styleUrls: ['./insertion.component.scss']

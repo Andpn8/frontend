@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FooterComponent } from "../footer/footer.component";
 import { NavbarComponent } from "../navbar/navbar.component";
 import { AnnouncementSummaryComponent } from "../announcement-summary/announcement-summary.component";
 import { CommonModule } from '@angular/common';
@@ -13,7 +12,6 @@ import { AnnouncementDataService } from '../services/announcement-data.service';
   styleUrls: ['./new-announcement-step2.component.scss'],
   standalone: true,
   imports: [
-    FooterComponent,
     NavbarComponent,
     AnnouncementSummaryComponent,
     ReactiveFormsModule,

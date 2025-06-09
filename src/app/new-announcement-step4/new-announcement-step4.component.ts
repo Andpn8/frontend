@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from "../navbar/navbar.component";
-import { FooterComponent } from "../footer/footer.component";
 import { AnnouncementSummaryComponent } from "../announcement-summary/announcement-summary.component";
 import { CommonModule } from '@angular/common';
 import { AnnouncementDataService } from '../services/announcement-data.service';
@@ -11,7 +10,7 @@ import { AnnouncementDataService } from '../services/announcement-data.service';
   selector: 'app-new-announcement-step4',
   templateUrl: './new-announcement-step4.component.html',
   styleUrls: ['./new-announcement-step4.component.scss'],
-  imports: [FooterComponent, CommonModule, ReactiveFormsModule, NavbarComponent, AnnouncementSummaryComponent]
+  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, AnnouncementSummaryComponent]
 })
 export class NewAnnouncementStep4Component {
   step4Form: FormGroup;

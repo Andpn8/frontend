@@ -27,7 +27,7 @@
           <label>Immobile:</label>
           <select formControlName="immobile">
             <option value="" disabled selected></option>
-            <option>Casa/Appartamento</option>
+            <option>Appartamento</option>
             <option>Villa</option>
             <option>Monolocale</option>
             <option>Attico</option>
@@ -50,30 +50,40 @@
           <small class="required-field">CAMPO OBBLIGATORIO</small>
         </div>
 
-        <div class="form-group">
-          <label>Comune:</label>
-          <select formControlName="comune">
-            <option value="" disabled selected></option>
-            <option>Napoli</option>
-            <option>Salerno</option>
-            <option>Caserta</option>
-            <option>Avellino</option>
-            <option>Benevento</option>
-            <option>Giugliano in Campania</option>
-          </select>
-          <small class="required-field">CAMPO OBBLIGATORIO</small>
-        </div>
+       <div class="form-group">
+  <label>Città:</label>
+  <input 
+    type="text" 
+    placeholder="Inserisci la città..." 
+    id="autocomplete-citta"
+    formControlName="citta" />
+  <small class="required-field">CAMPO OBBLIGATORIO</small>
+</div>
 
-        <div class="form-group address-group">
-          <label>Indirizzo:</label>
-          <div class="address-fields">
-            <input type="text" placeholder="Indirizzo immobile" formControlName="indirizzo" />
-            <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="n°" class="number-input" formControlName="numero" />
-            <label>CAP:</label> 
-            <input type="number" min="0" oninput="validity.valid||(value='');" class="cap-input" formControlName="cap" />
-          </div>
-          <small class="required-field">CAMPI OBBLIGATORI</small>
-        </div>
+       <div class="form-group address-group">
+  <label>Indirizzo:</label>
+  <div class="address-fields">
+    <input 
+      type="text" 
+      id="autocomplete-indirizzo"
+      placeholder="Inserisci indirizzo e n° civico..." 
+      formControlName="indirizzo" />
+      
+    <input 
+      type="text" 
+      class="number-input" 
+      formControlName="numero"
+        readonly />
+      
+    <label>CAP:</label> 
+    <input 
+      type="text" 
+      class="cap-input" 
+      formControlName="cap"
+        readonly />
+  </div>
+  <small class="required-field">CAMPI OBBLIGATORI</small>
+</div>
 
         <div class="form-buttons">
           <button type="button" class="back">INDIETRO</button>
@@ -88,6 +98,4 @@
     </div>
     <app-announcement-summary [activeStep]="1"></app-announcement-summary>
   </div>
-
-  <app-footer></app-footer>
 </div>

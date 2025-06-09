@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { AnnouncementSummaryComponent } from '../announcement-summary/announcement-summary.component';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from "../footer/footer.component";
 import { AnnouncementDataService } from '../services/announcement-data.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { AnnouncementDataService } from '../services/announcement-data.service';
   templateUrl: './new-announcement-step3.component.html',
   styleUrls: ['./new-announcement-step3.component.scss'],
   standalone: true,
-  imports: [FooterComponent, CommonModule, ReactiveFormsModule, NavbarComponent, AnnouncementSummaryComponent]
+  imports: [CommonModule, ReactiveFormsModule, NavbarComponent, AnnouncementSummaryComponent]
 })
 export class NewAnnouncementStep3Component implements OnInit {
   activeStep = 3;
