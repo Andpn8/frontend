@@ -23,12 +23,6 @@ export class NewAnnouncementStep2Component {
 
   classiEnergetiche = ['A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
-  stanze = [
-    { label: 'Locale', placeholder: 'Nessun Locale', icon: 'https://i.imgur.com/gzOq3Aq.png', control: 'locale' },  
-    { label: 'Camera da Letto', placeholder: 'Nessuna Camera da Letto', icon: 'https://i.imgur.com/K2MwtmB.png', control: 'cameradaletto' },
-  ];
-
-
   servizi = [
     { label: 'Portineria', control: 'portineria', icon: 'https://i.imgur.com/VJaYioG.png' },
     { label: 'Garage', control: 'garage', icon: 'https://i.imgur.com/ueH8rrr.png' },
@@ -43,7 +37,6 @@ export class NewAnnouncementStep2Component {
     private router: Router,
     private announcementDataService: AnnouncementDataService
   ) {
-    // 1. Crea il form
     this.step2Form = this.fb.group({
       superficie: ['', Validators.required],
       piano: ['', Validators.required],
@@ -54,13 +47,11 @@ export class NewAnnouncementStep2Component {
       sicurezza: [false],
       ascensore: [false],
       accessoDisabili: [false],
-      bagno: [''],
-      cucina: [''],
-      cameradaletto: [''],
-      locale: ['']
+      locali: [''],  
+      bagni: ['']   
     });
 
-    // 2. Pre-popola il form con i dati salvati
+    // Caricamento dati salvati
     const data = this.announcementDataService.getData();
     this.step2Form.patchValue({
       superficie: data.superficie || '',
@@ -72,15 +63,12 @@ export class NewAnnouncementStep2Component {
       sicurezza: data.sicurezza || false,
       ascensore: data.ascensore || false,
       accessoDisabili: data.accessoDisabili || false,
-      bagno: data.bagno || '',
-      cucina: data.cucina || '',
-      cameradaletto: data.cameradaletto || '',
-      locale: data.locale || ''
+      locali: data.locali || '',
+      bagni: data.bagni || ''
     });
 
-
-    // 3. Aggiorna il servizio in tempo reale quando i campi cambiano
-    this.step2Form.valueChanges.subscribe((formValues) => {
+    // Salvataggio dati in tempo reale nel servizio
+    this.step2Form.valueChanges.subscribe(formValues => {
       this.announcementDataService.setData(formValues);
     });
   }

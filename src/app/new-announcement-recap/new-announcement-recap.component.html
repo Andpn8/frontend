@@ -7,7 +7,7 @@
   <div class="insertion-static">
     <div class="header">
       <div class="header-content" #headerContent>
-        <span class="title">titolo</span>
+        <span class="title">{{ titolo }}</span>
         <img src="https://i.imgur.com/pJI4Efn.png" class="header-image" alt="Icona orologio" />
         <div class="date-block">
           <div class="label">aggiornato al</div>
@@ -35,8 +35,8 @@
     <div class="image-address-box">
       <img src="https://i.imgur.com/5T5vo0U.png" class="map-icon" alt="Mappa">
       <div class="address-bubble">
-        <div class="address-line bold">indirizzo , civico</div>
-        <div class="address-line">cap - città</div>
+        <div class="address-line bold">{{ indirizzo }} , {{ numero }}</div>
+        <div class="address-line">{{ cap }} - {{ citta }}</div>
       </div>
 
       <div class="vertical-separator"></div>
@@ -45,12 +45,12 @@
         <div class="info-block">
           <img src="https://i.imgur.com/hlHRiv4.png" class="info-img" alt="Icona casa" />
           <i class="fa fa-home"></i>
-          <span class="info-number">locali</span>
+          <span class="info-number">{{ locali }}</span>
         </div>
         <div class="info-block">
           <img src="https://i.imgur.com/eiE4nsX.png" class="info-img" alt="Icona bagno" />
           <i class="fa fa-bath"></i>
-          <span class="info-number">bagni</span>
+          <span class="info-number">{{ bagni }}</span>
         </div>
       </div>
 
@@ -58,14 +58,14 @@
 
       <div class="info-row">
         <span class="prezzo">
-          € soldi
+          € {{ prezzo }}
         </span>
       </div>
     </div>
 
     <div class="descrizione">
       <strong>DESCRIZIONE</strong>
-      <p>descrizione</p>
+      <p>{{ descrizione }}</p>
     </div>
 
     <div class="dati-aggiuntivi">
@@ -73,12 +73,12 @@
         <div class="info-block">
           <img src="https://i.imgur.com/j06eHj1.png" alt="Icona superficie" class="custom-icon" />
           <i class="fa fa-arrows-alt"></i>
-          <span><strong>Superficie:</strong> superficie m²</span>
+          <span><strong>Superficie:</strong> {{superficie}} m²</span>
         </div>
         <div class="info-block">
           <img src="https://i.imgur.com/2rOY3sw.png" alt="Icona piano" class="custom-icon" />
           <i class="fa fa-building"></i>
-          <span><strong>Piano:</strong> piano</span>
+          <span><strong>Piano:</strong> {{piano}}</span>
         </div>
       </div>
 
@@ -86,14 +86,18 @@
 
       <div class="info-row classe-energetica">
         <img src="https://i.imgur.com/Ij52b7K.png" alt="Icona classe energetica" class="custom-icon" />
-        <strong>Classe Energetica:</strong> classe energetica
+        <strong>Classe Energetica:</strong> {{classeEnergetica}}
       </div>
     </div>
 
     <div class="servizi">
-      <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
-      <strong>Servizi:</strong>servizi
-    </div>
+  <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
+  <strong>Servizi:</strong>
+  <span *ngIf="serviziAttivi.length > 0; else noServizi">
+    {{ serviziAttivi.join(', ') }}
+  </span>
+  <ng-template #noServizi>Nessun servizio selezionato</ng-template>
+</div>
 
     <div class="gallery" *ngIf="planimetrie.length" [style.maxWidth.px]="headerWidth">
       <div class="section-label">Planimetrie</div>

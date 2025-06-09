@@ -1,6 +1,6 @@
 <app-navbar
-  [helpMessage]="'<strong>Per inviare un annuncio,</strong> seleziona prima il <strong>tipo di contratto</strong> (Vendita o Affitto) e compila tutti i <strong>campi obbligatori</strong>.<br><br> Assicurati di inserire il <strong>titolo dell\'annuncio</strong>, il <strong>prezzo</strong>, il <strong>comune</strong> e l\'<strong>indirizzo completo</strong>.<br><br> Quando hai completato il form, puoi <strong>procedere</strong> o <strong>tornare indietro</strong> utilizzando i pulsanti in basso.'"
-  [centerMessage]="'<strong>NUOVO ANNUNCIO</strong>'">
+  [helpMessage]="'helpMessage'"
+  [centerMessage]="'NUOVO ANNUNCIO'">
 </app-navbar>
 
 <main class="step2-container">
@@ -53,14 +53,30 @@
 
         <div class="right-column">
           <h2>Dettagli Stanze</h2>
-          <div class="room" *ngFor="let stanza of stanze; let i = index">
-            <label *ngIf="i === 0" class="room-label">Stanze:</label>
-            <label *ngIf="i !== 0" class="room-label empty-label"></label>
-            <div class="icon-input-wrapper">
-              <img [src]="stanza.icon" [alt]="stanza.label" />
+          <div class="form-group-horizontal">
+            <label for="locali">Locali:</label>
+            <div class="input-column">
               <input
-                [placeholder]="stanza.placeholder"
-                [formControlName]="stanza.control"
+                type="number"
+                min="0"
+                id="locali"
+                formControlName="locali"
+                placeholder="Numero locali"
+                [class.invalid]="isInvalid('locali')"
+              />
+            </div>
+          </div>
+
+          <div class="form-group-horizontal">
+            <label for="bagni">Bagni:</label>
+            <div class="input-column">
+              <input
+                type="number"
+                min="0"
+                id="bagni"
+                formControlName="bagni"
+                placeholder="Numero bagni"
+                [class.invalid]="isInvalid('bagni')"
               />
             </div>
           </div>
@@ -103,8 +119,7 @@
       </div>
     </form>
   </div>
-   <div class="summary-wrapper">
-      <app-announcement-summary [activeStep]="2"></app-announcement-summary>
-    </div>
+  <div class="summary-wrapper">
+    <app-announcement-summary [activeStep]="2"></app-announcement-summary>
+  </div>
 </main>
-
