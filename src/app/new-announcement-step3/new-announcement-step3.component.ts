@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { AnnouncementSummaryComponent } from '../announcement-summary/announcement-summary.component';
 import { CommonModule } from '@angular/common';
-import { AnnouncementDataService } from '../services/announcement-data.service';
+import { AnnouncementDataService } from '../../services/componentServices/announcement-data.service';
 
 @Component({
   selector: 'app-new-announcement-step3',

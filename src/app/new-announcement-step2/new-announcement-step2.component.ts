@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { AnnouncementSummaryComponent } from "../announcement-summary/announcement-summary.component";
 import { CommonModule } from '@angular/common';
-import { AnnouncementDataService } from '../services/announcement-data.service';
+import { AnnouncementDataService } from '../../services/componentServices/announcement-data.service';
 
 @Component({
   selector: 'app-new-announcement-step2',
@@ -24,10 +24,8 @@ export class NewAnnouncementStep2Component {
   classiEnergetiche = ['A+', 'A', 'B', 'C', 'D', 'E', 'F', 'G'];
 
   stanze = [
-    { label: 'Bagno', placeholder: 'Nessun Bagno', icon: 'https://i.imgur.com/JIFqabC.png', control: 'bagno' },
-    { label: 'Cucina', placeholder: 'Nessuna Cucina', icon: 'https://i.imgur.com/86gT04H.png', control: 'cucina' },
-    { label: 'Camera da Letto', placeholder: 'Nessuna Camera da Letto', icon: 'https://i.imgur.com/K2MwtmB.png', control: 'cameradaletto' },
     { label: 'Locale', placeholder: 'Nessun Locale', icon: 'https://i.imgur.com/gzOq3Aq.png', control: 'locale' },  
+    { label: 'Camera da Letto', placeholder: 'Nessuna Camera da Letto', icon: 'https://i.imgur.com/K2MwtmB.png', control: 'cameradaletto' },
   ];
 
 

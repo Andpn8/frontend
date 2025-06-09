@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { AnnouncementSummaryComponent } from "../announcement-summary/announcement-summary.component";
 import { CommonModule } from '@angular/common';
-import { AnnouncementDataService } from '../services/announcement-data.service';
+import { AnnouncementDataService } from '../../services/componentServices/announcement-data.service';
 declare const google: any;
 
 @Component({
@@ -53,6 +53,12 @@ export class NewAnnouncementComponent implements OnInit {
 
   this.updateAnnouncementData();
 
+   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    this.initializeGoogleAutocomplete();
+  }
+}
+
+initializeGoogleAutocomplete() {
   const cityInput = document.getElementById("autocomplete-citta") as HTMLInputElement;
 
   if (cityInput) {

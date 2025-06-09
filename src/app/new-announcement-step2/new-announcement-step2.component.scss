@@ -17,6 +17,7 @@
 
 .layout-wrapper {
   display: flex;
+  flex-wrap: wrap;
   flex: 2;
   padding: 30px;
   flex-direction: row;
@@ -97,8 +98,8 @@
     }
 
     .right-column {
-      flex: 0 0 350px;
-      margin-left: 20rem;
+      flex: 1;
+      margin-left: 10rem;
 
       h2 {
         margin-left: 8rem;
@@ -222,3 +223,5 @@
     }
   }
 }
+
+

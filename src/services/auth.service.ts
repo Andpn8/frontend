@@ -49,17 +49,22 @@ export class AuthService {
   }
 }
 
-  getToken(): string | null {
+ getToken(): string | null {
+  if (typeof window !== 'undefined' && window.localStorage) {
     return localStorage.getItem('token');
   }
+  return null;
+}
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
-  }
+  return !!this.getToken();
+}
 
   logout(): void {
+  if (typeof window !== 'undefined' && window.localStorage) {
     localStorage.removeItem('token');
   }
+}
 
   getUserRoleFromToken(): 'user' | 'agent' | 'ceo' | 'admin' | 'guest' {
     const token = this.getToken();

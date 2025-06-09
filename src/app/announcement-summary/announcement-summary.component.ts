@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { AnnouncementDataService } from '../services/announcement-data.service';
 
 @Component({
   selector: 'app-announcement-summary',
@@ -13,12 +12,8 @@ export class AnnouncementSummaryComponent implements OnInit {
   @Input() activeStep: number = 1;
   announcementData: any = {};
 
-  constructor(private announcementDataService: AnnouncementDataService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.announcementData = this.announcementDataService.getData();
-
-    this.announcementData.indirizzoCompleto =
-      `${this.announcementData.indirizzo || ''}${this.announcementData.numero ? ', ' + this.announcementData.numero : ''}${this.announcementData.cap ? ' - ' + this.announcementData.cap : ''}`.trim() || '—';
   }
 }
