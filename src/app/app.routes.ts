@@ -18,6 +18,7 @@ import { LoginSuccessComponent } from './login-success/login-success.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { InsertionComponent } from './insertion/insertion.component';
+import { NewAnnouncementRecapComponent } from './new-announcement-recap/new-announcement-recap.component';
 
 export const routes: Routes = [
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'new-announcement-step2', component: NewAnnouncementStep2Component },
   { path: 'new-announcement-step3', component: NewAnnouncementStep3Component },
   { path: 'new-announcement-step4', component: NewAnnouncementStep4Component },
+  { path: 'new-announcement-recap', component: NewAnnouncementRecapComponent},
 
   //INFO
   { path: 'about-us', component: AboutUsComponent },
