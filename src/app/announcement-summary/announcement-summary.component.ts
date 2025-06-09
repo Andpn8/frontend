@@ -1,20 +1,12 @@
-import { CommonModule} from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
-import { AnnouncementDataService } from '../services/announcement-data.service';
+import { CommonModule } from '@angular/common';
+import { Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-announcement-summary',
   templateUrl: './announcement-summary.component.html',
   styleUrls: ['./announcement-summary.component.scss'],
-  standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule]
 })
-export class AnnouncementSummaryComponent implements OnInit {
+export class AnnouncementSummaryComponent {
   @Input() activeStep: number = 1;
-  announcementData: any = {};
-  constructor(private announcementDataService: AnnouncementDataService) {}
-
-  ngOnInit() {
-  this.announcementData = this.announcementDataService.getData();
-  }
 }

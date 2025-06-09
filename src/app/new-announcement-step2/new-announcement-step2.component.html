@@ -16,12 +16,13 @@
               <input
                 type="number"
                 min="0"
+                oninput="validity.valid||(value='');"
                 id="superficie"
                 formControlName="superficie"
                 placeholder="Es. 65 m²"
-                [class.invalid]="isInvalid('superficie')"
+                [class.always-invalid]="true"
               />
-              <span class="always-error" *ngIf="isInvalid('superficie')">CAMPO OBBLIGATORIO</span>
+              <span class="always-error">CAMPO OBBLIGATORIO</span>
             </div>
           </div>
 
@@ -31,12 +32,13 @@
               <input
                 type="number"
                 min="0"
+                oninput="validity.valid||(value='');"
                 id="piano"
                 formControlName="piano"
                 placeholder="Es. 4°"
-                [class.invalid]="isInvalid('piano')"
+                [class.always-invalid]="true"
               />
-              <span class="always-error" *ngIf="isInvalid('piano')">CAMPO OBBLIGATORIO</span>
+              <span class="always-error">CAMPO OBBLIGATORIO</span>
             </div>
           </div>
 
@@ -58,11 +60,9 @@
             <label *ngIf="i !== 0" class="room-label empty-label"></label>
             <div class="icon-input-wrapper">
               <img [src]="stanza.icon" [alt]="stanza.label" />
-              <input
-                [placeholder]="stanza.placeholder"
-                [formControlName]="stanza.control"
-              />
+              <input [placeholder]="stanza.placeholder" />
             </div>
+            <button type="button">+</button>
           </div>
         </div>
       </div>
@@ -103,6 +103,5 @@
       </div>
     </form>
   </div>
-
   <app-announcement-summary [activeStep]="2"></app-announcement-summary>
 </main>
