@@ -105,6 +105,11 @@
       align-items: center;
       gap: 0.5rem;
 
+      img {
+                width: 16px;
+                height: 16px;
+              }
+
       &:hover {
         text-decoration: underline;
         text-decoration-color: white;
@@ -114,6 +119,11 @@
       &.logout {
         background-color: #CE2D4F;
         color: white;
+
+        .logout-icon {
+                  width: 16px;
+                  height: 16px;
+                }
       }
 
       &.logout:hover {
@@ -170,3 +180,8 @@
     transform: translateY(0);
   }
 }
+
+.logo img {
+          width: 24px;
+          height: 24px;
+        }

@@ -5,19 +5,19 @@
     <div class="nav-left">
       <div class="icon user" (click)="toggleDropdown()" [class.open]="isDropdownOpen">
         <div class="logo">
-          <img src="https://i.imgur.com/fda9m1G.png" alt="Logo" />
+          <img src="https://i.imgur.com/U0sQmZK.png" alt="Logo" />
         </div>
         <i class="fas fa-user"></i>
         <span class="caret">▼</span>
 
         <div class="dropdown" *ngIf="isDropdownOpen">
           <ul>
-            <li (click)="goToNotify()"><img src="https://i.imgur.com/mcfdYbE.png" /> Notifiche</li>
+            <li (click)="goToNotify()"><img src="https://i.imgur.com/dEJ9NLl.png" /> Notifiche</li>
             <hr class="dropdown-divider" />
-            <li (click)="goToNewAnnouncement()"><img src="https://i.imgur.com/tAIBdEg.png" /> Pubblica annuncio</li>
+            <li (click)="goToNewAnnouncement()"><img src="https://i.imgur.com/E1oUOEr.png" /> Pubblica annuncio</li>
             <hr class="dropdown-divider" />
             <li (click)="logout()" class="logout">
-              <img class="logout-icon" src="https://i.imgur.com/pCXvAHh.png" alt="Logout icon" />
+              <img class="logout-icon" src="https://i.imgur.com/wSawRBK.png" alt="Logout icon" />
               Logout
             </li>
           </ul>
@@ -26,7 +26,7 @@
 
       <div class="icon" *ngIf="!isGeneric" (click)="goToNotify()">
         <div class="logo">
-          <img src="https://i.imgur.com/rRsXzMS.png" alt="Logo" />
+          <img src="https://i.imgur.com/dEJ9NLl.png" alt="Logo" />
         </div>
         <i class="fas fa-bell"></i>
         <span>Notifiche</span>
@@ -34,7 +34,7 @@
 
       <div class="icon" (click)="goToHome()">
         <div class="logo">
-          <img src="https://i.imgur.com/BBn9bOo.png" alt="Logo" />
+          <img src="https://i.imgur.com/vUmDahr.png" alt="Logo" />
         </div>
         <i class="fas fa-home"></i>
         <span>Home</span>
@@ -49,13 +49,13 @@
     <div class="nav-right">
       <button class="publish-btn" *ngIf="!isGeneric" (click)="goToNewAnnouncement()">
         <div class="logo">
-          <img src="https://i.imgur.com/MrFoMj6.png" alt="Logo" />
+          <img src="https://i.imgur.com/E1oUOEr.png" alt="Logo" />
         </div>
         <i class="fas fa-plus"></i> PUBBLICA ANNUNCIO
       </button>
       <div class="icon" (click)="toggleHelp()">
         <div class="logo">
-          <img src="https://i.imgur.com/XGH6MVo.png" alt="Logo " />
+          <img src="https://i.imgur.com/NbZdUVa.png" alt="Logo " />
         </div>
         <i class="fas fa-question-circle"></i>
         <span>Help</span>
@@ -75,7 +75,7 @@
 
   <!-- Centro -->
   <div class="nav-center" *ngIf="!isGeneric">
-    <div class="logo">
+    <div class="logoc">
       <img src="https://i.imgur.com/uOvKzdr.png" alt="Logo" />
     </div>
   </div>
