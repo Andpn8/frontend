@@ -2,7 +2,117 @@
   [helpMessage]="'Qui puoi vedere come appare il tuo annuncio prima della pubblicazione.'"
   [centerMessage]="'<strong>Anteprima Annuncio</strong>'">
 </app-navbar>
-<div>prova
-</div>
 
-   <app-announcement-summary [activeStep]="5"></app-announcement-summary>
+<div class="preview-container">
+  <div class="insertion-static">
+    <div class="header">
+      <div class="header-content" #headerContent>
+        <span class="title">titolo</span>
+        <img src="https://i.imgur.com/pJI4Efn.png" class="header-image" alt="Icona orologio" />
+        <div class="date-block">
+          <div class="label">aggiornato al</div>
+          <div class="date">Proprio ora</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery" [style.maxWidth.px]="headerWidth">
+      <button class="nav-button prev" (click)="prevImage()">‹</button>
+      <img [src]="selectedImage" class="main-image" alt="Foto appartamento" />
+      <button class="nav-button next" (click)="nextImage()">›</button>
+
+      <div class="thumbnails">
+        <img 
+          *ngFor="let img of images; let i = index" 
+          [src]="img" 
+          [class.selected]="img === selectedImage" 
+          (click)="selectImage(i)" 
+          alt="Thumbnail {{i + 1}}" 
+        />
+      </div>
+    </div>
+
+    <div class="image-address-box">
+      <img src="https://i.imgur.com/5T5vo0U.png" class="map-icon" alt="Mappa">
+      <div class="address-bubble">
+        <div class="address-line bold">indirizzo , civico</div>
+        <div class="address-line">cap - città</div>
+      </div>
+
+      <div class="vertical-separator"></div>
+
+      <div class="info-icons">
+        <div class="info-block">
+          <img src="https://i.imgur.com/hlHRiv4.png" class="info-img" alt="Icona casa" />
+          <i class="fa fa-home"></i>
+          <span class="info-number">locali</span>
+        </div>
+        <div class="info-block">
+          <img src="https://i.imgur.com/eiE4nsX.png" class="info-img" alt="Icona bagno" />
+          <i class="fa fa-bath"></i>
+          <span class="info-number">bagni</span>
+        </div>
+      </div>
+
+      <div class="vertical-separator"></div>
+
+      <div class="info-row">
+        <span class="prezzo">
+          € soldi
+        </span>
+      </div>
+    </div>
+
+    <div class="descrizione">
+      <strong>DESCRIZIONE</strong>
+      <p>descrizione</p>
+    </div>
+
+    <div class="dati-aggiuntivi">
+      <div class="info-icons">
+        <div class="info-block">
+          <img src="https://i.imgur.com/j06eHj1.png" alt="Icona superficie" class="custom-icon" />
+          <i class="fa fa-arrows-alt"></i>
+          <span><strong>Superficie:</strong> superficie m²</span>
+        </div>
+        <div class="info-block">
+          <img src="https://i.imgur.com/2rOY3sw.png" alt="Icona piano" class="custom-icon" />
+          <i class="fa fa-building"></i>
+          <span><strong>Piano:</strong> piano</span>
+        </div>
+      </div>
+
+      <div class="vertical-separator"></div>
+
+      <div class="info-row classe-energetica">
+        <img src="https://i.imgur.com/Ij52b7K.png" alt="Icona classe energetica" class="custom-icon" />
+        <strong>Classe Energetica:</strong> classe energetica
+      </div>
+    </div>
+
+    <div class="servizi">
+      <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
+      <strong>Servizi:</strong>servizi
+    </div>
+
+    <div class="gallery" *ngIf="planimetrie.length" [style.maxWidth.px]="headerWidth">
+      <div class="section-label">Planimetrie</div>
+      <button class="nav-button prev" (click)="prevPlanimetria()">‹</button>
+      <img [src]="selectedPlanimetria" class="main-image" alt="Planimetria" />
+      <button class="nav-button next" (click)="nextPlanimetria()">›</button>
+      <div class="thumbnails">
+        <img 
+          *ngFor="let pl of planimetrie; let i = index" 
+          [src]="pl" 
+          [class.selected]="pl === selectedPlanimetria" 
+          (click)="selectPlanimetria(i)" 
+          alt="Miniatura planimetria {{i + 1}}" 
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="announcement-box">
+    <app-announcement-summary [activeStep]="5"></app-announcement-summary>
+  </div>
+</div>
