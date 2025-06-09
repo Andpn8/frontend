@@ -36,7 +36,11 @@ export class NewAnnouncementStep3Component implements OnInit {
   showPlanimetriaMenu = false;
   showPlanimetriaDeleteIcons = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private announcementDataService: AnnouncementDataService) {
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private announcementDataService: AnnouncementDataService
+  ) {
     this.step3Form = this.fb.group({
       descrizione: ['', [Validators.required, Validators.maxLength(3000)]]
     });
@@ -45,17 +49,19 @@ export class NewAnnouncementStep3Component implements OnInit {
   ngOnInit(): void {
     const data = this.announcementDataService.getData();
     
-    // Carica i dati esistenti (se presenti)
-    if (data.fotoCount !== undefined) {
-      
-      // Ripristina il valore della descrizione
-     if (data.descrizione) {
-        this.step3Form.get('descrizione')?.setValue(data.descrizione);
-      }
+    // Ripristina i dati esistenti
+    if (data.descrizione) {
+      this.step3Form.get('descrizione')?.setValue(data.descrizione);
+    }
 
-      // Ripristina i conteggi delle foto e delle planimetrie
-      this.fotoPreviews = new Array(data.fotoCount).fill('');
-      this.planimetriaPreviews = new Array(data.planimetriaCount).fill('');
+    // Ripristina le foto se presenti
+    if (data.fotoPreviews) {
+      this.fotoPreviews = [...data.fotoPreviews];
+    }
+
+    // Ripristina le planimetrie se presenti
+    if (data.planimetriaPreviews) {
+      this.planimetriaPreviews = [...data.planimetriaPreviews];
     }
   }
 
@@ -63,12 +69,10 @@ export class NewAnnouncementStep3Component implements OnInit {
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
 
-    // Chiudi menu foto se aperto e clic fuori
     if (this.showFotoMenu && !target.closest('.foto-box') && !target.closest('.menu-popup')) {
       this.showFotoMenu = false;
     }
 
-    // Chiudi menu planimetria se aperto e clic fuori
     if (this.showPlanimetriaMenu && !target.closest('.planimetrie-box') && !target.closest('.menu-popup')) {
       this.showPlanimetriaMenu = false;
     }
@@ -240,35 +244,42 @@ export class NewAnnouncementStep3Component implements OnInit {
     this.showPlanimetriaOverlay = false;
   }
 
-// Navigazione
-onSubmit(): void {
-  const fotoValide = this.fotoPreviews.length > 0;
-  const planimetrieValide = this.planimetriaPreviews.length > 0;
+  // Navigazione
+  onSubmit(): void {
+    const fotoValide = this.fotoPreviews.length > 0;
+    const planimetrieValide = this.planimetriaPreviews.length > 0;
 
-  if (!fotoValide) {
-    alert('Devi caricare almeno una foto.');
+    if (!fotoValide) {
+      alert('Devi caricare almeno una foto.');
+    }
+
+    if (!planimetrieValide) {
+      alert('Devi caricare almeno una planimetria.');
+    }
+
+    if (this.step3Form.valid && fotoValide && planimetrieValide) {
+      const step3Data = {
+        descrizione: this.step3Form.get('descrizione')?.value,
+        fotoPreviews: this.fotoPreviews,
+        planimetriaPreviews: this.planimetriaPreviews
+      };
+
+      this.announcementDataService.setData(step3Data);
+      this.router.navigate(['/new-announcement-step4']);
+    } else {
+      this.step3Form.markAllAsTouched();
+    }
   }
-
-  if (!planimetrieValide) {
-    alert('Devi caricare almeno una planimetria.');
-  }
-
-  if (this.step3Form.valid && fotoValide && planimetrieValide) {
-    const step3Data = {
-      descrizione: this.step3Form.get('descrizione')?.value,
-      fotoCount: this.fotoPreviews.length,
-      planimetriaCount: this.planimetriaPreviews.length
-    };
-
-    this.announcementDataService.setData(step3Data);
-    this.router.navigate(['/new-announcement-step4']);
-  } else {
-    this.step3Form.markAllAsTouched();
-  }
-}
-
 
   goBack(): void {
+    // Salva i dati prima di tornare indietro
+    const step3Data = {
+      descrizione: this.step3Form.get('descrizione')?.value,
+      fotoPreviews: this.fotoPreviews,
+      planimetriaPreviews: this.planimetriaPreviews
+    };
+    
+    this.announcementDataService.setData(step3Data);
     this.router.navigate(['/new-announcement-step2']);
   }
 }

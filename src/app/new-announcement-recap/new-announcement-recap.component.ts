@@ -10,11 +10,9 @@ import { AnnouncementDataService } from '../../services/componentServices/announ
   standalone: true,
   templateUrl: './new-announcement-recap.component.html',
   styleUrls: ['./new-announcement-recap.component.scss'],
-  imports: [NavbarComponent, AnnouncementSummaryComponent,CommonModule]
+  imports: [NavbarComponent, AnnouncementSummaryComponent, CommonModule]
 })
 export class NewAnnouncementRecapComponent implements AfterViewInit {
-
-  
 
   @ViewChild('headerContent') headerContent!: ElementRef;
   headerWidth = 0;
@@ -33,22 +31,22 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   email: string = '';
   cellulare: string = ''; 
   servizi = [
-  { label: 'Portineria', control: 'portineria' },
-  { label: 'Garage', control: 'garage' },
-  { label: 'Climatizzazione', control: 'climatizzazione' },
-  { label: 'Sicurezza', control: 'sicurezza' },
-  { label: 'Ascensore', control: 'ascensore' },
-  { label: 'Accesso Disabili', control: 'accessoDisabili' }
-];
-serviziAttivi: string[] = [];
+    { label: 'Portineria', control: 'portineria' },
+    { label: 'Garage', control: 'garage' },
+    { label: 'Climatizzazione', control: 'climatizzazione' },
+    { label: 'Sicurezza', control: 'sicurezza' },
+    { label: 'Ascensore', control: 'ascensore' },
+    { label: 'Accesso Disabili', control: 'accessoDisabili' }
+  ];
+  serviziAttivi: string[] = [];
   images: string[] = [];
   selectedImage: string = '';
   planimetrie: string[] = [];
   selectedPlanimetria: string = '';
 
-  constructor(private router: Router,private announcementDataService: AnnouncementDataService
-
-    
+  constructor(
+    private router: Router,
+    private announcementDataService: AnnouncementDataService
   ) {} 
 
   ngAfterViewInit() {
@@ -56,10 +54,11 @@ serviziAttivi: string[] = [];
     this.loadData();
   }
 
-   loadData() {
+  loadData() {
     const data = this.announcementDataService.getData();
 
     if (data) {
+      // Dati testuali
       this.titolo = data.titolo || '';
       this.indirizzo = data.indirizzo || '';
       this.numero = data.numero || '';
@@ -74,15 +73,28 @@ serviziAttivi: string[] = [];
       this.descrizione = data.descrizione || '';
       this.email = data.email || '';
       this.cellulare = data.cellulare || '';
+      
+      // Servizi
       this.serviziAttivi = this.servizi
-      .filter(servizio => data[servizio.control])
-      .map(servizio => servizio.label);
+        .filter(servizio => data[servizio.control])
+        .map(servizio => servizio.label);
+
+      // Immagini e planimetrie
+      this.images = data.fotoPreviews || [];
+      this.planimetrie = data.planimetriaPreviews || [];
+      
+      // Imposta le immagini selezionate di default
+      if (this.images.length > 0) {
+        this.selectedImage = this.images[0];
+      }
+      if (this.planimetrie.length > 0) {
+        this.selectedPlanimetria = this.planimetrie[0];
+      }
     }
   }
 
-
   getServiziAttivi(serv: Record<string,boolean>): string[] {
-    return Object.entries(serv).filter(([_,a])=>a).map(([n])=>n.replace(/_/g,' '));
+    return Object.entries(serv).filter(([_,a]) => a).map(([n]) => n.replace(/_/g,' '));
   }
 
   goBack(): void {
