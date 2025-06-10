@@ -16,7 +16,7 @@
       </div>
     </div>
 
-    <div class="gallery" [style.maxWidth.px]="headerWidth">
+    <div class="gallery">
       <button class="nav-button prev" (click)="prevImage()">‹</button>
       <img [src]="selectedImage" class="main-image" alt="Foto appartamento" />
       <button class="nav-button next" (click)="nextImage()">›</button>
@@ -99,7 +99,7 @@
   <ng-template #noServizi>Nessun servizio selezionato</ng-template>
 </div>
 
-    <div class="gallery" *ngIf="planimetrie.length" [style.maxWidth.px]="headerWidth">
+    <div class="gallery" *ngIf="planimetrie.length">
       <div class="section-label">Planimetrie</div>
       <button class="nav-button prev" (click)="prevPlanimetria()">‹</button>
       <img [src]="selectedPlanimetria" class="main-image" alt="Planimetria" />

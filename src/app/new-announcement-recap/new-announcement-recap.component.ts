@@ -49,9 +49,12 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     private announcementDataService: AnnouncementDataService
   ) {} 
 
+  ngOnInit(): void {
+  this.loadData();
+}
+
   ngAfterViewInit() {
     this.headerWidth = this.headerContent.nativeElement.offsetWidth;
-    this.loadData();
   }
 
   loadData() {
