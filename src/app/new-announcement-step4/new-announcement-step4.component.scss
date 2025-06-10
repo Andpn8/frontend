@@ -114,23 +114,25 @@
       font-size: 1rem;
       border: none;
       border-radius: 20px;
-      cursor: pointer;
       font-weight: 600;
     }
 
     .indietro {
       background-color: #087E8B;
       color: #fff;
+       cursor: pointer;
     }
 
     .prosegui {
       background-color: #f8a5b0;
       color: white;
       transition: background-color 0.3s ease;
+       cursor: not-allowed;
     }
 
     .prosegui.active {
       background-color: #ce2d4f !important;
+      cursor: pointer !important;
     }
   }
 }

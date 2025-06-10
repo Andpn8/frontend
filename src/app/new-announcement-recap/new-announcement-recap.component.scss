@@ -416,12 +416,7 @@
   }
 
   .prosegui {
-    background-color: #f8a5b0;
-    color: white;
-    transition: background-color 0.3s ease;
-  }
-
-  .prosegui.active {
     background-color: #ce2d4f !important;
+    color: white;
   }
 }

@@ -175,10 +175,12 @@
         .prosegui {
           background-color: #f8a5b0;
           color: white;
+          cursor: not-allowed;
         }
 
         .prosegui.active {
           background-color: #ce2d4f !important;
+          cursor: pointer !important;
         }
       }
     }

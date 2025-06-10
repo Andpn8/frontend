@@ -38,6 +38,10 @@
       <div class="address-line bold">{{ annuncio.indirizzo }} , {{ annuncio.civico }}</div>
       <div class="address-line">{{ annuncio.cap }} - {{ annuncio.comune }}</div>
     </div>
+    <button class="street-view-btn" (click)="toggleStreetView()">
+    <img src="https://i.imgur.com/wzZQBjf.png" alt="Street View">
+    Street View
+  </button>
 
     <div class="vertical-separator"></div>
 
@@ -236,4 +240,9 @@
 </button>
     </div>
   </div>
+</div>
+
+<div class="street-view-container" *ngIf="showStreetView">
+  <div #streetViewElement class="street-view-element"></div>
+  <button class="close-street-view" (click)="toggleStreetView()">× Chiudi</button>
 </div>

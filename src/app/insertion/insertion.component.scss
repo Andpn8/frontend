@@ -722,6 +722,147 @@ input[type="number"] {
 }
 
 
+.open-map-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 10px;
+  
+  .map-btn-icon {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.2s;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.image-address-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-street-view {
+  display: flex;
+  align-items: center;
+  background-color: #087e8b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-left: 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #05668d;
+  }
+
+  .street-view-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+}
+
+.street-view-modal {
+  width: 90%;
+  max-width: 900px;
+  height: 80vh;
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #087e8b;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #666;
+      line-height: 1;
+      padding: 0 10px;
+    }
+  }
+
+  .street-view-container {
+    width: 100%;
+    height: calc(100% - 50px);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+}
+
+.street-view-btn {
+  background-color: #087e8b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  margin-left: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background-color: #065a6b;
+  }
+}
+
+.street-view-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+  .street-view-element {
+    width: 90%;
+    height: 80%;
+    margin-bottom: 20px;
+  }
+  
+  .close-street-view {
+    background-color: #ce2d4f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #a8233f;
+    }
+  }
+}
+
+
 
 
 

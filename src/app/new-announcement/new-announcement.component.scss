@@ -157,6 +157,7 @@
 
     .valid-button {
       background-color: #CE2D4F !important;
+      cursor: pointer !important;
     }
 
     display: flex;
@@ -170,17 +171,18 @@
       border-radius: 20px;
       font-weight: bold;
       font-size: 14px;
-      cursor: pointer;
     }
 
     .back {
       background-color: #087E8B;
       color: white;
+       cursor: pointer;
     }
 
     .next {
       background-color: #f9a9b0;
       color: white;
+       cursor: not-allowed;
     }
   }
 }
@@ -195,6 +197,25 @@ input[readonly] {
     outline: none;
     box-shadow: none;
   }
+}
+
+.open-map-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.open-map-btn:hover {
+  background-color: #0056b3;
+}
+
+.address-fields input {
+  margin-right: 5px;
 }
 
 

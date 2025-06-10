@@ -50,40 +50,47 @@
           <small class="required-field">CAMPO OBBLIGATORIO</small>
         </div>
 
-       <div class="form-group">
-  <label>Città:</label>
-  <input 
-    type="text" 
-    placeholder="Inserisci la città..." 
-    id="autocomplete-citta"
-    formControlName="citta" />
-  <small class="required-field">CAMPO OBBLIGATORIO</small>
-</div>
+        <div class="form-group">
+          <label>Città:</label>
+          <input 
+            type="text" 
+            placeholder="Inserisci la città..." 
+            id="autocomplete-citta"
+            formControlName="citta" />
+          <small class="required-field">CAMPO OBBLIGATORIO</small>
+        </div>
 
-       <div class="form-group address-group">
-  <label>Indirizzo:</label>
-  <div class="address-fields">
-    <input 
-      type="text" 
-      id="autocomplete-indirizzo"
-      placeholder="Inserisci indirizzo e n° civico..." 
-      formControlName="indirizzo" />
-      
-    <input 
-      type="text" 
-      class="number-input" 
-      formControlName="numero"
-        readonly />
-      
-    <label>CAP:</label> 
-    <input 
-      type="text" 
-      class="cap-input" 
-      formControlName="cap"
-        readonly />
-  </div>
-  <small class="required-field">CAMPI OBBLIGATORI</small>
-</div>
+        <div class="form-group address-group">
+          <label>Indirizzo:</label>
+          <div class="address-fields" style="display: flex; align-items: center;">
+            <!-- PULSANTE PER APRIRE LA MAPPA -->
+            <button type="button" class="open-map-btn" (click)="openMap()" style="margin-right: 8px;">
+              📍
+            </button>
+
+            <input 
+              type="text" 
+              id="autocomplete-indirizzo"
+              placeholder="Inserisci indirizzo e n° civico..." 
+              formControlName="indirizzo" />
+              
+            <input 
+              type="text" 
+              class="number-input" 
+              formControlName="numero"
+              readonly
+              placeholder="N°" />
+              
+            <label style="margin-left: 8px;">CAP:</label> 
+            <input 
+              type="text" 
+              class="cap-input" 
+              formControlName="cap"
+              readonly
+              placeholder="CAP" />
+          </div>
+          <small class="required-field">CAMPI OBBLIGATORI</small>
+        </div>
 
         <div class="form-buttons">
           <button type="button" class="back">INDIETRO</button>
@@ -96,6 +103,17 @@
         </div>
       </form>
     </div>
+
     <app-announcement-summary [activeStep]="1"></app-announcement-summary>
+  </div>
+
+  <div class="map-modal" *ngIf="showMapModal" 
+    style="position: fixed; top: 10%; left: 10%; width: 80%; height: 70%; background: white; z-index: 1000; box-shadow: 0 0 10px rgba(0,0,0,0.5); border-radius: 8px;">
+    <div id="map" style="width: 100%; height: 90%;"></div>
+    <button (click)="closeMap()" style="width: 100%; height: 10%;">Chiudi Mappa</button>
+  </div>
+
+  <div *ngIf="showMapModal" 
+    style="position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); z-index: 999;">
   </div>
 </div>

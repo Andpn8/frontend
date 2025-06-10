@@ -37,6 +37,10 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   propostaPrezzo: string = '';
   minDate: string = '';
 
+  showStreetView: boolean = false;
+  streetViewPanorama: any;
+  @ViewChild('streetViewElement') streetViewElement!: ElementRef;
+
   constructor(private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService,private offertaVisitaVenditaService: OffertaVisitaVenditaService,private offertaVisitaAffittoService: OffertaVisitaAffittoService) {
     const navigation = this.router.getCurrentNavigation();
     this.annuncio = navigation?.extras?.state?.['annuncio'];
@@ -346,5 +350,48 @@ onMinuteInput(event: any): void {
 
 preventManualInput(event: KeyboardEvent): void {
   event.preventDefault();
+}
+
+toggleStreetView(): void {
+  this.showStreetView = !this.showStreetView;
+  
+  if (this.showStreetView) {
+    setTimeout(() => {
+      this.initializeStreetView();
+    }, 0);
+  } else if (this.streetViewPanorama) {
+    // Pulisci l'istanza di Street View quando viene chiusa
+    this.streetViewPanorama = null;
+  }
+}
+
+initializeStreetView(): void {
+  const fullAddress = `${this.annuncio.indirizzo} ${this.annuncio.civico}, ${this.annuncio.cap} ${this.annuncio.comune}, Italia`;
+  
+  // Crea un geocoder per convertire l'indirizzo in coordinate
+  const geocoder = new google.maps.Geocoder();
+  
+  geocoder.geocode({ address: fullAddress }, (results, status) => {
+    if (status === 'OK' && results && results[0]) {
+      const location = results[0].geometry.location;
+      
+      // Crea l'istanza di Street View
+      this.streetViewPanorama = new google.maps.StreetViewPanorama(
+        this.streetViewElement.nativeElement,
+        {
+          position: location,
+          pov: { heading: 34, pitch: 10 },
+          zoom: 1,
+          addressControl: false,
+          linksControl: true,
+          panControl: true,
+          enableCloseButton: false
+        }
+      );
+    } else {
+      alert('Non è stato possibile trovare la posizione su Street View.');
+      this.showStreetView = false;
+    }
+  });
 }
 }
