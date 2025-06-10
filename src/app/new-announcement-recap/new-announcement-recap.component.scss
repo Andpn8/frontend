@@ -393,3 +393,35 @@
   font-weight: bold;
   margin-top: 50px;
 }
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  padding: 0 10%;
+
+  button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    min-width: 120px;
+    font-size: 14px;
+  }
+
+  .indietro {
+    background-color: #087E8B;
+    color: #fff;
+  }
+
+  .prosegui {
+    background-color: #f8a5b0;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+
+  .prosegui.active {
+    background-color: #ce2d4f !important;
+  }
+}

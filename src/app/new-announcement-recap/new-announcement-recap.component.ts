@@ -101,7 +101,7 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/home']); 
+    this.router.navigate(['/new-announcement-step4']); 
   }
 
   selectImage(index: number): void {

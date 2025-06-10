@@ -18,10 +18,8 @@ export class NewAnnouncementStep4Component {
 
   prefixOptions = [
     { code: '+39', label: '🇮🇹 +39' },
-    { code: '+33', label: '🇫🇷 +33' },
-    { code: '+49', label: '🇩🇪 +49' },
-    // Aggiungi altri se necessario
   ];
+  
 
   constructor(private fb: FormBuilder, private router: Router, private announcementDataService: AnnouncementDataService) {
     this.step4Form = this.fb.group({
@@ -40,9 +38,24 @@ export class NewAnnouncementStep4Component {
     });
   }
 
+  ngOnInit(): void {
+    const savedData = this.announcementDataService.getData();
+
+    if (savedData) {
+      if (savedData.email) {
+        this.step4Form.get('email')?.setValue(savedData.email);
+      }
+      if (savedData.phone) {
+        this.step4Form.get('phone')?.setValue(savedData.phone);
+      }
+    }
+  }
+  
+
   get isFormValid(): boolean {
    return this.step4Form.valid;
   }
+
 
   filterNumericInput(event: Event): void {
    const input = event.target as HTMLInputElement;
@@ -52,17 +65,28 @@ export class NewAnnouncementStep4Component {
   }
 
   goBack(): void {
-    this.router.navigate(['/new-announcement-step3']);
-  }
+  const step4Data = {
+    email: this.step4Form.get('email')?.value,
+    phone: this.step4Form.get('phone')?.value
+  };
+
+  this.announcementDataService.setData(step4Data);
+  this.router.navigate(['/new-announcement-step3']);
+}
 
  proceed(): void {
-    if (this.step4Form.valid) {
-      this.announcementDataService.setData(this.step4Form.value)
-      this.router.navigate(['/new-announcement-recap']);
-    } else {
-      this.step4Form.markAllAsTouched();
-    }
+  if (this.step4Form.valid) {
+    const step4Data = {
+      email: this.step4Form.get('email')?.value,
+      phone: this.step4Form.get('phone')?.value
+    };
+
+    this.announcementDataService.setData(step4Data);
+    this.router.navigate(['/new-announcement-recap']);
+  } else {
+    this.step4Form.markAllAsTouched();
   }
+}
 
   isInvalid(controlName: string): boolean {
     const control = this.step4Form.get(controlName);
