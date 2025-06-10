@@ -204,7 +204,6 @@ export class NewAnnouncementComponent implements OnInit, AfterViewInit {
         draggable: true
       });
 
-      // Aggiungo evento dragend per aggiornare i dati
       this.marker.addListener('dragend', (e: any) => {
         this.placeMarkerAndGeocode(e.latLng);
       });
@@ -214,7 +213,6 @@ export class NewAnnouncementComponent implements OnInit, AfterViewInit {
       if (status === 'OK' && results[0]) {
         const addressComponents = results[0].address_components;
 
-        // Estraggo i dati rilevanti
         const street = this.getComponent(addressComponents, 'route');
         const streetNumber = this.getComponent(addressComponents, 'street_number');
         const postalCode = this.getComponent(addressComponents, 'postal_code');
@@ -223,7 +221,6 @@ export class NewAnnouncementComponent implements OnInit, AfterViewInit {
           city = this.getComponent(addressComponents, 'administrative_area_level_3');
         }
 
-        // Andrea, qui è importante: aggiorniamo il form in Angular zone
         this.ngZone.run(() => {
           if (street) this.form.get('indirizzo')?.setValue(street);
           if (streetNumber) this.form.get('numero')?.setValue(streetNumber);
@@ -262,7 +259,7 @@ export class NewAnnouncementComponent implements OnInit, AfterViewInit {
   proceed() {
     if (this.form.valid) {
       this.updateAnnouncementData();
-      this.router.navigate(['/next-step']);
+      this.router.navigate(['/new-announcement-step2']);
     }
   }
 }
