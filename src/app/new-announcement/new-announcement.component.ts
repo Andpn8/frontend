@@ -237,9 +237,14 @@ export class NewAnnouncementComponent implements OnInit, AfterViewInit {
   }
 
   setAnnouncementType(type: 'vendita' | 'affitto') {
-    this.announcementType = type;
-    this.announcementDataService.setData({ announcementType: type });
-  }
+  this.announcementType = type;
+
+  const currentData = this.announcementDataService.getData() || {};
+  this.announcementDataService.setData({
+    ...currentData,
+    announcementType: type
+  });
+}
 
   updateAnnouncementData() {
     this.announcementData = {

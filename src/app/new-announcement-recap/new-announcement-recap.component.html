@@ -3,6 +3,18 @@
   [centerMessage]="'<strong>Anteprima Annuncio</strong>'">
 </app-navbar>
 
+<div class="confirmation-overlay" *ngIf="showConfirmationModal">
+  <div class="confirmation-modal">
+    <h3>Conferma caricamento annuncio</h3>
+    <p>Sei sicuro di voler pubblicare questo annuncio?</p>
+    
+    <div class="form-buttons">
+      <button type="button" class="annulla" (click)="cancelConfirmation()">ANNULLA</button>
+      <button type="button" class="invia" (click)="confirmSubmission()">INVIA</button>
+    </div>
+  </div>
+</div>
+
 <div class="preview-container">
   <div class="insertion-static">
     <div class="header">
@@ -91,13 +103,29 @@
     </div>
 
     <div class="servizi">
-  <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
-  <strong>Servizi:</strong>
-  <span *ngIf="serviziAttivi.length > 0; else noServizi">
-    {{ serviziAttivi.join(', ') }}
-  </span>
-  <ng-template #noServizi>Nessun servizio selezionato</ng-template>
-</div>
+      <img src="https://i.imgur.com/1FAMFeC.png" alt="Icona servizi" class="icon-servizi" />
+      <strong>Servizi:</strong>
+      <span *ngIf="serviziAttivi.length > 0; else noServizi">
+        {{ serviziAttivi.join(', ') }}
+      </span>
+      <ng-template #noServizi>Nessun servizio selezionato</ng-template>
+    </div>
+
+    <h2>Contatti</h2>
+
+    <div class="form-group">
+      <label>
+        <input type="checkbox" [checked]="hasCellulare" disabled />
+        Mostra numero di cellulare:
+      </label>
+
+      <div *ngIf="hasCellulare" class="cellulare-info">
+        <strong><br>Numero:</strong> {{ cellulare }}
+      </div>
+      <div class="email">
+        <strong><br>Email:</strong> {{ email }}
+      </div>
+    </div>
 
     <div class="gallery" *ngIf="planimetrie.length">
       <div class="section-label">Planimetrie</div>
@@ -114,12 +142,13 @@
         />
       </div>
     </div>
+    
     <div class="form-buttons">
-          <button type="button" class="indietro" (click)="goBack()">INDIETRO</button>
-          <button type="submit" class="prosegui">
-            PROSEGUI
-          </button>
-          </div>
+      <button type="button" class="indietro" (click)="goBack()">INDIETRO</button>
+      <button type="submit" class="prosegui" (click)="openConfirmationModal()">
+        PROSEGUI
+      </button>
+    </div>
   </div>
 
   <div class="announcement-box">

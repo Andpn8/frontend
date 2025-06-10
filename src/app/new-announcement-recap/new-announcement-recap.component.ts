@@ -4,16 +4,18 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { AnnouncementSummaryComponent } from "../announcement-summary/announcement-summary.component";
 import { CommonModule } from '@angular/common';
 import { AnnouncementDataService } from '../../services/componentServices/announcement-data.service';
+import { AuthService } from '../../services/auth.service';
+import { InsertionService } from '../../services/insertion.service';
 
 @Component({
   selector: 'app-new-announcement-recap',
   standalone: true,
   templateUrl: './new-announcement-recap.component.html',
   styleUrls: ['./new-announcement-recap.component.scss'],
-  imports: [NavbarComponent, AnnouncementSummaryComponent, CommonModule]
+  imports: [NavbarComponent, AnnouncementSummaryComponent, CommonModule],
+   providers: [InsertionService],
 })
 export class NewAnnouncementRecapComponent implements AfterViewInit {
-
   @ViewChild('headerContent') headerContent!: ElementRef;
   headerWidth = 0;
   titolo: string = '';
@@ -29,7 +31,10 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   bagni: number | null = null;   
   descrizione: string = '';
   email: string = '';
-  cellulare: string = ''; 
+  cellulare: string = '';
+  hasCellulare: boolean = false;
+  showConfirmationModal = false;
+
   servizi = [
     { label: 'Portineria', control: 'portineria' },
     { label: 'Garage', control: 'garage' },
@@ -46,12 +51,14 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
 
   constructor(
     private router: Router,
-    private announcementDataService: AnnouncementDataService
+    private announcementDataService: AnnouncementDataService,
+    private authService: AuthService,
+    private insertionService: InsertionService
   ) {} 
 
   ngOnInit(): void {
-  this.loadData();
-}
+    this.loadData();
+  }
 
   ngAfterViewInit() {
     this.headerWidth = this.headerContent.nativeElement.offsetWidth;
@@ -61,7 +68,6 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     const data = this.announcementDataService.getData();
 
     if (data) {
-      // Dati testuali
       this.titolo = data.titolo || '';
       this.indirizzo = data.indirizzo || '';
       this.numero = data.numero || '';
@@ -75,18 +81,16 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
       this.bagni = data.bagni || null;
       this.descrizione = data.descrizione || '';
       this.email = data.email || '';
-      this.cellulare = data.cellulare || '';
+      this.hasCellulare = !!data.showPhone;
+      this.cellulare = data.phone || '';
       
-      // Servizi
       this.serviziAttivi = this.servizi
         .filter(servizio => data[servizio.control])
         .map(servizio => servizio.label);
 
-      // Immagini e planimetrie
       this.images = data.fotoPreviews || [];
       this.planimetrie = data.planimetriaPreviews || [];
       
-      // Imposta le immagini selezionate di default
       if (this.images.length > 0) {
         this.selectedImage = this.images[0];
       }
@@ -94,10 +98,6 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
         this.selectedPlanimetria = this.planimetrie[0];
       }
     }
-  }
-
-  getServiziAttivi(serv: Record<string,boolean>): string[] {
-    return Object.entries(serv).filter(([_,a]) => a).map(([n]) => n.replace(/_/g,' '));
   }
 
   goBack(): void {
@@ -135,4 +135,63 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     const nextIndex = currentIndex === this.planimetrie.length - 1 ? 0 : currentIndex + 1;
     this.selectedPlanimetria = this.planimetrie[nextIndex];
   }
+
+  openConfirmationModal(): void {
+    this.showConfirmationModal = true;
+  }
+
+  cancelConfirmation(): void {
+    this.showConfirmationModal = false;
+  }
+
+  confirmSubmission(): void {
+  const data = this.announcementDataService.getData();
+  const agentId = this.authService.getAgentId();
+  console.log(data.announcementType);
+  
+  if (!data || !agentId) {
+    console.error('Dati annuncio o agentId mancanti');
+    return;
+  }
+
+  const insertionData = {
+    ...data,
+    agent_id: agentId,
+    servizi: {
+      portineria: data.portineria || false,
+      sicurezza: data.sicurezza || false,
+      garage: data.garage || false,
+      ascensore: data.ascensore || false,
+      climatizzazione: data.climatizzazione || false,
+      accesso_disabili: data.accessoDisabili || false
+    },
+    cellulare_mostrato: data.showPhone || false,
+    cellulare_agente: data.phone || '',
+    email_agente: data.email || ''
+  };
+
+  if (data?.announcementType === 'affitto') {
+    this.insertionService.createRent(insertionData).subscribe({
+      next: (response) => {
+        console.log('Annuncio affitto creato con successo', response);
+        this.router.navigate(['/announcement-confirmation']);
+      },
+      error: (error) => {
+        console.error('Errore nella creazione annuncio affitto', error);
+      }
+    });
+  } else if (data?.announcementType === 'vendita') {
+    this.insertionService.createSale(insertionData).subscribe({
+      next: (response) => {
+        console.log('Annuncio vendita creato con successo', response);
+        this.router.navigate(['/announcement-confirmation']);
+      },
+      error: (error) => {
+        console.error('Errore nella creazione annuncio vendita', error);
+      }
+    });
+  }
+
+  this.showConfirmationModal = false;
+}
 }

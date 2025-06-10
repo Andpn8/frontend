@@ -107,4 +107,16 @@ export class AuthService {
     return null;
   }
 }
+
+getAgentId(): number | null {
+  const token = this.getToken();
+  if (!token) return null;
+
+  try {
+    const decoded: any = jwtDecode(token);
+    return decoded.agentId || null;
+  } catch (e) {
+    return null;
+  }
+}
 }
