@@ -13,7 +13,7 @@ import { InsertionService } from '../../services/insertion.service';
   templateUrl: './new-announcement-recap.component.html',
   styleUrls: ['./new-announcement-recap.component.scss'],
   imports: [NavbarComponent, AnnouncementSummaryComponent, CommonModule],
-   providers: [InsertionService],
+  providers: [InsertionService],
 })
 export class NewAnnouncementRecapComponent implements AfterViewInit {
   @ViewChild('headerContent') headerContent!: ElementRef;
@@ -147,15 +147,20 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   confirmSubmission(): void {
   const data = this.announcementDataService.getData();
   const agentId = this.authService.getAgentId();
-  console.log(data.announcementType);
-  
+
   if (!data || !agentId) {
     console.error('Dati annuncio o agentId mancanti');
     return;
   }
 
+  if (!data.titolo || !data.indirizzo || !data.citta || !data.prezzo) {
+    console.error('Campi obbligatori mancanti');
+    return;
+  }
+
   const insertionData = {
     ...data,
+    propertyType: data.immobile || 'Appartamento', 
     agent_id: agentId,
     servizi: {
       portineria: data.portineria || false,
@@ -167,7 +172,8 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     },
     cellulare_mostrato: data.showPhone || false,
     cellulare_agente: data.phone || '',
-    email_agente: data.email || ''
+    email_agente: data.email || '',
+    descrizione: data.descrizione || 'Nessuna descrizione',
   };
 
   if (data?.announcementType === 'affitto') {
