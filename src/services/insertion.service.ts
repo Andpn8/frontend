@@ -41,8 +41,6 @@ export class InsertionService {
         climatizzazione: false,
         accesso_disabili: false
       },
-      foto: insertionData.fotoPreviews || [],
-      planimetrie: insertionData.planimetriaPreviews || [],
       email_agente: insertionData.email_agente,
       cellulare_agente: insertionData.cellulare_agente,
       cellulare_mostrato: insertionData.cellulare_mostrato,

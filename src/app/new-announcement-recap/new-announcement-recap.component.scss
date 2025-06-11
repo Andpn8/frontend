@@ -458,7 +458,7 @@
     color: #fff;
     
     &:hover {
-      background-color: darken(#087E8B, 10%);
+      background-color: color.adjust(#087E8B, $lightness: -10%);
     }
   }
 
@@ -467,7 +467,7 @@
     color: white;
     
     &:hover {
-      background-color: darken(#ce2d4f, 10%) !important;
+      background-color: color.adjust(#ce2d4f, $lightness: -10%) !important;
     }
   }
 
@@ -476,7 +476,7 @@
     color: #fff;
     
     &:hover {
-      background-color: darken(#087E8B, 10%);
+      background-color: color.adjust(#087E8B, $lightness: -10%);
     }
   }
   
@@ -485,7 +485,7 @@
     color: white;
     
     &:hover {
-      background-color: darken(#ce2d4f, 10%) !important;
+      background-color: color.adjust(#ce2d4f, $lightness: -10%) !important;
     }
   }
 }
