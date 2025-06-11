@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { AnnouncementDataService } from '../../services/componentServices/announcement-data.service';
 import { AuthService } from '../../services/auth.service';
 import { InsertionService } from '../../services/insertion.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-new-announcement-recap',
@@ -144,7 +145,7 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     this.showConfirmationModal = false;
   }
 
-  confirmSubmission(): void {
+  async confirmSubmission(): Promise<void> {
   const data = this.announcementDataService.getData();
   const agentId = this.authService.getAgentId();
 
@@ -158,46 +159,75 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     return;
   }
 
-  const insertionData = {
-    ...data,
-    propertyType: data.immobile || 'Appartamento', 
-    agent_id: agentId,
-    servizi: {
-      portineria: data.portineria || false,
-      sicurezza: data.sicurezza || false,
-      garage: data.garage || false,
-      ascensore: data.ascensore || false,
-      climatizzazione: data.climatizzazione || false,
-      accesso_disabili: data.accessoDisabili || false
-    },
-    cellulare_mostrato: data.showPhone || false,
-    cellulare_agente: data.phone || '',
-    email_agente: data.email || '',
-    descrizione: data.descrizione || 'Nessuna descrizione',
-  };
+  try {
+    // Converti le previews in File objects con tipi espliciti
+    const fotoFiles = data.fotoPreviews?.map((preview: string) => this.dataURLtoFile(preview)) || [];
+    const planimetrieFiles = data.planimetriaPreviews?.map((preview: string) => this.dataURLtoFile(preview)) || [];
 
-  if (data?.announcementType === 'affitto') {
-    this.insertionService.createRent(insertionData).subscribe({
-      next: (response) => {
-        console.log('Annuncio affitto creato con successo', response);
-        this.router.navigate(['/announcement-confirmation']);
+    // Carica prima le immagini con gestione degli errori
+    const uploadResults = await forkJoin([
+      this.insertionService.uploadFiles(fotoFiles),
+      this.insertionService.uploadFiles(planimetrieFiles)
+    ]).toPromise();
+
+    if (!uploadResults) {
+      throw new Error('Upload failed');
+    }
+
+    const [fotoUrls = [], planimetrieUrls = []] = uploadResults;
+
+    const insertionData = {
+      ...data,
+      propertyType: data.immobile || 'Appartamento', 
+      agent_id: agentId,
+      servizi: {
+        portineria: data.portineria || false,
+        sicurezza: data.sicurezza || false,
+        garage: data.garage || false,
+        ascensore: data.ascensore || false,
+        climatizzazione: data.climatizzazione || false,
+        accesso_disabili: data.accessoDisabili || false
       },
-      error: (error) => {
-        console.error('Errore nella creazione annuncio affitto', error);
-      }
-    });
-  } else if (data?.announcementType === 'vendita') {
-    this.insertionService.createSale(insertionData).subscribe({
-      next: (response) => {
-        console.log('Annuncio vendita creato con successo', response);
-        this.router.navigate(['/announcement-confirmation']);
-      },
-      error: (error) => {
-        console.error('Errore nella creazione annuncio vendita', error);
-      }
-    });
+      cellulare_mostrato: data.showPhone || false,
+      cellulare_agente: data.phone || '',
+      email_agente: data.email || '',
+      descrizione: data.descrizione || 'Nessuna descrizione',
+    };
+
+    if (data?.announcementType === 'affitto') {
+      await this.insertionService.createRent(insertionData, fotoUrls, planimetrieUrls).toPromise();
+      console.log('Annuncio affitto creato con successo');
+      this.router.navigate(['/announcement-confirmation']);
+    } else if (data?.announcementType === 'vendita') {
+      await this.insertionService.createSale(insertionData, fotoUrls, planimetrieUrls).toPromise();
+      console.log('Annuncio vendita creato con successo');
+      this.router.navigate(['/announcement-confirmation']);
+    }
+  } catch (error) {
+    console.error('Errore durante il caricamento:', error);
+    // Mostra un messaggio all'utente se necessario
+  } finally {
+    this.showConfirmationModal = false;
+  }
+}
+
+// Helper per convertire dataURL in File con tipi espliciti
+private dataURLtoFile(dataurl: string): File {
+  const arr = dataurl.split(',');
+  const mimeMatch = arr[0].match(/:(.*?);/);
+  
+  if (!mimeMatch) {
+    throw new Error('Invalid data URL format');
   }
 
-  this.showConfirmationModal = false;
+  const mime = mimeMatch[1];
+  const bstr = atob(arr[1]);
+  const u8arr = new Uint8Array(bstr.length);
+  
+  for (let i = 0; i < bstr.length; i++) {
+    u8arr[i] = bstr.charCodeAt(i);
+  }
+  
+  return new File([u8arr], 'image.jpg', { type: mime });
 }
 }

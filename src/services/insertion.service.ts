@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,37 @@ import { Observable, map } from 'rxjs';
 export class InsertionService {
   private rentUrl = 'http://localhost:3002/rents';
   private saleUrl = 'http://localhost:3002/sales';
+  private uploadUrl = 'http://localhost:3002/foto/upload';
 
   constructor(private http: HttpClient) {}
+
+  uploadFile(file: File): Observable<{url: string}> {
+    const formData = new FormData();
+    formData.append('image', file);
+    return this.http.post<{url: string}>(this.uploadUrl, formData);
+  }
+
+  // Metodo per caricare più file
+  uploadFiles(files: File[]): Observable<string[]> {
+    if (!files || files.length === 0) {
+      return of([]);
+    }
+    
+    const uploadObservables = files.map(file => 
+      this.uploadFile(file).pipe(
+        map(response => response.url),
+        catchError(error => {
+          console.error('Upload error:', error);
+          return of(null);
+        })
+      )
+    );
+
+    return forkJoin(uploadObservables).pipe(
+      map(urls => urls.filter(url => url !== null) as string[])
+    );
+  }
+
 
   getAllRentals(): Observable<any[]> {
     return this.http.get<any[]>(this.rentUrl);
@@ -19,7 +48,7 @@ export class InsertionService {
     return this.http.get<any[]>(this.saleUrl);
   }
 
-     createRent(insertionData: any): Observable<any> {
+     createRent(insertionData: any, fotoUrls: string[] = [], planimetrieUrls: string[] = []): Observable<any> {
     const formattedData = {
       tipologia_immobile: insertionData.propertyType,
       titolo: insertionData.titolo,
@@ -45,12 +74,14 @@ export class InsertionService {
       cellulare_agente: insertionData.cellulare_agente,
       cellulare_mostrato: insertionData.cellulare_mostrato,
       descrizione: insertionData.descrizione,
-      agent_id: insertionData.agent_id
+      agent_id: insertionData.agent_id,
+      foto: fotoUrls,
+      planimetrie: planimetrieUrls,
     };
     return this.http.post(this.rentUrl, formattedData);
   }
 
-  createSale(insertionData: any): Observable<any> {
+  createSale(insertionData: any, fotoUrls: string[] = [], planimetrieUrls: string[] = []): Observable<any> {
     const formattedData = {
       tipologia_immobile: insertionData.propertyType,
       titolo: insertionData.titolo,
@@ -76,7 +107,9 @@ export class InsertionService {
       cellulare_agente: insertionData.cellulare_agente,
       cellulare_mostrato: insertionData.cellulare_mostrato,
       descrizione: insertionData.descrizione,
-      agent_id: insertionData.agent_id
+      agent_id: insertionData.agent_id,
+      foto: fotoUrls,
+      planimetrie: planimetrieUrls,
     };
     return this.http.post(this.saleUrl, formattedData);
   }
