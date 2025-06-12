@@ -2,7 +2,6 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { PLATFORM_ID } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
-import { FooterComponent } from "../footer/footer.component";
 import { NotificationService, Notifica as NotificaUser } from '../../services/notification.service';
 import { NotificationAgenteService, NotificaAgente } from '../../services/notification-agente.service';
 import { AuthService } from '../../services/auth.service';
@@ -12,7 +11,7 @@ type Notifica = NotificaUser | NotificaAgente;
 @Component({
   selector: 'app-notify',
   standalone: true,
-  imports: [NavbarComponent, FooterComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule],
   templateUrl: './notify.component.html',
   styleUrls: ['./notify.component.scss']
 })

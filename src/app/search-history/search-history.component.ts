@@ -31,30 +31,40 @@ interface FilterSet {
 export class SearchHistoryComponent {
   @Input() searchHistory: FilterSet[] = [];
   @Output() restoreFilters = new EventEmitter<FilterSet>();
+  
+  confirmationVisible = false;
 
   applyFilters(filters: FilterSet): void {
     this.restoreFilters.emit(filters);
+    this.showConfirmation();
+  }
+
+  showConfirmation(): void {
+    this.confirmationVisible = true;
+    setTimeout(() => {
+      this.confirmationVisible = false;
+    }, 3000);
   }
 
   hasServices(services: FilterSet["services"] | undefined): boolean {
-  return services ? Object.values(services).some(v => v) : false;
-}
+    return services ? Object.values(services).some(v => v) : false;
+  }
 
   listServices(services: FilterSet["services"] | undefined): string {
-  if (!services) return '';
+    if (!services) return '';
 
-  const names = {
-    portineria: 'Portineria',
-    garage: 'Garage',
-    climatizzazione: 'Climatizzazione',
-    sicurezza: 'Sicurezza',
-    ascensore: 'Ascensore',
-    accessoDisabili: 'Accesso Disabili'
-  };
+    const names = {
+      portineria: 'Portineria',
+      garage: 'Garage',
+      climatizzazione: 'Climatizzazione',
+      sicurezza: 'Sicurezza',
+      ascensore: 'Ascensore',
+      accessoDisabili: 'Accesso Disabili'
+    };
 
-      return Object.entries(services)
-    .filter(([key, val]) => val)
-    .map(([key]) => names[key as keyof typeof names])
-    .join(', ');
-}
+    return Object.entries(services)
+      .filter(([key, val]) => val)
+      .map(([key]) => names[key as keyof typeof names])
+      .join(', ');
+  }
 }

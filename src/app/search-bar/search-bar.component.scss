@@ -284,12 +284,11 @@ select {
     
   }
 
-  /* Aggiungi i pulsanti in un contenitore separato */
   .button-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    margin-top: 20px; /* Spazio tra i filtri e i pulsanti */
+    margin-top: 20px; 
 
     .apply-btn, .close-btn {
       background-color: #d63053;
@@ -302,19 +301,18 @@ select {
       transition: background-color 0.3s ease;
 
       &:hover {
-        background-color: #b3243f; /* Colore di hover per il pulsante */
+        background-color: #b3243f; 
       }
     }
 
     .close-btn {
       background-color: #087E8B;
       &:hover {
-        background-color: #075e63; /* Colore di hover per il pulsante di chiusura */
+        background-color: #075e63;
       }
     }
   }
 
-  /* Messaggio di conferma */
   .confirmation-message {
     display: none;
     margin-top: 10px;
