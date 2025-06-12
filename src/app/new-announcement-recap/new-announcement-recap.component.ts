@@ -35,6 +35,7 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   cellulare: string = '';
   hasCellulare: boolean = false;
   showConfirmationModal = false;
+   isAffitto: boolean = false;
 
   servizi = [
     { label: 'Portineria', control: 'portineria' },
@@ -69,6 +70,7 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     const data = this.announcementDataService.getData();
 
     if (data) {
+      this.isAffitto = data.announcementType === 'affitto';
       this.titolo = data.titolo || '';
       this.indirizzo = data.indirizzo || '';
       this.numero = data.numero || '';
@@ -160,11 +162,9 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   }
 
   try {
-    // Converti le previews in File objects con tipi espliciti
     const fotoFiles = data.fotoPreviews?.map((preview: string) => this.dataURLtoFile(preview)) || [];
     const planimetrieFiles = data.planimetriaPreviews?.map((preview: string) => this.dataURLtoFile(preview)) || [];
 
-    // Carica prima le immagini con gestione degli errori
     const uploadResults = await forkJoin([
       this.insertionService.uploadFiles(fotoFiles),
       this.insertionService.uploadFiles(planimetrieFiles)
@@ -205,13 +205,11 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
     }
   } catch (error) {
     console.error('Errore durante il caricamento:', error);
-    // Mostra un messaggio all'utente se necessario
   } finally {
     this.showConfirmationModal = false;
   }
 }
 
-// Helper per convertire dataURL in File con tipi espliciti
 private dataURLtoFile(dataurl: string): File {
   const arr = dataurl.split(',');
   const mimeMatch = arr[0].match(/:(.*?);/);

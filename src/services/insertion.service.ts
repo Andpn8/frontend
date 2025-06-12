@@ -18,7 +18,6 @@ export class InsertionService {
     return this.http.post<{url: string}>(this.uploadUrl, formData);
   }
 
-  // Metodo per caricare più file
   uploadFiles(files: File[]): Observable<string[]> {
     if (!files || files.length === 0) {
       return of([]);

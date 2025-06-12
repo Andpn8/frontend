@@ -69,10 +69,10 @@
       <div class="vertical-separator"></div>
 
       <div class="info-row">
-        <span class="prezzo">
-          € {{ prezzo }}
-        </span>
-      </div>
+  <span class="prezzo">
+    € {{ prezzo }}<span *ngIf="isAffitto">/mese</span>
+  </span>
+</div>
     </div>
 
     <div class="descrizione">
