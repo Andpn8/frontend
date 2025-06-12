@@ -4,11 +4,12 @@ import { AuthService } from '../../services/auth.service';
 import { FooterComponent } from '../footer/footer.component';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from "../navbar/navbar.component";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-agency-login',
   standalone: true,
-  imports: [FormsModule, FooterComponent, NavbarComponent],
+  imports: [FormsModule, FooterComponent, NavbarComponent,CommonModule],
   templateUrl: './agency-login.component.html',
   styleUrls: ['./agency-login.component.scss']
 })

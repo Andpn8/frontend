@@ -84,4 +84,33 @@
       }
     }
   }
+
+   .register-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #087E8B;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    z-index: 2000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease-in-out;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.register-toast.error {
+    background-color: #d63053;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+    10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
   

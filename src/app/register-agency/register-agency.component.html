@@ -4,6 +4,10 @@
 </app-navbar>
 <div class="login-container">
   <div class="login-card">
+    <div class="register-toast" *ngIf="showToast" [class.error]="isError">
+        <span *ngIf="!isError">✅ {{ toastMessage }}</span>
+        <span *ngIf="isError">❌ {{ toastMessage }}</span>
+      </div>
     <div class="back-arrow" (click)="goBack()">&#8592;</div>
     <h2>Registrazione Agenzia <span>DietiEstates</span></h2>
 
