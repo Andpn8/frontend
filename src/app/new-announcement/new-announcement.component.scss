@@ -216,34 +216,34 @@ input[readonly] {
 
 .address-fields input {
   margin-right: 5px;
+
+  input.ng-valid.ng-touched,
+  select.ng-valid.ng-touched {
+    border-color: #087E8B !important;
+  }
+
+  /* Aggiunto per visualizzare il messaggio "CAMPO OBBLIGATORIO" sempre quando il campo è vuoto */
+  small.required-field {
+   display: block;
+   color: #CE2D4F;
+   font-size: 12px;
+   margin-top: 4px;
+  }
+
+  /* Nascondi "CAMPO OBBLIGATORIO" quando il campo è valido */
+  input.ng-valid.ng-touched + small.required-field,
+  select.ng-valid.ng-touched + small.required-field {
+    display: none !important;
 }
 
+}
 
+input.ng-valid,
+select.ng-valid {
+  border: 1px solid #087E8B !important;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+input.ng-invalid,
+select.ng-invalid {
+  border: 1px solid #CE2D4F !important;
+}

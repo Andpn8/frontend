@@ -22,85 +22,92 @@
         </button>
       </div>
 
-      <form [formGroup]="form" (ngSubmit)="proceed()">
-        <div class="form-group">
-          <label>Immobile:</label>
-          <select formControlName="immobile">
-            <option value="" disabled selected></option>
-            <option>Appartamento</option>
-            <option>Villa</option>
-            <option>Monolocale</option>
-            <option>Attico</option>
-          </select>
-          <small class="required-field">CAMPO OBBLIGATORIO</small>
-        </div>
+  
 
-        <div class="form-group">
-          <label>Titolo Annuncio:</label>
-          <input type="text" placeholder="Inserisci titolo..." formControlName="titolo" />
-          <small class="required-field">CAMPO OBBLIGATORIO</small>
-        </div>
+<form [formGroup]="form" (ngSubmit)="proceed()">
+  <div class="form-group">
+    <label>Immobile:</label>
+    <select formControlName="immobile" [ngClass]="{ 'ng-touched': form.get('immobile')?.touched, 'ng-valid': form.get('immobile')?.valid }">
+      <option value="" disabled selected></option>
+      <option>Appartamento</option>
+      <option>Villa</option>
+      <option>Monolocale</option>
+      <option>Attico</option>
+    </select>
+    <small class="required-field" *ngIf="form.get('immobile')?.invalid">CAMPO OBBLIGATORIO</small>
+  </div>
 
-        <div class="form-group price">
-          <label>Prezzo:</label>
-          <div class="price-input">
-            <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="Es. 50.000" formControlName="prezzo" />
-            <span>€</span>
-          </div>
-          <small class="required-field">CAMPO OBBLIGATORIO</small>
-        </div>
+  <div class="form-group">
+    <label>Titolo Annuncio:</label>
+    <input type="text" placeholder="Inserisci titolo..." formControlName="titolo" [ngClass]="{ 'ng-touched': form.get('titolo')?.touched, 'ng-valid': form.get('titolo')?.valid }" />
+    <small class="required-field" *ngIf="form.get('titolo')?.invalid">CAMPO OBBLIGATORIO</small>
+  </div>
 
-        <div class="form-group">
-          <label>Città:</label>
-          <input 
-            type="text" 
-            placeholder="Inserisci la città..." 
-            id="autocomplete-citta"
-            formControlName="citta" />
-          <small class="required-field">CAMPO OBBLIGATORIO</small>
-        </div>
+  <div class="form-group price">
+    <label>Prezzo:</label>
+    <div class="price-input">
+      <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="Es. 50.000" formControlName="prezzo" [ngClass]="{ 'ng-touched': form.get('prezzo')?.touched, 'ng-valid': form.get('prezzo')?.valid }"/>
+      <span>€</span>
+    </div>
+    <small class="required-field" *ngIf="form.get('prezzo')?.invalid">CAMPO OBBLIGATORIO</small>
+  </div>
 
-        <div class="form-group address-group">
-          <label>Indirizzo:</label>
-          <div class="address-fields" style="display: flex; align-items: center;">
-            <button type="button" class="open-map-btn" (click)="openMap()" style="margin-right: 8px;">
-              📍
-            </button>
+  <div class="form-group">
+    <label>Città:</label>
+    <input 
+      type="text" 
+      placeholder="Inserisci la città..." 
+      id="autocomplete-citta"
+      formControlName="citta" 
+      [ngClass]="{ 'ng-touched': form.get('citta')?.touched, 'ng-valid': form.get('citta')?.valid }"/>
+    <small class="required-field" *ngIf="form.get('citta')?.invalid">CAMPO OBBLIGATORIO</small>
+  </div>
 
-            <input 
-              type="text" 
-              id="autocomplete-indirizzo"
-              placeholder="Inserisci indirizzo e n° civico..." 
-              formControlName="indirizzo" />
-              
-            <input 
-              type="text" 
-              class="number-input" 
-              formControlName="numero"
-              readonly
-              placeholder="N°" />
-              
-            <label style="margin-left: 8px;">CAP:</label> 
-            <input 
-              type="text" 
-              class="cap-input" 
-              formControlName="cap"
-              readonly
-              placeholder="CAP" />
-          </div>
-          <small class="required-field">CAMPI OBBLIGATORI</small>
-        </div>
+  <div class="form-group address-group">
+    <label>Indirizzo:</label>
+    <div class="address-fields" style="display: flex; align-items: center;">
+      <button type="button" class="open-map-btn" (click)="openMap()" style="margin-right: 8px;">
+        📍
+      </button>
 
-        <div class="form-buttons">
-          <button type="button" class="back">INDIETRO</button>
-          <button 
-            type="submit" 
-            class="next" 
-            [ngClass]="{ 'active': form.valid, 'valid-button': form.valid }">
-            PROSEGUI
-          </button>
-        </div>
-      </form>
+      <input 
+        type="text" 
+        id="autocomplete-indirizzo"
+        placeholder="Inserisci indirizzo e n° civico..." 
+        formControlName="indirizzo"
+        [ngClass]="{ 'ng-touched': form.get('indirizzo')?.touched, 'ng-valid': form.get('indirizzo')?.valid }" />
+        
+      <input 
+        type="text" 
+        class="number-input" 
+        formControlName="numero"
+        readonly
+        placeholder="N°" />
+        
+      <label style="margin-left: 8px;">CAP:</label> 
+      <input 
+        type="text" 
+        class="cap-input" 
+        formControlName="cap"
+        readonly
+        placeholder="CAP" />
+    </div>
+    <small class="required-field" *ngIf="form.get('indirizzo')?.invalid">CAMPO OBBLIGATORIO</small>
+  </div>
+
+  <div class="form-buttons">
+    <button type="button" class="back">INDIETRO</button>
+    <button 
+      type="submit" 
+      class="next" 
+      [ngClass]="{ 'active': form.valid, 'valid-button': form.valid }">
+      PROSEGUI
+    </button>
+  </div>
+</form>
+
+
+
     </div>
 
     <app-announcement-summary [activeStep]="1"></app-announcement-summary>
