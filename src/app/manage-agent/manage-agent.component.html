@@ -37,39 +37,39 @@
           <td>{{ agent.name }}</td>
           <td>{{ agent.role }}</td>
           <td>
-            <!-- Promuovi (solo se è un Agente) -->
-           <button class="promote" 
-           (click)="promoteAgent(agent.id)"
-               *ngIf="agent.role === 'Agente'" 
-                [disabled]="currentUserRole !== 'CEO' && currentUserRole !== 'Amministratore'">
-             Promuovi
+         
+            <button class="promote" 
+                    (click)="confirmAction('promote', agent)"
+                    *ngIf="agent.role === 'Agente'" 
+                    [disabled]="currentUserRole !== 'CEO' && currentUserRole !== 'Amministratore'">
+              Promuovi
             </button>
 
-            <!-- Declassa (solo se è un Amministratore) -->
-           <button class="demote"
-        *ngIf="agent.role === 'Amministratore'" 
-        (click)="demoteAdmin(agent.id)" 
-        [disabled]="currentUserRole !== 'CEO'">
-  Declassa
-  <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
-</button>
+         
+            <button class="demote"
+                    *ngIf="agent.role === 'Amministratore'" 
+                    (click)="confirmAction('demote', agent)" 
+                    [disabled]="currentUserRole !== 'CEO'">
+              Declassa
+              <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
+            </button>
 
-            <!-- Licenzia AGENTE -->
-<button class="fire" 
-        *ngIf="agent.role === 'Agente'" 
-        (click)="fireAgent(agent.id)" 
-        [disabled]="currentUserRole !== 'CEO' && currentUserRole !== 'Amministratore'">
-  Licenzia
-</button>
+          
+            <button class="fire" 
+                    *ngIf="agent.role === 'Agente'" 
+                    (click)="confirmAction('fireAgent', agent)" 
+                    [disabled]="currentUserRole !== 'CEO' && currentUserRole !== 'Amministratore'">
+              Licenzia
+            </button>
 
-<!-- Licenzia AMMINISTRATORE -->
-<button class="fire" 
-        *ngIf="agent.role === 'Amministratore'" 
-        (click)="fireAdmin(agent.id)" 
-        [disabled]="currentUserRole !== 'CEO'">
-  Licenzia
-  <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
-</button>
+        
+            <button class="fire" 
+                    *ngIf="agent.role === 'Amministratore'" 
+                    (click)="confirmAction('fireAdmin', agent)" 
+                    [disabled]="currentUserRole !== 'CEO'">
+              Licenzia
+              <span *ngIf="currentUserRole !== 'CEO'" class="lock">🔒</span>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -85,4 +85,25 @@
   </div>
 
   <app-footer></app-footer>
+</div>
+
+<div class="overlay" *ngIf="showConfirmDialog" (click)="cancelAction()">
+  <div class="overlay-content" (click)="$event.stopPropagation()">
+    <h2>Conferma operazione</h2>
+    <p>{{ confirmMessage }}</p>
+    <div class="confirm-buttons">
+      <button class="confirm-btn" (click)="proceedAction()">Conferma</button>
+      <button class="cancel-btn" (click)="cancelAction()">Annulla</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="showResultDialog" (click)="closeResultDialog()">
+  <div class="overlay-content" (click)="$event.stopPropagation()">
+    <h2>{{ resultTitle }}</h2>
+    <p>{{ resultMessage }}</p>
+    <div class="confirm-buttons">
+      <button class="confirm-btn" (click)="closeResultDialog()">OK</button>
+    </div>
+  </div>
 </div>

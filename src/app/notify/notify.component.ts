@@ -19,6 +19,8 @@ export class NotifyComponent implements OnInit {
   notifications: Notifica[] = [];
   selectedNotification: Notifica | null = null;
   userRole: 'user' | 'agent' | 'guest' = 'guest';
+  showDeleteConfirm = false;
+  notificationToDelete: Notifica | null = null;
 
   constructor(
     private notificationService: NotificationService,
@@ -54,17 +56,36 @@ export class NotifyComponent implements OnInit {
     return this.notifications.filter(n => !n.letta).length;
   }
 
-  deleteNotification(notification: Notifica): void {
+  confirmDelete(notification: Notifica, event: MouseEvent): void {
+    event.stopPropagation();
+    this.notificationToDelete = notification;
+    this.showDeleteConfirm = true;
+  }
+
+  proceedDelete(): void {
+    if (!this.notificationToDelete) return;
+    
+    const notification = this.notificationToDelete;
     const service = this.userRole === 'agent' ? this.notificationAgenteService : this.notificationService;
+    
     service.deleteNotifica(notification.notificaId).subscribe({
       next: () => {
         this.notifications = this.notifications.filter(n => n.notificaId !== notification.notificaId);
         if (this.selectedNotification?.notificaId === notification.notificaId) {
           this.closeNotification();
         }
+        this.cancelDelete();
       },
-      error: (err) => console.error('Errore nella cancellazione:', err)
+      error: (err) => {
+        console.error('Errore nella cancellazione:', err);
+        this.cancelDelete();
+      }
     });
+  }
+
+  cancelDelete(): void {
+    this.showDeleteConfirm = false;
+    this.notificationToDelete = null;
   }
 
   openNotification(notification: Notifica): void {
