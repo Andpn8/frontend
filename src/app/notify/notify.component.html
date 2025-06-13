@@ -14,7 +14,7 @@
             {{ notification.titoloNotifica }}
             <span *ngIf="!notification.letta" class="new-label">NEW</span>
           </h3>
-          <button class="delete-btn" (click)="deleteNotification(notification); $event.stopPropagation()">Elimina</button>
+          <button class="delete-btn" (click)="confirmDelete(notification, $event)">Elimina</button>
         </div>
         <p>{{ notification.contenuto }}</p>
         <span class="notification-date">{{ notification.dataNotifica | date:'dd/MM/yyyy' }}</span>
@@ -38,3 +38,13 @@
   </div>
 </div>
 
+<div class="overlay" *ngIf="showDeleteConfirm" (click)="cancelDelete()">
+  <div class="overlay-content delete-confirm" (click)="$event.stopPropagation()">
+    <h2>Conferma eliminazione</h2>
+    <p>Sei sicuro di voler eliminare questa notifica?</p>
+    <div class="confirm-buttons">
+      <button class="confirm-btn" (click)="proceedDelete()">Si</button>
+      <button class="cancel-btn" (click)="cancelDelete()">No</button>
+    </div>
+  </div>
+</div>
