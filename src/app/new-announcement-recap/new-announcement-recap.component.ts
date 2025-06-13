@@ -35,7 +35,10 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   cellulare: string = '';
   hasCellulare: boolean = false;
   showConfirmationModal = false;
-   isAffitto: boolean = false;
+  isAffitto: boolean = false;
+  showResultModal = false;
+  resultModalTitle = '';
+  resultModalMessage = '';
 
   servizi = [
     { label: 'Portineria', control: 'portineria' },
@@ -152,12 +155,12 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
   const agentId = this.authService.getAgentId();
 
   if (!data || !agentId) {
-    console.error('Dati annuncio o agentId mancanti');
+    this.showError('Dati annuncio o agentId mancanti');
     return;
   }
 
   if (!data.titolo || !data.indirizzo || !data.citta || !data.prezzo) {
-    console.error('Campi obbligatori mancanti');
+    this.showError('Campi obbligatori mancanti');
     return;
   }
 
@@ -196,15 +199,14 @@ export class NewAnnouncementRecapComponent implements AfterViewInit {
 
     if (data?.announcementType === 'affitto') {
       await this.insertionService.createRent(insertionData, fotoUrls, planimetrieUrls).toPromise();
-      console.log('Annuncio affitto creato con successo');
-      this.router.navigate(['/announcement-confirmation']);
+      this.showSuccessAndRedirect('Annuncio affitto creato con successo');
     } else if (data?.announcementType === 'vendita') {
       await this.insertionService.createSale(insertionData, fotoUrls, planimetrieUrls).toPromise();
-      console.log('Annuncio vendita creato con successo');
-      this.router.navigate(['/announcement-confirmation']);
+      this.showSuccessAndRedirect('Annuncio vendita creato con successo');
     }
   } catch (error) {
     console.error('Errore durante il caricamento:', error);
+    this.showError('Errore durante il caricamento dell\'annuncio');
   } finally {
     this.showConfirmationModal = false;
   }
@@ -227,5 +229,33 @@ private dataURLtoFile(dataurl: string): File {
   }
   
   return new File([u8arr], 'image.jpg', { type: mime });
+}
+
+private showSuccess(message: string): void {
+  this.resultModalTitle = 'Operazione completata';
+  this.resultModalMessage = message;
+  this.showResultModal = true;
+}
+
+private showError(message: string): void {
+  this.resultModalTitle = 'Errore';
+  this.resultModalMessage = message;
+  this.showResultModal = true;
+}
+
+closeResultModal(): void {
+  this.showResultModal = false;
+  this.resultModalTitle = '';
+  this.resultModalMessage = '';
+}
+
+private showSuccessAndRedirect(message: string): void {
+  this.resultModalTitle = 'Operazione completata';
+  this.resultModalMessage = message;
+  this.showResultModal = true;
+  
+  setTimeout(() => {
+    this.router.navigate(['/home']);
+  }, 3000);
 }
 }

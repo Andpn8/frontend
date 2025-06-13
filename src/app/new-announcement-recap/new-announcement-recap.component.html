@@ -155,3 +155,26 @@
     <app-announcement-summary [activeStep]="5"></app-announcement-summary>
   </div>
 </div>
+
+<div class="overlay" *ngIf="showConfirmationModal" (click)="cancelConfirmation()">
+  <div class="confirmation-modal" (click)="$event.stopPropagation()">
+    <h3>Conferma caricamento annuncio</h3>
+    <p>Sei sicuro di voler pubblicare questo annuncio?</p>
+    
+    <div class="form-buttons">
+      <button type="button" class="annulla" (click)="cancelConfirmation()">ANNULLA</button>
+      <button type="button" class="invia" (click)="confirmSubmission()">INVIA</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="showResultModal" (click)="closeResultModal()">
+  <div class="result-modal" (click)="$event.stopPropagation()">
+    <h3>{{ resultModalTitle }}</h3>
+    <p>{{ resultModalMessage }}</p>
+    
+    <div class="button-container">
+      <button type="button" class="confirm-btn" (click)="closeResultModal()">OK</button>
+    </div>
+  </div>
+</div>
