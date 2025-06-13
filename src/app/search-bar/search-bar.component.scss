@@ -351,20 +351,20 @@ select {
 
 .filter-row {
   display: flex;
-  gap: 20px; /* Spazio tra i due elementi */
+  gap: 20px; 
   justify-content: center;
   width: 100%;
-  flex-wrap: wrap; /* Mobile-friendly */
+  flex-wrap: wrap; 
   
   .filter-item {
-    flex: 1 1 45%; /* Ogni campo prende circa metà larghezza */
-    max-width: 250px; /* Per evitare che si allarghino troppo su schermi grandi */
+    flex: 1 1 45%; 
+    max-width: 250px;
   }
 }
 
 #num-rooms,
 #num-bathrooms {
-  width: 50px; // oppure 65px se vuoi ancora più compatto
+  width: 50px; 
   text-align: center;
 }
 

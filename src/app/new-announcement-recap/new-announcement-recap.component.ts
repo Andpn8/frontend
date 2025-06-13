@@ -231,12 +231,6 @@ private dataURLtoFile(dataurl: string): File {
   return new File([u8arr], 'image.jpg', { type: mime });
 }
 
-private showSuccess(message: string): void {
-  this.resultModalTitle = 'Operazione completata';
-  this.resultModalMessage = message;
-  this.showResultModal = true;
-}
-
 private showError(message: string): void {
   this.resultModalTitle = 'Errore';
   this.resultModalMessage = message;

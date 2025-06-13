@@ -5,23 +5,21 @@
 
   <div class="dropdown-aligned-tabs">
     <div class="tabs">
-      <label for="compra" class="tab tab-active">COMPRA</label>
-      <input type="radio" id="compra" name="tab"
-         [(ngModel)]="buyOrRent" value="sale" />
-      <label for="affitta" class="tab">AFFITTA</label>
-     <input type="radio" id="affitta" name="tab"
-         [(ngModel)]="buyOrRent" value="rent" />
+      <label for="compra" class="tab" [class.tab-active]="buyOrRent === 'sale'">COMPRA</label>
+      <input type="radio" id="compra" name="tab" [(ngModel)]="buyOrRent" value="sale" />
+      <label for="affitta" class="tab" [class.tab-active]="buyOrRent === 'rent'">AFFITTA</label>
+      <input type="radio" id="affitta" name="tab" [(ngModel)]="buyOrRent" value="rent" />
     </div>
   </div>
 
   <div class="search-bar">
     <div class="dropdown-section">
       <select id="property-type" name="property-type" [(ngModel)]="propertyType">
-  <option value="Appartamento" selected >Appartamento</option>
-  <option value="Villa">Villa</option>
-  <option value="Monolocale">Monolocale</option>
-  <option value="Attico">Attico</option>
-</select>
+        <option value="Appartamento" selected>Appartamento</option>
+        <option value="Villa">Villa</option>
+        <option value="Monolocale">Monolocale</option>
+        <option value="Attico">Attico</option>
+      </select>
     </div>
 
     <div class="divider"></div>
@@ -30,20 +28,21 @@
       <div class="logo">
         <img src="https://i.imgur.com/q3KeOAl.png" alt="Logo">
       </div>
-      <i class="fas fa-search"></i>
-      <input type="text" placeholder="Effettua una nuova ricerca per città" 
+      <i class="material-icons"></i>
+      <input type="text" placeholder="Cerca per città..." 
              [(ngModel)]="location" 
-             (input)="onSearchChange()">
+             (input)="onSearchChange()"
+             (focus)="onSearchChange()">
       <div *ngIf="filteredCities.length > 0" class="suggestions">
         <ul>
-          <li *ngFor="let city of filteredCities.slice(0, 3)" (click)="onCitySelect(city)">
+          <li *ngFor="let city of filteredCities" (click)="onCitySelect(city)">
             {{ city }}
           </li>
         </ul>
       </div>
     </div>
 
-    <button class="search-btn" (click)="goToCatalog()" [disabled]="!isSearchEnabled" (click)="onSearchClick()">CERCA</button>
+    <button class="search-btn" (click)="goToCatalog()" [disabled]="!isSearchEnabled">CERCA</button>
   </div>
 
   <div *ngIf="showFilters" class="filters-link" (click)="toggleFilters()">
@@ -57,60 +56,61 @@
       <div class="filter-row">
         <div class="filter-item">
           <label for="min-price">Prezzo minimo:</label>
-         <input type="number" min="0" max="9999999"
-       oninput="validity.valid||(value='');"
-       id="min-price" name="min-price"
-       [(ngModel)]="minPrice"
-       (ngModelChange)="onMinPriceChange()"
-       placeholder="Inserisci prezzo min" />
+          <input type="number" min="0" max="9999999"
+                 oninput="validity.valid||(value='');"
+                 id="min-price" name="min-price"
+                 [(ngModel)]="minPrice"
+                 (ngModelChange)="onMinPriceChange()"
+                 placeholder="Min" />
         </div>
         <div class="filter-item">
           <label for="max-price">Prezzo massimo:</label>
-         <input type="number" min="0" max="10000000"
-       oninput="validity.valid||(value='');"
-       id="max-price" name="max-price"
-       [(ngModel)]="maxPrice"
-       (ngModelChange)="onMaxPriceChange()"
-       placeholder="Inserisci prezzo max" />
+          <input type="number" min="0" max="10000000"
+                 oninput="validity.valid||(value='');"
+                 id="max-price" name="max-price"
+                 [(ngModel)]="maxPrice"
+                 (ngModelChange)="onMaxPriceChange()"
+                 placeholder="Max" />
         </div>
       </div>
 
       <div class="filter-row">
         <div class="filter-item">
           <label for="rooms">Camere:</label>
-         <input type="number" min="1" max="99"
-       oninput="validity.valid||(value='');"
-       id="rooms" name="rooms"
-       [(ngModel)]="rooms"
-       placeholder="N°" />
+          <input type="number" min="1" max="99"
+                 oninput="validity.valid||(value='');"
+                 id="rooms" name="rooms"
+                 [(ngModel)]="rooms"
+                 placeholder="N°" />
         </div>
         <div class="filter-item">
-          <label for="num-bathrooms">Numero Bagni:</label>
+          <label for="num-bathrooms">Bagni:</label>
           <input type="number" min="1" max="10"
-       oninput="validity.valid||(value='');"
-       id="num-bathrooms" name="num-bathrooms"
-       [(ngModel)]="bathrooms"
-       placeholder="N°" />
+                 oninput="validity.valid||(value='');"
+                 id="num-bathrooms" name="num-bathrooms"
+                 [(ngModel)]="bathrooms"
+                 placeholder="N°" />
         </div>
       </div>
+
       <div class="filter-row">
         <div class="filter-item">
-          <label for="min-surface">Superficie minima (m²):</label>
+          <label for="min-surface">Superficie min (m²):</label>
           <input type="number" min="0" max="999"
-       oninput="validity.valid||(value='');"
-       id="min-surface" name="min-surface"
-       [(ngModel)]="minSurface"
-       (ngModelChange)="onMinSurfaceChange()"
-       placeholder="Min" />
+                 oninput="validity.valid||(value='');"
+                 id="min-surface" name="min-surface"
+                 [(ngModel)]="minSurface"
+                 (ngModelChange)="onMinSurfaceChange()"
+                 placeholder="Min" />
         </div>
         <div class="filter-item">
-          <label for="max-surface">Superficie massima (m²):</label>
-<input type="number" min="0" max="1000"
-       oninput="validity.valid||(value='');"
-       id="max-surface" name="max-surface"
-       [(ngModel)]="maxSurface"
-       (ngModelChange)="onMaxSurfaceChange()"
-       placeholder="Max" />
+          <label for="max-surface">Superficie max (m²):</label>
+          <input type="number" min="0" max="1000"
+                 oninput="validity.valid||(value='');"
+                 id="max-surface" name="max-surface"
+                 [(ngModel)]="maxSurface"
+                 (ngModelChange)="onMaxSurfaceChange()"
+                 placeholder="Max" />
         </div>
       </div>
 
@@ -138,11 +138,9 @@
 
       <div class="button-container">
         <button class="close-btn" (click)="closeAndReset()">Chiudi</button>
-       <button class="apply-btn "
-        [disabled]="isApplyDisabled"
-        (click)="toggleFilters(true)">
-  Applica
-</button>
+        <button class="apply-btn" [disabled]="isApplyDisabled" (click)="toggleFilters(true)">
+          Applica
+        </button>
       </div>
     </div>
   </div>
