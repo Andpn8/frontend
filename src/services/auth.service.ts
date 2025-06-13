@@ -35,11 +35,11 @@ export class AuthService {
     return this.http.get<any>(`${this.apiUrlUser}/me`, { headers });
   }
 
-  createAgent(data: any): Observable<any> {
-    const token = this.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post('http://localhost:3002/agent', data, { headers });
-  }
+  createAgent(data: any): Observable<{ message: string, agente: { agente_id: number, nome: string } }> {
+  const token = this.getToken();
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.post<{ message: string, agente: { agente_id: number, nome: string } }>(`${this.apiUrlAgent}`, data, { headers });
+}
 
   saveToken(token: string): void {
   if (typeof window !== 'undefined' && window.localStorage) {
@@ -90,11 +90,11 @@ export class AuthService {
     return this.http.post(`${this.apiUrlAmministrator}/login`, { amministratore_id, password });
   }
 
-  createAdmin(data: any): Observable<any> {
-    const token = this.getToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post('http://localhost:3002/amministrator', data, { headers });
-  }
+  createAdmin(data: any): Observable<{ message: string, amministratore: { amministratore_id: number, nome: string } }> {
+  const token = this.getToken();
+  const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  return this.http.post<{ message: string, amministratore: { amministratore_id: number, nome: string } }>(`${this.apiUrlAmministrator}`, data, { headers });
+}
 
   getUserId(): number | null {
   const token = this.getToken();
@@ -108,13 +108,25 @@ export class AuthService {
   }
 }
 
-getAgentId(): number | null {
+getAgentId(name?: string): number | null {
   const token = this.getToken();
   if (!token) return null;
 
   try {
     const decoded: any = jwtDecode(token);
     return decoded.agentId || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+getAmministratorId(): number | null {
+  const token = this.getToken();
+  if (!token) return null;
+
+  try {
+    const decoded: any = jwtDecode(token);
+    return decoded.amministratore_id || null;
   } catch (e) {
     return null;
   }
