@@ -6,6 +6,12 @@
 <section class="notify-section">
   <div class="content-wrapper">
     <div class="notifications">
+      <div *ngIf="notifications.length === 0" class="no-notifications">
+        <img src="https://i.imgur.com/uJlqqZ6.png" alt="Nessuna notifica" class="no-notifications-icon">
+        <h3>Nessuna notifica trovata</h3>
+        <p>Non hai ancora ricevuto nessuna notifica</p>
+      </div>
+
       <div class="notification-card" 
            *ngFor="let notification of notifications"
            (click)="openNotification(notification)">
@@ -28,7 +34,6 @@
     </div>
   </div>
 </section>
-
 <div class="overlay" *ngIf="selectedNotification" (click)="closeNotification()">
   <div class="overlay-content" (click)="$event.stopPropagation()">
     <h2>{{ selectedNotification.titoloNotifica }}</h2>
@@ -37,7 +42,6 @@
     <button class="close-btn" (click)="closeNotification()">Chiudi</button>
   </div>
 </div>
-
 <div class="overlay" *ngIf="showDeleteConfirm" (click)="cancelDelete()">
   <div class="overlay-content delete-confirm" (click)="$event.stopPropagation()">
     <h2>Conferma eliminazione</h2>
