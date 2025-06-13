@@ -21,6 +21,7 @@ export class NotifyComponent implements OnInit {
   userRole: 'user' | 'agent' | 'guest' = 'guest';
   showDeleteConfirm = false;
   notificationToDelete: Notifica | null = null;
+  showDeleteSuccess = false;
 
   constructor(
     private notificationService: NotificationService,
@@ -63,29 +64,37 @@ export class NotifyComponent implements OnInit {
   }
 
   proceedDelete(): void {
-    if (!this.notificationToDelete) return;
-    
-    const notification = this.notificationToDelete;
-    const service = this.userRole === 'agent' ? this.notificationAgenteService : this.notificationService;
-    
-    service.deleteNotifica(notification.notificaId).subscribe({
-      next: () => {
-        this.notifications = this.notifications.filter(n => n.notificaId !== notification.notificaId);
-        if (this.selectedNotification?.notificaId === notification.notificaId) {
-          this.closeNotification();
-        }
-        this.cancelDelete();
-      },
-      error: (err) => {
-        console.error('Errore nella cancellazione:', err);
-        this.cancelDelete();
+  if (!this.notificationToDelete) return;
+  
+  const notification = this.notificationToDelete;
+  const service = this.userRole === 'agent' ? this.notificationAgenteService : this.notificationService;
+  
+  this.cancelDelete();
+  
+  service.deleteNotifica(notification.notificaId).subscribe({
+    next: () => {
+      this.notifications = this.notifications.filter(n => n.notificaId !== notification.notificaId);
+      if (this.selectedNotification?.notificaId === notification.notificaId) {
+        this.closeNotification();
       }
-    });
-  }
+      
+      setTimeout(() => {
+        this.showDeleteSuccess = true;
+      }, 300);
+    },
+    error: (err) => {
+      console.error('Errore nella cancellazione:', err);
+    }
+  });
+}
 
   cancelDelete(): void {
     this.showDeleteConfirm = false;
     this.notificationToDelete = null;
+  }
+
+  closeDeleteSuccess(): void {
+    this.showDeleteSuccess = false;
   }
 
   openNotification(notification: Notifica): void {

@@ -48,3 +48,13 @@
     </div>
   </div>
 </div>
+
+<div class="overlay delete-success" *ngIf="showDeleteSuccess" (click)="closeDeleteSuccess()">
+  <div class="overlay-content delete-confirm" (click)="$event.stopPropagation()">
+    <h2>Operazione completata</h2>
+    <p>Notifica eliminata con successo</p>
+    <div class="confirm-buttons">
+      <button class="confirm-btn ok-btn" (click)="closeDeleteSuccess()">OK</button>
+    </div>
+  </div>
+</div>

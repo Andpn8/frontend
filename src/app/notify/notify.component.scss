@@ -96,7 +96,6 @@
   font-size: 1rem;
 }
 
-/* Overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -107,7 +106,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  
+  
+  &:not(.delete-success) {
+    z-index: 1000;
+  }
+  
+  &.delete-success {
+    z-index: 1001;
+  }
 }
 
 .overlay-content {
@@ -182,6 +189,13 @@
   background-color: #b3243f;
 }
 
+.confirm-btn.ok-btn {
+  background-color: #087E8B;
+  &:hover {
+    background-color: #065a63;
+  }
+}
+
 .cancel-btn {
   background-color: #087E8B;
   color: white;
@@ -195,4 +209,15 @@
 
 .cancel-btn:hover {
   background-color: #065a63;
+}
+
+.delete-success {
+  .overlay-content {
+    animation: fadeIn 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
