@@ -7,6 +7,7 @@ import { AnnouncementDataService } from '../../services/componentServices/announ
 import { AuthService } from '../../services/auth.service';
 import { InsertionService } from '../../services/insertion.service';
 import { forkJoin } from 'rxjs';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-new-announcement-recap',
@@ -14,7 +15,7 @@ import { forkJoin } from 'rxjs';
   templateUrl: './new-announcement-recap.component.html',
   styleUrls: ['./new-announcement-recap.component.scss'],
   imports: [NavbarComponent, AnnouncementSummaryComponent, CommonModule],
-  providers: [InsertionService],
+  providers: [DecimalPipe, InsertionService],
 })
 export class NewAnnouncementRecapComponent implements AfterViewInit {
   @ViewChild('headerContent') headerContent!: ElementRef;

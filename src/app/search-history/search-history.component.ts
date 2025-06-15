@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 interface FilterSet {
   location: string;
@@ -28,9 +29,18 @@ interface FilterSet {
   templateUrl: './search-history.component.html',
   styleUrls: ['./search-history.component.scss']
 })
+
+
 export class SearchHistoryComponent {
+
+  constructor(private authService: AuthService) {
+  this.userRole = this.authService.getUserRoleFromToken();
+}
   @Input() searchHistory: FilterSet[] = [];
   @Output() restoreFilters = new EventEmitter<FilterSet>();
+  
+
+  userRole: string = 'guest';
   
   confirmationVisible = false;
 

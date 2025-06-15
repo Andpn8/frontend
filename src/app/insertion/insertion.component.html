@@ -62,9 +62,9 @@
 
     <div class="info-row">
       <span class="prezzo">
-        € {{ modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo }}
-        <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
-      </span>
+  € {{ (modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo) | number:'1.2-2' }}
+  <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
+</span>
     </div>
   </div>
 
@@ -132,11 +132,18 @@
         </div>
       </div>
 
-      <button class="btn proponi" (click)="mostraPopupPrezzo = true">PROPONI PREZZO</button>
-      <div class="oppure">oppure</div>
-      <button class="btn richiedi" (click)="mostraPopupVisita = true">RICHIEDI VISITA</button>
-    </div>
-  </div>
+       <div class="button-container">
+  <button class="btn proponi" 
+          [disabled]="!isRegularUser()"
+          title="Devi essere un utente registrato!">
+    PROPONI PREZZO
+  </button>
+  <div class="oppure">oppure</div>
+  <button class="btn richiedi" 
+          [disabled]="!isRegularUser()"
+          title="Devi essere un utente registrato!">
+    RICHIEDI VISITA
+  </button>
 </div>
 
 <div class="modal-overlay" *ngIf="mostraPopupVisita">
