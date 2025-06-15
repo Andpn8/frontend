@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login-success',
@@ -8,16 +9,18 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginSuccessComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, private router: Router) {}
+  constructor(private snackBar: MatSnackBar, private route: ActivatedRoute, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const token = params['token'];
       if (token) {
         this.authService.saveToken(token);
-        this.router.navigate(['/']); // oppure '/dashboard' o qualsiasi pagina post-login
+        this.router.navigate(['/']);
       } else {
-        alert('Errore nel login con Google');
+        this.snackBar.open("Errore nel login.", "Chiudi", {
+    duration: 3000
+  })
         this.router.navigate(['/login']);
       }
     });

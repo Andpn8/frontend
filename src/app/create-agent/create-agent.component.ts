@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FooterComponent } from "../footer/footer.component";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-agent',
@@ -27,7 +28,8 @@ export class CreateAgentComponent {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
   ) {}
 
   onSubmit() {
@@ -46,11 +48,13 @@ export class CreateAgentComponent {
         const id = res.agente.agente_id;
         onSuccess(id, 'Agente');
       },
-      error: (err: any) => {
-        console.error('Errore durante la creazione agente:', err);
-        alert(err.error?.message || 'Errore nella creazione dell’agente');
-      }
-    });
+       error: (err: any) => {
+          console.error('Errore durante la creazione agente:', err);
+          this.snackBar.open(err.error?.message || 'Errore nella creazione dell’agente', 'Chiudi', {
+            duration: 3000
+          });
+        }
+      });
   } else if (role === 'admin') {
     this.authService.createAdmin({ nome: name, password }).subscribe({
       next: (res) => {
@@ -58,14 +62,18 @@ export class CreateAgentComponent {
         onSuccess(id, 'Amministratore');
       },
       error: (err: any) => {
-        console.error('Errore durante la creazione admin:', err);
-        alert(err.error?.message || 'Errore nella creazione dell’amministratore');
-      }
-    });
+          console.error('Errore durante la creazione admin:', err);
+          this.snackBar.open(err.error?.message || 'Errore nella creazione dell’amministratore', 'Chiudi', {
+            duration: 3000
+          });
+        }
+      });
   } else {
-    alert('Ruolo non valido selezionato.');
+      this.snackBar.open('Ruolo non valido selezionato.', 'Chiudi', {
+        duration: 3000
+      });
+    }
   }
-}
 
 
   confirmAndRedirect() {

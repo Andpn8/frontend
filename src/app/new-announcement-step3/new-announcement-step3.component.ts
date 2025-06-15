@@ -5,6 +5,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { AnnouncementSummaryComponent } from '../announcement-summary/announcement-summary.component';
 import { CommonModule } from '@angular/common';
 import { AnnouncementDataService } from '../../services/componentServices/announcement-data.service';
+import { MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-new-announcement-step3',
@@ -39,7 +40,8 @@ export class NewAnnouncementStep3Component implements OnInit {
   constructor(
     private fb: FormBuilder, 
     private router: Router, 
-    private announcementDataService: AnnouncementDataService
+    private announcementDataService: AnnouncementDataService,
+    private snackBar: MatSnackBar
   ) {
     this.step3Form = this.fb.group({
       descrizione: ['', [Validators.required, Validators.maxLength(3000)]]
@@ -86,16 +88,20 @@ export class NewAnnouncementStep3Component implements OnInit {
       const totalFiles = this.fotoPreviews.length + newFiles.length;
 
       if (totalFiles > 20) {
-        alert("Puoi caricare un massimo di 20 foto.");
-        return;
-      }
+        this.snackBar.open("Puoi caricare un massimo di 20 foto.", "Chiudi", {
+    duration: 3000
+  })
+  return;
+}
 
       newFiles.forEach((file: File) => {
         const fileType = file.type;
-        if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
-          alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
-          return;
-        }
+       if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+        this.snackBar.open("Formato non supportato. Carica solo immagini JPEG o PNG.", "Chiudi", {
+    duration: 3000
+  })
+  return;
+}
 
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -171,16 +177,20 @@ export class NewAnnouncementStep3Component implements OnInit {
       const totalFiles = this.planimetriaPreviews.length + newFiles.length;
 
       if (totalFiles > 4) {
-        alert("Puoi caricare un massimo di 4 planimetrie.");
-        return;
-      }
+        this.snackBar.open("Puoi caricare un massimo di 4 planimetrie.", "Chiudi", {
+    duration: 3000
+  })
+  return;
+}
 
       newFiles.forEach((file: File) => {
         const fileType = file.type;
         if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
-          alert("Formato non supportato. Carica solo immagini JPEG o PNG.");
-          return;
-        }
+          this.snackBar.open("Formato non supportato. Carica solo immagini JPEG o PNG.", "Chiudi", {
+    duration: 3000
+  })
+  return;
+}
 
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -244,18 +254,21 @@ export class NewAnnouncementStep3Component implements OnInit {
     this.showPlanimetriaOverlay = false;
   }
 
-  // Navigazione
   onSubmit(): void {
     const fotoValide = this.fotoPreviews.length > 0;
     const planimetrieValide = this.planimetriaPreviews.length > 0;
 
-    if (!fotoValide) {
-      alert('Devi caricare almeno una foto.');
-    }
+   if (!fotoValide) {
+    this.snackBar.open("Devi caricare almeno una foto.", "Chiudi", {
+    duration: 3000
+  })
+}
 
     if (!planimetrieValide) {
-      alert('Devi caricare almeno una planimetria.');
-    }
+      this.snackBar.open("Devi caricare almeno una planimetria.", "Chiudi", {
+    duration: 3000
+  })
+}
 
     if (this.step3Form.valid && fotoValide && planimetrieValide) {
       const step3Data = {

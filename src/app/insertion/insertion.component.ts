@@ -10,11 +10,12 @@ import { jwtDecode } from 'jwt-decode';
 import { OffertaVisitaAffitto, OffertaVisitaAffittoService } from '../../services/offerta_visita_affitto.service';
 import { OffertaVisitaVendita, OffertaVisitaVenditaService } from '../../services/offerta_visita_vendita.service';
 import { DecimalPipe } from '@angular/common';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-insertion',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FormsModule],
+  imports: [CommonModule, NavbarComponent, FormsModule,  MatSnackBarModule],
    providers: [DecimalPipe, OffertaVenditaService, OffertaAffittoService,AuthService,OffertaVisitaVenditaService,OffertaVisitaAffittoService],
   templateUrl: './insertion.component.html',
   styleUrls: ['./insertion.component.scss']
@@ -42,7 +43,7 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   streetViewPanorama: any;
   @ViewChild('streetViewElement') streetViewElement!: ElementRef;
 
-  constructor(private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService,private offertaVisitaVenditaService: OffertaVisitaVenditaService,private offertaVisitaAffittoService: OffertaVisitaAffittoService) {
+  constructor(private snackBar: MatSnackBar, private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService,private offertaVisitaVenditaService: OffertaVisitaVenditaService,private offertaVisitaAffittoService: OffertaVisitaAffittoService) {
     const navigation = this.router.getCurrentNavigation();
     this.annuncio = navigation?.extras?.state?.['annuncio'];
     this.modalitaCatalogo = navigation?.extras?.state?.['modalitaCatalogo'] || 'vendita';
@@ -136,18 +137,22 @@ export class InsertionComponent implements OnInit, AfterViewInit {
     const userId = this.authService.getUserId();
     const token = this.authService.getToken();
 
-    if (!userId || !token) {
-      alert("Devi essere loggato per inviare la richiesta di visita.");
-      return;
-    }
+   if (!userId || !token) {
+  this.snackBar.open("Devi essere loggato per inviare la richiesta di visita.", "Chiudi", {
+    duration: 3000
+  });
+  return;
+}
 
     let decoded: any;
     try {
-      decoded = jwtDecode(token);
-    } catch {
-      alert("Errore nell'autenticazione, effettua di nuovo il login.");
-      return;
-    }
+  decoded = jwtDecode(token);
+} catch {
+  this.snackBar.open("Errore nell'autenticazione, effettua di nuovo il login.", "Chiudi", {
+    duration: 3000
+  });
+  return;
+}
 
     const emailOfferente = decoded.email;
 
@@ -160,19 +165,23 @@ export class InsertionComponent implements OnInit, AfterViewInit {
         user_id: userId
       };
 
-      this.offertaVisitaVenditaService.creaOffertaVisitaVendita(offertaVisita).subscribe({
-        next: () => {
-          alert('✅ Richiesta visita vendita inviata con successo!');
-          this.mostraPopupVisita = false;
-          this.selectedDate = '';
-          this.selectedHour = '';
-          this.selectedMinute = '';
-        },
-        error: (err) => {
-          console.error('Errore invio richiesta visita vendita:', err);
-          alert('❌ Errore nell\'invio della richiesta visita, riprova più tardi.');
-        }
-      });
+     this.offertaVisitaVenditaService.creaOffertaVisitaVendita(offertaVisita).subscribe({
+  next: () => {
+    this.snackBar.open("✅ Richiesta visita vendita inviata con successo!", "Chiudi", {
+    duration: 3000
+  })
+    this.mostraPopupVisita = false;
+    this.selectedDate = '';
+    this.selectedHour = '';
+    this.selectedMinute = '';
+  },
+  error: (err) => {
+    console.error('Errore invio richiesta visita vendita:', err);
+    this.snackBar.open("❌ Errore nell\'invio della richiesta visita, riprova più tardi.", "Chiudi", {
+    duration: 3000
+  })
+  }
+});
 
     } else if (this.modalitaCatalogo === 'affitto') {
       const offertaVisita: OffertaVisitaAffitto = {
@@ -184,31 +193,42 @@ export class InsertionComponent implements OnInit, AfterViewInit {
       };
 
       this.offertaVisitaAffittoService.creaOffertaVisitaAffitto(offertaVisita).subscribe({
-        next: () => {
-          alert('✅ Richiesta visita affitto inviata con successo!');
-          this.mostraPopupVisita = false;
-          this.selectedDate = '';
-          this.selectedHour = '';
-          this.selectedMinute = '';
-        },
-        error: (err) => {
-          console.error('Errore invio richiesta visita affitto:', err);
-          alert('❌ Errore nell\'invio della richiesta visita, riprova più tardi.');
-        }
-      });
+  next: () => {
+    this.snackBar.open("✅ Richiesta visita affitto inviata con successo!", "Chiudi", {
+    duration: 3000
+  })
+    this.mostraPopupVisita = false;
+    this.selectedDate = '';
+    this.selectedHour = '';
+    this.selectedMinute = '';
+  },
+  error: (err) => {
+    console.error('Errore invio richiesta visita affitto:', err);
+    this.snackBar.open("❌ Errore nell\'invio della richiesta visita, riprova più tardi.", "Chiudi", {
+    duration: 3000
+  })
+  }
+});
 
     } else {
-      alert('Modalità catalogo non riconosciuta.');
+      this.snackBar.open("Modalità catalogo non riconosciuta.", "Chiudi", {
+    duration: 3000
+  })
     }
   } else {
-    alert("Per favore compila sia la data che l'orario prima di inviare.");
+    this.snackBar.open("Per favore compila sia la data che l'orario prima di inviare.", "Chiudi", {
+    duration: 3000
+  })
+
   }
 }
 
   inviaPropostaPrezzo(): void {
   const proposta = parseFloat(this.propostaPrezzo);
   if (!proposta || proposta <= 0 || !this.propostaValida()) {
-    alert("Per favore inserisci una proposta valida prima di inviare.");
+    this.snackBar.open("Per favore inserisci una proposta valida prima di inviare.", "Chiudi", {
+    duration: 3000
+  })
     return;
   }
 
@@ -216,18 +236,21 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   const token = this.authService.getToken();
 
   if (!userId || !token) {
-    alert("Devi essere loggato per inviare una proposta.");
-    return;
-  }
+    this.snackBar.open("Devi essere loggato per inviare una proposta.", "Chiudi", {
+    duration: 3000
+  })
+  return;
+}
 
-  // Ottieni i dati decodificati dal token JWT
   let decoded: any;
   try {
-    decoded = jwtDecode(token);
-  } catch {
-    alert("Errore nell'autenticazione, effettua di nuovo il login.");
-    return;
-  }
+  decoded = jwtDecode(token);
+} catch {
+  this.snackBar.open("Errore nell'autenticazione, effettua di nuovo il login.", "Chiudi", {
+    duration: 3000
+  })
+  return;
+}
 
   const emailOfferente = decoded.email;
 
@@ -240,16 +263,20 @@ export class InsertionComponent implements OnInit, AfterViewInit {
     };
 
     this.offertaVenditaService.creaOffertaVendita(offerta).subscribe({
-      next: () => {
-        alert('✅ Proposta vendita inviata con successo!');
-        this.mostraPopupPrezzo = false;
-        this.propostaPrezzo = '';
-      },
-      error: (err) => {
-        console.error('Errore invio proposta vendita:', err);
-        alert('❌ Errore nell\'invio della proposta vendita, riprova più tardi.');
-      }
-    });
+  next: () => {
+    this.snackBar.open("✅ Proposta vendita inviata con successo!", "Chiudi", {
+    duration: 3000
+  })
+    this.mostraPopupPrezzo = false;
+    this.propostaPrezzo = '';
+  },
+  error: (err) => {
+    console.error('Errore invio proposta vendita:', err);
+    this.snackBar.open("❌ Errore nell\'invio della proposta vendita, riprova più tardi.", "Chiudi", {
+    duration: 3000
+  })
+  }
+});
 
   } else if (this.modalitaCatalogo === 'affitto') {
     const offerta: OffertaAffitto = {
@@ -260,19 +287,25 @@ export class InsertionComponent implements OnInit, AfterViewInit {
     };
 
     this.offertaAffittoService.creaOffertaAffitto(offerta).subscribe({
-      next: () => {
-        alert('✅ Proposta affitto inviata con successo!');
-        this.mostraPopupPrezzo = false;
-        this.propostaPrezzo = '';
-      },
-      error: (err) => {
-        console.error('Errore invio proposta affitto:', err);
-        alert('❌ Errore nell\'invio della proposta affitto, riprova più tardi.');
-      }
-    });
+  next: () => {
+    this.snackBar.open("✅ Proposta affitto inviata con successo!", "Chiudi", {
+    duration: 3000
+  })
+    this.mostraPopupPrezzo = false;
+    this.propostaPrezzo = '';
+  },
+  error: (err) => {
+    console.error('Errore invio proposta affitto:', err);
+    this.snackBar.open("❌ Errore nell\'invio della proposta affitto, riprova più tardi.", "Chiudi", {
+    duration: 3000
+  })
+  }
+});
 
   } else {
-    alert('Modalità catalogo non riconosciuta.');
+    this.snackBar.open("Modalità catalogo non riconosciuta.", "Chiudi", {
+    duration: 3000
+  })
   }
 }
 
@@ -387,7 +420,9 @@ initializeStreetView(): void {
         }
       );
     } else {
-      alert('Non è stato possibile trovare la posizione su Street View.');
+      this.snackBar.open("Non è stato possibile trovare la posizione su Street View.", "Chiudi", {
+    duration: 3000
+  })
       this.showStreetView = false;
     }
   });
