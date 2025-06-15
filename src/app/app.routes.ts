@@ -19,6 +19,8 @@ import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { InsertionComponent } from './insertion/insertion.component';
 import { NewAnnouncementRecapComponent } from './new-announcement-recap/new-announcement-recap.component';
+import { AgentAdminCeoGuard } from '../guards/agent-admin-ceo.guard';
+import { AdminCeoGuard } from '../guards/admin-ceo.guard';
 
 export const routes: Routes = [
 
@@ -26,11 +28,31 @@ export const routes: Routes = [
   { path: 'home', component: HomepageComponent },
 
   //CREA ANNUNCIO
-  { path: 'new-announcement', component: NewAnnouncementComponent },
-  { path: 'new-announcement-step2', component: NewAnnouncementStep2Component },
-  { path: 'new-announcement-step3', component: NewAnnouncementStep3Component },
-  { path: 'new-announcement-step4', component: NewAnnouncementStep4Component },
-  { path: 'new-announcement-recap', component: NewAnnouncementRecapComponent},
+    { 
+    path: 'new-announcement', 
+    component: NewAnnouncementComponent,
+    canActivate: [AgentAdminCeoGuard] 
+  },
+   { 
+    path: 'new-announcement-step2', 
+    component: NewAnnouncementStep2Component,
+    canActivate: [AgentAdminCeoGuard] 
+  },
+  { 
+    path: 'new-announcement-step3', 
+    component: NewAnnouncementStep3Component,
+    canActivate: [AgentAdminCeoGuard] 
+  },
+  { 
+    path: 'new-announcement-step4', 
+    component: NewAnnouncementStep4Component,
+    canActivate: [AgentAdminCeoGuard] 
+  },
+  { 
+    path: 'new-announcement-recap', 
+    component: NewAnnouncementRecapComponent,
+    canActivate: [AgentAdminCeoGuard] 
+  },
 
   //INFO
   { path: 'about-us', component: AboutUsComponent },
@@ -50,8 +72,16 @@ export const routes: Routes = [
   { path: 'login-success', component: LoginSuccessComponent},
 
   //GESTIONE AGENTI
-  { path: 'manageAgent', component: ManageAgentComponent},
-  { path: 'createAgent', component: CreateAgentComponent},
+  { 
+    path: 'manageAgent', 
+    component: ManageAgentComponent,
+    canActivate: [AdminCeoGuard] 
+  },
+  { 
+    path: 'createAgent', 
+    component: CreateAgentComponent,
+    canActivate: [AdminCeoGuard] 
+  },
 
   //INFO PROFILO
   { path: 'profile-info', component: ProfileInfoComponent},

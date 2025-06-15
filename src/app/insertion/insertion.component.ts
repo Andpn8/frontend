@@ -361,7 +361,6 @@ toggleStreetView(): void {
       this.initializeStreetView();
     }, 0);
   } else if (this.streetViewPanorama) {
-    // Pulisci l'istanza di Street View quando viene chiusa
     this.streetViewPanorama = null;
   }
 }
@@ -369,14 +368,12 @@ toggleStreetView(): void {
 initializeStreetView(): void {
   const fullAddress = `${this.annuncio.indirizzo} ${this.annuncio.civico}, ${this.annuncio.cap} ${this.annuncio.comune}, Italia`;
   
-  // Crea un geocoder per convertire l'indirizzo in coordinate
   const geocoder = new google.maps.Geocoder();
   
   geocoder.geocode({ address: fullAddress }, (results, status) => {
     if (status === 'OK' && results && results[0]) {
       const location = results[0].geometry.location;
       
-      // Crea l'istanza di Street View
       this.streetViewPanorama = new google.maps.StreetViewPanorama(
         this.streetViewElement.nativeElement,
         {
@@ -394,5 +391,9 @@ initializeStreetView(): void {
       this.showStreetView = false;
     }
   });
+}
+
+isRegularUser(): boolean {
+  return this.authService.getUserRoleFromToken() === 'user';
 }
 }
