@@ -131,4 +131,18 @@ getAmministratorId(): number | null {
     return null;
   }
 }
+
+getNotificationSettings(): Observable<{ notify: boolean }> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    return this.http.get<{ notify: boolean }>(`${this.apiUrlUser}/notification-settings`, { headers });
+  }
+
+  updateNotificationSettings(notify: boolean): Observable<any> {
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    
+    return this.http.put(`${this.apiUrlUser}/notification-settings`, { notify }, { headers });
+  }
 }

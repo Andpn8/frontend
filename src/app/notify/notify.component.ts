@@ -5,13 +5,15 @@ import { NavbarComponent } from "../navbar/navbar.component";
 import { NotificationService, Notifica as NotificaUser } from '../../services/notification.service';
 import { NotificationAgenteService, NotificaAgente } from '../../services/notification-agente.service';
 import { AuthService } from '../../services/auth.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 type Notifica = NotificaUser | NotificaAgente;
 
 @Component({
   selector: 'app-notify',
   standalone: true,
-  imports: [NavbarComponent, CommonModule],
+  imports: [NavbarComponent, CommonModule, MatSlideToggleModule, FormsModule],
   templateUrl: './notify.component.html',
   styleUrls: ['./notify.component.scss']
 })
@@ -22,6 +24,7 @@ export class NotifyComponent implements OnInit {
   showDeleteConfirm = false;
   notificationToDelete: Notifica | null = null;
   showDeleteSuccess = false;
+  notifyStatus: boolean = false;
 
   constructor(
     private notificationService: NotificationService,
@@ -34,6 +37,7 @@ export class NotifyComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.userRole = this.authService.getUserRoleFromToken() as 'user' | 'agent' | 'guest';
       this.loadNotifications();
+      this.loadNotificationStatus();
     }
   }
 
@@ -112,5 +116,32 @@ export class NotifyComponent implements OnInit {
 
   closeNotification(): void {
     this.selectedNotification = null;
+  }
+
+   loadNotificationStatus(): void {
+    if (this.userRole === 'user') {
+      this.authService.getNotificationSettings().subscribe({
+        next: (response) => {
+          this.notifyStatus = response.notify;
+        },
+        error: (err) => {
+          console.error('Errore nel caricamento delle impostazioni notifiche:', err);
+        }
+      });
+    }
+  }
+
+  updateNotificationStatus(): void {
+    if (this.userRole === 'user') {
+      this.authService.updateNotificationSettings(this.notifyStatus).subscribe({
+        next: () => {
+          console.log('Impostazioni notifiche aggiornate con successo');
+        },
+        error: (err) => {
+          console.error('Errore nell\'aggiornamento delle impostazioni:', err);
+          this.notifyStatus = !this.notifyStatus;
+        }
+      });
+    }
   }
 }

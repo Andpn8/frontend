@@ -31,8 +31,21 @@
       <h3>Riepilogo delle notifiche</h3>
       <p>Totale notifiche: <strong>{{ notifications.length }}</strong></p>
       <p>Notifiche non lette: <strong>{{ unreadNotificationsCount }}</strong></p> 
+
+       <div class="notification-toggle" *ngIf="userRole === 'user'">
+    <h4>Offerte Promozionali</h4>
+    <mat-slide-toggle
+      [(ngModel)]="notifyStatus"
+      (change)="updateNotificationStatus()"
+      color="primary">
+      {{ notifyStatus ? 'ON' : 'OFF' }}
+    </mat-slide-toggle>
+    <p class="toggle-description">Ricevi notifiche di offerte e promozioni</p>
+  </div>
+
     </div>
   </div>
+  
 </section>
 <div class="overlay" *ngIf="selectedNotification" (click)="closeNotification()">
   <div class="overlay-content" (click)="$event.stopPropagation()">
