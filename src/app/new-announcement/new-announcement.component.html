@@ -49,7 +49,12 @@
       <input type="number" min="0" oninput="validity.valid||(value='');" placeholder="Es. 50.000" formControlName="prezzo" [ngClass]="{ 'ng-touched': form.get('prezzo')?.touched, 'ng-valid': form.get('prezzo')?.valid }"/>
       <span>€</span>
     </div>
-    <small class="required-field" *ngIf="form.get('prezzo')?.invalid">CAMPO OBBLIGATORIO</small>
+    <small class="required-field" *ngIf="form.get('prezzo')?.hasError('required') && form.get('prezzo')?.touched">
+      CAMPO OBBLIGATORIO
+    </small>
+    <small class="required-field" *ngIf="form.get('prezzo')?.hasError('max') && form.get('prezzo')?.touched">
+      VALORE MASSIMO: 5.000.000 €
+    </small>
   </div>
 
   <div class="form-group">

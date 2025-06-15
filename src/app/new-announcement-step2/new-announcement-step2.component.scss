@@ -85,33 +85,39 @@
         }
       }
 
-      .right-column .form-group-horizontal {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-    margin-bottom: 16px;
+      .right-column {
+        .form-group-horizontal {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          margin-bottom: 16px;
 
-  label {
-    width: 140px; 
-    
-    font-weight: 600;
-    margin-top: 4px;
-  }
+          label {
+            width: 140px;
+            font-weight: 600;
+            margin-top: 4px;
+          }
 
-  .input-column {
-    display: flex;
-    flex-direction: column;
+          .input-column {
+            display: flex;
+            flex-direction: column;
 
-    input {
-      height: 26px;
-      padding: 2px 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      width: 94px; 
-      
-    }
-  }
-}
+            input {
+              height: 26px;
+              padding: 2px 8px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+              width: 94px;
+            }
+
+            .always-error {
+              color: #ce2d4f;
+              font-size: 0.75rem;
+              margin-top: 4px;
+            }
+          }
+        }
+      }
     }
 
     .bottom-section {
@@ -200,5 +206,10 @@
   .summary-wrapper {
     flex: 1;
     max-width: 350px;
+  }
+
+  input.ng-valid.ng-touched:not([type='checkbox']),
+  select.ng-valid.ng-touched {
+    border: 1px solid #087E8B !important;
   }
 }

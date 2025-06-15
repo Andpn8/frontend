@@ -40,15 +40,22 @@ export class NewAnnouncementStep2Component {
     this.step2Form = this.fb.group({
       superficie: ['', Validators.required],
       piano: ['', Validators.required],
-      classeEnergetica: [''],
+      classeEnergetica: ['', Validators.required],
       portineria: [false],
       garage: [false],
       climatizzazione: [false],
       sicurezza: [false],
       ascensore: [false],
       accessoDisabili: [false],
-      locali: [''],  
-      bagni: ['']   
+      locali: ['', Validators.required],  
+      bagni: ['', Validators.required]   
+    });
+
+    Object.keys(this.step2Form.controls).forEach(field => {
+      const control = this.step2Form.get(field);
+       if (control && control.validator) {
+        control.markAsTouched({ onlySelf: true });
+       }
     });
 
     // Caricamento dati salvati
