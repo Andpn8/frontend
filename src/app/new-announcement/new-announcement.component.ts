@@ -36,9 +36,9 @@ export class NewAnnouncementComponent implements OnInit, AfterViewInit {
     private ngZone: NgZone
   ) {
     this.form = this.fb.group({
-      immobile: ['', Validators.required],
+      immobile: ['Appartamento', Validators.required],
       titolo: ['', Validators.required],
-      prezzo: ['', Validators.required],
+      prezzo: ['', [Validators.required, Validators.max(5000000)]],
       citta: ['', Validators.required],
       indirizzo: ['', Validators.required],
       numero: ['', Validators.required],

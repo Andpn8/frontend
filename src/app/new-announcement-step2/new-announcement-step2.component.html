@@ -47,6 +47,7 @@
                 <option value="">Seleziona</option>
                 <option *ngFor="let classe of classiEnergetiche" [value]="classe">{{ classe }}</option>
               </select>
+              <span class="always-error" *ngIf="isInvalid('classeEnergetica')">CAMPO OBBLIGATORIO</span>
             </div>
           </div>
         </div>
@@ -64,6 +65,7 @@
                 placeholder="Numero locali"
                 [class.invalid]="isInvalid('locali')"
               />
+              <span class="always-error" *ngIf="isInvalid('locali')">CAMPO OBBLIGATORIO</span>
             </div>
           </div>
 
@@ -78,6 +80,7 @@
                 placeholder="Numero bagni"
                 [class.invalid]="isInvalid('bagni')"
               />
+              <span class="always-error" *ngIf="isInvalid('bagni')">CAMPO OBBLIGATORIO</span>
             </div>
           </div>
         </div>
