@@ -6,27 +6,38 @@
 <app-search-bar [showFilters]="false"></app-search-bar>
 
 <div class="catalog-container">
-  <div 
-  class="annuncio-card" 
-  *ngFor="let annuncio of annunciPaginati"
-  (click)="vaiADettaglio(annuncio)"
-  style="cursor: pointer;"
->
-  <img [src]="annuncio.foto?.[0]" alt="foto" class="preview-img" />
-  <h3>{{ annuncio.titolo }}</h3>
-  <p><strong>{{ annuncio.indirizzo }}</strong>, {{ annuncio.civico }} - {{ annuncio.cap }}</p>
-  <p><strong>{{ annuncio.comune }}</strong></p>
+  <ng-container *ngIf="annunciPaginati && annunciPaginati.length > 0; else noResults">
+    <div 
+      class="annuncio-card" 
+      *ngFor="let annuncio of annunciPaginati"
+      (click)="vaiADettaglio(annuncio)"
+    >
+      <img [src]="annuncio.foto?.[0]" alt="foto" class="preview-img" />
+      <h3>{{ annuncio.titolo }}</h3>
+      <p><strong>{{ annuncio.indirizzo }}</strong>, {{ annuncio.civico }} - {{ annuncio.cap }}</p>
+      <p><strong>{{ annuncio.comune }}</strong></p>
 
-  <strong *ngIf="modalitaCatalogo === 'vendita'">
-    {{ annuncio.prezzo | currency:'EUR':'symbol' }}
-  </strong>
-  <strong *ngIf="modalitaCatalogo === 'affitto'">
-    {{ annuncio.prezzo_mensile | currency:'EUR':'symbol' }}/mese
-  </strong>
-</div>
+      <strong *ngIf="modalitaCatalogo === 'vendita'">
+        {{ annuncio.prezzo | currency:'EUR':'symbol' }}
+      </strong>
+      <strong *ngIf="modalitaCatalogo === 'affitto'">
+        {{ annuncio.prezzo_mensile | currency:'EUR':'symbol' }}/mese
+      </strong>
+    </div>
+  </ng-container>
+
+   <ng-template #noResults>
+    <div class="no-results-wrapper">
+      <div class="no-results-message">
+        <img src="https://i.imgur.com/uJlqqZ6.png" alt="Nessun risultato" class="no-results-image">
+        <h3>Non è stato trovato nessun annuncio</h3>
+        <p>Prova a modificare i filtri di ricerca o a cercare in un'altra città</p>
+      </div>
+    </div>
+  </ng-template>
 </div>
 
-<div class="pagination">
+<div class="pagination" *ngIf="annunciPaginati && annunciPaginati.length > 0">
   <button *ngFor="let pagina of numeroPagine" (click)="cambiaPagina(pagina)">
     {{ pagina }}
   </button>

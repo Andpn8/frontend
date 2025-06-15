@@ -8,18 +8,18 @@
 
 .annuncio-card {
   width: 300px;
-  border: 2px solid #087E8B; // ✅ Andrea, bordo blu riconoscibile
+  border: 2px solid #087E8B; 
   padding: 12px;
   border-radius: 8px;
   cursor: pointer;
   text-align: center;
   background-color: #fff;
-  box-shadow: 0 4px 6px rgba(8, 126, 139, 0.2);  // Ombra leggera iniziale
+  box-shadow: 0 4px 6px rgba(8, 126, 139, 0.2);  
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
-    box-shadow: 0 12px 20px rgba(8, 126, 139, 0.4); // Ombra più intensa su hover
-    transform: translateY(-6px) scale(1.05); // Movimento più fluido e sollevamento
+    box-shadow: 0 12px 20px rgba(8, 126, 139, 0.4); 
+    transform: translateY(-6px) scale(1.05); 
   }
 
   .preview-img {
@@ -31,7 +31,7 @@
   }
 
   &:hover .preview-img {
-    filter: brightness(1.1); // Leggero aumento di luminosità dell'immagine al passaggio del mouse
+    filter: brightness(1.1); 
   }
 }
 
@@ -51,6 +51,25 @@
     &:hover {
       opacity: 70%;
     }
+  }
+}
+
+.no-results-message {
+  text-align: center;
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 600px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  
+  h3 {
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  p {
+    color: #666;
+    font-size: 16px;
   }
 }
 
