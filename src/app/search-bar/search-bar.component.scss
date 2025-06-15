@@ -285,33 +285,44 @@ select {
   }
 
   .button-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px; 
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+  gap: 10px; 
 
-    .apply-btn, .close-btn {
-      background-color: #d63053;
-      color: white;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 20px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
+  .close-btn, .clear-btn, .apply-btn {
+    flex: 1; 
+    background-color: #087E8B;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
-      &:hover {
-        background-color: #b3243f; 
-      }
-    }
-
-    .close-btn {
-      background-color: #087E8B;
-      &:hover {
-        background-color: #075e63;
-      }
+    &:hover {
+      background-color: #075e63;
     }
   }
+
+  .clear-btn {
+    background-color: #6c757d; 
+    
+    &:hover {
+      background-color: #5a6268;
+    }
+  }
+
+  .apply-btn {
+    background-color: #d63053;
+    
+    &:hover {
+      background-color: #b3243f;
+    }
+  }
+}
 
   .confirmation-message {
     display: none;

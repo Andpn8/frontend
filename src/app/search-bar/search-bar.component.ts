@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, ChangeDetectorRef, Output, EventEmitter, Input, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FilterSet } from '../../models/filter-set.model';
@@ -55,6 +55,12 @@ export class SearchBarComponent implements OnInit {
     this.initGooglePlaces();
     if (this.restoredFilters) {
       this.applyFilterSet(this.restoredFilters);
+    }
+  }
+  
+    ngOnChanges(changes: SimpleChanges): void {
+    if (changes['restoredFilters'] && changes['restoredFilters'].currentValue) {
+      this.applyFilterSet(changes['restoredFilters'].currentValue);
     }
   }
 
@@ -137,30 +143,25 @@ export class SearchBarComponent implements OnInit {
     }, 3000);
   }
 
-  closeAndReset(): void {
-    this.resetFilters();
-    this.filtersVisible = false;
-    this.cdr.detectChanges();
-  }
-
   resetFilters(): void {
-    this.minPrice = null;
-    this.maxPrice = null;
-    this.rooms = null;
-    this.bathrooms = null;
-    this.minSurface = null;
-    this.maxSurface = null;
-    this.energyClass = 'tutte';
-    this.services = {
-      portineria: false,
-      garage: false,
-      climatizzazione: false,
-      sicurezza: false,
-      ascensore: false,
-      accessoDisabili: false
-    };
-    this.updateSearchButtonState();
-  }
+  this.minPrice = null;
+  this.maxPrice = null;
+  this.rooms = null;
+  this.bathrooms = null;
+  this.minSurface = null;
+  this.maxSurface = null;
+  this.energyClass = 'tutte';
+  this.services = {
+    portineria: false,
+    garage: false,
+    climatizzazione: false,
+    sicurezza: false,
+    ascensore: false,
+    accessoDisabili: false
+  };
+  this.updateSearchButtonState();
+  this.cdr.detectChanges();
+}
 
   onMinPriceChange(): void {
     if (this.minPrice != null && this.minPrice >= 0 && this.minPrice <= 9999999) {
@@ -194,19 +195,30 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
-  applyFilterSet(filters: FilterSet): void {
-    this.location = filters.location;
-    this.minPrice = filters.minPrice;
-    this.maxPrice = filters.maxPrice;
-    this.rooms = filters.rooms;
-    this.bathrooms = filters.bathrooms;
-    this.minSurface = filters.minSurface;
-    this.maxSurface = filters.maxSurface;
-    this.energyClass = filters.energyClass;
-    this.services = { ...filters.services };
-    this.citySelected = true;
-    this.updateSearchButtonState();
-  }
+ applyFilterSet(filters: FilterSet): void {
+  this.location = filters.location || '';
+  this.minPrice = filters.minPrice ?? null;
+  this.maxPrice = filters.maxPrice ?? null;
+  this.rooms = filters.rooms ?? null;
+  this.bathrooms = filters.bathrooms ?? null;
+  this.minSurface = filters.minSurface ?? null;
+  this.maxSurface = filters.maxSurface ?? null;
+  this.energyClass = filters.energyClass || 'tutte';
+  
+  this.services = filters.services ? { ...filters.services } : {
+    portineria: false,
+    garage: false,
+    climatizzazione: false,
+    sicurezza: false,
+    ascensore: false,
+    accessoDisabili: false
+  };
+
+  this.citySelected = !!filters.location;
+  this.updateSearchButtonState();
+  
+  this.cdr.detectChanges();
+}
 
   get isApplyDisabled(): boolean {
     return !(
@@ -236,4 +248,9 @@ export class SearchBarComponent implements OnInit {
       queryParams: { filters: JSON.stringify(filters) }
     });
   }
+
+  closePopup(): void {
+  this.filtersVisible = false;
+  this.cdr.detectChanges();
+}
 }

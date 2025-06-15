@@ -104,6 +104,12 @@ onFiltersApplied(newFilters: FilterSet): void {
 
 
 onRestoreFilters(filters: FilterSet): void {
-  this.restoredFilters = filters;
+  this.restoredFilters = { ...filters };
+  setTimeout(() => {
+    this.restoredFilters = null;
+    setTimeout(() => {
+      this.restoredFilters = { ...filters };
+    });
+  });
 }
 }
