@@ -223,6 +223,7 @@
     font-weight: bold;
     color: #000;
     text-decoration: underline;
+     text-decoration-skip-ink: none;
   }
 }
 
@@ -346,9 +347,9 @@
 
 .contatto-box {
   position: fixed;
-  top: 70px; 
+  top: 60px; 
   right: 8px;
-  width: 35%;
+  width: 25%;
   height: calc(100vh - 70px);
   max-width: calc(100vw - 750px);
   background-color: #087E8B;

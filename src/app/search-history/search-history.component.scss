@@ -75,3 +75,22 @@
   90% { opacity: 1; transform: translateX(-50%) translateY(0); }
   100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
+
+.history-container {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  
+  .no-filters-message, .non-user-message {
+    padding: 15px;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+  }
+  
+  .non-user-message {
+    color: #000000;
+    font-weight: 500;
+  }
+}

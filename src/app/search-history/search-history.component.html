@@ -1,23 +1,33 @@
-<div class="history-container" *ngIf="searchHistory.length > 0">
-   <div class="confirmation-toast" *ngIf="confirmationVisible">
-    ✅ Filtri applicati con successo!
+<div class="history-container">
+  <div *ngIf="searchHistory.length === 0 && userRole === 'user'" class="no-filters-message">
+    Nessun filtro salvato
   </div>
-  <h4 class="history-title">
-  <img src="https://i.imgur.com/vNVuN3y.png" alt="Icona filtri recenti" />
-  Filtri Recenti
-</h4>
-  <div class="history-cards">
-    <div 
-      class="history-card" 
-      *ngFor="let entry of searchHistory; let i = index" 
-      (click)="applyFilters(entry)">
-      <p><strong>{{ entry.location }}</strong></p>
-      <p *ngIf="entry.minPrice || entry.maxPrice">💰 {{ entry.minPrice || 'Min' }} - {{ entry.maxPrice || 'Max' }} €</p>
-      <p *ngIf="entry.rooms">🛏️ {{ entry.rooms }} camere</p>
-      <p *ngIf="entry.bathrooms">🛁 {{ entry.bathrooms }} bagni</p>
-      <p *ngIf="entry.minSurface || entry.maxSurface">📐 {{ entry.minSurface || 'Min' }} - {{ entry.maxSurface || 'Max' }} m²</p>
-      <p *ngIf="entry.energyClass !== 'tutte'">⚡ Classe {{ entry.energyClass }}</p>
-      <p *ngIf="hasServices(entry.services)">🔧 Servizi: {{ listServices(entry.services) }}</p>
+  
+  <div *ngIf="userRole !== 'user'" class="non-user-message">
+    Lo storico dei filtri è disponibile solo per gli utenti
+  </div>
+  
+  <div *ngIf="searchHistory.length > 0 && userRole === 'user'">
+    <div class="confirmation-toast" *ngIf="confirmationVisible">
+      ✅ Filtri applicati con successo!
+    </div>
+    <h4 class="history-title">
+      <img src="https://i.imgur.com/z0e6ey1.png" alt="Icona filtri recenti" />
+      Filtri Recenti
+    </h4>
+    <div class="history-cards">
+      <div 
+        class="history-card" 
+        *ngFor="let entry of searchHistory; let i = index" 
+        (click)="applyFilters(entry)">
+        <p><strong>{{ entry.location }}</strong></p>
+        <p *ngIf="entry.minPrice || entry.maxPrice">💰 {{ entry.minPrice || 'Min' }} - {{ entry.maxPrice || 'Max' }} €</p>
+        <p *ngIf="entry.rooms">🛏️ {{ entry.rooms }} camere</p>
+        <p *ngIf="entry.bathrooms">🛁 {{ entry.bathrooms }} bagni</p>
+        <p *ngIf="entry.minSurface || entry.maxSurface">📐 {{ entry.minSurface || 'Min' }} - {{ entry.maxSurface || 'Max' }} m²</p>
+        <p *ngIf="entry.energyClass !== 'tutte'">⚡ Classe {{ entry.energyClass }}</p>
+        <p *ngIf="hasServices(entry.services)">🔧 Servizi: {{ listServices(entry.services) }}</p>
+      </div>
     </div>
   </div>
 </div>

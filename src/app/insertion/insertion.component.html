@@ -62,9 +62,9 @@
 
     <div class="info-row">
       <span class="prezzo">
-        € {{ modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo }}
-        <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
-      </span>
+  € {{ (modalitaCatalogo === 'affitto' ? annuncio.prezzo_mensile : annuncio.prezzo) | number:'1.2-2' }}
+  <span *ngIf="modalitaCatalogo === 'affitto'">/mese</span>
+</span>
     </div>
   </div>
 

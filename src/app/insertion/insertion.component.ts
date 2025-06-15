@@ -9,12 +9,13 @@ import { AuthService } from '../../services/auth.service';
 import { jwtDecode } from 'jwt-decode';
 import { OffertaVisitaAffitto, OffertaVisitaAffittoService } from '../../services/offerta_visita_affitto.service';
 import { OffertaVisitaVendita, OffertaVisitaVenditaService } from '../../services/offerta_visita_vendita.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-insertion',
   standalone: true,
   imports: [CommonModule, NavbarComponent, FormsModule],
-   providers: [OffertaVenditaService, OffertaAffittoService,AuthService,OffertaVisitaVenditaService,OffertaVisitaAffittoService],
+   providers: [DecimalPipe, OffertaVenditaService, OffertaAffittoService,AuthService,OffertaVisitaVenditaService,OffertaVisitaAffittoService],
   templateUrl: './insertion.component.html',
   styleUrls: ['./insertion.component.scss']
 })
