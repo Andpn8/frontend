@@ -132,18 +132,11 @@
         </div>
       </div>
 
-       <div class="button-container">
-  <button class="btn proponi" 
-          [disabled]="!isRegularUser()"
-          title="Devi essere un utente registrato!">
-    PROPONI PREZZO
-  </button>
-  <div class="oppure">oppure</div>
-  <button class="btn richiedi" 
-          [disabled]="!isRegularUser()"
-          title="Devi essere un utente registrato!">
-    RICHIEDI VISITA
-  </button>
+      <button class="btn proponi" [disabled]="!isRegularUser()" title="Devi essere un utente registrato!" (click)="mostraPopupPrezzo = true">PROPONI PREZZO</button>
+      <div class="oppure">oppure</div>
+      <button class="btn richiedi" [disabled]="!isRegularUser()"  title="Devi essere un utente registrato!" (click)="mostraPopupVisita = true">RICHIEDI VISITA</button>
+    </div>
+  </div>
 </div>
 
 <div class="modal-overlay" *ngIf="mostraPopupVisita">
