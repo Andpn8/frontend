@@ -1,5 +1,5 @@
-import { Component, ElementRef, AfterViewInit, ViewChild, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ElementRef, AfterViewInit, ViewChild, OnInit, PLATFORM_ID, Inject } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 import { OffertaVisitaAffitto, OffertaVisitaAffittoService } from '../../services/offerta_visita_affitto.service';
 import { OffertaVisitaVendita, OffertaVisitaVenditaService } from '../../services/offerta_visita_vendita.service';
 import { DecimalPipe } from '@angular/common';
+declare const google: any;
 
 @Component({
   selector: 'app-insertion',
@@ -42,8 +43,9 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   streetViewPanorama: any;
   @ViewChild('streetViewElement') streetViewElement!: ElementRef;
 
-  constructor(private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService,private offertaVisitaVenditaService: OffertaVisitaVenditaService,private offertaVisitaAffittoService: OffertaVisitaAffittoService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,private router: Router,private offertaVenditaService: OffertaVenditaService,private offertaAffittoService: OffertaAffittoService,private authService: AuthService,private offertaVisitaVenditaService: OffertaVisitaVenditaService,private offertaVisitaAffittoService: OffertaVisitaAffittoService) {
     const navigation = this.router.getCurrentNavigation();
+    
     this.annuncio = navigation?.extras?.state?.['annuncio'];
     this.modalitaCatalogo = navigation?.extras?.state?.['modalitaCatalogo'] || 'vendita';
     
@@ -365,11 +367,15 @@ toggleStreetView(): void {
 }
 
 initializeStreetView(): void {
+  if (!isPlatformBrowser(this.platformId)) {
+    return;
+  }
+
   const fullAddress = `${this.annuncio.indirizzo} ${this.annuncio.civico}, ${this.annuncio.cap} ${this.annuncio.comune}, Italia`;
   
   const geocoder = new google.maps.Geocoder();
   
-  geocoder.geocode({ address: fullAddress }, (results, status) => {
+  geocoder.geocode({ address: fullAddress }, (results: any, status: any) => {
     if (status === 'OK' && results && results[0]) {
       const location = results[0].geometry.location;
 
@@ -391,6 +397,8 @@ initializeStreetView(): void {
     }
   });
 }
+
+
 isRegularUser(): boolean {
   return this.authService.getUserRoleFromToken() === 'user';
 }
