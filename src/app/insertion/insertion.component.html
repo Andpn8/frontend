@@ -242,6 +242,26 @@
   </div>
 </div>
 
+<div class="overlay" *ngIf="showVisitSuccess" (click)="closeVisitSuccess()">
+  <div class="overlay-content delete-confirm" (click)="$event.stopPropagation()">
+    <h2>Operazione completata</h2>
+    <p>Richiesta visita inviata con successo!</p>
+    <div class="confirm-buttons">
+      <button class="confirm-btn ok-btn" (click)="closeVisitSuccess()">OK</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="showOfferSuccess" (click)="closeOfferSuccess()">
+  <div class="overlay-content delete-confirm" (click)="$event.stopPropagation()">
+    <h2>Operazione completata</h2>
+    <p>Proposta prezzo inviata con successo!</p>
+    <div class="confirm-buttons">
+      <button class="confirm-btn ok-btn" (click)="closeOfferSuccess()">OK</button>
+    </div>
+  </div>
+</div>
+
 <div class="street-view-container" *ngIf="showStreetView">
   <div #streetViewElement class="street-view-element"></div>
   <button class="close-street-view" (click)="toggleStreetView()">× Chiudi</button>

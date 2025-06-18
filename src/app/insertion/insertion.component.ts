@@ -38,6 +38,8 @@ export class InsertionComponent implements OnInit, AfterViewInit {
   mostraPopupPrezzo: boolean = false;
   propostaPrezzo: string = '';
   minDate: string = '';
+  showVisitSuccess: boolean = false;
+  showOfferSuccess: boolean = false;
 
   showStreetView: boolean = false;
   streetViewPanorama: any;
@@ -131,7 +133,7 @@ export class InsertionComponent implements OnInit, AfterViewInit {
     return servizio.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
   }
 
-  inviaRichiestaVisita(): void {
+ inviaRichiestaVisita(): void {
   if (this.selectedDate && this.selectedHour && this.selectedMinute) {
     const orario = `${this.selectedHour.padStart(2, '0')}:${this.selectedMinute.padStart(2, '0')}`;
 
@@ -164,11 +166,11 @@ export class InsertionComponent implements OnInit, AfterViewInit {
 
       this.offertaVisitaVenditaService.creaOffertaVisitaVendita(offertaVisita).subscribe({
         next: () => {
-          alert('✅ Richiesta visita vendita inviata con successo!');
           this.mostraPopupVisita = false;
           this.selectedDate = '';
           this.selectedHour = '';
           this.selectedMinute = '';
+          this.showVisitSuccess = true;
         },
         error: (err) => {
           console.error('Errore invio richiesta visita vendita:', err);
@@ -187,11 +189,11 @@ export class InsertionComponent implements OnInit, AfterViewInit {
 
       this.offertaVisitaAffittoService.creaOffertaVisitaAffitto(offertaVisita).subscribe({
         next: () => {
-          alert('✅ Richiesta visita affitto inviata con successo!');
           this.mostraPopupVisita = false;
           this.selectedDate = '';
           this.selectedHour = '';
           this.selectedMinute = '';
+          this.showVisitSuccess = true;
         },
         error: (err) => {
           console.error('Errore invio richiesta visita affitto:', err);
@@ -242,9 +244,9 @@ export class InsertionComponent implements OnInit, AfterViewInit {
 
     this.offertaVenditaService.creaOffertaVendita(offerta).subscribe({
       next: () => {
-        alert('✅ Proposta vendita inviata con successo!');
         this.mostraPopupPrezzo = false;
         this.propostaPrezzo = '';
+        this.showOfferSuccess = true;
       },
       error: (err) => {
         console.error('Errore invio proposta vendita:', err);
@@ -262,9 +264,9 @@ export class InsertionComponent implements OnInit, AfterViewInit {
 
     this.offertaAffittoService.creaOffertaAffitto(offerta).subscribe({
       next: () => {
-        alert('✅ Proposta affitto inviata con successo!');
         this.mostraPopupPrezzo = false;
         this.propostaPrezzo = '';
+        this.showOfferSuccess = true;
       },
       error: (err) => {
         console.error('Errore invio proposta affitto:', err);
@@ -396,6 +398,14 @@ initializeStreetView(): void {
       this.showStreetView = false;
     }
   });
+}
+
+closeVisitSuccess(): void {
+  this.showVisitSuccess = false;
+}
+
+closeOfferSuccess(): void {
+  this.showOfferSuccess = false;
 }
 
 

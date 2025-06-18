@@ -905,6 +905,73 @@ input[type="number"] {
   margin: 5px 0;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.overlay-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+
+.overlay-content h2 {
+  margin-top: 0;
+  color: #087E8B;
+}
+
+.overlay-content p {
+  margin: 1rem 0;
+  color: #333;
+}
+
+.delete-confirm {
+  text-align: center;
+}
+
+.confirm-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.confirm-btn {
+  background-color: #d63053;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-btn:hover {
+  background-color: #b3243f;
+}
+
+.confirm-btn.ok-btn {
+  background-color: #087E8B;
+  
+  &:hover {
+    background-color: #065a63;
+  }
+}
+
 
 
 
