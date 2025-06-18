@@ -1,20 +1,23 @@
-# Fase 1: Build Angular SSR
-FROM node:18-alpine as builder
+# Dockerfile frontend (aggiornato)
+
+FROM node:18-alpine AS build
 
 WORKDIR /app
-COPY package.json package-lock.json ./
+
+COPY package*.json ./
 RUN npm install
 
-# Copia tutto il resto e costruisci
 COPY . .
-RUN npm run build:ssr
 
-# Fase 2: Serve con Node SSR
-FROM node:18-alpine
+RUN npm run build -- --configuration production
 
-WORKDIR /app
-COPY --from=builder /app/dist /app/dist
-COPY --from=builder /app/node_modules /app/node_modules
-COPY --from=builder /app/package.json /app/package.json
+FROM nginx:alpine
 
-CMD ["node", "dist/server/server.mjs"]
+COPY --from=build /app/dist/frontend/browser/* /usr/share/nginx/html/
+
+# Copia la configurazione nginx personalizzata
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
