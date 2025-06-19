@@ -21,6 +21,7 @@ import { InsertionComponent } from './insertion/insertion.component';
 import { NewAnnouncementRecapComponent } from './new-announcement-recap/new-announcement-recap.component';
 import { AgentAdminCeoGuard } from '../guards/agent-admin-ceo.guard';
 import { AdminCeoGuard } from '../guards/admin-ceo.guard';
+import { AgentGuard } from '../guards/agent.guard';
 
 export const routes: Routes = [
 
@@ -31,27 +32,27 @@ export const routes: Routes = [
     { 
     path: 'new-announcement', 
     component: NewAnnouncementComponent,
-    canActivate: [AgentAdminCeoGuard] 
+    canActivate: [AgentGuard] 
   },
    { 
     path: 'new-announcement-step2', 
     component: NewAnnouncementStep2Component,
-    canActivate: [AgentAdminCeoGuard] 
+    canActivate: [AgentGuard] 
   },
   { 
     path: 'new-announcement-step3', 
     component: NewAnnouncementStep3Component,
-    canActivate: [AgentAdminCeoGuard] 
+    canActivate: [AgentGuard] 
   },
   { 
     path: 'new-announcement-step4', 
     component: NewAnnouncementStep4Component,
-    canActivate: [AgentAdminCeoGuard] 
+    canActivate: [AgentGuard] 
   },
   { 
     path: 'new-announcement-recap', 
     component: NewAnnouncementRecapComponent,
-    canActivate: [AgentAdminCeoGuard] 
+    canActivate: [AgentGuard] 
   },
 
   //INFO

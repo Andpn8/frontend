@@ -43,10 +43,6 @@ export class NavbarCeoComponent {
     }
   }
 
-  goToNewAnnouncement() {
-    this.router.navigate(['/new-announcement']);
-  }
-
   goToCreateAgent() {
     this.router.navigate(['/createAgent']);
   }

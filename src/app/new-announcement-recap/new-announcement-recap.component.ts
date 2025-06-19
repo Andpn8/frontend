@@ -248,6 +248,9 @@ private showSuccessAndRedirect(message: string): void {
   this.resultModalTitle = 'Operazione completata';
   this.resultModalMessage = message;
   this.showResultModal = true;
+
+   this.announcementDataService.clearData();
+  
   
   setTimeout(() => {
     this.router.navigate(['/home']);

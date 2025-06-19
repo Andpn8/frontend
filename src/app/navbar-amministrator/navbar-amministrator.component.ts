@@ -43,10 +43,6 @@ export class NavbarAmministratorComponent {
     }
   }
 
-  goToNewAnnouncement() {
-    this.router.navigate(['/new-announcement']);
-  }
-
   goToHome() {
     this.router.navigate(['/home']);
   }

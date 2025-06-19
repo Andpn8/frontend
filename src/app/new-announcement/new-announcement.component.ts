@@ -267,4 +267,8 @@ export class NewAnnouncementComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/new-announcement-step2']);
     }
   }
+
+  goToHome(): void {
+    this.router.navigate(['/home']);
+  }
 }
