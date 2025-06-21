@@ -12,11 +12,12 @@
           <div class="left-column">
             <h2 class="form-title">Foto</h2>
             <div 
-              class="foto-box"
-              [class.hovered]="showFotoOverlay && !showDeleteIcons"
-              (mouseenter)="onMouseEnter()"
-              (mouseleave)="onMouseLeave()"
-              (click)="toggleFotoMenu($event)">
+                class="foto-box"
+                [class.hovered]="showFotoOverlay && !showDeleteIcons"
+                [class.required-border]="fotoPreviews.length === 0"
+               (mouseenter)="onMouseEnter()"
+               (mouseleave)="onMouseLeave()"
+                (click)="toggleFotoMenu($event)">
 
               <input type="file" #fotoInput multiple accept="image/*" (change)="onFotoSelected($event)" hidden />
 
@@ -58,40 +59,39 @@
             </div>
 
           </div>
-          <small class="text-muted">
-            Caricate: {{ fotoPreviews.length }} su 20 foto (png o jpg)
+           <small class="text-muted">
+           Caricate: {{ fotoPreviews.length }} su 20 foto (png o jpg)
+           </small>
+            <small class="campo-obbligatorio" *ngIf="fotoPreviews.length === 0">
+             <br>1 foto obbligatoria
           </small>
-
-        </div>
+          </div>
 
           <!-- Descrizione -->
           <div class="right-column">
-            <h2 class="form-title">Descrizione</h2>
-            <div class="descrizione-box">
-              <textarea formControlName="descrizione" placeholder="Descrizione immobile" maxlength="3000"></textarea>
-              <small class="text-muted">
-                {{ 3000 - (step3Form.get('descrizione')?.value?.length || 0) }} di 3000 caratteri rimasti
-              </small>
-
-              <small class="campo-obbligatorio" *ngIf="step3Form.get('descrizione')?.errors?.['maxlength']">
-                Massimo 3000 caratteri.
-              </small>
-            </div>
-              <small class="campo-obbligatorio" *ngIf="step3Form.get('descrizione')?.errors?.['required']">
-                CAMPO OBBLIGATORIO 
-              </small>
-          </div>
+  <h2 class="form-title">Descrizione</h2>
+  <div class="descrizione-box" [class.required-border]="!step3Form.get('descrizione')?.value">
+    <textarea formControlName="descrizione" placeholder="Descrizione immobile" maxlength="3000"></textarea>
+    <small class="text-muted">
+      {{ 3000 - (step3Form.get('descrizione')?.value?.length || 0) }} di 3000 caratteri rimasti
+    </small>
+    <small class="campo-obbligatorio" *ngIf="!step3Form.get('descrizione')?.value">
+      CAMPO OBBLIGATORIO 
+    </small>
+  </div>
+</div>
         </div>
 
-        <!-- Planimetrie e Nota -->
+        <!-- Planimetrie -->
         <div class="planimetrie-container-wrapper">
           <div class="planimetrie-container">
             <h2 class="form-title">Planimetrie</h2>
             <div 
               class="planimetrie-box"
               [class.hovered]="showPlanimetriaOverlay && !showPlanimetriaDeleteIcons"
-              (mouseenter)="onPlanimetriaMouseEnter()"
-              (mouseleave)="onPlanimetriaMouseLeave()"
+              [class.required-border]="planimetriaPreviews.length === 0"
+             (mouseenter)="onPlanimetriaMouseEnter()"
+             (mouseleave)="onPlanimetriaMouseLeave()"
               (click)="togglePlanimetriaMenu($event)">
 
               <input type="file" #planimetriaInput multiple accept="image/*" (change)="onPlanimetriaSelected($event)" hidden />
@@ -133,10 +133,12 @@
                 <div *ngIf="planimetriaPreviews.length > 0" (click)="openPlanimetriaDeletionPanel()">🗑 Elimina planimetria</div>
               </div>
             </div>
-            <small class="text-muted">
-              Caricate: {{ planimetriaPreviews.length }} su 4 foto (png o jpg)
+             <small class="text-muted">
+             Caricate: {{ planimetriaPreviews.length }} su 4 foto (png o jpg)
+           </small>
+          <small class="campo-obbligatorio" *ngIf="planimetriaPreviews.length === 0">
+          1 planimetria obbligatoria
             </small>
-
           </div>
         </div>
 
