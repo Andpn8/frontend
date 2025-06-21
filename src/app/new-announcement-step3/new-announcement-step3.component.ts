@@ -51,17 +51,14 @@ export class NewAnnouncementStep3Component implements OnInit {
   ngOnInit(): void {
     const data = this.announcementDataService.getData();
     
-    // Ripristina i dati esistenti
     if (data.descrizione) {
       this.step3Form.get('descrizione')?.setValue(data.descrizione);
     }
 
-    // Ripristina le foto se presenti
     if (data.fotoPreviews) {
       this.fotoPreviews = [...data.fotoPreviews];
     }
 
-    // Ripristina le planimetrie se presenti
     if (data.planimetriaPreviews) {
       this.planimetriaPreviews = [...data.planimetriaPreviews];
     }
@@ -80,7 +77,6 @@ export class NewAnnouncementStep3Component implements OnInit {
     }
   }
 
-  // FOTO - Caricamento
   onFotoSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input?.files) {
@@ -129,7 +125,6 @@ export class NewAnnouncementStep3Component implements OnInit {
     input.click();
   }
 
-  // FOTO - Modale eliminazione
   openPhotoDeletionPanel(): void {
     this.tempFotoPreviews = [...this.fotoPreviews];
     this.selectedFotoToDelete = this.tempFotoPreviews.map(() => false);
@@ -169,7 +164,6 @@ export class NewAnnouncementStep3Component implements OnInit {
     event.stopPropagation();
   }
 
-  // PLANIMETRIE - Caricamento
   onPlanimetriaSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input?.files) {
@@ -218,7 +212,6 @@ export class NewAnnouncementStep3Component implements OnInit {
     input.click();
   }
 
-  // PLANIMETRIE - Modale eliminazione
   openPlanimetriaDeletionPanel(): void {
     this.tempPlanimetriaPreviews = [...this.planimetriaPreviews];
     this.selectedPlanimetriaToDelete = this.tempPlanimetriaPreviews.map(() => false); 
@@ -285,7 +278,6 @@ export class NewAnnouncementStep3Component implements OnInit {
   }
 
   goBack(): void {
-    // Salva i dati prima di tornare indietro
     const step3Data = {
       descrizione: this.step3Form.get('descrizione')?.value,
       fotoPreviews: this.fotoPreviews,

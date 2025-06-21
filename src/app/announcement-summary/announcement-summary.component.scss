@@ -130,7 +130,7 @@
      border-radius: 50%;
      flex-shrink: 0;
      border: 2px solid #109CAB;
-     transition: background-color 0.3s, border-color 0.3s; /* Aggiungi una transizione morbida */
+     transition: background-color 0.3s, border-color 0.3s;
      display: flex;
      align-items: center;
      justify-content: center;
@@ -152,9 +152,9 @@
   }
 
   .step-content p {
-    word-wrap: break-word; /* Permette alle parole lunghe di andare a capo */
-    white-space: normal; /* Permette di andare a capo anche nelle parole lunghe */
-    overflow-wrap: break-word; /* Compatibilità per i browser più vecchi */
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
 }

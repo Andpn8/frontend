@@ -145,3 +145,48 @@ app-announcement-summary {
     width: 100%;
   }
 }
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 0.6rem;
+    font-size: 1rem;
+    border: 1.5px solid #ccc;
+    border-radius: 4px;
+
+    &.invalid {
+      border-color: #e15d7a;
+    }
+
+    &.valid {
+      border-color: #087E8B !important;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #e15d7a;
+    }
+  }
+
+  .error-row {
+    display: flex;
+    align-items: center;
+    gap: 3rem; 
+    flex-wrap: wrap; 
+    min-height: 1.5rem;
+
+    .error {
+      font-size: 0.8rem;
+      color: #e15d7a;
+      font-weight: 500;
+    }
+  }
+}

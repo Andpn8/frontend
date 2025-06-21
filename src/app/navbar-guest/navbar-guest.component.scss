@@ -7,14 +7,12 @@
     font-family: sans-serif;
   }
   
-  // Riga superiore con pulsanti
   .navbar-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
-  // Riga inferiore con logo centrale
   .navbar-bottom {
     display: flex;
     justify-content: center;
@@ -22,7 +20,6 @@
     margin-top: 0.5rem;
   }
   
-  // Gruppi pulsanti
   .nav-left,
   .nav-right {
     display: flex;
@@ -30,7 +27,6 @@
     gap: 1.5rem;
   }
   
-  // Icone base
   .icon {
     display: flex;
     align-items: center;
@@ -58,7 +54,6 @@
     font-size: 0.7rem;
   }
   
-  // Pulsanti login/register in alto a destra
   .login-btn,
   .register-btn {
     background-color: #CE2D4F;
@@ -78,7 +73,6 @@
     }
   }
   
-  // Dropdown stile
   .icon.user {
     position: relative;
   }
@@ -144,7 +138,6 @@
     }
   }
   
-  // Help box
   .help-box {
     position: absolute;
     top: 100%;

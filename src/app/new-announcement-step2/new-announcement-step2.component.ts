@@ -58,7 +58,6 @@ export class NewAnnouncementStep2Component {
        }
     });
 
-    // Caricamento dati salvati
     const data = this.announcementDataService.getData();
     this.step2Form.patchValue({
       superficie: data.superficie || '',
@@ -74,7 +73,6 @@ export class NewAnnouncementStep2Component {
       bagni: data.bagni || ''
     });
 
-    // Salvataggio dati in tempo reale nel servizio
     this.step2Form.valueChanges.subscribe(formValues => {
       this.announcementDataService.setData(formValues);
     });

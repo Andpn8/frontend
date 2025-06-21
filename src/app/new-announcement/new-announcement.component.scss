@@ -2,7 +2,6 @@
   font-family: 'Segoe UI', sans-serif;
   color: #333;
 
-  /* Rimuove frecce dai campi numerici */
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -10,7 +9,7 @@
   }
 
   input[type=number] {
-    -moz-appearance: textfield; /* Firefox */
+    -moz-appearance: textfield;
   }
 
   .content {
@@ -222,7 +221,6 @@ input[readonly] {
     border-color: #087E8B !important;
   }
 
-  /* Aggiunto per visualizzare il messaggio "CAMPO OBBLIGATORIO" sempre quando il campo è vuoto */
   small.required-field {
    display: block;
    color: #CE2D4F;
@@ -230,7 +228,6 @@ input[readonly] {
    margin-top: 4px;
   }
 
-  /* Nascondi "CAMPO OBBLIGATORIO" quando il campo è valido */
   input.ng-valid.ng-touched + small.required-field,
   select.ng-valid.ng-touched + small.required-field {
     display: none !important;

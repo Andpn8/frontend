@@ -10,53 +10,54 @@
 
       <form [formGroup]="step4Form" (ngSubmit)="proceed()">
 
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input id="email" type="email" formControlName="email" placeholder="La tua e-mail"
-             [class.invalid]="isInvalid('email')" />
+       <!-- Email -->
+<div class="form-group">
+  <label for="email">Email:</label>
+  <input id="email" type="email" formControlName="email" placeholder="La tua e-mail"
+     [class.invalid]="isInvalid('email')" 
+     [class.valid]="isValid('email')" />
 
-          <div class="error-row">
-             <div class="error" *ngIf="step4Form.get('email')?.hasError('required') && step4Form.get('email')?.touched">
-               CAMPO OBBLIGATORIO
-             </div>
-             <div class="error" *ngIf="step4Form.get('email')?.hasError('pattern') && step4Form.get('email')?.touched">
-              Dominio non valido
-             </div>
-          </div>
-        </div>
+  <div class="error-row">
+     <div class="error" *ngIf="step4Form.get('email')?.hasError('required') && (step4Form.get('email')?.touched || step4Form.get('email')?.dirty)">
+       CAMPO OBBLIGATORIO
+     </div>
+     <div class="error" *ngIf="step4Form.get('email')?.hasError('pattern') && (step4Form.get('email')?.touched || step4Form.get('email')?.dirty)">
+      Dominio non valido
+     </div>
+  </div>
+</div>
 
+<!-- Cellulare -->
+<div class="form-group">
+  <label for="phone">Cellulare:</label>
+  <div class="phone-input">
+    <select formControlName="prefix">
+     <option *ngFor="let option of prefixOptions" [value]="option.code">
+       {{ option.label }}
+     </option>
+   </select>
+   <input 
+     id="phone" type="tel" formControlName="phone" placeholder="Il tuo telefono"
+     [class.invalid]="isInvalid('phone')"
+     [class.valid]="isValid('phone')"
+     pattern="[0-9]*" inputmode="numeric" (input)="filterNumericInput($event)" />
+  </div>
 
-       <!-- Cellulare -->
-       <div class="form-group">
-        <label for="phone">Cellulare:</label>
-        <div class="phone-input">
-          <select formControlName="prefix">
-           <option *ngFor="let option of prefixOptions" [value]="option.code">
-             {{ option.label }}
-           </option>
-         </select>
-         <input 
-           id="phone" type="tel" formControlName="phone" placeholder="Il tuo telefono"
-           [class.invalid]="isInvalid('phone')"
-           pattern="[0-9]*" inputmode="numeric" (input)="filterNumericInput($event)" />
-        </div>
-  
-        <div class="error-row">
-          <div class="error" *ngIf="step4Form.get('phone')?.hasError('required') && step4Form.get('phone')?.touched">
-             CAMPO OBBLIGATORIO
-          </div>
-          <div class="error" *ngIf="step4Form.get('phone')?.hasError('minlength') && step4Form.get('phone')?.touched">
-             Il numero deve contenere almeno 10 caratteri.
-          </div>
-          <div class="error" *ngIf="step4Form.get('phone')?.hasError('maxlength') && step4Form.get('phone')?.touched">
-            Il numero non può superare i 15 caratteri.
-          </div>
-          <div class="error" *ngIf="step4Form.get('phone')?.hasError('pattern') && step4Form.get('phone')?.touched">
-            Inserisci solo numeri
-          </div>
-        </div>
-      </div>
+  <div class="error-row">
+    <div class="error" *ngIf="step4Form.get('phone')?.hasError('required') && (step4Form.get('phone')?.touched || step4Form.get('phone')?.dirty)">
+       CAMPO OBBLIGATORIO
+    </div>
+    <div class="error" *ngIf="step4Form.get('phone')?.hasError('minlength') && (step4Form.get('phone')?.touched || step4Form.get('phone')?.dirty)">
+       Il numero deve contenere almeno 10 caratteri.
+    </div>
+    <div class="error" *ngIf="step4Form.get('phone')?.hasError('maxlength') && (step4Form.get('phone')?.touched || step4Form.get('phone')?.dirty)">
+      Il numero non può superare i 15 caratteri.
+    </div>
+    <div class="error" *ngIf="step4Form.get('phone')?.hasError('pattern') && (step4Form.get('phone')?.touched || step4Form.get('phone')?.dirty)">
+      Inserisci solo numeri
+    </div>
+  </div>
+</div>
 
         <!-- Checkbox -->
         <div class="form-group checkbox-group">

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';  // Assicurati che il percorso sia corretto
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar-user',

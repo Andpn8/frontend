@@ -56,7 +56,6 @@ onFiltersApplied(newFilters: FilterSet): void {
     return;
   }
 
-  // Costruisci il filtro da salvare per il backend
   const filtroBackend = {
     user_id: userId,
     localita: newFilters.location,
@@ -72,7 +71,6 @@ onFiltersApplied(newFilters: FilterSet): void {
       .map(([k]) => k)
   };
 
-  // Se ci sono già 3 filtri salvati, elimina il più vecchio (per ID!)
   if (this.searchHistory.length >= 3) {
     const filtroDaEliminare = this.searchHistory.shift();
     
@@ -86,12 +84,11 @@ onFiltersApplied(newFilters: FilterSet): void {
     }
   }
 
-  // Salva il nuovo filtro
   this.filtriService.salvaFiltri(userId.toString(), filtroBackend).subscribe({
     next: res => {
       const filtroConId: FilterSet = {
         ...newFilters,
-        id: res.filtro?.id_filtro // Assicurati che il backend ritorni id_filtro
+        id: res.filtro?.id_filtro
       };
       this.searchHistory.push(filtroConId);
       console.log('Nuovo filtro salvato con successo');

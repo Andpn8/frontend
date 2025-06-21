@@ -1,3 +1,5 @@
+@use "sass:color";
+
 :host {
   display: block;
   min-height: 100vh;
@@ -303,7 +305,6 @@
   display: block;
 }
 
-/* 🔥 MODALE PER LA CANCELLAZIONE FOTO 🔥 */
 .photo-deletion-modal {
   position: fixed;
   top: 0;
@@ -383,14 +384,13 @@
   }
 }
 
-/* NUOVA SEZIONE MODALE */
 .custom-modal {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  border: 2px solid #087E8B; /* bordo colore #087E8B */
+  border: 2px solid #087E8B;
   border-radius: 8px;
   padding: 2rem;
   z-index: 1000;
@@ -441,7 +441,6 @@
   border-radius: 50%;
 }
 
-/* 🔥 MODALE PER LA CANCELLAZIONE PLANIMETRIE 🔥 */
 .planimetria-deletion-modal {
   position: fixed;
   top: 0;
@@ -537,7 +536,6 @@
 }
 
 
-/* Pulsanti del modale */
 .custom-modal-buttons {
   display: flex;
   justify-content: space-between;

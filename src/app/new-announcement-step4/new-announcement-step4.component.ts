@@ -43,23 +43,26 @@ export class NewAnnouncementStep4Component {
   }
 
   ngOnInit(): void {
-    const savedData = this.announcementDataService.getData();
+  const savedData = this.announcementDataService.getData();
 
-    if (savedData) {
-      if (savedData.email) {
-        this.step4Form.get('email')?.setValue(savedData.email);
-      }
-      if (savedData.phone) {
-        this.step4Form.get('phone')?.setValue(savedData.phone);
-      }
-      if (savedData.showPhone !== undefined) {
-        this.step4Form.get('showPhone')?.setValue(savedData.showPhone);
-      }
-      if (savedData.prefix) {
-        this.step4Form.get('prefix')?.setValue(savedData.prefix);
-      }
+  if (savedData) {
+    if (savedData.email) {
+      this.step4Form.get('email')?.setValue(savedData.email);
+      this.step4Form.get('email')?.markAsDirty();
+    }
+    if (savedData.phone) {
+      this.step4Form.get('phone')?.setValue(savedData.phone);
+      this.step4Form.get('phone')?.markAsDirty();
+    }
+    if (savedData.showPhone !== undefined) {
+      this.step4Form.get('showPhone')?.setValue(savedData.showPhone);
+    }
+    if (savedData.prefix) {
+      this.step4Form.get('prefix')?.setValue(savedData.prefix);
     }
   }
+  this.step4Form.markAllAsTouched();
+}
 
   get isFormValid(): boolean {
     return this.step4Form.valid;
@@ -89,7 +92,12 @@ export class NewAnnouncementStep4Component {
   }
 
   isInvalid(controlName: string): boolean {
-    const control = this.step4Form.get(controlName);
-    return control?.invalid && control?.touched || false;
-  }
+  const control = this.step4Form.get(controlName);
+  return control?.invalid && (control?.touched || control?.dirty) || false;
+}
+
+isValid(controlName: string): boolean {
+  const control = this.step4Form.get(controlName);
+  return control?.valid && (control?.touched || control?.dirty) || false;
+}
 }
